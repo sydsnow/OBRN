@@ -1,6 +1,6 @@
 // Router Components
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import '../styles/styles.css'
+import '../scss/styles.scss';
 
 // Components
 import Header from '../components/Header'
