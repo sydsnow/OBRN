@@ -1,9 +1,12 @@
-import Header from "../components/Header";
-import Footer from "../components/Footer";
-
 function HomePage () {
     return (
-        <><Header /><Footer /></>
+    
+        <div className="wrapper">
+        <div className="main-container">
+            <h1>Our Beauty Referral Network</h1>
+        </div>
+     </div>
+
     )
 }
 

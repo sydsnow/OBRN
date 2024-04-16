@@ -1,24 +1,19 @@
-// Router Components
+
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import '../scss/styles.scss';
-
-// Components
-import Header from '../components/Header'
-import Main from '../components/Main'
-import Footer from '../components/Footer'
-
+import Header from '../components/Header';
+import Footer from '../components/Footer';
+import HomePage from '../pages/HomePage';
 
 function AppRouter() {
-
   return (
     <BrowserRouter>
       <Header />
       <Routes>
-        <Route path="/" element={<Main />} />
+        <Route path="/" element={<HomePage />} />
       </Routes>
       <Footer />
     </BrowserRouter>
-  )
+  );
 }
 
-export default AppRouter
+export default AppRouter;
