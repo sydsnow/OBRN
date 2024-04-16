@@ -1,13 +1,29 @@
+@use "variables" as *;
+
 .header {
     &-top-nav {
         display: flex;
+        align-items: center;
+        justify-content: space-evenly;
+        width: 100%;
+        background-color: black;
+        color: white;
+        //font-size: 0.8rem;
     }
     &-socials {
         display: flex;
         flex-direction: row;
     }
+    &-socials > a {
+        padding: 0 15px; 
+        color: white;
+    }
     &-contact {
         display: flex;
         flex-direction: row;
+    }
+    &-contact > p {
+        padding: 0 10px;
+        //letter-spacing: 2px;
     }
 }
