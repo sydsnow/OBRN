@@ -1,0 +1,13 @@
+@use '../components/variables' as *;
+
+.wrapper{
+    display:flex;
+    flex-direction: column;
+    margin: 20vh;
+}
+
+h1{
+    font-family: $primary-font;
+    font-size: 3rem;
+    font-weight: 700;
+}
