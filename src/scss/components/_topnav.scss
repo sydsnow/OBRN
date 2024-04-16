@@ -1,0 +1,13 @@
+.header {
+    &-top-nav {
+        display: flex;
+    }
+    &-socials {
+        display: flex;
+        flex-direction: row;
+    }
+    &-contact {
+        display: flex;
+        flex-direction: row;
+    }
+}
