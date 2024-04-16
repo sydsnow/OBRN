@@ -1,5 +1,6 @@
 import Topnav from "./TopNav";
 import Nav from "./Nav";
+import "../scss/components/_header.scss";
 
 function Header() {
     return (
