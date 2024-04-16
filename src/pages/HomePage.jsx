@@ -6,7 +6,6 @@ function HomePage () {
             <h1>Our Beauty Referral Network</h1>
         </div>
      </div>
-
     )
 }
 

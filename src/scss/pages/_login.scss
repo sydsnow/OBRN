@@ -1,0 +1,42 @@
+@use '../components/reset' as *;
+@use '../components/variables' as *;
+
+.login{
+
+display:flex;
+flex-direction: row;
+
+@media (min-width: 760px) {
+
+}
+
+    @media (min-width: 960px) {
+    display: flex;
+    flex-direction:row;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    width:100%;
+
+    &-container{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        width: 60%;
+        padding: 20px;
+    }
+    &-aside{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        width: 40%;
+        padding: 20px;
+        img{
+            width: 4d00px;
+        }
+    }
+}
+
+}
