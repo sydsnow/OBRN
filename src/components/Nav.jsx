@@ -21,6 +21,11 @@ function Nav () {
                             SERVICES
                         </NavLink>
                     </li>
+                    <li>
+                        <NavLink to="/testimonials">
+                            TESTIMONIALS
+                        </NavLink>
+                    </li>
                     <li><a href="#">SHOP</a></li>
                     <li><a href="#">COMMUNITY <i className="fa-solid fa-angle-down"></i></a></li>
                     <li><a href="#">BLOG</a></li>

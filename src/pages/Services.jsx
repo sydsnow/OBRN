@@ -6,7 +6,7 @@ function ServicesPage () {
             <div className="services-search-container">
                 <div id="services-title">Search Services/Products</div>
                 <div id="services-search-wrapper">
-                    <label htmlFor="search"><i className="fa-solid fa-magnifying-glass"></i></label>
+                    <label htmlFor="search" id="search"><i className="fa-solid fa-magnifying-glass"></i></label>
                     <input name="search" placeholder="Search Services & Products..."></input>
                     <button>Search</button>
                 </div>
