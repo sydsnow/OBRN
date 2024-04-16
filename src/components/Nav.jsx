@@ -1,10 +1,11 @@
 import "../scss/components/_nav.scss";
+import logo from '../assets/obrn-logo.png';
 
 function Nav () {
     return (
         <nav className="header-main-nav">
             <div className="header-logo">
-                <img src="../assets/obrn-logo.png" alt="obrn logo" ></img>
+                <img src={logo} alt="obrn logo" ></img>
             </div>
             <div className="header-nav-links">
                 <ul>
