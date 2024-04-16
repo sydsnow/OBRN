@@ -1,43 +1,47 @@
 .footer {
-    background-color: #333;  // Dark background for the footer
-    color: white;            // White text color for readability
-    padding: 20px;           // Padding around the content
-    display: flex;
-    flex-direction: column;
-    align-items: stretch;
-  
-    .footer-content {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-  
-      .footer-section {
-        display: flex;
-        flex-direction: column;
-  
-        .footer-heading {
-          font-weight: bold;  // Bold for headings
-          margin-bottom: 10px;
-        }
-  
-        p, .footer-link {
-          margin: 5px 0;
-          color: white;  // Ensures links are also white
-          text-decoration: none;
-  
-          &:hover {
-            text-decoration: underline;  // Underline on hover for better UX
-          }
-        }
-      }
-    }
-  
-    .footer-bottom {
-      background-color: black;  // Different background for copyright section
-      color: white;
-      text-align: center;
-      padding: 10px 0;
-      font-size: 0.8em;  // Smaller text for copyright notice
-    }
+  background-color: #f8f9fa; /* Example background color */
+  color: #333; /* Example text color */
+  // padding: 20px;
+  font-size: 14px;
+}
+
+.footer-top {
+  display: grid;
+  grid-template-columns: 1fr; /* Stacks elements on mobile */
+  gap: 20px;
+  margin-left: 50px;
+  margin-right: 50px;
+}
+
+.footer-section {
+  text-align: center; /* Centers the content on mobile */
+}
+
+.footer-heading {
+  margin-bottom: 10px; /* Spacing below the heading */
+}
+
+.footer-link {
+  display: block; /* Makes links take full width */
+  margin-bottom: 5px; /* Spacing between links */
+  color: inherit; /* Inherits color from parent */
+  text-decoration: none; /* Removes underline from links */
+}
+
+.footer-bottom {
+  text-align: center;
+  margin-top: 20px; /* Spacing above the copyright text */
+  padding-top: 10px; /* Padding at the top */
+  border-top: 1px solid #ccc; /* Line at the top */
+}
+
+/* Media query for desktop screens */
+@media (min-width: 768px) {
+  .footer-top {
+    grid-template-columns: repeat(4, 1fr); /* Four columns on desktop */
   }
-  
+
+  .footer-section {
+    text-align: left; /* Aligns text to the left on desktop */
+  }
+}

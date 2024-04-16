@@ -3,6 +3,9 @@ import React from 'react';
 function Footer() {
   return (
     <footer className="footer">
+        <div className="footer-logo">
+        
+        </div>
         <div className="footer-top">
             <div className="footer-section">
                 <h4 className="footer-heading">Quick Menu</h4>
@@ -14,15 +17,15 @@ function Footer() {
             </div>
             <div className="footer-section">
                 <h4 className="footer-heading">Services</h4>
-                <a href="#webdev" className="footer-link">HAIR</a>
-                <a href="#design" className="footer-link">NAILS</a>
-                <a href="#marketing" className="footer-link">Marketing</a>
+                <a href="#hair" className="footer-link">HAIR</a>
+                <a href="#nails" className="footer-link">NAILS</a>
+                <a href="#spa" className="footer-link">SPA</a>
             </div>
             <div className="footer-section">
                 <h4 className="footer-heading">About Us</h4>
                 <a href="#history" className="footer-link">OUR HISTORY</a>
-                <a href="#team" className="footer-link">TERMS & CONDITIONS</a>
-                <a href="#careers" className="footer-link">PRIVACY STATEMENT</a>
+                <a href="#termscondition" className="footer-link">TERMS & CONDITIONS</a>
+                <a href="#privacy" className="footer-link">PRIVACY STATEMENT</a>
             </div>
             <div className="footer-section">
                 <h4 className="footer-heading">Contact Us</h4>
