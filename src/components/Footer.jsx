@@ -1,10 +1,13 @@
 import React from 'react';
+import logo from '../assets/obrn-logo.png';
+import { getYear } from "../utilities/utilities";
+
 
 function Footer() {
   return (
     <footer className="footer">
-        <div className="footer-logo">
-        
+       <div className="footer-logo">
+            <img src={logo} alt="Our Beauty Logo" />
         </div>
         <div className="footer-top">
             <div className="footer-section">
@@ -35,7 +38,7 @@ function Footer() {
             </div>
         </div>
         <div className="footer-bottom">
-            © 2024 Our Beauty. All Rights Reserved.
+            &copy; {getYear()} OUR BEAUTY. ALL RIGHTS RESERVED.
         </div>
     </footer>
   );
