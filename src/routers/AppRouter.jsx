@@ -4,6 +4,7 @@ import Header from '../components/Header';
 import Footer from '../components/Footer';
 import HomePage from '../pages/HomePage';
 import Login from '../pages/Login';
+import TestRegisterPage from "../pages/TestRegisterPage";
 
 function AppRouter() {
   return (
@@ -12,6 +13,7 @@ function AppRouter() {
       <Routes>
         <Route path="/" element={<HomePage />} />
         <Route path="/login" element={<Login />} />
+        <Route path="/testregister" element={<TestRegisterPage />}></Route>
       </Routes>
       <Footer />
     </BrowserRouter>

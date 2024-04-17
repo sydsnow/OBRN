@@ -22,7 +22,7 @@ function Login() {
     </div>
     <div className="login-aside">
         <div className="login-img">
-    <img src={loginimg} alt="person loggin in" />
+    <img src={loginimg} alt="person logging in" />
     </div>
     </div>
 </div>
