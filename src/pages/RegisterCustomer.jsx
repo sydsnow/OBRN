@@ -24,7 +24,7 @@ function RegisterCustomer(){
         <label className="label" htmlFor="phone">            <i className="fa-solid fa-phone"></i> Phone</label>
         </div>
         <div className="form-group">
-        <input className='input' type="date" required autoComplete='off' id="date" name="date" />
+        <input className='input2' type="date" required autoComplete='off' id="date" name="date" />
         <label className="label" htmlFor="date"><i className="fa-regular fa-calendar"></i> Birthday</label>
         </div>
         <div className="form-group">
@@ -50,6 +50,10 @@ function RegisterCustomer(){
 
         <button type="submit">Register</button>
         </form>
+
+        <div className="register-login">
+        <p>Already a user?&nbsp;<a href="#"> Login</a></p>
+        </div>
     </div>
     <div className="register-aside">
 

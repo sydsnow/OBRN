@@ -49,6 +49,7 @@ min-height:70vh;
         margin: 0 auto;
         align-items:center;
         gap: 1vh;
+        padding-bottom:5vh;
         label{
             font-family:$secondary-font;
             font-size:1rem;
@@ -73,8 +74,76 @@ min-height:70vh;
             transition: all 0.3s ease;
         }
     }   
+    &-login{
+        display:flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        width:100%;
+        border-top:1px solid lightgray;
+        margin: 0 auto;
+        padding:5vh 0;
+        p{
+            display:flex;
+            flex-direction: row;
+            justify-content: center;
+            align-items: center;
+            font-family: $secondary-font;
+            font-size: 1rem;
+            font-weight: 400;
+            text-align: center;
+        }
+    }
     &-aside{
         display: none;
+    }
+    &-business-aside{
+        display: none;
+    }
+    &-business-form{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        width:100%;
+        margin: 0 auto;
+        gap: 3vh;
+        // padding-bottom:5vh;
+        button{
+            width: 100%;
+            // width:390px;
+            // min-width:420px;
+            background-color:#000;
+            display:flex;
+            flex-direction:column;
+            justify-content: center;
+            align-items: center;
+            font-family:$secondary-font;
+            font-size:1.1rem;
+            padding: 15px;
+            border: 1px solid lightgray;
+            border-radius: 10px;
+            color: white;
+            font-weight: 800;
+            cursor: pointer;
+            transition: all 0.3s ease;
+
+            &:hover{
+                background-color: #4d4d4d;
+            }
+        }
+
+    }
+    &-business-block{
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        align-items: center;
+        gap:2vh;
+        width:100%;
+
+        :nth-child(7){
+            margin-bottom:5vh;
+        }
     }
 
     @media (min-width: 960px) {
@@ -91,7 +160,7 @@ min-height:70vh;
         justify-content: center;
         align-items: flex-start;
         width: 50%;
-        padding: 20px;
+        // padding: 20px;
         margin: 0 auto;
     }
     &-business-container{
@@ -111,6 +180,7 @@ min-height:70vh;
         width: 100%;
         align-items:flex-start;
         margin: 0 auto;
+        text-align:left;
         
         h1{
             font-family: $primary-font;
@@ -132,6 +202,9 @@ min-height:70vh;
         align-items: center;
         gap:2vh;
         width:50%;
+        :nth-child(7) {
+            margin-bottom: 2vh;
+        }
 
     }
     &-business-form{
@@ -141,6 +214,7 @@ min-height:70vh;
         width:100%;
         margin: 0 auto;
         gap: 3vh;
+        padding-bottom:5vh;
         button{
             width: 100%;
             // width:390px;
@@ -169,9 +243,10 @@ min-height:70vh;
         display: flex;
         flex-direction: column;
         justify-content: center;
-        width:60%;
+        width:80%;
         margin: 0 auto;
         gap: 3vh;
+        // padding:5vh;
         button{
             width: 100%;
             // width:390px;
@@ -196,6 +271,26 @@ min-height:70vh;
             }
         }
     }
+    &-login{
+        display:flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        width:100%;
+        border-top:1px solid lightgray;
+        margin: 0 auto;
+        padding:5vh 0;
+        p{
+            display:flex;
+            flex-direction: row;
+            justify-content: center;
+            align-items: center;
+            font-family: $secondary-font;
+            font-size: 1.1rem;
+            font-weight: 400;
+            text-align: center;
+        }
+    }
     &-business-aside{
         display: flex;
         flex-direction: column;
@@ -207,7 +302,8 @@ min-height:70vh;
             display:flex;
             flex-direction: column;
             width: 100%;
-            // max-width: 500px;
+            max-width: 500px;
+            border-radius:50px;
         }
     }
     &-aside{
@@ -221,7 +317,8 @@ min-height:70vh;
             display:flex;
             flex-direction: column;
             width: 100%;
-            // max-width: 500px;
+            max-width: 600px;
+            border-radius:50px;
         }
     }
 }

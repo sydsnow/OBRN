@@ -11,9 +11,22 @@ html {
 body{
     margin:0;
 }
+a {
+    text-decoration: none;
+    color:#C93482;
+}
+.wrapper{
+    display:flex;
+    flex-direction: column;
+    margin: 5vh;
+}
+
+@media (min-width: 960px) {
 
 .wrapper{
     display:flex;
     flex-direction: column;
+    margin: 10vh;
+}
 }
 

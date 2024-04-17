@@ -15,7 +15,7 @@ min-height:70vh;
         flex-direction: column;
         justify-content: center;
         width:100%;
-        padding: 20px;
+        // padding: 20px;   
         margin: 0 auto;
         align-items: center;
 
@@ -73,6 +73,46 @@ min-height:70vh;
         display: none;
     }
 
+    &-forgot{
+
+        display:flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: flex-end;
+        width:100%;
+        padding-bottom:5vh;
+        p{
+            display:flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: flex-end;
+            font-family: $secondary-font;
+            font-size: 1rem;
+            font-weight: 400;
+            text-align: right;
+        }
+    }
+    &-register{
+        display:flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        width:100%;
+        border-top:1px solid lightgray;
+        margin: 0 auto;
+        padding:5vh 0;
+        p{
+            display:flex;
+            flex-direction: row;
+            justify-content: center;
+            align-items: center;
+            font-family: $secondary-font;
+            font-size: 1rem;
+            font-weight: 400;
+            text-align: center;
+        }
+    }
+
     @media (min-width: 960px) {
     display: flex;
     flex-direction:row;
@@ -87,7 +127,6 @@ min-height:70vh;
         justify-content: center;
         align-items: flex-start;
         width: 50%;
-        padding: 20px;
         margin: 0 auto;
     }
 
@@ -143,6 +182,46 @@ min-height:70vh;
             }
         }
     }
+
+    &-forgot{
+        display:flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: flex-end;
+        width:100%;
+        padding-bottom: 5vh;
+        p{
+            display:flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: flex-end;
+            font-family: $secondary-font;
+            font-size: 1rem;
+            font-weight: 400;
+            text-align: right;
+        }
+    }
+    &-register{
+        display:flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        width:60%;
+        border-top:1px solid lightgray;
+        margin: 0 auto;
+        padding:5vh 0;
+        p{
+            display:flex;
+            flex-direction: row;
+            justify-content: center;
+            align-items: center;
+            font-family: $secondary-font;
+            font-size: 1rem;
+            font-weight: 400;
+            text-align: center;
+        }
+    }
+
     &-aside{
         display: flex;
         flex-direction: column;
@@ -154,7 +233,8 @@ min-height:70vh;
             display:flex;
             flex-direction: column;
             width: 100%;
-            // max-width: 500px;
+            max-width: 500px;
+            border-radius:50px;
         }
     }
 }

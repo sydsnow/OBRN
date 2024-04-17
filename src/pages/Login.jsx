@@ -23,7 +23,16 @@ function Login() {
 
         </div>
         <button type="submit">Login</button>
+        <div className="login-forgot">
+        <p><a href="#">Forgot Password?</a></p>
+        </div>
+
         </form>
+
+        <div className="login-register">
+        <p>New User?&nbsp;<a href="#"> Register Account</a></p>
+        </div>
+
     </div>
     <div className="login-aside">
 
