@@ -4,8 +4,9 @@
         justify-content: center;
     }
     &-logo > img {
-        height: 80px;
-        padding: 15px;
+        width: 200px;
+        height: auto;
+        margin: 15px;
     }
     &-nav-links {
         border-top: 1px solid lightpink;

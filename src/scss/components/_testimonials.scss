@@ -1,0 +1,66 @@
+@use "variables" as *;
+
+.testimonials {
+    &-banner {
+    background-color: black;
+    color: white;
+    height: 400px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    letter-spacing: 1px;
+    }
+
+    &-path {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        font-size: 0.9rem;
+        margin-left: 100px;
+        > i, p {
+            padding: 0 8px;
+        }
+    }
+    &-gallery {
+        margin: 0 100px;
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: center;
+        font-family: $secondary-font;
+        //display: grid;
+        //grid-template-columns: 1fr 1fr;
+    }
+    &-card {
+        background-color: rgb(243, 242, 242);
+        width: 350px;
+        height: 350px;
+        margin: 20px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        letter-spacing: 0.5px;
+        > p {
+            padding-left: 100px;
+            padding-right: 30px;
+        }
+        &-name {
+            font-weight: 600;
+            font-size: 1.4rem;
+        }
+        &-description {
+            font-size: 1rem;
+            margin: 0;
+        }
+    }
+}
+#testimonials-large {
+    font-size: 3.5rem;
+    margin-left: 100px;
+    line-height: 0rem;
+}
+#testimonials-small {
+    font-size: 0.9rem;
+    margin-left: 100px;
+
+}

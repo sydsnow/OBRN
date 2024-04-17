@@ -1,7 +1,13 @@
 @use './components/variables';
 @use './components/reset';
+@use './components/forms';
 @use './components/footer';
 @use './components/header';
 @use './components/main';
 @use './components/nav';
 @use './pages/login';
+
+@use './pages/register';
+
+@use './pages/customerprofile'
+
