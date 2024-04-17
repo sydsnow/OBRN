@@ -33,7 +33,7 @@
     }
     &-card {
         background-color: rgb(243, 242, 242);
-        width: 350px;
+        width: 400px;
         height: 350px;
         margin: 20px;
         display: flex;
@@ -51,7 +51,11 @@
         &-description {
             font-size: 1rem;
             margin: 0;
+            height: 140px; 
+            display: flex;
+            align-items: center;
         }
+        
     }
 }
 #testimonials-large {
@@ -64,3 +68,10 @@
     margin-left: 100px;
 
 }
+.fa-star {
+    color: lightgray; // Set the default star color
+  }
+  
+  .filled {
+    color: gold; // Set the color for filled stars
+  }
