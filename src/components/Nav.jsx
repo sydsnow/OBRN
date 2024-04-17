@@ -1,15 +1,26 @@
 import "../scss/components/_nav.scss";
 import logo from '../assets/obrn-logo.png';
 import { NavLink } from "react-router-dom";
-
+import { useState } from "react";
 
 function Nav () {
+    const [isActive, setIsActive] = useState(false);
+
+    const toggleHamburger = () => {
+        setIsActive(!isActive);
+    };
+
     return (
         <nav className="header-main-nav">
             <div className="header-logo">
                 <img src={logo} alt="obrn logo" ></img>
             </div>
-            <div className="header-nav-links">
+            <div className={`hamburger ${isActive ? 'active' : ''}`} onClick={toggleHamburger}>
+                <span className="bar"></span>
+                <span className="bar"></span>
+                <span className="bar"></span>
+            </div>
+            <div className={`header-nav-links ${isActive ? "active" : ""}`} onClick={toggleHamburger}>
                 <ul>
                     <li>
                         <NavLink to="/">
@@ -31,6 +42,11 @@ function Nav () {
                     {/* <li><a href="#">BLOG</a></li>
                     <li><a href="#">JOB</a></li> */}
                     <li><a href="#">CONTACT US</a></li>
+                    <li>
+                        <NavLink to="/customerprofile">
+                            PROFILE
+                        </NavLink>
+                    </li>
                     <li>
                         <NavLink to="/login">
                             LOGIN

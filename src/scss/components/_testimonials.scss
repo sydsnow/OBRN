@@ -57,12 +57,13 @@
         font-family: $secondary-font;
         display: grid;
         grid-template-columns: 1fr ;
+        margin: 20px 0;
         @media (min-width: 768px) {
-            margin: 0 100px;
+            margin: 20px 100px;
         }
         @media (min-width: 1440px) {
             grid-template-columns: 1fr 1fr;
-            margin: 0 145px;
+            margin: 20px 145px;
         }
     }
     &-card {
