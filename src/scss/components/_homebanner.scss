@@ -1,0 +1,169 @@
+@use '../components/reset' as *;
+@use '../components/variables' as *;
+
+.home{
+    display:flex;
+    flex-direction: column;
+    justify-content: center;
+    margin:  0 auto;
+    width:100%;
+
+    &-banner{
+        display:flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        width:100%;
+        background: url('../assets/home-banner.jpg');
+        background-size:cover;
+        height:50vh;
+    }
+    &-banner-container{
+        display:flex;
+        flex-direction: column;
+        justify-content: space-evenly;
+        align-items:flex-start;
+        width:90%;
+        height:320px;
+    }
+
+    &-banner-copy{
+        display:flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        align-items: flex-start;
+        text-align: left;
+        width:100%;
+        padding:30px 35px 0 0;
+        h1{
+            font-family: $primary-font;
+            text-shadow: 2px 2px 6px #000000;
+            font-size: 2rem;
+            // line-height: 5rem;
+            font-weight: 700;
+            color:#fff;
+            margin:2vh 0;
+        }
+        p{
+            font-family: $secondary-font;
+            font-size: 1rem;
+            font-weight: 300;
+            margin:0;
+            color:#fff;
+        }
+    }
+    &-btns{
+        display:flex;
+        flex-direction: row;
+        justify-content: flex-start;
+        align-items: flex-start;
+        width:100%;
+        gap: 0.5rem;
+    }
+
+    &-btn{
+        display:flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        width:100%;
+        max-width:150px;
+        padding: 1rem;
+        border-radius: 5px;
+        background: #222;
+        color: #fff;
+        font-family: $secondary-font;
+        font-size: 0.8rem;
+        font-weight: 400;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        border:none;
+        &:hover{
+            background: #660A3E;
+        }
+    }
+
+@media (min-width: 960px) {
+display:flex;
+flex-direction: column;
+justify-content: center;
+margin:  0 auto;
+width:100%;
+    &-banner{
+        display:flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        width:100%;
+        background: url('../assets/home-banner.jpg');
+        background-size:cover;
+        height:80vh;
+    }
+
+    &-banner-container{
+        display:flex;
+        flex-direction: column;
+        justify-content: space-evenly;
+        align-items:flex-start;
+        width:90%;
+        height:350px;
+    }
+
+    &-banner-copy{
+        display:flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        align-items: flex-start;
+        text-align: left;
+        width:70%;
+        padding:30px 35px 30px 0;
+        h1{
+            font-family: $primary-font;
+            text-shadow: 2px 2px 6px #000000;
+            font-size: 4rem;
+            // line-height: 5rem;
+            font-weight: 700;
+            color:#fff;
+            margin:2vh 0;
+        }
+        p{
+            font-family: $secondary-font;
+            font-size: 1.3rem;
+            font-weight: 300;
+            margin:0;
+            color:#fff;
+        }
+    }
+    &-btns{
+        display:flex;
+        flex-direction: row;
+        justify-content: flex-start;
+        align-items: flex-start;
+        width:100%;
+        gap: 1rem;
+    }
+
+    &-btn{
+        display:flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        width:100%;
+        max-width:200px;
+        padding: 1rem;
+        border-radius: 5px;
+        background: #222;
+        color: #fff;
+        font-family: $secondary-font;
+        font-size: 1rem;
+        font-weight: 400;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        border:none;
+        &:hover{
+            background: #660A3E;
+        }
+    }
+
+}
+}

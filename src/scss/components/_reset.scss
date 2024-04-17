@@ -1,3 +1,6 @@
+
+@use '../components/variables' as *;
+
 /* CSS Reset */
 html {
     box-sizing: border-box;
@@ -11,9 +14,20 @@ html {
 body{
     margin:0;
 }
+
+h1,h2,h3,h4,h5,h6{
+    font-family: $primary-font;
+    font-weight: 700;
+
+}
+p{
+    font-family: $secondary-font;
+    font-weight: 400;
+}
 a {
     text-decoration: none;
     color:#C93482;
+    font-family: $secondary-font;
 }
 .wrapper{
     display:flex;

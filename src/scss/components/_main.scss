@@ -6,3 +6,11 @@ h1{
     font-size: 3rem;
     font-weight: 700;
 }
+
+.main{
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    min-height:90vh;
+}
