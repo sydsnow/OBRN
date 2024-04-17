@@ -8,7 +8,7 @@ function CustomerProfile () {
                 <h1 className="customer-profile-title">Customer Profile</h1>
                 <div className="customer-profile-buttons">
                     <a href="#editprofile" className="button">EDIT PROFILE</a> 
-                    <a href="#notifications" className="button">NOTIFICATIONS</a>
+                    {/* <a href="#notifications" className="button">NOTIFICATIONS</a> */}
                 </div>
             </div>
             <div className="customer-profile-image-container">
@@ -21,6 +21,25 @@ function CustomerProfile () {
                 <p><i className="fa-solid fa-phone"></i> +123 456 7890</p>
                 <p><i className="fa-solid fa-location-dot"></i> Vancouver, Canada</p>
             </div>
+            <div className="customer-profile-upcoming">
+                <div className="customer-profile-upcoming-header">
+                    <h2 className="customer-profile-upcoming-title">Upcoming Appointments</h2>
+                    <a href="#seeall" className="customer-profile-see-all-button">See All</a>
+                </div>
+                <table className="customer-profile-table">
+                    <tr>
+                        <th className="customer-profile-date">Date</th>
+                        <th>Service</th>
+                        <th>Provider</th>
+                    </tr>
+                    <tr>
+                        <td>29 June, 2024</td>
+                        <td>Haircut & Styling</td>
+                        <td>Joe</td>
+                    </tr>
+
+                </table>
+            </div>
             <div className="customer-profile-history">
                 <div className="customer-profile-history-header">
                     <h2 className="customer-profile-history-title">Appointment History</h2>
@@ -28,7 +47,7 @@ function CustomerProfile () {
                 </div>
                 <table className="customer-profile-table">
                     <tr>
-                        <th>Date</th>
+                        <th className="customer-profile-date">Date</th>
                         <th>Service</th>
                         <th>Provider</th>
                     </tr>
@@ -37,22 +56,42 @@ function CustomerProfile () {
                         <td>Haircut & Styling</td>
                         <td>Sarah</td>
                     </tr>
+                    <tr>
+                        <td>15 April, 2024</td>
+                        <td>Haircut & Styling</td>
+                        <td>Sarah</td>
+                    </tr>
                 </table>
             </div>
-            <div className="customer-profile-upcoming">
-                <div className="customer-profile-upcoming-header">
-                    <h2 className="customer-profile-upcoming-title">Upcoming Appointments</h2>
+            <div className="customer-profile-products">
+                <div className="customer-profile-products-header">
+                    <h2 className="customer-profile-products-title">Product History</h2>
                     <a href="#seeall" className="customer-profile-see-all-button">See All</a>
                 </div>
                 <table className="customer-profile-table">
                     <tr>
-                        <th>Date</th>
-                        <th>Service</th>
+                        <th className="customer-profile-date">Date</th>
+                        <th>Product</th>
                         <th>Provider</th>
                     </tr>
                     <tr>
                         <td>29 June, 2024</td>
-                        <td>Haircut & Styling</td>
+                        <td>Mushroom</td>
+                        <td>Joe</td>
+                    </tr>
+                    <tr>
+                        <td>29 June, 2024</td>
+                        <td>Weed</td>
+                        <td>Joe</td>
+                    </tr>
+                    <tr>
+                        <td>29 June, 2024</td>
+                        <td>Weed</td>
+                        <td>Joe</td>
+                    </tr>
+                    <tr>
+                        <td>29 June, 2024</td>
+                        <td>Weed</td>
                         <td>Joe</td>
                     </tr>
                 </table>

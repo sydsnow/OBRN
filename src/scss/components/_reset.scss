@@ -15,12 +15,12 @@ body{
     margin:0;
 }
 
-h1,h2,h3,h4,h5,h6{
+h1,h2,h3,h4,h5,h6,th{
     font-family: $primary-font;
     font-weight: 700;
 
 }
-p{
+p,td{
     font-family: $secondary-font;
     font-weight: 400;
 }
