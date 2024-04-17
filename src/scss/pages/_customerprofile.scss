@@ -44,7 +44,7 @@
     }
 
     &-history, &-upcoming {
-        margin-top: 50px;
+        margin: 30px;
         border: 1px solid rgba(181, 181, 181, 0.49);
         border-radius: 5px;
         padding: 15px;
@@ -78,7 +78,25 @@
         text-align: center;
     }
 
+    &-table{
+        width: 100%;
+        border-collapse: collapse;
+        // margin: 20px;
+        th {
+            border: 1px solid black;
+            text-align: left;
+            background-color: black;
+            color: white;
+            padding-top: 5px;
+            padding-bottom: 5px;
+            padding-left: 12px;
+            padding-right: 12px;
+
+        }
+    }
+
     @media (min-width: 768px) {
+        
         &-title {
             text-align: left;
             font-size: 70px;
@@ -92,7 +110,8 @@
         &-buttons {
             display: flex;
             justify-content: flex-end; 
-            width: 100%; 
+            // width: 100%; 
+            margin-right: 130px;
         }
         &-image-container {
             justify-content: flex-start;
@@ -106,77 +125,12 @@
             flex-direction: column;
             justify-content: center;
             margin-left: 130px;
+            line-height:0px;
+        }
+        &-history, &-upcoming {
+            margin-left: 130px;
+            margin-right: 130px;
+            
         }
     }
 }
-
-// .customer-profile {
-//     &-content {
-//         display: flex;
-//         flex-direction: column;
-//         align-items: center;
-//         @media (min-width: 768px) {
-//             flex-direction: row;
-//             align-items: flex-start; // Align items to the top
-//         }
-//     }
-
-//     &-image-container {
-//         display: flex;
-//         justify-content: center;
-//         margin-top: -100px;
-//         @media (min-width: 768px) {
-//             margin-top: 0;
-//             justify-content: flex-start;
-//         }
-//     }
-    
-//     &-picture {
-//         border-radius: 50%; 
-//         width: 160px; 
-//         height: 160px; 
-//         object-fit: cover; 
-//         border: 3px solid white;
-//         @media (min-width: 768px) {
-//             margin-right: 50px; // Adds spacing between the picture and the details
-//         }
-//     }
-
-//     &-details {
-//         text-align: center;
-//         @media (min-width: 768px) {
-//             text-align: left;
-//             display: flex;
-//             flex-direction: column;
-//             justify-content: center;
-//         }
-//     }
-
-//     &-top-container {
-//         background-color: black;
-//         color: white;
-//         height: 400px;
-//         display: flex;
-//         flex-direction: column;
-//         letter-spacing: 1px;
-//         justify-content: space-between;
-//         padding: 20px;
-//         @media (min-width: 768px) {
-//             flex-direction: row;
-//             justify-content: space-between;
-//         }
-//     }
-
-//     &-title {
-//         font-size: 36px;
-//         text-align: center;
-//         margin-top: 150px;
-//         @media (min-width: 768px) {
-//             text-align: left;
-//             font-size: 70px;
-//             line-height: 0rem;
-//             margin-left: 100px;
-//         }
-//     }
-//     // Remaining styles...
-// }
