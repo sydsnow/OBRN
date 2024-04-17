@@ -4,6 +4,7 @@ import Header from '../components/Header';
 import Footer from '../components/Footer';
 import HomePage from '../pages/HomePage';
 import Login from '../pages/Login';
+import TestRegisterPage from "../pages/TestRegisterPage";
 
 import RegisterCustomer from '../pages/RegisterCustomer';
 import RegisterBusiness from '../pages/RegisterBusiness';
@@ -21,15 +22,12 @@ function AppRouter() {
       <Routes>
         <Route path="/" element={<HomePage />} />
         <Route path="/login" element={<Login />} />
-
+        <Route path="/testregister" element={<TestRegisterPage />} />
         <Route path="/registercustomer" element={<RegisterCustomer />} />
         <Route path="/registerbusiness" element={<RegisterBusiness />} />
-
-
         <Route path="/customerprofile" element={<CustomerProfile />} />
         <Route path="/services" element={<ServicesPage />} />
         <Route path="/testimonials" element={<TestimonialsPage />} />
-
       </Routes>
       <Footer />
     </BrowserRouter>

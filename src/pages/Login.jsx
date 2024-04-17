@@ -26,8 +26,9 @@ function Login() {
         </form>
     </div>
     <div className="login-aside">
-
-    <img src={loginimg} alt="person loggin in" />
+        <div className="login-img">
+    <img src={loginimg} alt="person logging in" />
+        </div>
     </div>
 </div>
 </div>
