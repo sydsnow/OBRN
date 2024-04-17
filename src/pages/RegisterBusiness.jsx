@@ -52,11 +52,11 @@ function RegisterBusiness(){
         <label className="label" htmlFor="insurance"> Insurance Company</label>
         </div> 
         <div className="form-group">
-        <input className='input' type="date" required autoComplete='off' id="date" name="date" />
+        <input className='input2' type="date" required autoComplete='off' id="date" name="date" />
         <label className="label" htmlFor="date"> Insurance Expiry</label>
         </div>
         <div className="form-group">
-        <input className='input' type="file" required id="file" name="file" />
+        <input className='input2' type="file" required id="file" name="file" />
         <label className="label" htmlFor="file">
         <i className="fa-solid fa-upload"></i> Business License</label>
         </div>  
@@ -76,6 +76,9 @@ function RegisterBusiness(){
         <button type="submit">Register</button>
         </div>
         </form>
+        <div className="register-login">
+        <p>Already a user?&nbsp;<a href="#"> Login</a></p>
+        </div>
     </div>
     <div className="register-business-aside">
 
