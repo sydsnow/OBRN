@@ -31,6 +31,11 @@ function Nav () {
                     <li><a href="#">BLOG</a></li>
                     <li><a href="#">JOB</a></li>
                     <li><a href="#">CONTACT US</a></li>
+                    <li>
+                        <NavLink to="/login">
+                            LOGIN
+                        </NavLink>
+                    </li>
                 </ul>
             </div>
         </nav>
