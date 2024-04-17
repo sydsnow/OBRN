@@ -30,8 +30,8 @@ function TestimonialsPage() {
   return (
     <div className="testimonials">
       <div className="testimonials-banner">
-        <p id="testimonials-small">TESTIMONIALS</p>
-        <p id="testimonials-large">Testimonials</p>
+        <p className="testimonials-small">TESTIMONIALS</p>
+        <p className="testimonials-large">Testimonials</p>
         <div className="testimonials-path">
           <i className="fa-solid fa-house"></i>
           <p>HOME</p>
