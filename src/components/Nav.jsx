@@ -28,8 +28,8 @@ function Nav () {
                     </li>
                     <li><a href="#">SHOP</a></li>
                     <li><a href="#">COMMUNITY <i className="fa-solid fa-angle-down"></i></a></li>
-                    <li><a href="#">BLOG</a></li>
-                    <li><a href="#">JOB</a></li>
+                    {/* <li><a href="#">BLOG</a></li>
+                    <li><a href="#">JOB</a></li> */}
                     <li><a href="#">CONTACT US</a></li>
                     <li>
                         <NavLink to="/login">

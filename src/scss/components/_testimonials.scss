@@ -23,17 +23,34 @@
     }
     &-gallery {
         margin: 0 100px;
-        display: flex;
-        flex-direction: row;
-        flex-wrap: wrap;
-        justify-content: center;
+        // display: flex;
+        // flex-direction: row;
+        // flex-wrap: wrap;
+        // justify-content: center;
         font-family: $secondary-font;
-        //display: grid;
-        //grid-template-columns: 1fr 1fr;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        padding: 100px;
     }
     &-card {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+    }
+    &-card-image {
+        width: 150px;
+        position: relative;
+        bottom: 275px;
+        //right: 55px;
+        left: -200px;
+        &-container {
+            height: 10px;
+        }
+    }
+    &-card-info {
         background-color: rgb(243, 242, 242);
-        width: 350px;
+        width: 400px;
         height: 350px;
         margin: 20px;
         display: flex;
@@ -51,8 +68,13 @@
         &-description {
             font-size: 1rem;
             margin: 0;
+            height: 140px; 
+            display: flex;
+            align-items: center;
         }
+        
     }
+    
 }
 #testimonials-large {
     font-size: 3.5rem;
@@ -64,3 +86,10 @@
     margin-left: 100px;
 
 }
+.fa-star {
+    color: lightgray; // Set the default star color
+  }
+  
+  .filled {
+    color: gold; // Set the color for filled stars
+  }
