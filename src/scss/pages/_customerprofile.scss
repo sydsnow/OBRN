@@ -1,0 +1,10 @@
+.customer-profile {
+    &-top-container {
+        background-color: black;
+        color: white;
+        height: 400px;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+    }
+}
