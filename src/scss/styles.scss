@@ -9,5 +9,9 @@
 
 @use './pages/register';
 
-@use './pages/customerprofile'
+@use './pages/customerprofile';
+@use './pages/businessprofile';
 
+@use './components/slider';
+@use './components/home';
+@use './components/profilebanner';

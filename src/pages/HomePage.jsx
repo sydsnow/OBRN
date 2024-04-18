@@ -1,11 +1,15 @@
+// import Carousel from "../components/Carousel";
+import HomeBanner from "../components/HomeBanner";
+import HomeServices from "../components/HomeServices";
+
 function HomePage () {
     return (
-    
-        <div className="wrapper">
-        <div className="main-container">
-            <h1>Our Beauty Referral Network</h1>
-        </div>
-     </div>
+        <main className="main">
+        {/* <Carousel /> */}
+        <HomeBanner />
+        <HomeServices />
+
+        </main>
     )
 }
 
