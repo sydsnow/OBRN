@@ -8,6 +8,7 @@ import TestRegisterPage from "../pages/TestRegisterPage";
 
 import RegisterCustomer from '../pages/RegisterCustomer';
 import RegisterBusiness from '../pages/RegisterBusiness';
+import TestServices from "../pages/TestServices";
 
 
 import ServicesPage from "../pages/Services";
@@ -22,6 +23,7 @@ function AppRouter() {
       <Routes>
         <Route path="/" element={<HomePage />} />
         <Route path="/login" element={<Login />} />
+        <Route path="/testservices" element={<TestServices />} />
         <Route path="/testregister" element={<TestRegisterPage />} />
         <Route path="/registercustomer" element={<RegisterCustomer />} />
         <Route path="/registerbusiness" element={<RegisterBusiness />} />
