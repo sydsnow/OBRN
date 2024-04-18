@@ -12,9 +12,9 @@ function RegisterCustomer(){
         phone: '',
         birthdate: new Date(),
         email: '',
-        confirm18: '0',
+        confirm18: false,
         qr: '',
-        vip: '0',
+        vip: false,
         photo: '',
         address: '',
         city: '',
@@ -28,7 +28,7 @@ function RegisterCustomer(){
 
     const handleChange = (e) => {
         if (e.target.name === 'confirm18') {
-            const value = e.target.checked ? '1' : '0';
+            const value = e.target.checked ? true : false;
             setCustomer({ ...customer, [e.target.name]: value });
         } else {
             setCustomer({ ...customer, [e.target.name]: e.target.value });
