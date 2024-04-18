@@ -1,0 +1,57 @@
+.services {
+    &-gallery-content {
+        display: grid;
+        grid-template-columns: 1fr;
+        place-content: center;
+        @media(min-width: 768px) {
+            grid-template-columns: 1fr 1fr;
+            margin: 10px 100px;
+        }
+        @media(min-width: 1024px) {
+            grid-template-columns: 1fr 1fr 1fr;
+        }
+        @media(min-width: 1440px) {
+            grid-template-columns: 1fr 1fr 1fr 1fr;
+        }
+    }
+    &-card {
+        margin: 15px;
+        display: flex;
+        justify-content: center;
+        &-image {
+            width: 240px;
+            @media(min-width: 1024px) {
+                width: 275px;
+            }
+        }
+        &-info {
+
+        
+            &-prices {
+                font-size: 0.8rem;
+                line-height: 0;
+                @media(min-width: 1024px) {
+                    font-size: 1rem
+                }
+                > div {
+                    display: flex;
+                    > :nth-child(2) {
+                        color: rgb(142, 142, 142);
+                        text-decoration: line-through;
+                    }
+                    > p {
+                        padding-right: 10px;
+                        
+                    }
+                }
+            }
+            > p {
+                line-height: 0;
+                @media(min-width: 1024px) {
+                    font-size: 1.2rem
+                }
+                //font-size: 0.9rem;
+            }
+        }
+    }
+}
