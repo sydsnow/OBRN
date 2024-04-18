@@ -4,18 +4,18 @@ import kitty from '../assets/kitty.jpg';
 function CustomerProfile () {
     return (
         <div className="customer-profile">
-            <div className="customer-profile-top-container">
-                <h1 className="customer-profile-title">Customer Profile</h1>
-                <div className="customer-profile-buttons">
+            <div className="profile-banner-top-container">
+                <h1 className="profile-banner-title">Customer Profile</h1>
+                <div className="profile-banner-buttons">
                     <a href="#editprofile" className="button">EDIT PROFILE</a> 
                     {/* <a href="#notifications" className="button">NOTIFICATIONS</a> */}
                 </div>
             </div>
-            <div className="customer-profile-image-container">
-                <img src={kitty} alt="Profile Picture" className="customer-profile-picture"/>
+            <div className="profile-banner-image-container">
+                <img src={kitty} alt="Profile Picture" className="profile-banner-picture"/>
             </div>
-            <div className="customer-profile-details"> 
-                <h2 className="customer-profile-name">Tracy Huang</h2>
+            <div className="profile-banner-details"> 
+                <h2 className="profile-banner-name">Tracy Huang</h2>
                 <p>I love to go on hikes, and eat yummy food!</p>
                 <p><i className="fa-solid fa-envelope"></i> tracy@home.com</p>
                 <p><i className="fa-solid fa-phone"></i> +123 456 7890</p>
