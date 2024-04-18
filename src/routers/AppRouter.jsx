@@ -14,6 +14,7 @@ import ServicesPage from "../pages/Services";
 import TestimonialsPage from "../pages/Testimonials";
 import CustomerProfile from "../pages/CustomerProfile";
 import BusinessProfile from "../pages/BusinessProfile";
+import About from "../pages/About";
 
 
 function AppRouter() {
@@ -30,6 +31,7 @@ function AppRouter() {
         <Route path="/businessprofile" element={<BusinessProfile />} />
         <Route path="/services" element={<ServicesPage />} />
         <Route path="/testimonials" element={<TestimonialsPage />} />
+        <Route path="/about" element={<About />} />
       </Routes>
       <Footer />
     </BrowserRouter>
