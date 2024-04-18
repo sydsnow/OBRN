@@ -1,12 +1,39 @@
+import { useState } from 'react';
 import registerimg from '../assets/register-img.jpg';
 
-function RegisterCustomer(){
+const RegisterCustomer = () => {
+    const [birthday, setBirthday] = useState('');
+    const [error, setError] = useState('');
+  
+    const handleInputChange = (e) => {
+      const value = e.target.value;
+      setBirthday(value);
+    };
+  
+    const validateBirthday = () => {
+      const regex = /^(0[1-9]|[12][0-9]|3[01])\/(0[1-9]|1[0-2])\/\d{4}$/;
+      if (!regex.test(birthday)) {
+        setError('Please enter a valid date in the format DD/MM/YYYY');
+        return false;
+      } else {
+        setError('');
+        return true;
+      }
+    };
+  
+    const handleSubmit = (e) => {
+      e.preventDefault();
+      if (validateBirthday()) {
+        // Submit form if birthday is valid
+        console.log('Form submitted!');
+      }
+    };
     return (
     <div className="wrapper">
     <div className="register">
     <div className="register-container">
 
-        <form className="register-form">
+    <form className="register-form" onSubmit={handleSubmit}>
         <div className="register-header">
         <h1>Customer Registration</h1>
         <p>Please fill out the following details</p>
@@ -24,9 +51,25 @@ function RegisterCustomer(){
         <label className="label" htmlFor="phone">            <i className="fa-solid fa-phone"></i> Phone</label>
         </div>
         <div className="form-group">
+              <input
+                className="input2"
+                type="text"
+                placeholder="DD/MM/YYYY"
+                value={birthday}
+                onChange={handleInputChange}
+                onBlur={validateBirthday}
+                id="birthday"
+                name="birthday"
+              />
+              <label className="label" htmlFor="birthday">
+                <i className="fa-regular fa-calendar"></i> Birthday
+              </label>
+              {error && <p style={{ color: 'red' }}>{error}</p>}
+            </div>
+        {/* <div className="form-group">
         <input className='input2' type="date" required autoComplete='off' id="date" name="date" />
         <label className="label" htmlFor="date"><i className="fa-regular fa-calendar"></i> Birthday</label>
-        </div>
+        </div> */}
         <div className="form-group">
         <input className='input' type="email" required autoComplete='off' id="email" name="email" />
         <label className="label" htmlFor="email">            <i className="fa-regular fa-envelope"></i> Email</label>
