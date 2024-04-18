@@ -1,0 +1,28 @@
+@mixin flex-col {
+    display: flex;
+    flex-direction: column;
+}
+
+@mixin flex-row {
+    display: flex;
+    flex-direction: row;
+}
+
+@mixin flex-col-rev {
+    display: flex;
+    flex-direction: column-reverse;
+}
+
+@mixin flex-row-rev {
+    display: flex;
+    flex-direction: row-reverse;
+}
+
+@mixin page-banner {
+    background-color: black;
+    color: white;
+    height: 300px;
+    display: flex;
+    flex-direction: column;
+    letter-spacing: 1px;
+}

@@ -1,0 +1,75 @@
+@use '../components/variables' as *;
+@use '../components/reset' as *;
+@use '../components/mixins' as *;
+
+.profile-banner{
+    &-top-container {
+        @include page-banner;
+    }
+
+    &-title {
+        font-size: 2.5rem;
+        font-weight:400;
+        text-align: center;
+        margin-top: 70px;
+    }
+
+    &-buttons {
+        text-align: center;
+    }
+    &-image-container {
+        display: flex;
+        justify-content: center;
+        margin-top: -100px; 
+        margin-bottom: 25px;
+    }
+    
+    &-picture {
+        border-radius: 50%; 
+        width: 160px; 
+        height: 160px; 
+        object-fit: cover; 
+        border: 3px solid white;
+    }
+
+    &-details{
+        text-align: center;
+        i {
+            margin-right: 8px;
+        }
+    }
+    @media (min-width: 768px) {
+        &-top-container{
+            height: 400px;
+        }
+        &-title {
+            text-align: left;
+            font-size: 3.5rem;
+            line-height: 0rem;
+            margin: 180px 0 0 90px;
+        }
+        &-top-container {
+            justify-content: space-between;
+            padding: 20px; 
+        }
+        &-buttons {
+            display: flex;
+            justify-content: flex-end; 
+            margin-right: 130px;
+        }
+        &-image-container {
+            justify-content: flex-start;
+        }
+        &-picture{
+            margin-left: 130px;
+        }
+        &-details{
+            text-align: left;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            margin-left: 130px;
+            line-height:0px;
+        }
+    }
+}
