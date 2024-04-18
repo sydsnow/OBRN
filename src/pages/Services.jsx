@@ -4,6 +4,7 @@ import hair from "../assets/hair.jpeg";
 import nails from "../assets/nails.jpeg";
 import facial from "../assets/facial.jpeg";
 import botox from "../assets/botox.jpeg";
+import ServiceGallery from "../components/ServiceGallery";
 
 
 function ServicesPage () {
@@ -28,25 +29,29 @@ function ServicesPage () {
             id: 1,
             service: "Nails",
             price: 80,
-            image: nails
+            image: nails,
+            discount: 10
         },
         {
             id: 2, 
             service: "Hair",
             price: 120,
-            image: hair
+            image: hair,
+            //discount: 25
         },
         {
             id: 3,
             service: "Botox",
             price: 12,
-            image: botox
+            image: botox,
+            discount: 15,
         },
         {
             id: 4,
             service: "Facial",
             price: 300,
-            image: facial
+            image: facial,
+            discount: 50
         }
     ]
 
@@ -69,33 +74,24 @@ function ServicesPage () {
                     <div className="services-gallery-header-filter">
                         <p>Sort By</p>
                         {/* Sorting dropdown */}
-                    <select
-                        value={selectedOption}
-                        onChange={handleSortingChange}
-                        className="sorting-dropdown"
-                        >
-                        {sortingOptions.map((option) => (
-                            <option key={option} value={option}>
-                            {option}
-                            </option>
-                        ))}
-                    </select>
+                        <div>
+                            <select
+                                value={selectedOption}
+                                onChange={handleSortingChange}
+                                className="sorting-dropdown"
+                                >
+                                {sortingOptions.map((option) => (
+                                    <option key={option} value={option}>
+                                    {option}
+                                    </option>
+                                ))}
+                            </select> 
+                        </div>
+                   
                     {/* <i className="fa-solid fa-list"></i> */}
                     </div>
                 </div>
-                <div className="services-gallery-content">
-                    {services.map((service) => (
-                        <div className="services-card" key={service.id}>
-                            <div className="services-card-image-container">
-                                <img src={service.image}alt="Service Image" className="services-card-image" />
-                            </div>
-                            <div className="services-card-info">
-                                <p className="services-card-info-name">{service.service}</p>
-                                <p className="services-card-info-price">${service.price}</p>
-                            </div>
-                        </div>
-                    ))}
-                </div>
+                <ServiceGallery services={services}></ServiceGallery>
             </div>
         </div>
     )
