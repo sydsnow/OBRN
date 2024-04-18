@@ -1,14 +1,10 @@
 @use "variables" as *;
+@use "mixins" as *;
 
 .testimonials {
     &-banner {
-    background-color: black;
-    color: white;
-    height: 300px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    letter-spacing: 1px;
+        @include page-banner;
+        justify-content: center;
     @media (min-width: 768px) {
         height: 400px;
     }
