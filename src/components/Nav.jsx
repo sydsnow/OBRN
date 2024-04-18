@@ -41,7 +41,11 @@ function Nav () {
                     <li><a href="#">COMMUNITY <i className="fa-solid fa-angle-down"></i></a></li>
                     {/* <li><a href="#">BLOG</a></li>
                     <li><a href="#">JOB</a></li> */}
-                    <li><a href="#">CONTACT US</a></li>
+                    <li>
+                        <NavLink to="/about">
+                            ABOUT
+                        </NavLink>
+                    </li>
                     <li>
                         <NavLink to="/customerprofile">
                             PROFILE

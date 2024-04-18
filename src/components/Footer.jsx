@@ -12,8 +12,8 @@ function Footer() {
         <div className="footer-top">
             <div className="footer-section">
                 <h4 className="footer-heading">Quick Menu</h4>
-                <a href="#home" className="footer-link">HOME</a>
-                <a href="#blog" className="footer-link">SERVICE</a>
+                <a href="/" className="footer-link">HOME</a>
+                <a href="/services" className="footer-link">SERVICES</a>
                 <a href="#shop" className="footer-link">SHOP</a>
                 <a href="#community" className="footer-link">COMMUNITY</a>
                 <a href="#blog" className="footer-link">BLOG</a>
@@ -26,9 +26,11 @@ function Footer() {
             </div>
             <div className="footer-section">
                 <h4 className="footer-heading">About Us</h4>
-                <a href="#history" className="footer-link">OUR HISTORY</a>
+                <a href="/about" className="footer-link">OUR HISTORY</a>
                 <a href="#termscondition" className="footer-link">TERMS & CONDITIONS</a>
                 <a href="#privacy" className="footer-link">PRIVACY STATEMENT</a>
+                <a href="/businessprofile" className="footer-link">BUSINESS PROFILE</a>
+                <a href="/customerprofile" className="footer-link">CUSTOMER PROFILE</a>
             </div>
             <div className="footer-section">
                 <h4 className="footer-heading">Contact Us</h4>

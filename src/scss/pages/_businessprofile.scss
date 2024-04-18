@@ -32,6 +32,9 @@
             margin: 30px 130px 30px 130px;
             text-align: left;      
         }
+        &-title{
+            font-size: 30px;
+        }
         &-services-dropdown-menu{
             display: none;
         }
@@ -56,7 +59,7 @@
         }
         &-services-title{
             font-size: 35px;
-            margin-top: 70px;
+            // margin-top: 70px;
         }
     }
 }
