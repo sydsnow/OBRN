@@ -1,0 +1,57 @@
+@use '../components/variables' as *;
+@use '../components/mixins' as *;
+
+.admin{
+    @include flex-col;
+    justify-content: flex-start;
+    align-items: center;
+    min-height:90vh;
+
+    &-container{
+        @include flex-col;
+        justify-content: center;
+        width: 100%;
+        padding: 20px;
+        margin: 0 auto;
+        align-items: center;
+    }
+
+    &-copy{
+        @include flex-col;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+        padding: 20px;
+        margin: 0 auto;
+        gap: 1vh;
+        p{
+            font-family: $secondary-font;
+            font-size: 1rem;
+            font-weight: 400;
+        }
+    }
+    &-btns{
+        @include flex-row;
+        justify-content: center;
+        align-items: center;
+        gap: 1vh;
+        button{
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            background-color:#222;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            font-family: $secondary-font;
+            font-size: 1rem;
+            font-weight: 400;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            &:hover{
+                background-color: #4d4d4d;
+            }
+        }
+    }
+}
