@@ -1,26 +1,18 @@
 import React from 'react';
+import ProfileBanner from '../components/ProfileBanner';
 import kitty from '../assets/kitty.jpg';
 
-function CustomerProfile () {
+function CustomerProfile() {
     return (
         <div className="customer-profile">
-            <div className="profile-banner-top-container">
-                <h1 className="profile-banner-title">Customer Profile</h1>
-                <div className="profile-banner-buttons">
-                    <a href="#editprofile" className="button">EDIT PROFILE</a> 
-                    {/* <a href="#notifications" className="button">NOTIFICATIONS</a> */}
-                </div>
-            </div>
-            <div className="profile-banner-image-container">
-                <img src={kitty} alt="Profile Picture" className="profile-banner-picture"/>
-            </div>
-            <div className="profile-banner-details"> 
-                <h2 className="profile-banner-name">Tracy Huang</h2>
-                <p>I love to go on hikes, and eat yummy food!</p>
-                <p><i className="fa-solid fa-envelope"></i> tracy@home.com</p>
-                <p><i className="fa-solid fa-phone"></i> +123 456 7890</p>
-                <p><i className="fa-solid fa-location-dot"></i> Vancouver, Canada</p>
-            </div>
+            <ProfileBanner 
+                title="Customer Profile"
+                imagePath={kitty}
+                name="Tracy Huang"
+                email="tracy@home.com"
+                phone="+123 456 7890"
+                location="Vancouver, Canada"
+            />
             <div className="customer-profile-upcoming">
                 <div className="customer-profile-upcoming-header">
                     <h2 className="customer-profile-upcoming-title">Upcoming Appointments</h2>
