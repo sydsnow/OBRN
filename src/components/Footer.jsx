@@ -14,21 +14,21 @@ function Footer() {
                 <h4 className="footer-heading">Quick Menu</h4>
                 <a href="/" className="footer-link">HOME</a>
                 <a href="/services" className="footer-link">SERVICES</a>
-                <a href="#shop" className="footer-link">SHOP</a>
-                <a href="#community" className="footer-link">COMMUNITY</a>
-                <a href="#blog" className="footer-link">BLOG</a>
+                <a href="/comingsoon" className="footer-link">SHOP</a>
+                <a href="/comingsoon" className="footer-link">COMMUNITY</a>
+                <a href="/comingsoon" className="footer-link">BLOG</a>
             </div>
             <div className="footer-section">
                 <h4 className="footer-heading">Services</h4>
-                <a href="#hair" className="footer-link">HAIR</a>
-                <a href="#nails" className="footer-link">NAILS</a>
-                <a href="#spa" className="footer-link">SPA</a>
+                <a href="/comingsoon" className="footer-link">HAIR</a>
+                <a href="/comingsoon" className="footer-link">NAILS</a>
+                <a href="/comingsoon" className="footer-link">SPA</a>
             </div>
             <div className="footer-section">
                 <h4 className="footer-heading">About Us</h4>
                 <a href="/about" className="footer-link">OUR HISTORY</a>
-                <a href="#termscondition" className="footer-link">TERMS & CONDITIONS</a>
-                <a href="#privacy" className="footer-link">PRIVACY STATEMENT</a>
+                <a href="/comingsoon" className="footer-link">TERMS & CONDITIONS</a>
+                <a href="/comingsoon" className="footer-link">PRIVACY STATEMENT</a>
                 <a href="/businessprofile" className="footer-link">BUSINESS PROFILE</a>
                 <a href="/customerprofile" className="footer-link">CUSTOMER PROFILE</a>
             </div>

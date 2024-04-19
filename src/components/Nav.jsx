@@ -37,8 +37,16 @@ function Nav () {
                             TESTIMONIALS
                         </NavLink>
                     </li>
-                    <li><a href="#">SHOP</a></li>
-                    <li><a href="#">COMMUNITY <i className="fa-solid fa-angle-down"></i></a></li>
+                    <li>
+                        <NavLink to="/comingsoon">
+                            SHOP
+                        </NavLink>
+                    </li>
+                    <li>
+                        <NavLink to="/comingsoon">
+                            COMMUNITY <i className="fa-solid fa-angle-down"></i>
+                        </NavLink>
+                    </li>
                     {/* <li><a href="#">BLOG</a></li>
                     <li><a href="#">JOB</a></li> */}
                     <li>
