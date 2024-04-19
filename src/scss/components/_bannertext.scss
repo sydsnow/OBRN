@@ -1,0 +1,46 @@
+@use '../components/variables' as *;
+@use '../components/reset' as *;
+@use '../components/mixins' as *;
+
+.banner-text{
+    &-large {
+        font-size: 2.5rem;
+        margin-left: 20px;
+        line-height: 0rem;
+        @media (min-width: 425px) {
+            margin-left: 60px;
+        }
+        @media (min-width: 768px) {
+            font-size: 3.5rem;
+            margin-left: 100px;
+        }
+    }
+    &-small {
+        font-size: 0.7rem;
+        margin-left: 20px;
+        @media (min-width: 425px) {
+            margin-left: 60px;
+        }
+        @media (min-width: 768px) {
+            font-size: 0.9rem;
+            margin-left: 100px;
+        }
+    }
+    &-path {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        font-size: 0.7rem;
+        margin-left: 20px;
+        @media (min-width: 425px) {
+            margin-left: 60px;
+        }
+        @media (min-width: 768px) {
+            font-size: 0.9rem;
+            margin-left: 100px;
+        }
+        > i, p {
+            padding: 0 8px;
+        }
+    }
+}

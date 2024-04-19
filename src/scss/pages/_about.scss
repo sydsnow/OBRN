@@ -1,0 +1,15 @@
+@use '../components/variables' as *;
+@use '../components/reset' as *;
+@use '../components/mixins' as *;
+
+.about-page{
+    &-banner{
+        @include page-banner;
+    }
+
+    @media (min-width: 768px) {
+        &-banner{
+            height: 400px;
+        }
+    }
+}
