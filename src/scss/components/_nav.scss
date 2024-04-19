@@ -2,6 +2,12 @@
     &-logo {
         display: flex;
         justify-content: center;
+
+        img{
+            width: 200px;
+            height: auto;
+            margin: 5px;
+        }
     }
 
     &-logo > img {
