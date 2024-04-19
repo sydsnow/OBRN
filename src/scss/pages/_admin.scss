@@ -3,8 +3,9 @@
 
 .admin{
     @include flex-col;
-    justify-content: center;
+    justify-content: flex-start;
     align-items: center;
+    min-height:90vh;
 
     &-container{
         @include flex-col;
@@ -28,6 +29,12 @@
             font-size: 1rem;
             font-weight: 400;
         }
+    }
+    &-btns{
+        @include flex-row;
+        justify-content: center;
+        align-items: center;
+        gap: 1vh;
         button{
             display: flex;
             flex-direction: column;

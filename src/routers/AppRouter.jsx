@@ -18,6 +18,7 @@ import BusinessProfile from "../pages/BusinessProfile";
 import About from "../pages/About";
 import PageNotFound from "../pages/PageNotFound";
 import PageComingSoon from "../pages/PageComingSoon";
+import Admin from "../pages/Admin";
 
 
 function AppRouter() {

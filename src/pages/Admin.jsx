@@ -5,7 +5,11 @@ function Admin() {
         <div className="admin-container">
             <div className="admin-copy">
             <h1>Admin</h1>
-            <button>View All Users</button>
+            </div>
+            <div className="admin-btns">
+            <button>View All OBRN Users</button>
+            <button>View All Admin Users</button>
+            <button>View All Deals</button>
             </div>
         </div>
     </div>
