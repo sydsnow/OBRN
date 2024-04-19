@@ -58,8 +58,8 @@ function ServicesPage () {
     return (
         <div className="services">
             <div className="services-search-container">
-                <div id="services-title">Search Services/Products</div>
-                <div id="services-search-wrapper">
+                <div className="services-title">Search Services/Products</div>
+                <div className="services-search-wrapper">
                     <label htmlFor="search" id="search-label"><i className="fa-solid fa-magnifying-glass"></i></label>
                     <input name="search" id="search" placeholder="Search Services & Products..."></input>
                     <button>Search</button>
