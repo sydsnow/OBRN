@@ -15,6 +15,7 @@ import ServicesPage from "../pages/Services";
 import TestimonialsPage from "../pages/Testimonials";
 import CustomerProfile from "../pages/CustomerProfile";
 import BusinessProfile from "../pages/BusinessProfile";
+import Admin from "../pages/Admin";
 
 
 function AppRouter() {
@@ -24,6 +25,7 @@ function AppRouter() {
       <Routes>
         <Route path="/" element={<HomePage />} />
         <Route path="/login" element={<Login />} />
+        <Route path="/admin" element={<Admin />} />
         <Route path="/testservices" element={<TestServices />} />
         <Route path="/testregister" element={<TestRegisterPage />} />
         <Route path="/registercustomer" element={<RegisterCustomer />} />
