@@ -19,7 +19,7 @@ import About from "../pages/About";
 import PageNotFound from "../pages/PageNotFound";
 import PageComingSoon from "../pages/PageComingSoon";
 import Admin from "../pages/Admin";
-
+import AddServicePage from "../pages/AddService";
 
 function AppRouter() {
   return (
@@ -40,7 +40,7 @@ function AppRouter() {
         <Route path="/about" element={<About />} />
         <Route path="*" element={<PageNotFound />} />
         <Route path="/comingsoon" element={<PageComingSoon />} />
-
+        <Route path="/addservice" element={<AddServicePage />} />
       </Routes>
       <Footer />
     </BrowserRouter>
