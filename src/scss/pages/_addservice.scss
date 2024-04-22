@@ -1,0 +1,120 @@
+@use '../components/variables' as *;
+
+.add-service {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    &-form {
+        width: 290px;
+        display: flex;
+        flex-direction: column;
+        //margin-bottom: 20px;
+        @media(min-width: 768px) {
+            width: 400px;
+        }
+        @media(min-width: 1024px) {
+            width: 500px;
+        }
+        > .form-group-service {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px;
+            > input {
+                width: 150px;
+                height: 35px;
+                // display: flex;
+                // align-items: center;
+                @media(min-width: 768px) {
+                    width: 250px;
+                    height: 40px;
+                }
+                @media(min-width: 1024px) {
+                    width: 325px;
+                }
+                &::placeholder {
+                    font-size: 0.6rem;
+                    @media(min-width: 768px) {
+                        font-size: 0.8rem;
+                    }
+                    @media(min-width: 1024px) {
+                        font-size: 1rem;
+                    }
+                }
+                &[type="file"] {
+                    padding: 6px;
+                    @media(min-width: 768px) {
+                        padding: 8px;
+                    }
+                }
+            }
+            > label {
+                font-size: 0.9rem; 
+                display: flex;
+                align-items: center;
+                font-family: $secondary-font;
+                @media(min-width: 768px) {
+                   font-size: 1rem;
+                }
+                @media(min-width: 1024px) {
+                    font-size: 1.2rem;
+                }
+                > p { 
+                    color: rgb(152, 152, 152);
+                    font-size: 0.7rem;
+                    padding-left: 5px;
+                    @media (min-width: 1024px) {
+                        padding-left: 8px;
+                        font-size: 0.9rem;
+                    }
+                }
+            }
+            > select {
+                width: 150px;
+                height: 35px;
+                font-size: 0.7rem;
+                padding-left: 12px;
+                padding-top: 0;
+                padding-bottom: 0;
+                @media(min-width: 768px) {
+                    width: 250px;
+                    font-size: 0.8rem;
+                    height: 40px;
+                }
+                @media(min-width: 1024px) {
+                    width: 325px;
+                    font-size: 1rem;
+                }
+            }
+        }
+        > .button-container {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 20px;
+            margin-top: 10px;
+            > button {
+                margin: 5px;
+                padding: 3px;
+                width: 70px;
+                border-radius: 5px;
+                background-color: black;
+                color: white;
+                border: 1px solid black;
+                @media(min-width: 768px) {
+                    font-size: 1rem;
+                    padding: 5px;
+                    width: 80px;
+                }
+                @media(min-width: 1024px) {
+                    font-size: 1.2rem;
+                    width: 95px;
+                }
+                > a {
+                    color: white;
+                    font-weight: 600;
+                }
+            }
+        }
+    }
+}

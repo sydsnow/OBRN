@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import cat from '../assets/cat.jpeg';
 import hair from "../assets/hair.jpeg";
 import nails from "../assets/nails.jpeg";
@@ -54,7 +54,7 @@ function BusinessProfile () {
             <div className="business-profile-about">
                 <h2 className="business-profile-title">About Us</h2>
                 <p className="business-profile-about-details">Welcome to Purrfect Styles, where we specialize in providing top-notch grooming services for your feline companions. Our dedicated team of professionals understands the unique grooming needs of cats and is committed to ensuring that each cat receives personalized care and attention. From stylish haircuts to soothing baths and meticulous nail trims, we offer a wide range of services designed to keep your cat looking and feeling their best.
-                    <br/><br/>At Purrfect Styles, we prioritize the comfort and well-being of your cat above all else. Our salon is designed to create a stress-free environment, and our gentle approach ensures that even the most nervous cats feel at ease during their grooming session. We use only the finest products that are safe and gentle on your cat's skin and coat, leaving them looking and smelling fresh. Treat your cat to the ultimate pampering experience at Purrfect Styles, where we treat every cat like royalty.</p>            
+                    <br/><br/>At Purrfect Styles, we prioritize the comfort and well-being of your cat above all else. Our salon is designed to create a stress-free environment, and our gentle approach ensures that even the most nervous cats feel at ease during their grooming session. We use only the finest products that are safe and gentle on your cats skin and coat, leaving them looking and smelling fresh. Treat your cat to the ultimate pampering experience at Purrfect Styles, where we treat every cat like royalty.</p>            
             </div>
             <div className="business-profile-services">
                 <h2 className="business-profile-services-title">Our Services</h2>

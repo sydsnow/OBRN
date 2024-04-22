@@ -1,6 +1,7 @@
 import "../scss/components/_testimonials.scss"; 
 import kitty from "../assets/kitty.jpg";
 import TestimonialGallery from "../components/TestimonialGallery";
+import { NavLink } from "react-router-dom";
 
 function TestimonialsPage() {
 
@@ -35,9 +36,9 @@ function TestimonialsPage() {
         <p className="testimonials-large">Testimonials</p>
         <div className="testimonials-path">
           <i className="fa-solid fa-house"></i>
-          <p>HOME</p>
+          <NavLink to="/" className="testimonials-links">HOME</NavLink>
           <i className="fa-solid fa-angle-right"></i>
-          <p>TESTIMONIALS</p>
+          <NavLink to="/testimonials" className="testimonials-links">TESTIMONIALS</NavLink>
         </div>
       </div>
       <TestimonialGallery testimonials={testimonials}></TestimonialGallery>
