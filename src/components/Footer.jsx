@@ -1,4 +1,3 @@
-import React from 'react';
 import logo from '../assets/obrn-logo.png';
 import { getYear } from "../utilities/utilities";
 

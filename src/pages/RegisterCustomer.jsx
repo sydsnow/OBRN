@@ -38,6 +38,15 @@ function RegisterCustomer(){
     const handleSubmit = async (e) => {
         e.preventDefault();
         console.log("customer: ", customer);
+
+        const birthdate = new Date(customer.birthdate);
+        const today = new Date();
+        const eighteenYearsAgo = new Date(today.getFullYear() - 18, today.getMonth(), today.getDate());
+        if (birthdate > eighteenYearsAgo) {
+            setErrorMessage('You must be 18 years or older in order to register with Our Beauty Referral Network.');
+            return;
+        }
+
         if (customer.password !== customer.confirmPassword) {
             setErrorMessage('Password and Confirm Password must match');
             return;
@@ -192,3 +201,9 @@ function RegisterCustomer(){
     )
 }
 export default RegisterCustomer;
+
+// Database updates
+// pkCustomerId -> integer to text, make sure to do this with all fkCustomerIds as well
+// actually should pkCustomerId be text or varchar? ask Calli if she wants a limit on username length,
+// and if yes, what that limit should be
+// change vip and confirm18 from char to bool
