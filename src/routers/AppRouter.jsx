@@ -10,6 +10,10 @@ import RegisterCustomer from '../pages/RegisterCustomer';
 import RegisterBusiness from '../pages/RegisterBusiness';
 import TestServices from "../pages/TestServices";
 
+import EditProfile from "../pages/EditProfile";
+import EditProfileMyDetails from "../pages/EditProfileMyDetails";
+import EditProfileBusinessDetails from "../pages/EditProfileBusinessDetails";
+import EditPasswordPage from "../pages/EditPasswordPage";
 
 import ServicesPage from "../pages/Services";
 import TestimonialsPage from "../pages/Testimonials";
@@ -38,6 +42,10 @@ function AppRouter() {
         <Route path="/registerbusiness" element={<RegisterBusiness />} />
         <Route path="/customerprofile" element={<CustomerProfile />} />
         <Route path="/businessprofile" element={<BusinessProfile />} />
+        <Route path="/editprofile" element={<EditProfile />} />
+        <Route path="/editprofile/mydetails" element={<EditProfileMyDetails />} />
+        <Route path="/editprofile/businessdetails" element={<EditProfileBusinessDetails />} />
+        <Route path="/editprofile/editpassword" element={<EditPasswordPage />} />
         <Route path="/services" element={<ServicesPage />} />
         <Route path="/testimonials" element={<TestimonialsPage />} />
         <Route path="/about" element={<About />} />
