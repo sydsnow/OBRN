@@ -1,4 +1,3 @@
-import React from 'react';
 import ProfileBanner from '../components/ProfileBanner';
 import kitty from '../assets/kitty.jpg';
 

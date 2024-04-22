@@ -16,6 +16,8 @@ function Footer() {
                 <Link to="/comingsoon" className="footer-link">SHOP</Link>
                 <Link to="/registerbusiness" className="footer-link">BUSINESS REGISTRATION</Link>
                 <Link to="/registercustomer" className="footer-link">CUSTOMER REGISTRATION</Link>
+                <Link to="/admin" className="footer-link">ADMIN</Link>
+
             </div>
             <div className="footer-section">
                 <h4 className="footer-heading">Services</h4>

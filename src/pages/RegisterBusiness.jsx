@@ -33,8 +33,8 @@ function RegisterBusiness(){
         <label className="label" htmlFor="city"> City</label>
         </div>
         <div className="form-group">
-        <input className='input' type="address" required autoComplete='off' id="address" name="address" />
-        <label className="label" htmlFor="address"> Street Address</label>
+        <input className='input' type="postal" required autoComplete='off' id="postal" name="postal" />
+        <label className="label" htmlFor="posta"> Postal Code</label>
         </div>
         <div className="form-group">
         <input className='input' type="province" required autoComplete='off' id="province" name="province" />

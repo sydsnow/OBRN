@@ -19,6 +19,9 @@ import About from "../pages/About";
 import PageNotFound from "../pages/PageNotFound";
 import PageComingSoon from "../pages/PageComingSoon";
 import Admin from "../pages/Admin";
+import AdminTestimonials from "../pages/AdminTestimonials";
+import AdminAllUsers from "../pages/AdminAllUsers";
+import AdminUsers from "../pages/AdminUsers";
 
 
 function AppRouter() {
@@ -40,6 +43,11 @@ function AppRouter() {
         <Route path="/about" element={<About />} />
         <Route path="*" element={<PageNotFound />} />
         <Route path="/comingsoon" element={<PageComingSoon />} />
+        <Route path="/admin-testimonials" element={<AdminTestimonials />} />
+        <Route path="/admin-all-users" element={<AdminAllUsers />} />
+        <Route path="/admin-users" element={<AdminUsers />} />
+
+        
 
       </Routes>
       <Footer />
