@@ -10,7 +10,7 @@ function ProfileBanner({ title, imagePath, name, email, phone, location }) {
             <div className="profile-banner-top-container">
                 <h1 className="profile-banner-title">{title}</h1>
                 <div className="profile-banner-buttons">
-                    <a href="#editprofile" className="button">EDIT PROFILE</a> 
+                    <a href="/editprofile" className="button">EDIT PROFILE</a>
                     <NavLink to="/addservice" className="button">ADD / EDIT SERVICE</NavLink>
                     {/* You can uncomment this if you want another button */}
                     {/* <a href="#notifications" className="button">NOTIFICATIONS</a> */}

@@ -1,4 +1,3 @@
-import React from 'react';
 import ProfileBanner from '../components/ProfileBanner';
 import kitty from '../assets/kitty.jpg';
 
@@ -8,8 +7,8 @@ function CustomerProfile() {
             <ProfileBanner 
                 title="Customer Profile"
                 imagePath={kitty}
-                name="Tracy Huang"
-                email="tracy@home.com"
+                name="Catherine Smith"
+                email="cssmith@home.com"
                 phone="+123 456 7890"
                 location="Vancouver, Canada"
             />

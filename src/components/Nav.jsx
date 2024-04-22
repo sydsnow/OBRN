@@ -13,7 +13,9 @@ function Nav () {
     return (
         <nav className="header-main-nav">
             <div className="header-logo">
+            <NavLink to="/">
                 <img src={logo} alt="obrn logo" ></img>
+            </NavLink>
             </div>
             <div className={`hamburger ${isActive ? 'active' : ''}`} onClick={toggleHamburger}>
                 <span className="bar"></span>
