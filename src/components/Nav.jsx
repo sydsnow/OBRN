@@ -13,7 +13,9 @@ function Nav () {
     return (
         <nav className="header-main-nav">
             <div className="header-logo">
+            <NavLink to="/">
                 <img src={logo} alt="obrn logo" ></img>
+            </NavLink>
             </div>
             <div className={`hamburger ${isActive ? 'active' : ''}`} onClick={toggleHamburger}>
                 <span className="bar"></span>
@@ -37,11 +39,23 @@ function Nav () {
                             TESTIMONIALS
                         </NavLink>
                     </li>
-                    <li><a href="#">SHOP</a></li>
-                    <li><a href="#">COMMUNITY <i className="fa-solid fa-angle-down"></i></a></li>
+                    <li>
+                        <NavLink to="/comingsoon">
+                            SHOP
+                        </NavLink>
+                    </li>
+                    <li>
+                        <NavLink to="/comingsoon">
+                            COMMUNITY <i className="fa-solid fa-angle-down"></i>
+                        </NavLink>
+                    </li>
                     {/* <li><a href="#">BLOG</a></li>
                     <li><a href="#">JOB</a></li> */}
-                    <li><a href="#">CONTACT US</a></li>
+                    <li>
+                        <NavLink to="/about">
+                            ABOUT
+                        </NavLink>
+                    </li>
                     <li>
                         <NavLink to="/customerprofile">
                             PROFILE

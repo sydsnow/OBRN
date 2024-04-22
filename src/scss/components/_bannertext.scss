@@ -1,14 +1,8 @@
-@use "variables" as *;
-@use "mixins" as *;
+@use '../components/variables' as *;
+@use '../components/reset' as *;
+@use '../components/mixins' as *;
 
-.testimonials {
-    &-banner {
-        @include page-banner;
-        justify-content: center;
-    @media (min-width: 768px) {
-        height: 400px;
-    }
-    }
+.banner-text{
     &-large {
         font-size: 2.5rem;
         margin-left: 20px;
