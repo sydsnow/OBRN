@@ -1,6 +1,5 @@
 import { useState } from 'react';
 import axios from 'axios';
-import bcrypt from 'bcryptjs';
 
 import registerimg from '../assets/register-img.jpg';
 
@@ -13,13 +12,7 @@ function RegisterCustomer(){
         birthdate: new Date(),
         email: '',
         confirm18: false,
-        qr: '',
         vip: false,
-        photo: '',
-        address: '',
-        city: '',
-        province: '',
-        postalCode: '',
         password: '',
         confirmPassword: '',
     });
@@ -37,8 +30,6 @@ function RegisterCustomer(){
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        console.log("customer: ", customer);
-
         const birthdate = new Date(customer.birthdate);
         const today = new Date();
         const eighteenYearsAgo = new Date(today.getFullYear() - 18, today.getMonth(), today.getDate());
@@ -53,9 +44,8 @@ function RegisterCustomer(){
         }
 
         try {
-            const hashedPassword = await bcrypt.hash(customer.password, 10);
             const apiUrl = import.meta.env.VITE_API_BASE_URL;
-            const response = await axios.post(`${apiUrl}/api/customer/addcustomer`, { ...customer, password: hashedPassword, confirmPassword: hashedPassword });
+            const response = await axios.post(`${apiUrl}/api/customer/addcustomer`, customer);
             console.log("response: ", response);
             const { message, token } = response.data;
             console.log(message);
@@ -201,9 +191,3 @@ function RegisterCustomer(){
     )
 }
 export default RegisterCustomer;
-
-// Database updates
-// pkCustomerId -> integer to text, make sure to do this with all fkCustomerIds as well
-// actually should pkCustomerId be text or varchar? ask Calli if she wants a limit on username length,
-// and if yes, what that limit should be
-// change vip and confirm18 from char to bool

@@ -10,6 +10,10 @@ import RegisterCustomer from '../pages/RegisterCustomer';
 import RegisterBusiness from '../pages/RegisterBusiness';
 import TestServices from "../pages/TestServices";
 
+import EditProfile from "../pages/EditProfile";
+import EditProfileMyDetails from "../pages/EditProfileMyDetails";
+import EditProfileBusinessDetails from "../pages/EditProfileBusinessDetails";
+import EditPasswordPage from "../pages/EditPasswordPage";
 
 import ServicesPage from "../pages/Services";
 import TestimonialsPage from "../pages/Testimonials";
@@ -19,12 +23,10 @@ import About from "../pages/About";
 import PageNotFound from "../pages/PageNotFound";
 import PageComingSoon from "../pages/PageComingSoon";
 import Admin from "../pages/Admin";
+import AddServicePage from "../pages/AddService";
 import AdminTestimonials from "../pages/AdminTestimonials";
 import AdminAllUsers from "../pages/AdminAllUsers";
 import AdminUsers from "../pages/AdminUsers";
-import AdminAddTestimonial from "../pages/AdminAddTestimonial";
-import NewTestimonial from "../pages/NewTestimonial";
-
 
 function AppRouter() {
   return (
@@ -40,16 +42,19 @@ function AppRouter() {
         <Route path="/registerbusiness" element={<RegisterBusiness />} />
         <Route path="/customerprofile" element={<CustomerProfile />} />
         <Route path="/businessprofile" element={<BusinessProfile />} />
+        <Route path="/editprofile" element={<EditProfile />} />
+        <Route path="/editprofile/mydetails" element={<EditProfileMyDetails />} />
+        <Route path="/editprofile/businessdetails" element={<EditProfileBusinessDetails />} />
+        <Route path="/editprofile/editpassword" element={<EditPasswordPage />} />
         <Route path="/services" element={<ServicesPage />} />
         <Route path="/testimonials" element={<TestimonialsPage />} />
         <Route path="/about" element={<About />} />
         <Route path="*" element={<PageNotFound />} />
         <Route path="/comingsoon" element={<PageComingSoon />} />
+        <Route path="/addservice" element={<AddServicePage />} />
         <Route path="/admin-testimonials" element={<AdminTestimonials />} />
         <Route path="/admin-all-users" element={<AdminAllUsers />} />
         <Route path="/admin-users" element={<AdminUsers />} />
-        <Route path="/admin-add-testimonial" element={<AdminAddTestimonial />} />
-        <Route path="/new-testimonial" element={<NewTestimonial />} />
 
         
 

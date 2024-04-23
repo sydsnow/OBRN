@@ -38,6 +38,7 @@
         align-items: center;
         font-size: 0.7rem;
         margin-left: 20px;
+        margin-top: 15px;
         @media (min-width: 425px) {
             margin-left: 60px;
         }
@@ -45,8 +46,9 @@
             font-size: 0.9rem;
             margin-left: 100px;
         }
-        > i, p {
+        > i, a {
             padding: 0 8px;
+            color: white;
         }
     }
 }
