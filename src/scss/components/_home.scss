@@ -1,5 +1,7 @@
 @use '../components/reset' as *;
 @use '../components/variables' as *;
+@use '../components/mixins' as *;
+
 
 .home{
     display:flex;
@@ -180,10 +182,9 @@
         background:#222;
         h3{
             font-family: $primary-font;
-            font-size: 3rem;
+            font-size: 2.8rem;
             font-weight: 700;
             margin:0;
-            text-align: center;
             color:#fff;
             // margin:0 5vh 10vh 5vh;
         }
@@ -210,7 +211,7 @@
     &-deals-copy{
         display:flex;
         flex-direction: column;
-        justify-content: center;
+        justify-content: flex-start;
         align-items: flex-start;
         width:100%;
         gap:2vh;
@@ -246,7 +247,7 @@
             color: #222;
             font-family: $secondary-font;
             font-size: 1rem;
-            font-weight: 400;
+            font-weight: 700;
             cursor: pointer;
             transition: all 0.3s ease;
             border:none;
@@ -264,6 +265,59 @@
         width:100%;
         img{
         width:100%;
+        }
+    }
+
+    &-countdown{
+@include flex-col;
+        justify-content: center;
+        align-items: center;
+        width:100%;
+        background:#222;    
+    }
+    &-countdown-container{
+        display:flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: flex-start;
+        width:100%;
+    }
+    &-countdown-info{
+    @include flex-row;
+        gap:2vh;
+    }
+    &-countdown-box{
+        @include flex-col;
+        justify-content: center;
+        align-items: center;
+        width:50%;
+        gap:1vh;
+        h5{
+            @include flex-row;
+            justify-content: center;
+            align-items: center;
+            font-family: $secondary-font;
+            font-size: 1.5rem;
+            font-weight: 700;
+            line-height:2rem;
+            margin: 0;
+            color:#4d4d4d; 
+            border: 1px solid #ccc;
+            background-color: #fff;
+            border-radius: 20px;
+            width:70px;
+            padding:15px;
+            text-align: center;
+            
+        }
+
+        p{
+            font-family: $primary-font;
+            font-size: 1rem;
+            font-weight: 400;
+            line-height:2rem;
+            margin: 0;
+            color:#fff;
         }
     }
 
@@ -513,7 +567,7 @@ width:100%;
             color: #222;
             font-family: $secondary-font;
             font-size: 1rem;
-            font-weight: 400;
+            font-weight: 700;
             cursor: pointer;
             transition: all 0.3s ease;
             border:none;
@@ -533,6 +587,60 @@ width:100%;
         width:100%;
         }
     }
+
+    &-countdown{
+        @include flex-col;
+                justify-content: center;
+                align-items: center;
+                width:100%;
+                background:#222;    
+            }
+            &-countdown-container{
+                display:flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: flex-start;
+                width:100%;
+            }
+            &-countdown-info{
+            @include flex-row;
+                gap:2vh;
+            }
+            &-countdown-box{
+                @include flex-col;
+                justify-content: center;
+                align-items: center;
+                width:50%;
+                gap:1vh;
+                h5{
+                    @include flex-row;
+                    justify-content: center;
+                    align-items: center;
+                    font-family: $secondary-font;
+                    font-size: 1.8rem;
+                    font-weight: 700;
+                    line-height:2rem;
+                    margin: 0;
+                    color:#4d4d4d; 
+                    border: 1px solid #ccc;
+                    background-color: #fff;
+                    border-radius: 20px;
+                    width:80px;
+                    padding:20px;
+                    text-align: center;
+                    
+                }
+        
+                p{
+                    font-family: $primary-font;
+                    font-size: 1rem;
+                    font-weight: 400;
+                    line-height:2rem;
+                    margin: 0;
+                    color:#fff;
+                }
+            }
+        
 
     
 }
