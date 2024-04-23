@@ -1,26 +1,24 @@
-import "../scss/pages/_addservice.scss"
-// import { NavLink } from "react-router-dom";
-// import { useState } from "react";
-import ServiceForm from "../components/ServiceForm";
+import { useState } from "react";
+import { NavLink, useLocation } from "react-router-dom";
+import "../scss/components/_serviceform.scss";
 
+function ServiceForm () {
+    // Soon will dynamically get all the categories 
+    const categories = ["Nails", "Hair", "Eyelashes", "Wellness", "Eyebrows", "Facials"];
 
-function AddServicePage() {
-    // // Soon will dynamically get all the categories 
-    // const categories = ["Nails", "Hair", "Eyelashes", "Wellness", "Eyebrows", "Facials"];
+    // state to manage selected category 
+    const [selectedCategory, setSelectedCategory] = useState("");
 
-    // // state to manage selected category 
-    // const [selectedCategory, setSelectedCategory] = useState("");
-
-    // //handler for sorting categories
-    // const handleCategoryOption = (e) => {
-    //     setSelectedCategory(e.target.value);
-    // };
+    //handler for sorting categories
+    const handleCategoryOption = (e) => {
+        setSelectedCategory(e.target.value);
+    };
+     // Get the current location
+     const location = useLocation();
+     const isEditServicePage = location.pathname.includes("/editservice");
 
     return (
-        <div className="add-service">
-            <h2 className="add-service-title">Add Service</h2>
-            <ServiceForm />
-            {/* <form className="add-service-form">
+        <form className="service-form">
                 <div className="form-group-service">
                     <label className="service-label" htmlFor="category">Category</label>
                     <select
@@ -110,10 +108,13 @@ function AddServicePage() {
                 <div className="button-container">
                     <button><NavLink to="/businessprofile">Cancel</NavLink></button>
                     <button type="submit">Save</button>
+                    {/* Conditionally render delete button */}
+                    {isEditServicePage && (
+                        <button className="delete-button">Delete</button>
+                    )}
                 </div>
-            </form> */}
-        </div>
+            </form>
     )
-} 
+}
 
-export default AddServicePage;
+export default ServiceForm;
