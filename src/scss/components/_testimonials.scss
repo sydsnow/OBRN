@@ -52,3 +52,74 @@
         }
     }
 }
+
+.testimonial{
+    @include flex-col;
+
+    &-container{
+        @include flex-col;
+        justify-content: center;
+        align-items: center;
+        gap: 2vh;
+        width: 100%;
+
+    }
+
+    &-form{
+        @include flex-col;
+        justify-content: center;
+        align-items: center;
+        gap: 2vh;
+        width: 100%;
+        max-width:400px;    
+        padding: 20px;
+        background-color: #fff;
+        border-radius: 10px;
+        box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.1);
+
+        button{
+            width: 100%;
+            // width:390px;
+            // min-width:420px;
+            background-color:#000;
+            display:flex;
+            flex-direction:column;
+            justify-content: center;
+            align-items: center;
+            font-family:$secondary-font;
+            font-size:1.1rem;
+            padding: 15px;
+            border: 1px solid lightgray;
+            border-radius: 10px;
+            color: white;
+            font-weight: 800;
+            cursor: pointer;
+            transition: all 0.3s ease;
+
+            &:hover{
+                background-color: #4d4d4d;
+            }
+        }
+    }
+ &-label{
+    @include flex-row;
+    justify-content: center;
+    font-family:$secondary-font;
+ }
+    &-rating-input{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 1vh;
+        width: 100%;
+        label{
+            font-family:$secondary-font;
+            font-size:1rem;
+            font-weight: 400;
+        }
+    }
+    @media (min-width: 768px) {
+        width: 100%;
+    }
+
+}
