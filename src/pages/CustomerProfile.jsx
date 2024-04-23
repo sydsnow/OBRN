@@ -19,10 +19,8 @@ function CustomerProfile() {
             try {
                 const apiUrl = import.meta.env.VITE_API_BASE_URL;
                 const token = localStorage.getItem('token');
-                console.log("token: ", token);
                 if (token) {
                     const email = getEmailFromJWT(token);
-                    console.log("userId: ", email);
                     const response = await axios.get(`${apiUrl}/api/customer/getcustomerbyemail?email=${email}`);
                     axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
                     setCustomer(response.data);
