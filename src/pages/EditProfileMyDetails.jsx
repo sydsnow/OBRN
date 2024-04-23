@@ -1,4 +1,8 @@
+
 import EditProfileInfo from "../components/EditProfileInfo";
+import React from 'react';
+import MyDetailsForm from "../components/MyDetailsForm";
+
 
 function EditProfileMyDetails() {
   const userDetails = {
@@ -22,8 +26,11 @@ function EditProfileMyDetails() {
             <p>MY DETAILS</p>
           </div>
         </div>
-        <div>
-          <EditProfileInfo initialData={userDetails} />
+        <div className="edit-profile-container">
+          <h2 className="edit-profile-title">Update My Details</h2>
+          <div>
+            <MyDetailsForm initialData={userDetails} />
+          </div>
         </div>
     </div> 
   );

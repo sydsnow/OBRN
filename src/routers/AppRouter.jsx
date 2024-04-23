@@ -25,8 +25,11 @@ import PageComingSoon from "../pages/PageComingSoon";
 import Admin from "../pages/Admin";
 import AddServicePage from "../pages/AddService";
 import AdminTestimonials from "../pages/AdminTestimonials";
-import AdminAllUsers from "../pages/AdminAllUsers";
+import AdminAllCustomers from "../pages/AdminAllCustomers";
 import AdminUsers from "../pages/AdminUsers";
+import AdminAllBusinesses from "../pages/AdminAllBusinesses";
+import AdminEditCustomer from "../pages/AdminEditCustomer";
+import NewTestimonial from "../pages/NewTestimonial";
 
 function AppRouter() {
   return (
@@ -55,8 +58,11 @@ function AppRouter() {
           <Route path="/comingsoon" element={<PageComingSoon />} />
           <Route path="/addservice" element={<AddServicePage />} />
           <Route path="/admin-testimonials" element={<AdminTestimonials />} />
-          <Route path="/admin-all-users" element={<AdminAllUsers />} />
+          <Route path="/admin-all-customers" element={<AdminAllCustomers />} />
           <Route path="/admin-users" element={<AdminUsers />} />
+          <Route path="/admin-all-businesses" element={<AdminAllBusinesses />} />
+          <Route path="/admin-edit-customer/:id" element={<AdminEditCustomer/>} />
+          <Route path="/new-testimonial" element={<NewTestimonial />} />
         </Routes>
         <Footer />
       </AuthProvider>

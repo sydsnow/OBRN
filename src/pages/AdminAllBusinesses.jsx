@@ -1,31 +1,44 @@
-import { Link } from 'react-router-dom'; // Import Link from React Router
-import { useState } from 'react';
+import { Link } from 'react-router-dom';
+import { useState, useEffect } from 'react';
+import axios from 'axios';
 
-function AdminAllUsers() {
-    // State variables for pagination and search
+function AdminAllBusinesses() {
     const [currentPage, setCurrentPage] = useState(1);
     const [searchQuery, setSearchQuery] = useState('');
-    
-    // Dummy data for users (replace this with your actual data)
-    const users = [
-        { id: 1, firstName: 'John', lastName: 'Doe', username: 'johndoe123' },
-        { id: 2, firstName: 'Jane', lastName: 'Smith', username: 'janesmith456' },
-        // Add more users as needed
-    ];
+    const [users, setUsers] = useState([]);
 
-    // Pagination variables
-    const usersPerPage = 10; // Change this to the desired number of users per page
+    useEffect(() => {
+        // Fetch users from your API when component mounts
+        const fetchUsers = async () => {
+            try {
+                const apiUrl = import.meta.env.VITE_API_BASE_URL;
+                const response = await axios.get(`${apiUrl}/api/customer/getcustomers`);
+                setUsers(response.data); // Assuming response.data is an array of users
+            } catch (error) {
+                console.error('Failed to fetch users: ', error);
+            }
+        };
+
+        fetchUsers();
+
+        // Cleanup function
+        return () => {
+            // Cleanup logic if needed
+        };
+    }, []);
+
+    const handleSearchInputChange = (e) => {
+        setSearchQuery(e.target.value);
+        setCurrentPage(1);
+    };
+
+     // Pagination variables
+     const usersPerPage = 10; // Change this to the desired number of users per page
+
     const indexOfLastUser = currentPage * usersPerPage;
     const indexOfFirstUser = indexOfLastUser - usersPerPage;
     const currentUsers = users.slice(indexOfFirstUser, indexOfLastUser);
 
-    // Handle search input change
-    const handleSearchInputChange = (e) => {
-        setSearchQuery(e.target.value);
-        setCurrentPage(1); // Reset to first page when searching
-    };
-
-    // Filter users based on search query
     const filteredUsers = currentUsers.filter(user =>
         user.firstName.toLowerCase().includes(searchQuery.toLowerCase()) ||
         user.lastName.toLowerCase().includes(searchQuery.toLowerCase()) ||
@@ -37,9 +50,8 @@ function AdminAllUsers() {
             <div className="admin">
                 <Link to="/admin"><button>Back to Admin</button></Link>
                 <div className="admin-all-container">
-                    <h1>Customers & Businesses</h1>
+                    <h1>All Businesses</h1>
 
-                    {/* Search input */}
                     <input
                         type="text"
                         placeholder="Search users..."
@@ -47,14 +59,13 @@ function AdminAllUsers() {
                         onChange={handleSearchInputChange}
                     />
 
-                    {/* Display users */}
                     <div className="admin-all-users">
                         {filteredUsers.map(user => (
-                            <div className="admin-user" key={user.id}>
+                            <div className="admin-user" key={user.pkCustomerId}>
                                 <div className="admin-user-details">
                                     <div className="admin-user-copy">
                                         <h3>{user.firstName} <span>{user.lastName}</span> </h3>
-                                        <p>{user.username}</p>
+                                        <p>{user.email}</p>
                                     </div>
                                     <div className="admin-user-btns">
                                         <button>Edit</button>
@@ -65,11 +76,9 @@ function AdminAllUsers() {
                         ))}
                     </div>
 
-                    {/* Pagination */}
                     <div className="admin-pagination">
-                    <span>{currentPage}</span>
+                        <span>{currentPage}</span>
                         <button onClick={() => setCurrentPage(currentPage - 1)} disabled={currentPage === 1}>Previous</button>
-
                         <button onClick={() => setCurrentPage(currentPage + 1)} disabled={currentUsers.length < usersPerPage}>Next</button>
                     </div>
                 </div>
@@ -78,4 +87,4 @@ function AdminAllUsers() {
     );
 }
 
-export default AdminAllUsers;
+export default AdminAllBusinesses;

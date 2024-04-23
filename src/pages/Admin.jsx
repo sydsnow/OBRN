@@ -9,7 +9,9 @@ function Admin() {
             <h1>Admin</h1>
           </div>
           <div className="admin-btns">
-            <Link to="/admin-all-users"><button>View All OBRN Users</button></Link>
+            <Link to="/admin-all-customers"><button>View All Customers</button></Link>
+            <Link to="/admin-all-businesses"><button>View All Businesses</button></Link>
+
             <Link to="/admin-users"><button>View All Admin Users</button></Link>
             <Link to="/admin-deals"><button>View All Deals</button></Link>
             <Link to="/admin-testimonials"><button>View Testimonials</button></Link>

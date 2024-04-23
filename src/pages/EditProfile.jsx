@@ -1,9 +1,14 @@
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+
 import { getEmailFromJWT, formatPhoneNumber } from '../utilities/utilities';
 import EditProfileInfo from '../components/EditProfileInfo';
 import EditProfileBusinessInfo from '../components/EditProfileBusinessInfo';
 import axios from 'axios';
+
+import MyDetailsForm from '../components/MyDetailsForm';
+import BusinessDetailsForm from '../components/BusinessDetailsForm';
+
 
 function EditProfile() {
   const navigate = useNavigate();
@@ -12,6 +17,7 @@ function EditProfile() {
   const [customer, setCustomer] = useState(null);
 
   // Placeholder data for user details
+
   // const userDetails = {
   //   name: "John Doe",
   //   email: "johndoe@example.com",
@@ -21,6 +27,7 @@ function EditProfile() {
   //   province: "BC",
   //   postalCode: "V2T 5R7"
   // };
+
 
   // Placeholder data for business details
   const businessDetails = {
@@ -93,7 +100,7 @@ function EditProfile() {
               <p>Postal Code: {(customer?.postalCode) ? (customer?.postalCode) : 'Unspecified' }</p>
             </div>
           ) : (
-            <EditProfileInfo initialData={customer} />
+            <MyDetailsForm initialData={userDetails} />
           )}
           <button className="edit-profile-button" onClick={handleEditDetailsClick}>Edit My Details</button>
         </div>
@@ -107,7 +114,7 @@ function EditProfile() {
               <p>Business License: {businessDetails.businessLicense}</p>
             </div>
           ) : (
-            <EditProfileBusinessInfo initialData={businessDetails} />
+            <BusinessDetailsForm initialData={businessDetails} />
           )}
           <button className="edit-profile-button" onClick={handleEditBusinessClick}>Edit Business Details</button>
         </div>
