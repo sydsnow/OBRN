@@ -13,13 +13,7 @@ function RegisterCustomer(){
         birthdate: new Date(),
         email: '',
         confirm18: false,
-        qr: '',
         vip: false,
-        photo: '',
-        address: '',
-        city: '',
-        province: '',
-        postalCode: '',
         password: '',
         confirmPassword: '',
     });
