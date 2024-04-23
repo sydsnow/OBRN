@@ -1,8 +1,11 @@
 import { useState } from 'react';
-import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
+import { useAuth } from '../auth/authUtils';
 import loginimg from '../assets/login-img.jpg';
 
 function Login() {
+    const { login } = useAuth();
+    const navigate = useNavigate();
     const [formData, setFormData] = useState({
         email: '',
         password: ''
@@ -14,19 +17,8 @@ function Login() {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-
-        try {
-            const apiUrl = import.meta.env.VITE_API_BASE_URL;
-            console.log("password: ", formData.password);
-            const response = await axios.post(`${apiUrl}/api/customer/login`, formData);
-            console.log("response: ", response);
-            const { message, token } = response.data;
-            console.log(message);
-            localStorage.setItem('token', token);
-            axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
-        } catch (error) {
-            console.error('Registration failed: ', error);
-        }
+        await login(formData);
+        navigate('/');
     };
 
   return (

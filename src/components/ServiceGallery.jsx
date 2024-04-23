@@ -1,7 +1,13 @@
 import PropTypes from 'prop-types';
 import "../scss/components/_servicegallery.scss"
+import { NavLink, useLocation } from 'react-router-dom';
 
 function ServiceGallery ({services}) {
+
+    // Get the current location
+    const location = useLocation();
+    const isBusinessProfileRoute = location.pathname === '/businessprofile';
+
     return (
         <div className="services-gallery-content">
             {services.map((service) => (
@@ -11,7 +17,14 @@ function ServiceGallery ({services}) {
                             <img src={service.image}alt="Service Image" className="services-card-image" />
                         </div>
                         <div className="services-card-info">
-                            <p className="services-card-info-name">{service.service}</p>
+                            <div className='services-card-info-container'>
+                                <p className="services-card-info-name">{service.service}</p>
+                                {isBusinessProfileRoute && (
+                                    <NavLink to={`/editservice/${service.id}`} className="service-card-info-button">
+                                        Edit
+                                    </NavLink>
+                                )}
+                            </div>
                             <div className="services-card-info-prices">
                                 <div>
                                     {service.discount && (
@@ -30,6 +43,7 @@ function ServiceGallery ({services}) {
                             </div>
                         </div>
                     </div>
+                    
                 </div>
             ))}
         </div>
