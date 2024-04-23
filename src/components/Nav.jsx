@@ -65,14 +65,18 @@ function Nav () {
                         </NavLink>
                     </li>
                     {authenticated ? (
-                        <li>
-                            <NavLink to="/customerprofile">
-                                PROFILE
-                            </NavLink>
-                            <button onClick={handleLogout}>
-                                LOGOUT
-                            </button>
-                        </li>
+                        <div>
+                            <li>
+                                <NavLink to="/customerprofile">
+                                    PROFILE
+                                </NavLink>
+                            </li>
+                            <li>
+                                <button onClick={handleLogout}>
+                                    LOGOUT
+                                </button>
+                            </li>
+                        </div>
                     ) : (
                         <li>
                             <NavLink to="/login">
