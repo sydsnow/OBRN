@@ -59,7 +59,9 @@
         &-buttons {
             display: flex;
             justify-content: flex-end; 
-            margin-right: 130px;
+            @media(min-width: 1024px) {
+                margin-right: 130px;
+            }
         }
         &-image-container {
             justify-content: flex-start;
