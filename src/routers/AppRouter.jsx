@@ -22,6 +22,8 @@ import Admin from "../pages/Admin";
 import AdminTestimonials from "../pages/AdminTestimonials";
 import AdminAllUsers from "../pages/AdminAllUsers";
 import AdminUsers from "../pages/AdminUsers";
+import AdminAddTestimonial from "../pages/AdminAddTestimonial";
+import NewTestimonial from "../pages/NewTestimonial";
 
 
 function AppRouter() {
@@ -46,6 +48,8 @@ function AppRouter() {
         <Route path="/admin-testimonials" element={<AdminTestimonials />} />
         <Route path="/admin-all-users" element={<AdminAllUsers />} />
         <Route path="/admin-users" element={<AdminUsers />} />
+        <Route path="/admin-add-testimonial" element={<AdminAddTestimonial />} />
+        <Route path="/new-testimonial" element={<NewTestimonial />} />
 
         
 
