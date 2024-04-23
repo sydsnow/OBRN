@@ -4,6 +4,13 @@ import ProfileBanner from '../components/ProfileBanner';
 import { getEmailFromJWT } from '../utilities/utilities';
 import kitty from '../assets/kitty.jpg';
 
+function formatPhoneNumber(phone) {
+    if (/^\d{10}$/.test(phone)) {
+        return `(${phone.slice(0, 3)}) ${phone.slice(3, 6)}-${phone.slice(6)}`;
+    }
+    return phone; // If the phone number doesn't match the format, do not modify it
+}
+
 function CustomerProfile() {
     const [customer, setCustomer] = useState(null);
 
@@ -36,8 +43,8 @@ function CustomerProfile() {
                     imagePath={kitty}
                     name={customer.firstName + ' ' + customer.lastName}
                     email={customer.email}
-                    phone={customer.phone}
-                    location={customer.city ? `${customer.city}, ${customer.country}` : ''}
+                    phone={formatPhoneNumber(customer.phone)}
+                    location={(customer.city && customer.province) ? `${customer.city}, ${customer.province}` : 'Location unspecified'}
                 />
             )}
             <div className="customer-profile-upcoming">

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import EditProfileInfo from '../components/EditProfileInfo';
 import EditProfileBusinessInfo from '../components/EditProfileBusinessInfo';
@@ -12,8 +12,11 @@ function EditProfile() {
   const userDetails = {
     name: "John Doe",
     email: "johndoe@example.com",
-    phoneNumber: "123-456-7890",
-    location: "Vancouver, Canada"
+    phoneNumber: "1234567890",
+    address: "123 Main Street",
+    city: "Vancouver",
+    province: "BC",
+    postalCode: "V2T 5R7"
   };
 
   // Placeholder data for business details
@@ -62,7 +65,10 @@ function EditProfile() {
               <p>Name: {userDetails.name}</p>
               <p>Email: {userDetails.email}</p>
               <p>Phone Number: {userDetails.phoneNumber}</p>
-              <p>Location: {userDetails.location}</p>
+              <p>Address: {userDetails.address}</p>
+              <p>City: {userDetails.city}</p>
+              <p>Province: {userDetails.province}</p>
+              <p>Postal Code: {userDetails.postalCode}</p>
             </div>
           ) : (
             <EditProfileInfo initialData={userDetails} />
