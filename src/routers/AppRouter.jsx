@@ -58,7 +58,7 @@ function AppRouter() {
           <Route path="/comingsoon" element={<PageComingSoon />} />
           <Route path="/addservice" element={<AddServicePage />} />
           <Route path="/admin-testimonials" element={<AdminTestimonials />} />
-          <Route path="/admin-all-users" element={<AdminAllUsers />} />
+          <Route path="/admin-all-customers" element={<AdminAllCustomers />} />
           <Route path="/admin-users" element={<AdminUsers />} />
           <Route path="/admin-all-businesses" element={<AdminAllBusinesses />} />
           <Route path="/admin-edit-customer/:id" element={<AdminEditCustomer/>} />
