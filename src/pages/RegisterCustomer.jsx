@@ -60,24 +60,32 @@ function RegisterCustomer(){
             setErrorMessage('You must be 18 years or older in order to register with Our Beauty Referral Network.');
             return;
         }
-
+    
         if (customer.password !== customer.confirmPassword) {
             setErrorMessage('Password and Confirm Password must match.');
             return;
         }
-
+    
         try {
             const apiUrl = import.meta.env.VITE_API_BASE_URL;
             const response = await axios.post(`${apiUrl}/api/customer/addcustomer`, customer);
-            console.log("response: ", response);
             const { message, token } = response.data;
-            console.log(message);
             localStorage.setItem('token', token);
             axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
+            // Clear any previous error messages
+            setErrorMessage('');
+            console.log(message);
         } catch (error) {
             console.error('Registration failed: ', error);
+            console.log("error.response.data: ", error.response.data)
+            if (error.response && error.response.data) {
+                // Display the specific error message from the backend
+                setErrorMessage(`Registration failed: ${error.response.data}`);
+            } else {
+                setErrorMessage('Registration failed. Please try again later.');
+            }
         }
-    };
+    };    
 
     return (
     <div className="wrapper">
