@@ -1,5 +1,5 @@
 import React from 'react';
-import EditProfileBusinessInfo from "../components/EditProfileBusinessInfo";
+import BusinessDetailsForm from "../components/BusinessDetailsForm";
 
 function EditProfileBusinessDetails() {
     const businessDetails = {
@@ -23,9 +23,12 @@ function EditProfileBusinessDetails() {
                 <p>MY BUSINESS DETAILS</p>
             </div>
             </div>
+            <div className="edit-business-container">
+            <h2 className="edit-business-title">Update My Business Details</h2>
             <div>
-            <EditProfileBusinessInfo initialData={businessDetails} />
+                <BusinessDetailsForm initialData={businessDetails} />
             </div>
+        </div>
         </div> 
     );
 }
