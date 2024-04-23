@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import axios from 'axios';
-import bcrypt from 'bcryptjs';
+// import bcrypt from 'bcryptjs';
 
 import registerimg from '../assets/register-img.jpg';
 
@@ -47,10 +47,10 @@ function RegisterCustomer(){
         }
 
         try {
-            const hashedPassword = await bcrypt.hash(customer.password, 10);
-            console.log("hashedPassword: ", hashedPassword);
+            // const hashedPassword = await bcrypt.hash(customer.password, 10);
             const apiUrl = import.meta.env.VITE_API_BASE_URL;
-            const response = await axios.post(`${apiUrl}/api/customer/addcustomer`, { ...customer, password: hashedPassword, confirmPassword: hashedPassword });
+            // const response = await axios.post(`${apiUrl}/api/customer/addcustomer`, { ...customer, password: hashedPassword, confirmPassword: hashedPassword });
+            const response = await axios.post(`${apiUrl}/api/customer/addcustomer`, customer);
             console.log("response: ", response);
             const { message, token } = response.data;
             console.log(message);
