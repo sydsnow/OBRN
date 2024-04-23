@@ -1,4 +1,3 @@
-import React from 'react';
 import EditProfileInfo from "../components/EditProfileInfo";
 
 function EditProfileMyDetails() {

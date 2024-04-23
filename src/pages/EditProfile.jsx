@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { getEmailFromJWT } from '../utilities/utilities';
+import { getEmailFromJWT, formatPhoneNumber } from '../utilities/utilities';
 import EditProfileInfo from '../components/EditProfileInfo';
 import EditProfileBusinessInfo from '../components/EditProfileBusinessInfo';
 import axios from 'axios';
@@ -86,7 +86,7 @@ function EditProfile() {
               <p>First Name: {customer?.firstName}</p>
               <p>Last Name: {customer?.lastName}</p>
               <p>Email: {customer?.email}</p>
-              <p>Phone Number: {customer?.phone}</p>
+              <p>Phone Number: {formatPhoneNumber(customer?.phone)}</p>
               <p>Address: {(customer?.address) ? (customer?.address) : 'Unspecified' }</p>
               <p>City: {(customer?.city) ? (customer?.city) : 'Unspecified' }</p>
               <p>Province: {(customer?.province) ? (customer?.province) : 'Unspecified' }</p>

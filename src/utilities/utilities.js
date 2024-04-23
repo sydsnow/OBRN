@@ -14,4 +14,11 @@ function getEmailFromJWT(token) {
     return email;
 }
 
-export { getYear, getEmailFromJWT }
+function formatPhoneNumber(phone) {
+    if (/^\d{10}$/.test(phone)) {
+        return `(${phone.slice(0, 3)}) ${phone.slice(3, 6)}-${phone.slice(6)}`;
+    }
+    return phone; // If the phone number doesn't match the format, do not modify it
+}
+
+export { getYear, getEmailFromJWT, formatPhoneNumber }
