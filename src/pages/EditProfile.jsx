@@ -13,7 +13,7 @@ function EditProfile() {
     name: "John Doe",
     email: "johndoe@example.com",
     phoneNumber: "123-456-7890",
-    location: "City, Country"
+    location: "Vancouver, Canada"
   };
 
   // Placeholder data for business details
@@ -50,42 +50,47 @@ function EditProfile() {
           <p>EDIT PROFILE</p>
         </div>
       </div>
-      <div>
-        <h2>My Details</h2>
-        {!isEditingDetails ? (
-          <div>
-            <p>Name: {userDetails.name}</p>
-            <p>Email: {userDetails.email}</p>
-            <p>Phone Number: {userDetails.phoneNumber}</p>
-            <p>Location: {userDetails.location}</p>
-            <button onClick={handleEditDetailsClick}>Edit My Details</button>
-          </div>
-        ) : (
-          <EditProfileInfo initialData={userDetails} />
-        )}
+      <div className="edit-profile-header">
+        <h2>Settings</h2>
+        <p>You can manage your account here.</p>
       </div>
-      <div>
-        <h2>Business Details</h2>
-        {!isEditingBusiness ? (
-          <div>
-            <p>Business Name: {businessDetails.businessName}</p>
-            <p>Insurance Company: {businessDetails.insuranceCompany}</p>
-            <p>Insurance Expiry: {businessDetails.insuranceExpiry}</p>
-            <p>Business License: {businessDetails.businessLicense}</p>
-            <button onClick={handleEditBusinessClick}>Edit Business Details</button>
-          </div>
-        ) : (
-          <EditProfileBusinessInfo initialData={businessDetails} />
-        )}
-      </div>
-      <div>
-        <h2>Password</h2>
-        <p>Password: *******</p>
-        <button onClick={handleChangePasswordClick}>Change Password</button>
+      <div className="edit-profile-wrapper">
+        <div className="edit-profile-section">
+          <h3>My Details</h3>
+          {!isEditingDetails ? (
+            <div>
+              <p>Name: {userDetails.name}</p>
+              <p>Email: {userDetails.email}</p>
+              <p>Phone Number: {userDetails.phoneNumber}</p>
+              <p>Location: {userDetails.location}</p>
+            </div>
+          ) : (
+            <EditProfileInfo initialData={userDetails} />
+          )}
+          <button className="edit-profile-button" onClick={handleEditDetailsClick}>Edit My Details</button>
+        </div>
+        <div className="edit-profile-section">
+          <h3>Business Details</h3>
+          {!isEditingBusiness ? (
+            <div>
+              <p>Business Name: {businessDetails.businessName}</p>
+              <p>Insurance Company: {businessDetails.insuranceCompany}</p>
+              <p>Insurance Expiry: {businessDetails.insuranceExpiry}</p>
+              <p>Business License: {businessDetails.businessLicense}</p>
+            </div>
+          ) : (
+            <EditProfileBusinessInfo initialData={businessDetails} />
+          )}
+          <button className="edit-profile-button" onClick={handleEditBusinessClick}>Edit Business Details</button>
+        </div>
+        <div className="edit-profile-section">
+          <h3>Password</h3>
+          <p>*******</p>
+          <button className="edit-profile-button" onClick={handleChangePasswordClick}>Change Password</button>
+        </div>
       </div>
     </div>
   );
 }
 
 export default EditProfile;
-
