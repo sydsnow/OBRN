@@ -1,17 +1,45 @@
+import { useState, useEffect } from 'react';
+import axios from 'axios';
 import ProfileBanner from '../components/ProfileBanner';
+import { getEmailFromJWT } from '../utilities/utilities';
 import kitty from '../assets/kitty.jpg';
 
 function CustomerProfile() {
+    const [customer, setCustomer] = useState(null);
+
+    useEffect(() => {
+        const fetchCustomerData = async () => {
+            try {
+                const apiUrl = import.meta.env.VITE_API_BASE_URL;
+                const token = localStorage.getItem('token');
+                console.log("token: ", token);
+                if (token) {
+                    const email = getEmailFromJWT(token);
+                    console.log("userId: ", email);
+                    const response = await axios.get(`${apiUrl}/api/customer/getcustomerbyemail?email=${email}`);
+                    axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
+                    setCustomer(response.data);
+                }
+            } catch (error) {
+                console.error('Error fetching user data: ', error);
+            }
+        };
+
+        fetchCustomerData();
+    }, []);
+
     return (
         <div className="customer-profile">
-            <ProfileBanner 
-                title="Customer Profile"
-                imagePath={kitty}
-                name="Catherine Smith"
-                email="cssmith@home.com"
-                phone="+123 456 7890"
-                location="Vancouver, Canada"
-            />
+            {customer && (
+                <ProfileBanner 
+                    title="Customer Profile"
+                    imagePath={kitty}
+                    name={customer.firstName + ' ' + customer.lastName}
+                    email={customer.email}
+                    phone={customer.phone}
+                    location={customer.city ? `${customer.city}, ${customer.country}` : ''}
+                />
+            )}
             <div className="customer-profile-upcoming">
                 <div className="customer-profile-upcoming-header">
                     <h2 className="customer-profile-upcoming-title">Upcoming Appointments</h2>

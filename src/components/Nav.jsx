@@ -1,6 +1,6 @@
 import { NavLink, useNavigate } from "react-router-dom";
 import { useState } from "react";
-import { useAuth } from '../auth/AuthContext';
+import { useAuth } from '../auth/authUtils';
 import "../scss/components/_nav.scss";
 import logo from '../assets/obrn-logo.png';
 
