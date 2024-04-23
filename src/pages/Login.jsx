@@ -1,6 +1,5 @@
 import { useState } from 'react';
 import axios from 'axios';
-// import bcrypt from 'bcryptjs';
 import loginimg from '../assets/login-img.jpg';
 
 function Login() {
@@ -17,10 +16,8 @@ function Login() {
         e.preventDefault();
 
         try {
-            // const hashedPassword = await bcrypt.hash(formData.password, 10);
             const apiUrl = import.meta.env.VITE_API_BASE_URL;
             console.log("password: ", formData.password);
-            // const response = await axios.post(`${apiUrl}/api/customer/login`, { ...formData, password: hashedPassword });
             const response = await axios.post(`${apiUrl}/api/customer/login`, formData);
             console.log("response: ", response);
             const { message, token } = response.data;
