@@ -15,9 +15,12 @@ export const AuthProvider = ({ children }) => {
             localStorage.setItem('token', token);
             axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
             setAuthenticated(true);
+            console.log("authenticated: ", true);
+            return token;
         } catch (error) {
             console.error('Login failed: ', error);
             setAuthenticated(false);
+            return null;
         }
     };
 
@@ -36,6 +39,6 @@ export const AuthProvider = ({ children }) => {
 
 AuthProvider.propTypes = {
     children: PropTypes.node.isRequired,
-}
+};
 
 export const useAuth = () => useContext(AuthContext);
