@@ -1,6 +1,5 @@
 import { useState } from 'react';
 import axios from 'axios';
-// import bcrypt from 'bcryptjs';
 
 import registerimg from '../assets/register-img.jpg';
 
@@ -31,8 +30,6 @@ function RegisterCustomer(){
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        console.log("customer: ", customer);
-
         const birthdate = new Date(customer.birthdate);
         const today = new Date();
         const eighteenYearsAgo = new Date(today.getFullYear() - 18, today.getMonth(), today.getDate());
@@ -47,9 +44,7 @@ function RegisterCustomer(){
         }
 
         try {
-            // const hashedPassword = await bcrypt.hash(customer.password, 10);
             const apiUrl = import.meta.env.VITE_API_BASE_URL;
-            // const response = await axios.post(`${apiUrl}/api/customer/addcustomer`, { ...customer, password: hashedPassword, confirmPassword: hashedPassword });
             const response = await axios.post(`${apiUrl}/api/customer/addcustomer`, customer);
             console.log("response: ", response);
             const { message, token } = response.data;
