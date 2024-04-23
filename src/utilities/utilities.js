@@ -4,4 +4,14 @@ function getYear(){
     return d.getFullYear();
 }
 
-export { getYear }
+function getEmailFromJWT(token) {
+    const [, payloadBase64] = token.split('.'); // Get the base64 encoded payload
+    const payloadJson = atob(payloadBase64); // Decode base64 to JSON
+    const payload = JSON.parse(payloadJson); // Parse JSON
+
+    const email = payload['http://schemas.xmlsoap.org/ws/2005/05/identity/claims/emailaddress'];
+
+    return email;
+}
+
+export { getYear, getEmailFromJWT }

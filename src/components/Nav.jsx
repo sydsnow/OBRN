@@ -1,13 +1,21 @@
+import { NavLink, useNavigate } from "react-router-dom";
+import { useState } from "react";
+import { useAuth } from '../auth/authUtils';
 import "../scss/components/_nav.scss";
 import logo from '../assets/obrn-logo.png';
-import { NavLink } from "react-router-dom";
-import { useState } from "react";
 
 function Nav () {
     const [isActive, setIsActive] = useState(false);
+    const { authenticated, logout } = useAuth();
+    const navigate = useNavigate();
 
     const toggleHamburger = () => {
         setIsActive(!isActive);
+    };
+
+    const handleLogout = async () => {
+        await logout();
+        navigate('/');
     };
 
     return (
@@ -56,16 +64,22 @@ function Nav () {
                             ABOUT
                         </NavLink>
                     </li>
-                    <li>
-                        <NavLink to="/customerprofile">
-                            PROFILE
-                        </NavLink>
-                    </li>
-                    <li>
-                        <NavLink to="/login">
-                            LOGIN
-                        </NavLink>
-                    </li>
+                    {authenticated ? (
+                        <li>
+                            <NavLink to="/customerprofile">
+                                PROFILE
+                            </NavLink>
+                            <button onClick={handleLogout}>
+                                LOGOUT
+                            </button>
+                        </li>
+                    ) : (
+                        <li>
+                            <NavLink to="/login">
+                                LOGIN
+                            </NavLink>
+                        </li>
+                    )}
                 </ul>
             </div>
         </nav>

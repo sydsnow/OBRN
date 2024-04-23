@@ -64,6 +64,7 @@ function AppRouter() {
         <Routes>
           <Route path="/" element={<HomePage />} />
           <Route path="/login" element={<Login />} />
+          <Route path="/logout" element={<Logout />} />
           <Route path="/admin" element={<Admin />} />
           <Route path="/testservices" element={<TestServices />} />
           <Route path="/testregister" element={<TestRegisterPage />} />
@@ -92,3 +93,7 @@ function AppRouter() {
 }
 
 export default AppRouter;
+
+function Logout() {
+  return null;
+}
