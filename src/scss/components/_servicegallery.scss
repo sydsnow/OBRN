@@ -45,13 +45,20 @@
                     }
                 }
             }
-            > p {
-                line-height: 0;
-                @media(min-width: 1024px) {
-                    font-size: 1.2rem
+            &-container {
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                > p, a {
+                    line-height: 0;
+                    text-align: left;
+                    @media(min-width: 1024px) {
+                        font-size: 1.2rem
+                    }
+                    //font-size: 0.9rem;
                 }
-                //font-size: 0.9rem;
             }
+            
         }
     }
 }

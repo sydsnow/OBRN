@@ -27,6 +27,7 @@ import AddServicePage from "../pages/AddService";
 import AdminTestimonials from "../pages/AdminTestimonials";
 import AdminAllUsers from "../pages/AdminAllUsers";
 import AdminUsers from "../pages/AdminUsers";
+import EditService from "../pages/EditService";
 
 function AppRouter() {
   return (
@@ -55,6 +56,7 @@ function AppRouter() {
         <Route path="/admin-testimonials" element={<AdminTestimonials />} />
         <Route path="/admin-all-users" element={<AdminAllUsers />} />
         <Route path="/admin-users" element={<AdminUsers />} />
+        <Route path="/editservice/:id" element={<EditService />} />
       </Routes>
       <Footer />
     </BrowserRouter>
