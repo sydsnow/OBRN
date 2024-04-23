@@ -49,7 +49,7 @@ function AdminTestimonials(){
                     <h1>Testimonials</h1>
                 </div>
                 <div className="admin-testimonials-btns">
-                <Link to="/admin-add-testimonial"><button>Add Testimonial</button></Link>
+                {/* <Link to="/admin-add-testimonial"><button>Add Testimonial</button></Link> */}
                 </div>
                 <div className="admin-testimonials">
                     <div className="admin-testimonial">
@@ -64,7 +64,7 @@ function AdminTestimonials(){
                             </p>
                             </div>
                         <div className="admin-testimonial-btns">
-                            <button>Edit</button>
+                            {/* <button>Edit</button> */}
                             <button>Delete</button>
                         </div>
                 </div>
