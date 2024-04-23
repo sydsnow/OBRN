@@ -2,7 +2,7 @@ import { Link } from 'react-router-dom'; // Import Link from React Router
 import { useState } from 'react';
 
 
-function AdminTestimonials(){
+function AdminAddTestimonial(){
 
     // Dummy testimonials data (replace this with your actual data)
     const testimonials = [
@@ -49,7 +49,7 @@ function AdminTestimonials(){
                     <h1>Testimonials</h1>
                 </div>
                 <div className="admin-testimonials-btns">
-                <Link to="/admin-add-testimonial"><button>Add Testimonial</button></Link>
+                    <button>Add Testimonial</button>
                 </div>
                 <div className="admin-testimonials">
                     <div className="admin-testimonial">
@@ -100,4 +100,4 @@ function AdminTestimonials(){
     );
 }
 
-export default AdminTestimonials;
+export default AdminAddTestimonial;

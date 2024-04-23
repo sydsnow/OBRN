@@ -1,24 +1,62 @@
+import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { useAuth } from '../auth/AuthContext';
 import loginimg from '../assets/login-img.jpg';
 
 function Login() {
+    const { login } = useAuth();
+    const navigate = useNavigate();
+    const [formData, setFormData] = useState({
+        email: '',
+        password: ''
+    });
+
+    const handleChange = (e) => {
+        setFormData({ ...formData, [e.target.name]: e.target.value });
+    };
+
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        await login(formData);
+        navigate('/');
+    };
+
   return (
     <div className="wrapper">
-<div className="login">
+    <div className="login">
     <div className="login-container">
 
-        <form className="login-form">
+        <form className="login-form" onSubmit={handleSubmit}>
         <div className="login-header">
         <h1>Login</h1>
         <p>Access back to your account</p>
         </div>
         <div className="form-group">
-        <input className='input' type="email" required autoComplete='off' id="email" name="email" />
+        <input 
+            className='input' 
+            type="email" 
+            required 
+            autoComplete='off' 
+            id="email" 
+            name="email" 
+            value={formData.email}
+            onChange={handleChange}
+        />
 
         <label className="label" htmlFor="email">            <i className="fa-regular fa-envelope"></i> Email</label>
 
         </div>
         <div className="form-group">
-        <input className='input' type="password" id="password" required autoComplete='off' name="password" />
+        <input 
+            className='input' 
+            type="password" 
+            id="password" 
+            required 
+            autoComplete='off' 
+            name="password"
+            value={formData.password}
+            onChange={handleChange} 
+        />
             <label className="label" htmlFor="password"> <i className="fa-solid fa-key"></i> Password</label>
 
         </div>
