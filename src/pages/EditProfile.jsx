@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import EditProfileInfo from '../components/EditProfileInfo';
-import EditProfileBusinessInfo from '../components/EditProfileBusinessInfo';
+import MyDetailsForm from '../components/MyDetailsForm';
+import BusinessDetailsForm from '../components/BusinessDetailsForm';
 
 function EditProfile() {
   const navigate = useNavigate();
@@ -13,7 +13,8 @@ function EditProfile() {
     name: "John Doe",
     email: "johndoe@example.com",
     phoneNumber: "123-456-7890",
-    location: "Vancouver, Canada"
+    address: "1234 Cambie Street, ",
+    city: "Vancouver"
   };
 
   // Placeholder data for business details
@@ -62,10 +63,10 @@ function EditProfile() {
               <p>Name: {userDetails.name}</p>
               <p>Email: {userDetails.email}</p>
               <p>Phone Number: {userDetails.phoneNumber}</p>
-              <p>Location: {userDetails.location}</p>
+              <p>Location: {userDetails.address}{userDetails.city}</p>
             </div>
           ) : (
-            <EditProfileInfo initialData={userDetails} />
+            <MyDetailsForm initialData={userDetails} />
           )}
           <button className="edit-profile-button" onClick={handleEditDetailsClick}>Edit My Details</button>
         </div>
@@ -79,7 +80,7 @@ function EditProfile() {
               <p>Business License: {businessDetails.businessLicense}</p>
             </div>
           ) : (
-            <EditProfileBusinessInfo initialData={businessDetails} />
+            <BusinessDetailsForm initialData={businessDetails} />
           )}
           <button className="edit-profile-button" onClick={handleEditBusinessClick}>Edit Business Details</button>
         </div>
