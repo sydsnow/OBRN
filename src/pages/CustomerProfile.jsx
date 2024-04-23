@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 import ProfileBanner from '../components/ProfileBanner';
-import { getEmailFromJWT } from '../utilities/utilities';
+import { getEmailFromJWT, formatPhoneNumber } from '../utilities/utilities';
 import kitty from '../assets/kitty.jpg';
 
 function CustomerProfile() {
@@ -12,10 +12,8 @@ function CustomerProfile() {
             try {
                 const apiUrl = import.meta.env.VITE_API_BASE_URL;
                 const token = localStorage.getItem('token');
-                console.log("token: ", token);
                 if (token) {
                     const email = getEmailFromJWT(token);
-                    console.log("userId: ", email);
                     const response = await axios.get(`${apiUrl}/api/customer/getcustomerbyemail?email=${email}`);
                     axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
                     setCustomer(response.data);
@@ -36,8 +34,8 @@ function CustomerProfile() {
                     imagePath={kitty}
                     name={customer.firstName + ' ' + customer.lastName}
                     email={customer.email}
-                    phone={customer.phone}
-                    location={customer.city ? `${customer.city}, ${customer.country}` : ''}
+                    phone={formatPhoneNumber(customer.phone)}
+                    location={(customer.city && customer.province) ? `${customer.city}, ${customer.province}` : 'Location unspecified'}
                 />
             )}
             <div className="customer-profile-upcoming">

@@ -1,5 +1,8 @@
+
+import EditProfileInfo from "../components/EditProfileInfo";
 import React from 'react';
 import MyDetailsForm from "../components/MyDetailsForm";
+
 
 function EditProfileMyDetails() {
   const userDetails = {

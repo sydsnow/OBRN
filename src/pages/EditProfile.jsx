@@ -1,21 +1,33 @@
-import React, { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+
+import { getEmailFromJWT, formatPhoneNumber } from '../utilities/utilities';
+import EditProfileInfo from '../components/EditProfileInfo';
+import EditProfileBusinessInfo from '../components/EditProfileBusinessInfo';
+import axios from 'axios';
+
 import MyDetailsForm from '../components/MyDetailsForm';
 import BusinessDetailsForm from '../components/BusinessDetailsForm';
+
 
 function EditProfile() {
   const navigate = useNavigate();
   const [isEditingDetails, setIsEditingDetails] = useState(false);
   const [isEditingBusiness, setIsEditingBusiness] = useState(false);
+  const [customer, setCustomer] = useState(null);
 
   // Placeholder data for user details
-  const userDetails = {
-    name: "John Doe",
-    email: "johndoe@example.com",
-    phoneNumber: "123-456-7890",
-    address: "1234 Cambie Street, ",
-    city: "Vancouver"
-  };
+
+  // const userDetails = {
+  //   name: "John Doe",
+  //   email: "johndoe@example.com",
+  //   phoneNumber: "1234567890",
+  //   address: "123 Main Street",
+  //   city: "Vancouver",
+  //   province: "BC",
+  //   postalCode: "V2T 5R7"
+  // };
+
 
   // Placeholder data for business details
   const businessDetails = {
@@ -24,6 +36,24 @@ function EditProfile() {
     insuranceExpiry: "2023-12-31",
     businessLicense: "License12345"
   };
+
+  useEffect(() => {
+    const fetchCustomerData = async () => {
+        try {
+          const apiUrl = import.meta.env.VITE_API_BASE_URL;
+          const token = localStorage.getItem('token');
+          if (token) {
+            const email = getEmailFromJWT(token);
+            const response = await axios.get(`${apiUrl}/api/customer/getcustomerbyemail?email=${email}`);
+            axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
+            setCustomer(response.data);
+          }
+        } catch (error) {
+            console.error('Error fetching user data: ', error);
+        }
+      };
+      fetchCustomerData();
+    }, []);
 
   const handleEditDetailsClick = () => {
     navigate('/editprofile/mydetails');
@@ -60,10 +90,14 @@ function EditProfile() {
           <h3>My Details</h3>
           {!isEditingDetails ? (
             <div>
-              <p>Name: {userDetails.name}</p>
-              <p>Email: {userDetails.email}</p>
-              <p>Phone Number: {userDetails.phoneNumber}</p>
-              <p>Location: {userDetails.address}{userDetails.city}</p>
+              <p>First Name: {customer?.firstName}</p>
+              <p>Last Name: {customer?.lastName}</p>
+              <p>Email: {customer?.email}</p>
+              <p>Phone Number: {formatPhoneNumber(customer?.phone)}</p>
+              <p>Address: {(customer?.address) ? (customer?.address) : 'Unspecified' }</p>
+              <p>City: {(customer?.city) ? (customer?.city) : 'Unspecified' }</p>
+              <p>Province: {(customer?.province) ? (customer?.province) : 'Unspecified' }</p>
+              <p>Postal Code: {(customer?.postalCode) ? (customer?.postalCode) : 'Unspecified' }</p>
             </div>
           ) : (
             <MyDetailsForm initialData={userDetails} />
