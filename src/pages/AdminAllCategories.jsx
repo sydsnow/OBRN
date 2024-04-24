@@ -23,6 +23,18 @@ function AdminAllCategories() {
         };
     }, []);
 
+    // Function to handle deletion of a category
+    const handleDeleteCategory = async (categoryId) => {
+        try {
+            const apiUrl = import.meta.env.VITE_API_BASE_URL;
+            await axios.delete(`${apiUrl}/api/Category/${categoryId}`);
+            // Update local state after successful deletion
+            setCategory(category.filter(category => category.id !== categoryId));
+        } catch (error) {
+            console.error('Failed to delete category: ', error);
+        }
+    };
+
   return (
     <div className="wrapper">
         <div className="admin">
@@ -34,7 +46,7 @@ function AdminAllCategories() {
                     {category.map((category) => (
                         <div key={category.id} className="admin-category">
                             <h3>{category.name}</h3>
-                            <button>Delete</button>
+                            <button onClick={() => handleDeleteCategory(category.id)}>Delete</button>
                         </div>
                     ))}
                 </div>
