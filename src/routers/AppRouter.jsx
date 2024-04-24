@@ -32,6 +32,7 @@ import AdminEditCustomer from "../pages/AdminEditCustomer";
 import NewTestimonial from "../pages/NewTestimonial";
 import AddCategoryPage from "../pages/AddCategory";
 import AdminAllCategories from "../pages/AdminAllCategories";
+import AdminEditBusiness from "../pages/AdminEditBusiness";
 
 function AppRouter() {
   return (
@@ -67,6 +68,7 @@ function AppRouter() {
           <Route path="/new-testimonial" element={<NewTestimonial />} />
           <Route path="/add-category" element={<AddCategoryPage />} />
           <Route path="/admin-all-categories" element={<AdminAllCategories />} />
+          <Route path="/admin-edit-business/:id" element={<AdminEditBusiness />} />
         </Routes>
         <Footer />
       </AuthProvider>
