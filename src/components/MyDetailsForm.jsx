@@ -5,11 +5,11 @@ import axios from 'axios';
 import "../scss/components/_mydetailsform.scss";
 import { getEmailFromJWT } from '../utilities/utilities';
 
-const apiUrl = import.meta.env.VITE_API_BASE_URL;
-const token = localStorage.getItem('token');
-const email = getEmailFromJWT(token);
-const response = await axios.get(`${apiUrl}/api/customer/getcustomerbyemail?email=${email}`);
-axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
+// const apiUrl = import.meta.env.VITE_API_BASE_URL;
+// const token = localStorage.getItem('token');
+// const email = getEmailFromJWT(token);
+// const response = await axios.get(`${apiUrl}/api/customer/getcustomerbyemail?email=${email}`);
+// axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
 
 const MyDetailsForm = () => {
     const navigate = useNavigate();
