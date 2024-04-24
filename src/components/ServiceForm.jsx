@@ -1,13 +1,33 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { NavLink, useLocation } from "react-router-dom";
+import axios from "axios";
 import "../scss/components/_serviceform.scss";
 
 function ServiceForm () {
     // Soon will dynamically get all the categories 
-    const categories = ["Nails", "Hair", "Eyelashes", "Wellness", "Eyebrows", "Facials"];
+    //const categories = ["Nails", "Hair", "Eyelashes", "Wellness", "Eyebrows", "Facials"];
 
     // state to manage selected category 
     const [selectedCategory, setSelectedCategory] = useState("");
+
+    const [categories, setCategories] = useState([]);
+
+    useEffect(() => {
+        const fetchCategories = async () => {
+            try {
+                const apiUrl = import.meta.env.VITE_API_BASE_URL;
+                const response = await axios.get(`${apiUrl}/api/Category/getcategories`);
+                setCategories(response.data); // Assuming response.data is an array of categories 
+            } catch (error) {
+                console.error('Failed to fetch categories: ', error);
+            }
+        }
+        fetchCategories();
+
+        return () => {
+            // Cleanup logic if needed
+        };
+    }, []);
 
     //handler for sorting categories
     const handleCategoryOption = (e) => {
@@ -29,8 +49,8 @@ function ServiceForm () {
                     >    
                         <option value="" disabled>Select a category</option>
                         {categories.map((category) => (
-                            <option key={category} value={category}>
-                                {category}
+                            <option key={category.categoryId} value={category.categoryName}>
+                                {category.categoryName}
                             </option>
                         ))}
                     </select>
