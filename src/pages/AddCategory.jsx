@@ -41,7 +41,7 @@ function AddCategoryPage () {
                         type="text" 
                         id="add-category" 
                         required autoComplete="off" 
-                        name="category" 
+                        name="categoryName" 
                         placeholder="Category Name"
                         value={category.categoryName}
                         onChange={handleChange}>
