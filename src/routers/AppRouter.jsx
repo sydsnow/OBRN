@@ -30,6 +30,7 @@ import AdminUsers from "../pages/AdminUsers";
 import AdminAllBusinesses from "../pages/AdminAllBusinesses";
 import AdminEditCustomer from "../pages/AdminEditCustomer";
 import NewTestimonial from "../pages/NewTestimonial";
+import AdminEditBusiness from "../pages/AdminEditBusiness";
 
 function AppRouter() {
   return (
@@ -63,6 +64,7 @@ function AppRouter() {
           <Route path="/admin-all-businesses" element={<AdminAllBusinesses />} />
           <Route path="/admin-edit-customer/:id" element={<AdminEditCustomer/>} />
           <Route path="/new-testimonial" element={<NewTestimonial />} />
+          <Route path="/admin-edit-business/:id" element={<AdminEditBusiness />} />
         </Routes>
         <Footer />
       </AuthProvider>
