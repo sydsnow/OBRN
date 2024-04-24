@@ -10,7 +10,7 @@ function AdminAllCategories() {
         const fetchCategories = async () => {
             try {
                 const apiUrl = import.meta.env.VITE_API_BASE_URL;
-                const response = await axios.get(`${apiUrl}/api/Category/getcategories`);
+                const response = await axios.get(`${apiUrl}/category`);
                 setCategory(response.data); // Assuming response.data is an array of categories 
             } catch (error) {
                 console.error('Failed to fetch categories: ', error);
@@ -32,8 +32,8 @@ function AdminAllCategories() {
                 <h2>All Categories</h2>
                 <div className="admin-all-categories">
                     {category.map((category) => (
-                        <div key={category.id} className="admin-category">
-                            <h3>{category.name}</h3>
+                        <div key={category.pkCategoryId} className="admin-category">
+                            <h3>{category.categoryName}</h3>
                             <button>Delete</button>
                         </div>
                     ))}
