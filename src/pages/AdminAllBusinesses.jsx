@@ -5,21 +5,21 @@ import axios from 'axios';
 function AdminAllBusinesses() {
     const [currentPage, setCurrentPage] = useState(1);
     const [searchQuery, setSearchQuery] = useState('');
-    const [users, setUsers] = useState([]);
+    const [business, setBusiness] = useState([]);
 
     useEffect(() => {
         // Fetch users from your API when component mounts
-        const fetchUsers = async () => {
+        const fetchBusinesses = async () => {
             try {
                 const apiUrl = import.meta.env.VITE_API_BASE_URL;
-                const response = await axios.get(`${apiUrl}/api/customer/getcustomers`);
-                setUsers(response.data); // Assuming response.data is an array of users
+                const response = await axios.get(`${apiUrl}/api/Business/getbusinesses`);
+                setBusiness(response.data); // Assuming response.data is an array of users
             } catch (error) {
                 console.error('Failed to fetch users: ', error);
             }
         };
 
-        fetchUsers();
+        fetchBusinesses();
 
         // Cleanup function
         return () => {
@@ -33,16 +33,16 @@ function AdminAllBusinesses() {
     };
 
      // Pagination variables
-     const usersPerPage = 10; // Change this to the desired number of users per page
+     const businessesPerPage = 10; // Change this to the desired number of users per page
 
-    const indexOfLastUser = currentPage * usersPerPage;
-    const indexOfFirstUser = indexOfLastUser - usersPerPage;
-    const currentUsers = users.slice(indexOfFirstUser, indexOfLastUser);
+    const indexOfLastBusiness = currentPage * businessesPerPage;
+    const indexOfFirstBusiness = indexOfLastBusiness - businessesPerPage;
+    const currentBusiness = business.slice(indexOfFirstBusiness, indexOfLastBusiness);
 
-    const filteredUsers = currentUsers.filter(user =>
-        user.firstName.toLowerCase().includes(searchQuery.toLowerCase()) ||
-        user.lastName.toLowerCase().includes(searchQuery.toLowerCase()) ||
-        user.username.toLowerCase().includes(searchQuery.toLowerCase())
+    const filteredBusinesses = currentBusiness.filter(business =>
+        business.businessName.toLowerCase().includes(searchQuery.toLowerCase()) ||
+        business.contactName.toLowerCase().includes(searchQuery.toLowerCase()) ||
+        business.pkBusinessId.toLowerCase().includes(searchQuery.toLowerCase())
     );
 
     return (
@@ -60,15 +60,15 @@ function AdminAllBusinesses() {
                     />
 
                     <div className="admin-all-users">
-                        {filteredUsers.map(user => (
-                            <div className="admin-user" key={user.pkCustomerId}>
+                        {filteredBusinesses.map(business => (
+                            <div className="admin-user" key={business.pkBusinessId}>
                                 <div className="admin-user-details">
                                     <div className="admin-user-copy">
-                                        <h3>{user.firstName} <span>{user.lastName}</span> </h3>
-                                        <p>{user.email}</p>
+                                        <h3>{business.businessName} </h3>
+                                        <p>{business.email}</p>
                                     </div>
                                     <div className="admin-user-btns">
-                                        <button>Edit</button>
+                                    <Link to={`/admin-edit-business/${business.pkBusinessId}`}><button>Edit</button></Link>
                                         <button>Delete</button>
                                     </div>
                                 </div>
@@ -79,7 +79,7 @@ function AdminAllBusinesses() {
                     <div className="admin-pagination">
                         <span>{currentPage}</span>
                         <button onClick={() => setCurrentPage(currentPage - 1)} disabled={currentPage === 1}>Previous</button>
-                        <button onClick={() => setCurrentPage(currentPage + 1)} disabled={currentUsers.length < usersPerPage}>Next</button>
+                        <button onClick={() => setCurrentPage(currentPage + 1)} disabled={currentBusiness.length < businessesPerPage}>Next</button>
                     </div>
                 </div>
             </div>
