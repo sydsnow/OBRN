@@ -1,23 +1,30 @@
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-
-import { getEmailFromJWT, formatPhoneNumber } from '../utilities/utilities';
-import EditProfileInfo from '../components/EditProfileInfo';
-import EditProfileBusinessInfo from '../components/EditProfileBusinessInfo';
 import axios from 'axios';
-
+import { getEmailFromJWT, formatPhoneNumber } from '../utilities/utilities';
+// import EditProfileInfo from '../components/EditProfileInfo';
+// import EditProfileBusinessInfo from '../components/EditProfileBusinessInfo';
 import MyDetailsForm from '../components/MyDetailsForm';
 import BusinessDetailsForm from '../components/BusinessDetailsForm';
 
 
 function EditProfile() {
-  const navigate = useNavigate();
-  const [isEditingDetails, setIsEditingDetails] = useState(false);
-  const [isEditingBusiness, setIsEditingBusiness] = useState(false);
-  const [customer, setCustomer] = useState(null);
+  // const navigate = useNavigate();
+  // const [isEditingDetails, setIsEditingDetails] = useState(false);
+  // const [isEditingBusiness, setIsEditingBusiness] = useState(false);
+  // const [userDetails, setUserDetails] = useState({
+  //   firstName: '',
+  //   lastName: '',
+  //   phone: '',
+  //   birthdate: '',
+  //   email: '',
+  //   address: '',
+  //   city: '',
+  //   province: '',
+  //   postalCode: ''
+  // });
 
   // Placeholder data for user details
-
   // const userDetails = {
   //   name: "John Doe",
   //   email: "johndoe@example.com",
@@ -37,23 +44,50 @@ function EditProfile() {
     businessLicense: "License12345"
   };
 
+  const navigate = useNavigate();
+  const [isEditingDetails, setIsEditingDetails] = useState(false);
+  const [isEditingBusiness, setIsEditingBusiness] = useState(false);
+  const [userDetails, setUserDetails] = useState({
+    firstName: '',
+    lastName: '',
+    phone: '',
+    birthdate: '',
+    email: '',
+    address: '',
+    city: '',
+    province: '',
+    postalCode: ''
+  });
+
   useEffect(() => {
     const fetchCustomerData = async () => {
-        try {
-          const apiUrl = import.meta.env.VITE_API_BASE_URL;
-          const token = localStorage.getItem('token');
-          if (token) {
-            const email = getEmailFromJWT(token);
-            const response = await axios.get(`${apiUrl}/api/customer/getcustomerbyemail?email=${email}`);
-            axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
-            setCustomer(response.data);
-          }
-        } catch (error) {
-            console.error('Error fetching user data: ', error);
+      try {
+        const apiUrl = import.meta.env.VITE_API_BASE_URL;
+        const token = localStorage.getItem('token');
+        if (token) {
+          const email = getEmailFromJWT(token);
+          const response = await axios.get(`${apiUrl}/api/customer/getcustomerbyemail?email=${email}`);
+          axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
+          setUserDetails(prevUserDetails => ({
+            ...prevUserDetails,
+            firstName: response.data.firstName,
+            lastName: response.data.lastName,
+            phone: response.data.phone,
+            birthdate: response.data.birthdate,
+            email: response.data.email,
+            address: response.data.address,
+            city: response.data.city,
+            province: response.data.province,
+            postalCode: response.data.postalCode
+          }));
         }
-      };
-      fetchCustomerData();
-    }, []);
+      } catch (error) {
+        console.error('Error fetching user data: ', error);
+      }
+    };
+
+    fetchCustomerData();
+  }, []); // Depend on an empty array to fetch data only once
 
   const handleEditDetailsClick = () => {
     navigate('/editprofile/mydetails');
@@ -68,6 +102,8 @@ function EditProfile() {
   const handleChangePasswordClick = () => {
     navigate('/editprofile/editpassword');
   };
+
+  console.log(userDetails);
 
   return (
     <div className="edit-profile">
@@ -90,14 +126,14 @@ function EditProfile() {
           <h3>My Details</h3>
           {!isEditingDetails ? (
             <div>
-              <p>First Name: {customer?.firstName}</p>
-              <p>Last Name: {customer?.lastName}</p>
-              <p>Email: {customer?.email}</p>
-              <p>Phone Number: {formatPhoneNumber(customer?.phone)}</p>
-              <p>Address: {(customer?.address) ? (customer?.address) : 'Unspecified' }</p>
-              <p>City: {(customer?.city) ? (customer?.city) : 'Unspecified' }</p>
-              <p>Province: {(customer?.province) ? (customer?.province) : 'Unspecified' }</p>
-              <p>Postal Code: {(customer?.postalCode) ? (customer?.postalCode) : 'Unspecified' }</p>
+              <p>First Name: {userDetails?.firstName}</p>
+              <p>Last Name: {userDetails?.lastName}</p>
+              <p>Email: {userDetails?.email}</p>
+              <p>Phone Number: {formatPhoneNumber(userDetails?.phone)}</p>
+              <p>Address: {(userDetails?.address) ? (userDetails?.address) : 'Unspecified' }</p>
+              <p>City: {(userDetails?.city) ? (userDetails?.city) : 'Unspecified' }</p>
+              <p>Province: {(userDetails?.province) ? (userDetails?.province) : 'Unspecified' }</p>
+              <p>Postal Code: {(userDetails?.postalCode) ? (userDetails?.postalCode) : 'Unspecified' }</p>
             </div>
           ) : (
             <MyDetailsForm initialData={userDetails} />
