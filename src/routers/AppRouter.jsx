@@ -33,6 +33,8 @@ import NewTestimonial from "../pages/NewTestimonial";
 import AddCategoryPage from "../pages/AddCategory";
 import AdminAllCategories from "../pages/AdminAllCategories";
 import AdminEditBusiness from "../pages/AdminEditBusiness";
+import AdminAllDiscounts from "../pages/AdminAllDiscounts";
+import AddDiscount from "../pages/AddDiscount";
 
 function AppRouter() {
   return (
@@ -69,6 +71,8 @@ function AppRouter() {
           <Route path="/add-category" element={<AddCategoryPage />} />
           <Route path="/admin-all-categories" element={<AdminAllCategories />} />
           <Route path="/admin-edit-business/:id" element={<AdminEditBusiness />} />
+          <Route path="/admin-all-discounts" element={<AdminAllDiscounts />} />
+          <Route path="/add-discount" element={<AddDiscount />} />
         </Routes>
         <Footer />
       </AuthProvider>
