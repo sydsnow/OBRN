@@ -6,7 +6,8 @@ import logo from '../assets/obrn-logo.png';
 
 function Nav () {
     const [isActive, setIsActive] = useState(false);
-    const { authenticated, logout } = useAuth();
+    const { logout } = useAuth();
+    const authenticated = localStorage.getItem('authenticated');
     const navigate = useNavigate();
 
     const toggleHamburger = () => {
@@ -17,6 +18,8 @@ function Nav () {
         await logout();
         navigate('/');
     };
+
+    console.log("authenticated: ", authenticated);
 
     return (
         <nav className="header-main-nav">

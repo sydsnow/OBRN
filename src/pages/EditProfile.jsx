@@ -68,18 +68,7 @@ function EditProfile() {
           const email = getEmailFromJWT(token);
           const response = await axios.get(`${apiUrl}/api/customer/getcustomerbyemail?email=${email}`);
           axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
-          setUserDetails(prevUserDetails => ({
-            ...prevUserDetails,
-            firstName: response.data.firstName,
-            lastName: response.data.lastName,
-            phone: response.data.phone,
-            birthdate: response.data.birthdate,
-            email: response.data.email,
-            address: response.data.address,
-            city: response.data.city,
-            province: response.data.province,
-            postalCode: response.data.postalCode
-          }));
+          setUserDetails(response.data);
         }
       } catch (error) {
         console.error('Error fetching user data: ', error);
@@ -103,7 +92,19 @@ function EditProfile() {
     navigate('/editprofile/editpassword');
   };
 
-  console.log(userDetails);
+  const initialData = {
+    firstName: userDetails?.firstName,
+    lastName: userDetails?.lastName,
+    phone: userDetails?.phone,
+    birthdate: userDetails?.birthdate,
+    email: userDetails?.email,
+    address: userDetails?.address,
+    city: userDetails?.city,
+    province: userDetails?.province,
+    postalCode: userDetails?.postalCode
+  };
+
+  console.log(initialData);
 
   return (
     <div className="edit-profile">
@@ -136,7 +137,7 @@ function EditProfile() {
               <p>Postal Code: {(userDetails?.postalCode) ? (userDetails?.postalCode) : 'Unspecified' }</p>
             </div>
           ) : (
-            <MyDetailsForm initialData={userDetails} />
+            <MyDetailsForm initialData={initialData} />
           )}
           <button className="edit-profile-button" onClick={handleEditDetailsClick}>Edit My Details</button>
         </div>

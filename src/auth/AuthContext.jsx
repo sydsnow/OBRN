@@ -1,10 +1,8 @@
-import { useState } from 'react';
 import PropTypes from 'prop-types';
 import { apiUrl, setAuthHeaders, AuthContext } from './authUtils'; // Import the shared utilities
 import axios from 'axios';
 
 export const AuthProvider = ({ children }) => {
-    const [authenticated, setAuthenticated] = useState(false);
 
     const login = async (formData) => {
         try {
@@ -12,11 +10,10 @@ export const AuthProvider = ({ children }) => {
             const { token } = response.data;
             localStorage.setItem('token', token);
             setAuthHeaders(token); // Use the setAuthHeaders function from authUtils
-            setAuthenticated(true);
+            localStorage.setItem('authenticated', true);
             return token;
         } catch (error) {
             console.error('Login failed: ', error);
-            setAuthenticated(false);
             return null;
         }
     };
@@ -24,11 +21,11 @@ export const AuthProvider = ({ children }) => {
     const logout = () => {
         localStorage.removeItem('token');
         delete axios.defaults.headers.common['Authorization'];
-        setAuthenticated(false);
+        localStorage.removeItem('authenticated');
     };
 
     return (
-        <AuthContext.Provider value={{ authenticated, login, logout }}>
+        <AuthContext.Provider value={{ login, logout }}>
             {children}
         </AuthContext.Provider>
     );
