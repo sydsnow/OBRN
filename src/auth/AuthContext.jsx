@@ -1,16 +1,15 @@
 import PropTypes from 'prop-types';
-import { apiUrl, setAuthHeaders, AuthContext } from './authUtils'; // Import the shared utilities
+import { apiUrl, setAuthHeaders, AuthContext } from './authUtils';
 import axios from 'axios';
 
 export const AuthProvider = ({ children }) => {
-
     const login = async (formData) => {
         try {
             const response = await axios.post(`${apiUrl}/api/customer/login`, formData);
             const { token } = response.data;
             localStorage.setItem('token', token);
-            setAuthHeaders(token); // Use the setAuthHeaders function from authUtils
-            localStorage.setItem('authenticated', true);
+            setAuthHeaders(token); 
+            // localStorage.setItem('authenticated', true);
             return token;
         } catch (error) {
             console.error('Login failed: ', error);
@@ -21,7 +20,7 @@ export const AuthProvider = ({ children }) => {
     const logout = () => {
         localStorage.removeItem('token');
         delete axios.defaults.headers.common['Authorization'];
-        localStorage.removeItem('authenticated');
+        // localStorage.removeItem('authenticated');
     };
 
     return (
