@@ -3,32 +3,31 @@ import PropTypes from 'prop-types';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import "../scss/components/_mydetailsform.scss";
+import { getEmailFromJWT } from '../utilities/utilities';
 
-function MyDetailsForm({ initialData }) {
-    console.log("initial data: ", initialData);
+const apiUrl = import.meta.env.VITE_API_BASE_URL;
+const token = localStorage.getItem('token');
+const email = getEmailFromJWT(token);
+const response = await axios.get(`${apiUrl}/api/customer/getcustomerbyemail?email=${email}`);
+axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
+
+const MyDetailsForm = () => {
     const navigate = useNavigate();
-    const [formData, setFormData] = useState({
-        firstName: initialData?.firstName,
-        lastName: initialData?.lastName,
-        phone: initialData?.phoneNumber,
-        birthdate: initialData?.birthdate,
-        email: initialData?.email,
-        address: initialData?.address || '',
-        city: initialData?.city || '',
-        province: initialData?.province || '',
-        postalCode: initialData?.postalCode || '',
+
+    const [userDetails, setUserDetails] = useState({
+        firstName: response.data.firstName,
+        lastName: response.data.lastName,
+        phone: response.data.phone,
+        birthdate: response.data.birthdate,
+        email: response.data.email,
+        address: response.data.address || '',
+        city: response.data.city || '',
+        province: response.data.province || '',
+        postalCode: response.data.postalCode || '',
+        vip: false,
         // photo: initialData?.photo || ''
     });
-    console.log("form data: ", formData);
     const [errorMessage, setErrorMessage] = useState('');
-
-    // const handleChange = (event) => {
-    //     const { name, value } = event.target;
-    //     setFormData(prevState => ({
-    //         ...prevState,
-    //         [name]: value
-    //     }));
-    // };
 
     const handleChange = (e) => {
         let value = e.target.value;
@@ -45,14 +44,14 @@ function MyDetailsForm({ initialData }) {
             }
         }
         
-        setFormData({ ...formData, [e.target.name]:  value });
+        setUserDetails({ ...userDetails, [e.target.name]:  value });
     };
 
     const handleImageChange = (event) => {
         const file = event.target.files[0];
         const reader = new FileReader();
         reader.onloadend = () => {
-            setFormData(prevState => ({
+            setUserDetails(prevState => ({
                 ...prevState,
                 photo: reader.result 
             }));
@@ -62,24 +61,18 @@ function MyDetailsForm({ initialData }) {
         }
     };
 
-    // const handleSubmit = (event) => {
-    //     event.preventDefault();
-    //     console.log('Form Data:', formData);
-    // };
-
     const handleSubmit = async (e) => {
         e.preventDefault();
-        const birthdate = new Date(formData.birthdate);
+        const birthdate = new Date(userDetails.birthdate);
         const today = new Date();
         const eighteenYearsAgo = new Date(today.getFullYear() - 18, today.getMonth(), today.getDate());
-        if (birthdate < eighteenYearsAgo) {
+        if (birthdate > eighteenYearsAgo) {
             setErrorMessage('You must be 18 years or older in order to be registered with Our Beauty Referral Network.');
             return;
         }
 
         try {
-            const apiUrl = import.meta.env.VITE_API_BASE_URL;
-            const response = await axios.post(`${apiUrl}/api/customer/editcustomer`, formData);
+            const response = await axios.post(`${apiUrl}/api/customer/editcustomer`, userDetails);
             console.log(response.data);
         } catch (error) {
             console.error('Updating customer failed: ', error);
@@ -107,7 +100,7 @@ function MyDetailsForm({ initialData }) {
                     id="firstName"
                     name="firstName"
                     required
-                    value={formData.firstName}
+                    value={userDetails.firstName}
                     onChange={handleChange}
                 />
             </div>
@@ -119,7 +112,7 @@ function MyDetailsForm({ initialData }) {
                     id="lastName"
                     name="lastName"
                     required
-                    value={formData.lastName}
+                    value={userDetails.lastName}
                     onChange={handleChange}
                 />
             </div>
@@ -131,7 +124,7 @@ function MyDetailsForm({ initialData }) {
                     id="phone"
                     name="phone"
                     required
-                    value={formData.phone}
+                    value={userDetails.phone}
                     onChange={handleChange}
                 />
             </div>
@@ -143,7 +136,7 @@ function MyDetailsForm({ initialData }) {
                     id="birthdate"
                     name="birthdate"
                     required
-                    value={formData.birthdate}
+                    value={userDetails.birthdate}
                     onChange={handleChange}
                 />
             </div>
@@ -154,7 +147,7 @@ function MyDetailsForm({ initialData }) {
                     type="text"
                     id="address"
                     name="address"
-                    value={formData.address}
+                    value={userDetails.address}
                     onChange={handleChange}
                 />
             </div>
@@ -165,7 +158,7 @@ function MyDetailsForm({ initialData }) {
                     type="text"
                     id="city"
                     name="city"
-                    value={formData.city}
+                    value={userDetails.city}
                     onChange={handleChange}
                 />
             </div>
@@ -176,7 +169,7 @@ function MyDetailsForm({ initialData }) {
                     type="text"
                     id="province"
                     name="province"
-                    value={formData.province}
+                    value={userDetails.province}
                     onChange={handleChange}
                 />
             </div>
@@ -187,7 +180,7 @@ function MyDetailsForm({ initialData }) {
                     type="text"
                     id="postalCode"
                     name="postalCode"
-                    value={formData.postalCode}
+                    value={userDetails.postalCode}
                     onChange={handleChange}
                 />
             </div>

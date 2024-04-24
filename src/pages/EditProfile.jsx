@@ -9,41 +9,6 @@ import BusinessDetailsForm from '../components/BusinessDetailsForm';
 
 
 function EditProfile() {
-  // const navigate = useNavigate();
-  // const [isEditingDetails, setIsEditingDetails] = useState(false);
-  // const [isEditingBusiness, setIsEditingBusiness] = useState(false);
-  // const [userDetails, setUserDetails] = useState({
-  //   firstName: '',
-  //   lastName: '',
-  //   phone: '',
-  //   birthdate: '',
-  //   email: '',
-  //   address: '',
-  //   city: '',
-  //   province: '',
-  //   postalCode: ''
-  // });
-
-  // Placeholder data for user details
-  // const userDetails = {
-  //   name: "John Doe",
-  //   email: "johndoe@example.com",
-  //   phoneNumber: "1234567890",
-  //   address: "123 Main Street",
-  //   city: "Vancouver",
-  //   province: "BC",
-  //   postalCode: "V2T 5R7"
-  // };
-
-
-  // Placeholder data for business details
-  const businessDetails = {
-    businessName: "Doe Enterprises",
-    insuranceCompany: "Best Coverage, Inc.",
-    insuranceExpiry: "2023-12-31",
-    businessLicense: "License12345"
-  };
-
   const navigate = useNavigate();
   const [isEditingDetails, setIsEditingDetails] = useState(false);
   const [isEditingBusiness, setIsEditingBusiness] = useState(false);
@@ -58,6 +23,14 @@ function EditProfile() {
     province: '',
     postalCode: ''
   });
+
+  // Placeholder data for business details
+  const businessDetails = {
+    businessName: "Doe Enterprises",
+    insuranceCompany: "Best Coverage, Inc.",
+    insuranceExpiry: "2023-12-31",
+    businessLicense: "License12345"
+  };  
 
   useEffect(() => {
     const fetchCustomerData = async () => {
@@ -76,7 +49,7 @@ function EditProfile() {
     };
 
     fetchCustomerData();
-  }, []); // Depend on an empty array to fetch data only once
+  }, []); 
 
   const handleEditDetailsClick = () => {
     navigate('/editprofile/mydetails');
@@ -91,20 +64,6 @@ function EditProfile() {
   const handleChangePasswordClick = () => {
     navigate('/editprofile/editpassword');
   };
-
-  const initialData = {
-    firstName: userDetails?.firstName,
-    lastName: userDetails?.lastName,
-    phone: userDetails?.phone,
-    birthdate: userDetails?.birthdate,
-    email: userDetails?.email,
-    address: userDetails?.address,
-    city: userDetails?.city,
-    province: userDetails?.province,
-    postalCode: userDetails?.postalCode
-  };
-
-  console.log(initialData);
 
   return (
     <div className="edit-profile">
@@ -137,7 +96,7 @@ function EditProfile() {
               <p>Postal Code: {(userDetails?.postalCode) ? (userDetails?.postalCode) : 'Unspecified' }</p>
             </div>
           ) : (
-            <MyDetailsForm initialData={initialData} />
+            <MyDetailsForm />
           )}
           <button className="edit-profile-button" onClick={handleEditDetailsClick}>Edit My Details</button>
         </div>
