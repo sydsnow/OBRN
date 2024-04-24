@@ -29,7 +29,7 @@ function AdminAllCategories() {
             const apiUrl = import.meta.env.VITE_API_BASE_URL;
             await axios.delete(`${apiUrl}/api/Category/${categoryId}`);
             // Update local state after successful deletion
-            setCategory(category.filter(category => category.id !== categoryId));
+            setCategory(category.filter(category => category.pkCategoryId !== categoryId));
         } catch (error) {
             console.error('Failed to delete category: ', error);
         }
@@ -46,7 +46,7 @@ function AdminAllCategories() {
                     {category.map((category) => (
                        <div key={category.pkCategoryId} className="admin-category">
                        <h3>{category.categoryName}</h3>
-                            <button onClick={() => handleDeleteCategory(category.id)}>Delete</button>
+                            <button onClick={() => handleDeleteCategory(category.pkCategoryId)}>Delete</button>
                         </div>
                     ))}
                 </div>
