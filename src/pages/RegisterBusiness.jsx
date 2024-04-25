@@ -38,7 +38,7 @@ function RegisterBusiness(){
 
         try {
             const apiUrl = import.meta.env.VITE_API_BASE_URL;
-            const response = await axios.post(`${apiUrl}/api/TempBusiness/addbusiness`, business);
+            const response = await axios.post(`${apiUrl}/api/Business/addbusiness`, business);
             console.log("response: ", response);
             const { message, token } = response.data;
             console.log(message);

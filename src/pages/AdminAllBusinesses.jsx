@@ -51,7 +51,6 @@ function AdminAllBusinesses() {
                 <Link to="/admin"><button>Back to Admin</button></Link>
                 <div className="admin-all-container">
                     <h1>All Businesses</h1>
-
                     <input
                         type="text"
                         placeholder="Search users..."

@@ -31,11 +31,16 @@ function AdminEditCustomer() {
         setCustomer({ ...customer, [e.target.name]: e.target.value });
     };
 
+    const handleIsVip = () => {
+        setCustomer({ ...customer, vip: !customer.vip });
+    };
+    
+
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
             const apiUrl = import.meta.env.VITE_API_BASE_URL;
-            const response = await axios.put(`${apiUrl}/api/Customer/updatecustomer/${id}`, customer);
+            const response = await axios.post(`${apiUrl}/api/Customer/editcustomer/`, customer);
             console.log('Customer updated:', response.data);
             setEditing(false);
         } catch (error) {
@@ -55,6 +60,19 @@ function AdminEditCustomer() {
                     <h1>Edit Customer Details</h1>
 
                     <div className="admin-customer-details">
+                    <div className="admin-customer-info">
+                            <label>VIP</label>
+                            {editing ? (
+                                <input
+                                    type="checkbox"
+                                    name="vip"
+                                    checked={customer.isVerified}
+                                    onChange={handleIsVip}
+                                />
+                            ) : (
+                                <p>{customer.vip ? 'Yes' : 'No'}</p>
+                            )}
+                         </div>    
                         <div className="admin-customer-info">
                             <label>First Name:</label>
                             {editing ? (
@@ -142,10 +160,10 @@ function AdminEditCustomer() {
                             )}
                         </div>
                         
-                        <div className="admin-customer-info">
+                        {/* <div className="admin-customer-info">
                             <label>VIP</label>
                             <p>{customer.vip ? 'Yes' : 'No'}</p>
-                        </div>
+                        </div> */}
                         <div className="admin-customer-info">
                             <label>Is Over the Age of 18?</label>
                             <p>{customer.confirm18 ? 'Yes' : 'No'}</p>

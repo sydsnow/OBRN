@@ -49,7 +49,7 @@
         }
     }
     &-btns{
-        @include flex-row;
+        @include flex-col;
         justify-content: center;
         align-items: center;
         gap: 1vh;
@@ -523,6 +523,11 @@
         }
     }
     @media (min-width: 960px) {
+        @include flex-row;
+
+        &-btns{
+            @include flex-row;
+        }
 
     }
 }
