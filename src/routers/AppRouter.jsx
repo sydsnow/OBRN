@@ -32,6 +32,8 @@ import AdminEditCustomer from "../pages/AdminEditCustomer";
 import NewTestimonial from "../pages/NewTestimonial";
 
 function AppRouter() {
+  const authenticated = localStorage.getItem('token');
+
   return (
     <BrowserRouter>
       <AuthProvider>
@@ -48,7 +50,10 @@ function AppRouter() {
           <Route path="/customerprofile" element={<CustomerProfile />} />
           <Route path="/businessprofile" element={<BusinessProfile />} />
           <Route path="/editprofile" element={<EditProfile />} />
+
+          {authenticated && (
           <Route path="/editprofile/mydetails" element={<EditProfileMyDetails />} />
+          )}
           <Route path="/editprofile/businessdetails" element={<EditProfileBusinessDetails />} />
           <Route path="/editprofile/editpassword" element={<EditPasswordPage />} />
           <Route path="/services" element={<ServicesPage />} />

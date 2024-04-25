@@ -1,33 +1,65 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import "../scss/components/_mydetailsform.scss";
 import { getEmailFromJWT } from '../utilities/utilities';
 
-// const apiUrl = import.meta.env.VITE_API_BASE_URL;
-// const token = localStorage.getItem('token');
-// const email = getEmailFromJWT(token);
-// const response = await axios.get(`${apiUrl}/api/customer/getcustomerbyemail?email=${email}`);
-// axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
+async function fetchCustomerData(token, apiUrl) {
+    const email = getEmailFromJWT(token);
+    const response = await axios.get(`${apiUrl}/api/customer/getcustomerbyemail?email=${email}`);
+    axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
+    return response.data;
+}
 
 const MyDetailsForm = () => {
     const navigate = useNavigate();
-
+    const apiUrl = import.meta.env.VITE_API_BASE_URL;
+    const token = localStorage.getItem('token');
     const [userDetails, setUserDetails] = useState({
-        firstName: response.data.firstName,
-        lastName: response.data.lastName,
-        phone: response.data.phone,
-        birthdate: response.data.birthdate,
-        email: response.data.email,
-        address: response.data.address || '',
-        city: response.data.city || '',
-        province: response.data.province || '',
-        postalCode: response.data.postalCode || '',
+        firstName: '',
+        lastName: '',
+        phone: '',
+        birthdate: '',
+        email: '',
+        address: '',
+        city: '',
+        province: '',
+        postalCode: '',
         vip: false,
         // photo: initialData?.photo || ''
     });
     const [errorMessage, setErrorMessage] = useState('');
+
+    useEffect(() => {
+        async function fetchData() {
+            try {
+                const response = await fetchCustomerData(token, apiUrl);
+                updateUserDetails(response);
+            } catch (error) {
+                console.error('Fetching customer data failed: ', error);
+                setErrorMessage('Failed to fetch user details. Please try again later.');
+            }
+        }
+        fetchData();
+    }, [token, apiUrl]);
+
+    const updateUserDetails = (data) => {
+        const updatedUserDetails = {
+            firstName: data.firstName || '',
+            lastName: data.lastName || '',
+            phone: data.phone || '',
+            birthdate: data.birthdate || '',
+            email: data.email || '',
+            address: data.address || '',
+            city: data.city || '',
+            province: data.province || '',
+            postalCode: data.postalCode || '',
+            vip: data.vip || false,
+            // photo
+        };
+        setUserDetails(updatedUserDetails);
+    }
 
     const handleChange = (e) => {
         let value = e.target.value;
