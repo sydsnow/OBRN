@@ -17,6 +17,7 @@ function RegisterBusiness(){
         insuranceCompany: '',
         insuranceExpiryDate: '',
         verificationDocument: '',
+        logo: '',
         password: '',
         confirmPassword: ''
     });
@@ -38,7 +39,7 @@ function RegisterBusiness(){
 
         try {
             const apiUrl = import.meta.env.VITE_API_BASE_URL;
-            const response = await axios.post(`${apiUrl}/api/TempBusiness/addbusiness`, business);
+            const response = await axios.post(`${apiUrl}/api/Business/addbusiness`, business);
             console.log("response: ", response);
             const { message, token } = response.data;
             console.log(message);
@@ -55,7 +56,7 @@ function RegisterBusiness(){
     <div className="register-business-container">
     <div className="register-header">
         <h1>Business Registration</h1>
-        <p>Please fill out the following details</p>
+        <p>Please fill out the following details. All fields are required.</p>
         </div>
         <form className="register-business-form" onSubmit={handleSubmit}>
 
@@ -208,6 +209,19 @@ function RegisterBusiness(){
         </div>  
         <div className="form-group">
         <input 
+            className='input2' 
+            type="file" 
+            required 
+            id="logo" 
+            name="logo"
+            value={business.logo}
+            onChange={handleChange} 
+        />
+        <label className="label" htmlFor="logo">
+        <i className="fa-solid fa-upload"></i> Logo</label>
+        </div> 
+        <div className="form-group">
+        <input 
             className='input' 
             type="string" 
             required 
@@ -216,7 +230,7 @@ function RegisterBusiness(){
             name="pkBusinessId" 
             value={business.pkBusinessId}
             onChange={handleChange}
-        />
+        />  
         <label className="label" htmlFor="username">            <i className="fa-regular fa-circle-user"></i> Username</label>
         </div>
         <div className="form-group">
