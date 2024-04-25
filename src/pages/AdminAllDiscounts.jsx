@@ -35,6 +35,16 @@ function AdminAllDiscounts() {
         }
     };
 
+     // Function to format discount value
+     const formatDiscountValue = (discount) => {
+        if (discount.amount !== null) {
+            return `$${parseFloat(discount.amount).toFixed(2)}`;
+        } else if (discount.percent !== null) {
+            return `${(parseFloat(discount.percent) * 100).toFixed(2)}%`;
+        }
+        return '';
+    };
+
     return (
         <div className="wrapper">
             <div className="admin">
@@ -45,7 +55,7 @@ function AdminAllDiscounts() {
                     <div className="admin-all-discounts">
                         {discount.map((discount) => (
                             <div key={discount.pkDiscountId} className="admin-discount">
-                                <h3>{discount.discountName}</h3>
+                                <p>Discount Value: {formatDiscountValue(discount)}</p>
                                 <button onClick={() => handleDeleteDiscount(discount.id)}>Delete</button>
                             </div>
                         ))}
@@ -54,7 +64,6 @@ function AdminAllDiscounts() {
             </div>
         </div>
     )
-
 }
 
 export default AdminAllDiscounts;

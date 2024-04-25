@@ -17,15 +17,70 @@ function RegisterBusiness(){
         insuranceCompany: '',
         insuranceExpiryDate: '',
         verificationDocument: '',
+        logo: '',
         password: '',
         confirmPassword: ''
     });
 
     const [errorMessage, setErrorMessage] = useState('');
 
+    // const handleChange = (e) => {
+    //     setBusiness({ ...business, [e.target.name]: e.target.value });
+    // };
+
     const handleChange = (e) => {
-        setBusiness({ ...business, [e.target.name]: e.target.value });
-    };
+        let value = e.target.value;
+        let errorMessage = '';
+
+        switch (e.target.name) {
+            case 'phone':
+                // Strip away non-numeric characters
+                value = value.replace(/\D/g, '');
+                // Limit phone length to 20 digits
+                value = value.slice(0, 20);
+                if (value.length === 20) {
+                    errorMessage = 'Phone number is limited to 20 digits.';
+                }
+                break;
+            case 'pkBusinessId':
+                // Limiting pkBusinessId (username) length to 30 characters
+                value = value.slice(0, 30);
+                if (value.length === 30) {
+                    errorMessage = 'Username is limited to 30 characters.';
+                }
+                break;
+            default:
+                break;
+        }
+
+        setBusiness({ ...business, [e.target.name]: value });
+        setErrorMessage(errorMessage);
+    }
+
+    // const handleImageChange = (event, property) => {
+    //     const file = event.target.files[0];
+    //     console.log("file: ", file);
+    //     const reader = new FileReader();
+    //     reader.onloadend = () => {
+    //         setBusiness(prevState => ({
+    //             ...prevState,
+    //             [property]: reader.result 
+    //         }));
+    //     };
+    //     if (file) {
+    //         reader.readAsDataURL(file);
+    //     }
+    // };
+
+    // const handleImageChange = (event, property) => {
+    //     const file = event.target.files[0];
+    //     console.log("file: ", file);
+    //     // No need to set the value directly for file inputs
+    //     setBusiness(prevState => ({
+    //         ...prevState,
+    //         [property]: file // Store the file object directly
+    //     }));
+    // };    
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -55,7 +110,7 @@ function RegisterBusiness(){
     <div className="register-business-container">
     <div className="register-header">
         <h1>Business Registration</h1>
-        <p>Please fill out the following details</p>
+        <p>Please fill out the following details. All fields are required.</p>
         </div>
         <form className="register-business-form" onSubmit={handleSubmit}>
 
@@ -200,12 +255,28 @@ function RegisterBusiness(){
             required 
             id="verificationDocument" 
             name="verificationDocument"
+            accept=".jpg,.jpeg,.png,.doc,.docx,.pdf"
             value={business.verificationDocument}
-            onChange={handleChange} 
+            /* onChange={(e) => handleImageChange(e, 'verificationDocument')} */
+            onChange={handleChange}
         />
         <label className="label" htmlFor="verificationDocument">
         <i className="fa-solid fa-upload"></i> Business License</label>
         </div>  
+        <div className="form-group">
+        <input 
+            className='input2' 
+            type="file" 
+            required 
+            id="logo" 
+            name="logo"
+            value={business.logo}
+            /* onChange={(e) => handleImageChange(e, 'logo')} */
+            onChange={handleChange}
+        />
+        <label className="label" htmlFor="logo">
+        <i className="fa-solid fa-upload"></i> Logo</label>
+        </div> 
         <div className="form-group">
         <input 
             className='input' 
@@ -216,7 +287,7 @@ function RegisterBusiness(){
             name="pkBusinessId" 
             value={business.pkBusinessId}
             onChange={handleChange}
-        />
+        />  
         <label className="label" htmlFor="username">            <i className="fa-regular fa-circle-user"></i> Username</label>
         </div>
         <div className="form-group">
