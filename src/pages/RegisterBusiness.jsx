@@ -1,9 +1,11 @@
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 
 import registerbsn from '../assets/register-bsn.jpg';
 
 function RegisterBusiness(){
+    const navigate = useNavigate();
     const [business, setBusiness] = useState({
         pkBusinessId: '',
         businessName: '',
@@ -99,6 +101,7 @@ function RegisterBusiness(){
             console.log(message);
             localStorage.setItem('token', token);
             axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
+            navigate('/');
         } catch (error) {
             console.error('Registration failed: ', error);
         }
