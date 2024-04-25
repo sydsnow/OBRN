@@ -39,6 +39,7 @@ import AdminFees from "../pages/AdminFees";
 
 function AppRouter() {
   const authenticated = localStorage.getItem('token');
+  
 
   return (
     <BrowserRouter>

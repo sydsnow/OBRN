@@ -1,9 +1,11 @@
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 
 import registerimg from '../assets/register-img.jpg';
 
 function RegisterCustomer(){
+    const navigate = useNavigate();
     const [customer, setCustomer] = useState({
         pkCustomerId: '',
         firstName: '',
@@ -70,11 +72,10 @@ function RegisterCustomer(){
             const apiUrl = import.meta.env.VITE_API_BASE_URL;
             const response = await axios.post(`${apiUrl}/api/customer/addcustomer`, customer);
             const { message, token } = response.data;
+            console.log(message);
             localStorage.setItem('token', token);
             axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
-            // Clear any previous error messages
-            setErrorMessage('');
-            console.log(message);
+            navigate('/');
         } catch (error) {
             console.error('Registration failed: ', error);
             console.log("error.response.data: ", error.response.data)
