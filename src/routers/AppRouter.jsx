@@ -14,6 +14,9 @@ import EditProfile from "../pages/EditProfile";
 import EditProfileMyDetails from "../pages/EditProfileMyDetails";
 import EditProfileBusinessDetails from "../pages/EditProfileBusinessDetails";
 import EditPasswordPage from "../pages/EditPasswordPage";
+import CustomerMembershipDetails from "../pages/CustomerMembershipDetails";
+import BusinessMembershipDetails from "../pages/BusinessMembershipDetails";
+import MembershipInfo from "../pages/MembershipInfo";
 
 import ServicesPage from "../pages/Services";
 import TestimonialsPage from "../pages/Testimonials";
@@ -57,12 +60,15 @@ function AppRouter() {
           <Route path="/customerprofile" element={<CustomerProfile />} />
           <Route path="/businessprofile" element={<BusinessProfile />} />
           <Route path="/editprofile" element={<EditProfile />} />
+          <Route path="/membershipinfo" element={<MembershipInfo />} />
 
           {authenticated && (
           <Route path="/editprofile/mydetails" element={<EditProfileMyDetails />} />
           )}
           <Route path="/editprofile/businessdetails" element={<EditProfileBusinessDetails />} />
           <Route path="/editprofile/editpassword" element={<EditPasswordPage />} />
+          <Route path="/editprofile/customer-membership-details" element={<CustomerMembershipDetails />} />
+          <Route path="/editprofile/business-membership-details" element={<BusinessMembershipDetails />} />
           <Route path="/services" element={<ServicesPage />} />
           <Route path="/testimonials" element={<TestimonialsPage />} />
           <Route path="/about" element={<About />} />

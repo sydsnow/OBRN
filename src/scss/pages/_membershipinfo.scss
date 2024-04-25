@@ -1,0 +1,57 @@
+.membership-info {
+    font-family: Arial, sans-serif;
+    color: #333;
+    background-color: #f9f9f9;
+    margin: 0 auto;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+
+    &-container {
+        background-color: #fff;
+        padding: 30px;
+        border-radius: 8px;
+    }
+    
+    &-title {
+        margin-top: 0;
+        color: #333;
+        font-size: 20px;
+    }
+    
+    &-container div {
+        padding: 10px 15px;
+        border-bottom: 1px solid #eee;
+        cursor: pointer;
+        transition: background-color 0.3s;
+    }
+    
+    &-container div:hover {
+        background-color: #f0f0f0;
+    }
+    
+    &-container p {
+        margin: 5px 0;
+        font-size: 16px;
+    
+    @media (max-width: 768px) {
+        &-info {
+            padding: 10px;
+            box-shadow: none; 
+        }
+    
+        &-container {
+            padding: 50px;
+        }
+    
+        &-container div {
+            padding: 8px 10px; 
+        }
+        
+            @media (max-width: 1024px) {
+                &-container p {
+                    font-size: 14px; 
+                }
+            }
+        }
+    }
+}    

@@ -26,10 +26,19 @@ function EditProfile() {
 
   // Placeholder data for business details
   const businessDetails = {
-    businessName: "Doe Enterprises",
-    insuranceCompany: "Best Coverage, Inc.",
-    insuranceExpiry: "2023-12-31",
-    businessLicense: "License12345"
+    contactName: '',
+    businessName: '',
+    address:'',
+    city: '',
+    province: '',
+    postalCode: '',
+    email: '',
+    phone: '',
+    description: '',
+    logo: '',
+    insuranceCompany: '',
+    insuranceExpiry: '',
+    verificationDocument: '',
   };  
 
   useEffect(() => {
@@ -63,6 +72,14 @@ function EditProfile() {
 
   const handleChangePasswordClick = () => {
     navigate('/editprofile/editpassword');
+  };
+
+  const handleViewCustomerMembershipClick = () => {
+    navigate('/editprofile/customer-membership-details');
+  };
+
+  const handleViewBusinessMembershipClick = () => {
+    navigate('/editprofile/business-membership-details');
   };
 
   return (
@@ -104,10 +121,19 @@ function EditProfile() {
           <h3>Business Details</h3>
           {!isEditingBusiness ? (
             <div>
+              {/* <p>Contact Name: {businessDetails.contactName}</p> */}
               <p>Business Name: {businessDetails.businessName}</p>
+              <p>Address: {businessDetails.address}</p>
+              {/* <p>City: {businessDetails.city}</p> */}
+              {/* <p>Province: {businessDetails.province}</p>
+              <p>Postal Code: {businessDetails.postalCode}</p> */}
+              <p>Email: {businessDetails.email}</p>
+              <p>Phone: {formatPhoneNumber(businessDetails.phone)}</p>
+              <p>Description: {businessDetails.description}</p>
+              {/* <p>Logo: {businessDetails.logo}</p> */}
               <p>Insurance Company: {businessDetails.insuranceCompany}</p>
               <p>Insurance Expiry: {businessDetails.insuranceExpiry}</p>
-              <p>Business License: {businessDetails.businessLicense}</p>
+              <p>Business License: {businessDetails.verificationDocument}</p>
             </div>
           ) : (
             <BusinessDetailsForm initialData={businessDetails} />
@@ -118,6 +144,16 @@ function EditProfile() {
           <h3>Password</h3>
           <p>*******</p>
           <button className="edit-profile-button" onClick={handleChangePasswordClick}>Change Password</button>
+        </div>
+        <div className="edit-profile-section">
+          <h3>Customer Membership</h3>
+          <p>Manage your customer membership</p>
+          <button className="edit-profile-button" onClick={handleViewCustomerMembershipClick}>View Customer Membership</button>
+        </div>
+        <div className="edit-profile-section">
+          <h3>Business Membership</h3>
+          <p>Manage your business membership</p>
+          <button className="edit-profile-button" onClick={handleViewBusinessMembershipClick}>View Business Membership</button>
         </div>
       </div>
     </div>

@@ -67,7 +67,7 @@ function Nav () {
                     </li>
                     {authenticated ? (
                         <li>
-                            <NavLink to="/customerprofile">
+                            <NavLink to="/businessprofile">
                                 PROFILE
                             </NavLink>
                             <button onClick={handleLogout}>
