@@ -24,9 +24,38 @@ function RegisterBusiness(){
 
     const [errorMessage, setErrorMessage] = useState('');
 
+    // const handleChange = (e) => {
+    //     setBusiness({ ...business, [e.target.name]: e.target.value });
+    // };
+
     const handleChange = (e) => {
-        setBusiness({ ...business, [e.target.name]: e.target.value });
-    };
+        let value = e.target.value;
+        let errorMessage = '';
+
+        switch (e.target.name) {
+            case 'phone':
+                // Strip away non-numeric characters
+                value = value.replace(/\D/g, '');
+                // Limit phone length to 20 digits
+                value = value.slice(0, 20);
+                if (value.length === 20) {
+                    errorMessage = 'Phone number is limited to 20 digits.';
+                }
+                break;
+            case 'pkBusinessId':
+                // Limiting pkBusinessId (username) length to 30 characters
+                value = value.slice(0, 30);
+                if (value.length === 30) {
+                    errorMessage = 'Username is limited to 30 characters.';
+                }
+                break;
+            default:
+                break;
+        }
+
+        setBusiness({ ...business, [e.target.name]: value });
+        setErrorMessage(errorMessage);
+    }
 
     // const handleImageChange = (event, property) => {
     //     const file = event.target.files[0];
