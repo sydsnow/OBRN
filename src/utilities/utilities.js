@@ -4,4 +4,21 @@ function getYear(){
     return d.getFullYear();
 }
 
-export { getYear }
+function getEmailFromJWT(token) {
+    const [, payloadBase64] = token.split('.'); // Get the base64 encoded payload
+    const payloadJson = atob(payloadBase64); // Decode base64 to JSON
+    const payload = JSON.parse(payloadJson); // Parse JSON
+
+    const email = payload['http://schemas.xmlsoap.org/ws/2005/05/identity/claims/emailaddress'];
+
+    return email;
+}
+
+function formatPhoneNumber(phone) {
+    if (/^\d{10}$/.test(phone)) {
+        return `(${phone.slice(0, 3)}) ${phone.slice(3, 6)}-${phone.slice(6)}`;
+    }
+    return phone; // If the phone number doesn't match the format, do not modify it
+}
+
+export { getYear, getEmailFromJWT, formatPhoneNumber }

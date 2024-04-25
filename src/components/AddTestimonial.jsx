@@ -13,10 +13,10 @@ function AddTestimonial() {
             <div className="testimonial-container">
 
                 <form className="testimonial-form">
-                <h2>Add Testimonial</h2>
+                <h2>Add Testimonial For Our Beauty Referral Network</h2>
                     <div className="form-group">
                         <input className='input' type="text" required autoComplete='off' id="name" name="name" />
-                        <label className="label" htmlFor="name"><i className="fa-regular fa-user"></i> Customer/Company Name</label>
+                        <label className="label" htmlFor="name"><i className="fa-regular fa-user"></i> Your Name</label>
                     </div>
                     <div className="form-group">
                         <input className='input2 input-date' type="date" required autoComplete='off' id="date" name="date" />

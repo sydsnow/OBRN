@@ -20,13 +20,36 @@ function RegisterCustomer(){
     const [errorMessage, setErrorMessage] = useState('');
 
     const handleChange = (e) => {
-        if (e.target.name === 'confirm18') {
-            const value = e.target.checked ? true : false;
-            setCustomer({ ...customer, [e.target.name]: value });
-        } else {
-            setCustomer({ ...customer, [e.target.name]: e.target.value });
+        let value = e.target.value;
+        let errorMessage = '';
+    
+        switch (e.target.name) {
+            case 'confirm18':
+                value = e.target.checked;
+                break;
+            case 'phone':
+                // Strip away non-numeric characters
+                value = value.replace(/\D/g, '');
+                // Limiting phone length to 20 characters
+                value = value.slice(0, 20);
+                if (value.length === 20) {
+                    errorMessage = 'Phone number is limited to 20 digits.'
+                }
+                break;
+            case 'pkCustomerId':
+                // Limiting pkCustomerId (username) length to 20 characters
+                value = value.slice(0, 20);
+                if (value.length === 20) {
+                    errorMessage = 'Username is limited to 20 characters.';
+                }
+                break;
+            default:
+                break;
         }
-    };
+    
+        setCustomer({ ...customer, [e.target.name]: value });
+        setErrorMessage(errorMessage);
+    };    
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -37,24 +60,32 @@ function RegisterCustomer(){
             setErrorMessage('You must be 18 years or older in order to register with Our Beauty Referral Network.');
             return;
         }
-
+    
         if (customer.password !== customer.confirmPassword) {
-            setErrorMessage('Password and Confirm Password must match');
+            setErrorMessage('Password and Confirm Password must match.');
             return;
         }
-
+    
         try {
             const apiUrl = import.meta.env.VITE_API_BASE_URL;
             const response = await axios.post(`${apiUrl}/api/customer/addcustomer`, customer);
-            console.log("response: ", response);
             const { message, token } = response.data;
-            console.log(message);
             localStorage.setItem('token', token);
             axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
+            // Clear any previous error messages
+            setErrorMessage('');
+            console.log(message);
         } catch (error) {
             console.error('Registration failed: ', error);
+            console.log("error.response.data: ", error.response.data)
+            if (error.response && error.response.data) {
+                // Display the specific error message from the backend
+                setErrorMessage(`Registration failed: ${error.response.data}`);
+            } else {
+                setErrorMessage('Registration failed. Please try again later.');
+            }
         }
-    };
+    };    
 
     return (
     <div className="wrapper">

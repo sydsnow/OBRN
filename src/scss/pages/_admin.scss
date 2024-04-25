@@ -356,6 +356,172 @@
             font-weight: 700;
         }
     }
+    &-edit-container{
+        @include flex-col;
+        justify-content: center;
+        align-items: flex-start;
+        width:100%;
+        padding: 20px;
+        h1{
+            font-family: $primary-font;
+            font-size: 3rem;
+            font-weight: 700;
+        }
+    }
+    &-customer-details{
+        @include flex-col;
+        justify-content: center;
+        align-items: flex-start;
+        width: 100%;
+        gap:2vh;
+    }
+    &-customer-info{
+        @include flex-row;
+        justify-content: space-between;
+        align-items: center;
+        width:70%;
+        margin: 0;
+        gap: 2vh;
+        input{
+            width: 60%;
+            padding: 10px;
+            font-family: $secondary-font;
+            font-size: 1.2rem;
+            font-weight: 400;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        label{
+            font-family: $secondary-font;
+            font-size: 1.2rem;
+            font-weight: 700;
+        }
+        p{
+            font-family: $secondary-font;
+            font-size: 1.2rem;
+            font-weight: 400;
+            margin:0;
+            width:60%;
+        }
+    }   
+
+    &-edit-btns{
+        @include flex-row;
+        justify-content: flex-start;
+        align-items: center;
+        gap: 1vh;
+        width:100%;
+        padding:20px 0;
+        button{
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            background-color:#4CA633;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            font-family: $secondary-font;
+            font-size: 1rem;
+            font-weight: 400;
+            cursor: pointer;
+            width: 100%;
+            max-width:200px;
+            transition: all 0.3s ease;
+            &:hover{
+                background-color: #4d4d4d;
+            }
+
+        }
+        :nth-child(2){
+            background-color: #BF0426;
+        }
+    }
+    &-all-categories{
+        @include flex-col;
+        justify-content: center;
+        align-items: flex-start;
+        width: 100%;
+        padding: 20px;
+        margin: 0 auto;
+        gap: 1vh;
+        p{
+            font-family: $secondary-font;
+            font-size: 1rem;
+            font-weight: 400;
+        }
+    }
+
+    &-category-box{
+        @include flex-row;
+        justify-content: space-between;
+        align-items: center;
+        width: 100%;
+        padding: 20px;
+        margin: 0 auto;
+        gap: 1vh;
+        // border-top: 1px solid #ccc;
+    }
+    &-category-container{
+        @include flex-col;
+        justify-content: center;
+        align-items: flex-start;
+        width:100%;
+        padding: 20px;
+        h1{
+            font-family: $primary-font;
+            font-size: 3rem;
+            font-weight: 700;
+        }
+        button{
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            background-color:#4CA633;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            font-family: $secondary-font;
+            font-size: 1rem;
+            font-weight: 400;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            &:hover{
+                background-color: #4d4d4d;
+            }
+        
+        }
+    }
+    &-category{
+        @include flex-row;
+        justify-content: space-between;
+        align-items: center;
+        width: 100%;
+        padding: 20px;
+        margin: 0 auto;
+        gap: 1vh;
+        border-top: 1px solid #ccc;
+
+        button{
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            background-color:#F21616;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            font-family: $secondary-font;
+            font-size: 1rem;
+            font-weight: 400;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            &:hover{
+                background-color: #4d4d4d;
+            }
+        }
+    }
     @media (min-width: 960px) {
 
     }
