@@ -28,6 +28,31 @@ function RegisterBusiness(){
         setBusiness({ ...business, [e.target.name]: e.target.value });
     };
 
+    // const handleImageChange = (event, property) => {
+    //     const file = event.target.files[0];
+    //     console.log("file: ", file);
+    //     const reader = new FileReader();
+    //     reader.onloadend = () => {
+    //         setBusiness(prevState => ({
+    //             ...prevState,
+    //             [property]: reader.result 
+    //         }));
+    //     };
+    //     if (file) {
+    //         reader.readAsDataURL(file);
+    //     }
+    // };
+
+    // const handleImageChange = (event, property) => {
+    //     const file = event.target.files[0];
+    //     console.log("file: ", file);
+    //     // No need to set the value directly for file inputs
+    //     setBusiness(prevState => ({
+    //         ...prevState,
+    //         [property]: file // Store the file object directly
+    //     }));
+    // };    
+
     const handleSubmit = async (e) => {
         e.preventDefault();
         console.log("business: ", business);
@@ -201,8 +226,10 @@ function RegisterBusiness(){
             required 
             id="verificationDocument" 
             name="verificationDocument"
+            accept=".jpg,.jpeg,.png,.doc,.docx,.pdf"
             value={business.verificationDocument}
-            onChange={handleChange} 
+            /* onChange={(e) => handleImageChange(e, 'verificationDocument')} */
+            onChange={handleChange}
         />
         <label className="label" htmlFor="verificationDocument">
         <i className="fa-solid fa-upload"></i> Business License</label>
@@ -215,7 +242,8 @@ function RegisterBusiness(){
             id="logo" 
             name="logo"
             value={business.logo}
-            onChange={handleChange} 
+            /* onChange={(e) => handleImageChange(e, 'logo')} */
+            onChange={handleChange}
         />
         <label className="label" htmlFor="logo">
         <i className="fa-solid fa-upload"></i> Logo</label>
