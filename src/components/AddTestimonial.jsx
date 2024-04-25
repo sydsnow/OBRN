@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios';
-import { useParams } from 'react-router-dom';
+import { json, useParams } from 'react-router-dom';
 
 function AddTestimonial() {
     const [rating, setRating] = useState(0); // State to store the selected rating
@@ -10,30 +10,36 @@ function AddTestimonial() {
         description: '',
         rating: 0,
     });
+
     const { id } = useParams(); // Fetch the customer ID from the URL params
+    const authenticated = localStorage.getItem('token');
+    console.log('authenticated:', authenticated);
 
     useEffect(() => {
         // Fetch the token from localStorage
         const token = localStorage.getItem('token');
-    
-        if (token && id) { // Add id to the dependency array
+
+        if (token) {
             // Make a request to your API to fetch the business ID associated with the token
+            const emailAddress = JSON.parse(token).email;
+            console.log('emailAddress:', emailAddress);
             const apiUrl = import.meta.env.VITE_API_BASE_URL;
-            axios.get(`${apiUrl}/api/business/getbusiness/${id}`, {
+            axios.get(`${apiUrl}/api/Business/getcustomerbyemail`, {
                 headers: {
                     Authorization: `Bearer ${token}`,
                 },
             })
+    
             .then(response => {
                 const { businessId } = response.data;
                 setTestimonial(prevState => ({ ...prevState, fkBusinessId: businessId }));
             })
+
             .catch(error => {
                 console.error('Error fetching business ID:', error);
             });
         }
-    }, [id]); // Include id in the dependency array
-    
+    }, [id]); // Empty dependency array ensures this effect runs only once after the component mounts
 
     const handleRatingChange = (value) => {
         setRating(value); // Set the rating value when a radio button is clicked
@@ -61,7 +67,6 @@ function AddTestimonial() {
         } catch (error) {
             console.error('Testimonial add failed: ', error);
         }
-
         const storedToken = localStorage.getItem('token');
         console.log('storedToken:', storedToken);
     };
