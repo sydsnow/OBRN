@@ -1,33 +1,65 @@
 import "../scss/components/_testimonials.scss"; 
-import kitty from "../assets/kitty.jpg";
+//import kitty from "../assets/kitty.jpg";
 import TestimonialGallery from "../components/TestimonialGallery";
 import { NavLink } from "react-router-dom";
+import { useState, useEffect } from 'react';
+import axios from 'axios';
 
 function TestimonialsPage() {
 
-  const testimonials = [
-    {
-      id: 1,
-      name: "John Doe",
-      description: "Lorem ipsum dolor sit amet, ",
-      rating: 5,
-      image: kitty 
-    },
-    {
-      id: 2,
-      name: "Jane Doe",
-      description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam in quam in odio venenatis luctus. Nullam at luctus enim. Nullam in quam in odio venenatis luctus. Nullam at luctus enim. Nullam in quam in odio venenatis luctus. Nullam at luctus enim. dfuva;dfuha;fuhvdfuvadfvhafvadfhvadfvhadkfvad;kuhrf;aohrv;arh'd;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;ad;fbda'fbaofa'bdfnba'dflbnadf'bn'dfb'dfb'dfnb'dfnbdfkb'dfbn'dfbh'dfba",
-      rating: 4,
-      image: kitty
-    },
-    {
-      id: 3,
-      name: "James Doe",
-      description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam in quam in odio venenatis luctus. Nullam at luctus enim. Nullam in quam in odio venenatis luctus. Nullam at luctus enim. Nullam in quam in odio venenatis luctus. Nullam at luctus enim.",
-      rating: 3,
-      image: kitty 
-    }
-  ];
+  const [testimonials, setTestimonials] = useState([]);
+
+  // useEffect(() => {
+  //   const fetchTestimonials = async () => {
+  //       try {
+  //           const apiUrl = import.meta.env.VITE_API_BASE_URL;
+  //           const response = await axios.get(`${apiUrl}/testimonial`);
+  //           setTestimonials(response.data); // Assuming response.data is an array of testimonials
+  //       } catch (error) {
+  //           console.error('Failed to fetch testimonials: ', error);
+  //       }
+  //   };
+
+  //   fetchTestimonials();
+
+  //   return () => {
+  //       // Cleanup logic if needed
+  //   };
+  // }, []);
+  useEffect(() => {
+    const fetchTestimonials = async () => {
+        try {
+            const apiUrl = import.meta.env.VITE_API_BASE_URL;
+            const response = await axios.get(`${apiUrl}/testimonial`);
+            const fetchedTestimonials = response.data;
+
+            // Fetch business information for each testimonial
+            const updatedTestimonials = await Promise.all(
+                fetchedTestimonials.map(async testimonial => {
+                    const businessId = testimonial.fkBusinessId;
+                    const businessResponse = await axios.get(`${apiUrl}/api/Business/getbusiness/${businessId}`);
+                    const business = businessResponse.data;
+                    
+                    // Merge testimonial object with business information
+                    return {
+                        ...testimonial,
+                        business: business // Assuming businessResponse.data contains the business information
+                    };
+                })
+            );
+
+            setTestimonials(updatedTestimonials);
+        } catch (error) {
+            console.error('Failed to fetch testimonials: ', error);
+        }
+    };
+
+    fetchTestimonials();
+
+    return () => {
+        // Cleanup logic if needed
+    };
+}, []);
 
   return (
     <div className="testimonials">

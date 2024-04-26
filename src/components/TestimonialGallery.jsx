@@ -56,7 +56,7 @@ function TestimonialGallery({ testimonials }) {
   return (
     <div className="testimonials-gallery">
       {testimonials.map((testimonial) => (
-        <div className="testimonials-card" key={testimonial.id}>
+        <div className="testimonials-card" key={testimonial.pkTestimonialId}>
           <div className="testimonials-card-info">
             <p className="testimonials-card-info-rating">
               {[...Array(5)].map((_, index) => (
@@ -74,11 +74,13 @@ function TestimonialGallery({ testimonials }) {
             {testimonial.description.length > 100 && ( // Add condition here
               <button onClick={() => openModal(testimonial)} className="testimonials-card-info-button">Show More</button>
             )}
-            <p className="testimonials-card-info-name">{testimonial.name}</p>
+            <p className="testimonials-card-info-name">{testimonial.business.businessName}</p>
           </div>
-          <div className="testimonials-card-image-container">
-            <img src={testimonial.image} alt="Testimonial Image" className="testimonials-card-image" />
-          </div>
+          {/* <div className="testimonials-card-image-container">
+          {testimonial.business.logo && ( // Check if logo is available
+              <img src={testimonial.business.logo} alt="Testimonial Image" className="testimonials-card-image" />
+            )}
+          </div> */}
         </div>
       ))}
       {selectedTestimonial && (
@@ -87,6 +89,7 @@ function TestimonialGallery({ testimonials }) {
           onRequestClose={closeModal}
           description={selectedTestimonial.description}
           closeModal={closeModal}
+          businessName={selectedTestimonial.business.businessName}
         />
       )}
     </div>
