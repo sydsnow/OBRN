@@ -28,8 +28,8 @@ function Footer() {
             <div className="footer-section">
                 <h4 className="footer-heading">About Us</h4>
                 <Link to="/about" className="footer-link">OUR HISTORY</Link>
-                <Link to="/comingsoon" className="footer-link">TERMS & CONDITIONS</Link>
-                <Link to="/comingsoon" className="footer-link">PRIVACY STATEMENT</Link>
+                <Link to="/termscondition" className="footer-link">TERMS & CONDITIONS</Link>
+                <Link to="/privacystatement" className="footer-link">PRIVACY STATEMENT</Link>
                 <Link to="/businessprofile" className="footer-link">BUSINESS PROFILE</Link>
                 <Link to="/customerprofile" className="footer-link">CUSTOMER PROFILE</Link>
             </div>

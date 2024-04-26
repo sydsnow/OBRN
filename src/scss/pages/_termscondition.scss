@@ -1,0 +1,13 @@
+.wrapper-info{
+    &-content{
+        margin: 30px;
+        line-height: 40px;
+    }
+    @media (min-width: 768px) {
+        &-content{
+            margin-left: 130px;
+            margin-right: 130px;
+            margin-top: 60px;
+        }
+    }
+}

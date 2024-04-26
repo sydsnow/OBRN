@@ -25,6 +25,9 @@ import BusinessProfile from "../pages/BusinessProfile";
 import About from "../pages/About";
 import PageNotFound from "../pages/PageNotFound";
 import PageComingSoon from "../pages/PageComingSoon";
+import TermsCondition from "../pages/TermsCondition";
+import PrivacyStatement from "../pages/PrivacyStatement";
+
 import Admin from "../pages/Admin";
 import AddServicePage from "../pages/AddService";
 import AdminTestimonials from "../pages/AdminTestimonials";
@@ -61,6 +64,8 @@ function AppRouter() {
           <Route path="/businessprofile" element={<BusinessProfile />} />
           <Route path="/editprofile" element={<EditProfile />} />
           <Route path="/membershipinfo" element={<MembershipInfo />} />
+          <Route path="/termscondition" element={<TermsCondition />} />
+          <Route path="/privacystatement" element={<PrivacyStatement />} />
 
           {authenticated && (
           <Route path="/editprofile/mydetails" element={<EditProfileMyDetails />} />
