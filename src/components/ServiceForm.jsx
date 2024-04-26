@@ -273,7 +273,7 @@ function ServiceForm() {
                 />
             </div>
             <div className="form-group-service">
-                <label className="service-label" htmlFor="discount">Discount <p>*optional</p></label>
+                <label className="service-label" htmlFor="discount">Discount</label>
                 <select
                     value={selectedDiscount}
                     onChange={handleDiscountOption}

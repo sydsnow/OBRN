@@ -19,7 +19,7 @@ function RegisterBusiness(){
         verificationDocument: '',
         logo: '',
         password: '',
-        confirmPassword: ''
+        confirmPassword: '',
     });
 
     const [errorMessage, setErrorMessage] = useState('');

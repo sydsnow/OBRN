@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import axios from 'axios';
+import placeholderImg from "../assets/profile-placeholder.png";
 
 import registerimg from '../assets/register-img.jpg';
 
@@ -15,6 +16,7 @@ function RegisterCustomer(){
         vip: false,
         password: '',
         confirmPassword: '',
+        photo: placeholderImg,
     });
 
     const [errorMessage, setErrorMessage] = useState('');
