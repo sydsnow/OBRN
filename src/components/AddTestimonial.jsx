@@ -108,7 +108,7 @@ function AddTestimonial() {
                             <i className="fa-regular fa-comment"></i> Description
                         </label>
                     </div>
-                    <div className="form-group">
+                    {/* <div className="form-group">
                         <label className="testimonial-label">Rating:</label>
                         <div className="testimonial-rating-input">
                             {[1, 2, 3, 4, 5].map((value) => (
@@ -122,6 +122,22 @@ function AddTestimonial() {
                                     />
                                     {value}
                                 </label>
+                            ))}
+                        </div>
+                    </div> */}
+                                        <div className="form-group">
+                        <label className="testimonial-label" id="rating">Rating:</label>
+                        <div className="testimonial-rating-input">
+                            {[1, 2, 3, 4, 5].map((value) => (
+                                <span
+                                    key={value}
+                                    className={`fa-solid fa-star${value <= rating ? ' filled' : ''}`}
+                                    onClick={() => handleRatingChange(value)}
+                                    id="rating"
+                                    name="rating"
+                                    value={testimonial.rating}
+                                    onChange={handleChange}
+                                ></span>
                             ))}
                         </div>
                     </div>
