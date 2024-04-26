@@ -3,7 +3,7 @@ import Modal from 'react-modal';
 import PropTypes from 'prop-types';
 //import "../scss/components/_modal.scss";
 
-function ModalComponent({ isOpen, onRequestClose, description, closeModal }) {
+function ModalComponent({ isOpen, onRequestClose, description, closeModal, businessName }) {
   // Define custom styles for the modal
 // const customStyles = {
 //   content: {
@@ -70,7 +70,7 @@ function ModalComponent({ isOpen, onRequestClose, description, closeModal }) {
       // className="modal-content"
     >
       {/* Modal content */}
-      <h2>Testimonial</h2>
+      <h2>{businessName}</h2>
       <div style={customStyles.div}>{description}</div>
       <button style={customStyles.button} onClick={closeModal}>Close</button>
     </Modal>
@@ -82,6 +82,7 @@ ModalComponent.propTypes = {
     onRequestClose: PropTypes.func.isRequired,
     description: PropTypes.string.isRequired,
     closeModal: PropTypes.func.isRequired,
+    businessName: PropTypes.string.isRequired,
 };
 
 export default ModalComponent;
