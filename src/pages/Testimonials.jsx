@@ -16,7 +16,7 @@ function TestimonialsPage() {
     {
       id: 2,
       name: "Jane Doe",
-      description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam in quam in odio venenatis luctus. Nullam at luctus enim. Nullam in quam in odio venenatis luctus. Nullam at luctus enim. Nullam in quam in odio venenatis luctus. Nullam at luctus enim.",
+      description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam in quam in odio venenatis luctus. Nullam at luctus enim. Nullam in quam in odio venenatis luctus. Nullam at luctus enim. Nullam in quam in odio venenatis luctus. Nullam at luctus enim. dfuva;dfuha;fuhvdfuvadfvhafvadfhvadfvhadkfvad;kuhrf;aohrv;arh'd;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;ad;fbda'fbaofa'bdfnba'dflbnadf'bn'dfb'dfb'dfnb'dfnbdfkb'dfbn'dfbh'dfba",
       rating: 4,
       image: kitty
     },
