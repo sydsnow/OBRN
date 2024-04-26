@@ -69,6 +69,7 @@ function AddTestimonial() {
                 },
             });
             console.log("response: ", response); // Log the response from the server
+            console.log(localStorage.getItem('token'));
     
             const { message, token } = response.data;
             console.log(message);
@@ -76,7 +77,7 @@ function AddTestimonial() {
             localStorage.setItem('token', token); // Update token if necessary
             axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
         } catch (error) {
-            console.error('Testimonial add failed: ', error.response); // Log the error response from the server
+            console.error('Testimonial add failed: ', error); // Log the error response from the server
         }
     
         const storedToken = localStorage.getItem('token');
