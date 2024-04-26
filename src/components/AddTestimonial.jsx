@@ -1,40 +1,47 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios';
-import { json, useParams } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 
 function AddTestimonial() {
     const [rating, setRating] = useState(0); // State to store the selected rating
     const [testimonial, setTestimonial] = useState({
         fkBusinessId: '',
-        date: '',
+        // date: '',
         description: '',
         rating: 0,
     });
 
     const { id } = useParams(); // Fetch the customer ID from the URL params
-    const authenticated = localStorage.getItem('token');
-    console.log('authenticated:', authenticated);
+
+    // const authenticated = localStorage.getItem('token');
+    // console.log('authenticated:', authenticated);
 
     useEffect(() => {
         // Fetch the token from localStorage
         const token = localStorage.getItem('token');
+        console.log('token:', token);
 
         if (token) {
             // Make a request to your API to fetch the business ID associated with the token
-            const emailAddress = JSON.parse(token).email;
-            console.log('emailAddress:', emailAddress);
             const apiUrl = import.meta.env.VITE_API_BASE_URL;
-            axios.get(`${apiUrl}/api/Business/getcustomerbyemail`, {
+            axios.get(`${apiUrl}/api/Business/getbusiness/${id}`, {
                 headers: {
                     Authorization: `Bearer ${token}`,
                 },
             })
-    
+            // .then(response => {
+            //     const { businessId } = response.data;
+            //     setTestimonial(prevState => ({ ...prevState, pkBusinessId: businessId }));
+            //     console.log('businessId:', businessId);
+            //     console.log(response.data);
+            // })
             .then(response => {
-                const { businessId } = response.data;
-                setTestimonial(prevState => ({ ...prevState, fkBusinessId: businessId }));
+                const { pkBusinessId } = response.data;
+                setTestimonial(prevState => ({ ...prevState, fkBusinessId: pkBusinessId }));
+                console.log('businessId:', pkBusinessId);
+                console.log(response.data);
             })
-
+            
             .catch(error => {
                 console.error('Error fetching business ID:', error);
             });
@@ -52,25 +59,30 @@ function AddTestimonial() {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        console.log("testimonial: ", testimonial);
-
+        console.log("testimonial: ", testimonial); // Log the testimonial object
+    
         try {
             const apiUrl = import.meta.env.VITE_API_BASE_URL;
-            const response = await axios.post(`${apiUrl}/testimonial/create`, testimonial);
-            console.log("response: ", response);
-
+            const response = await axios.post(`${apiUrl}/testimonial/create`, testimonial, {
+                headers: {
+                    Authorization: `Bearer ${localStorage.getItem('token')}`, // Send authorization token in the request header
+                },
+            });
+            console.log("response: ", response); // Log the response from the server
+    
             const { message, token } = response.data;
             console.log(message);
-
-            localStorage.setItem('token', token);
+    
+            localStorage.setItem('token', token); // Update token if necessary
             axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
         } catch (error) {
-            console.error('Testimonial add failed: ', error);
+            console.error('Testimonial add failed: ', error.response); // Log the error response from the server
         }
+    
         const storedToken = localStorage.getItem('token');
         console.log('storedToken:', storedToken);
     };
-
+    
     return (
         <div className="wrapper">
             <div className="testimonial-container">

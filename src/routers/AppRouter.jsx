@@ -74,9 +74,10 @@ function AppRouter() {
           <Route path="/admin-users" element={<AdminUsers />} />
           <Route path="/admin-all-businesses" element={<AdminAllBusinesses />} />
           <Route path="/admin-edit-customer/:id" element={<AdminEditCustomer/>} />
-          <Route path="/new-testimonial" element={<NewTestimonial />} />
+          
           <Route path="/admin-all-categories" element={<AdminAllCategories />} />
           <Route path="/admin-edit-business/:id" element={<AdminEditBusiness />} />
+          <Route path="/admin-edit-business/:id/new-testimonial" element={<NewTestimonial />} />
           <Route path="/admin-all-discounts" element={<AdminAllDiscounts />} />
           <Route path="/add-discount" element={<AddDiscount />} />
           <Route path="/admin-fees" element={<AdminFees />} />
