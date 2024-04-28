@@ -1,5 +1,7 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
+import PropTypes from 'prop-types';
 import { useNavigate } from 'react-router-dom';
+import provinces from '../data/provinces';
 import "../scss/components/_businessdetailsform.scss"; 
 
 function BusinessDetailsForm({ initialData }) {
@@ -76,7 +78,7 @@ function BusinessDetailsForm({ initialData }) {
                 />
             </div>
             <div className="business-form-group">
-                <label className="business-label" htmlFor="contactName">City</label>
+                <label className="business-label" htmlFor="city">City</label>
                 <input
                     className="input"
                     type="text"
@@ -88,19 +90,23 @@ function BusinessDetailsForm({ initialData }) {
                 />
             </div>
             <div className="business-form-group">
-                <label className="business-label" htmlFor="contactName">Province</label>
-                <input
-                    className="input"
-                    type="text"
+                <label htmlFor="province" className="business-label">Province/Territory</label>
+                <select 
+                    className="input" 
                     id="province"
+                    required
                     name="province"
                     value={formData.province}
                     onChange={handleChange}
-                    required
-                />
+                >
+                    <option value=""></option>
+                    {provinces.map((province) => (
+                        <option key={province} value={province}>{province}</option>
+                    ))}
+                </select>
             </div>
             <div className="business-form-group">
-                <label className="business-label" htmlFor="contactName">Postal Code </label>
+                <label className="business-label" htmlFor="postalCode">Postal Code </label>
                 <input
                     className="input"
                     type="text"
@@ -112,7 +118,7 @@ function BusinessDetailsForm({ initialData }) {
                 />
             </div>
             <div className="business-form-group">
-                <label className="business-label" htmlFor="contactName">Email</label>
+                <label className="business-label" htmlFor="email">Email</label>
                 <input
                     className="input"
                     type="text"
@@ -124,7 +130,7 @@ function BusinessDetailsForm({ initialData }) {
                 />
             </div>
             <div className="business-form-group">
-                <label className="business-label" htmlFor="contactName">Phone</label>
+                <label className="business-label" htmlFor="phone">Phone</label>
                 <input
                     className="input"
                     type="text"
@@ -137,7 +143,7 @@ function BusinessDetailsForm({ initialData }) {
             </div>
             <h2>Update My Business Descriptions</h2>
             <div className="business-form-group">
-                <label className="business-label" htmlFor="aboutUs">About Us Description</label>
+                <label className="business-label" htmlFor="description">About Us Description</label>
                 <textarea
                     className="input"
                     id="description"
@@ -150,7 +156,7 @@ function BusinessDetailsForm({ initialData }) {
                 />
             </div>
             <div className="business-form-group">
-                <label className="business-label" htmlFor="businesslogo">Business Logo</label>
+                <label className="business-label" htmlFor="businessLogo">Business Logo</label>
                 <input
                     className="input"
                     type="file"
@@ -197,6 +203,10 @@ function BusinessDetailsForm({ initialData }) {
             </div>
         </form>
     );
+}
+
+BusinessDetailsForm.propTypes = {
+    initialData: PropTypes.object
 }
 
 export default BusinessDetailsForm;

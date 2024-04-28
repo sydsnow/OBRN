@@ -1,4 +1,3 @@
-import React from 'react';
 import BusinessDetailsForm from "../components/BusinessDetailsForm";
 
 function EditProfileBusinessDetails() {

@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import provinces from '../data/provinces';
 
 import registerbsn from '../assets/register-bsn.jpg';
 
@@ -184,17 +185,20 @@ function RegisterBusiness(){
         <label className="label" htmlFor="city"> City</label>
         </div>
         <div className="form-group">
-        <input 
-            className='input' 
-            type="string" 
-            required 
-            autoComplete='off' 
-            id="province" 
-            name="province" 
-            value={business.province}
-            onChange={handleChange}
-        />
-        <label className="label" htmlFor="province">Province</label>
+            <select 
+                className="input" 
+                id="province"
+                required
+                name="province"
+                value={business.province}
+                onChange={handleChange}
+            >
+                <option value=""></option>
+                {provinces.map((province) => (
+                    <option key={province} value={province}>{province}</option>
+                ))}
+            </select>
+            <label htmlFor="province" className="label">Province/Territory</label>
         </div>
         <div className="form-group">
         <input 

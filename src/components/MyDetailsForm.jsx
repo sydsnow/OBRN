@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import "../scss/components/_mydetailsform.scss";
 import { getEmailFromJWT } from '../utilities/utilities';
+import provinces from '../data/provinces';
 
 async function fetchCustomerData(token, apiUrl) {
     const email = getEmailFromJWT(token);
@@ -195,15 +196,19 @@ const MyDetailsForm = () => {
                 />
             </div>
             <div className="profile-form-group">
-                <label className="profile-label" htmlFor="province">Province</label>
-                <input
+                <label htmlFor="province" className="profile-label">Province/Territory</label>
+                <select
                     className="input"
-                    type="text"
                     id="province"
                     name="province"
                     value={userDetails.province}
                     onChange={handleChange}
-                />
+                >
+                    <option value=""></option>
+                    {provinces.map((province) => (
+                        <option key={province} value={province}>{province}</option>
+                    ))}
+                </select>
             </div>
             <div className="profile-form-group">
                 <label className="profile-label" htmlFor="postalCode">Postal Code</label>
