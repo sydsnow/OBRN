@@ -1,6 +1,7 @@
 import { Link,  useParams } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import axios from 'axios';
+import provinces from '../data/provinces';
 
 function AdminEditBusiness() {
     const { id } = useParams(); // Fetch the customer ID from the URL params
@@ -167,14 +168,19 @@ function AdminEditBusiness() {
                             )}
                         </div>
                         <div className="admin-customer-info">
-                            <label>Province:</label>
+                            <label htmlFor="province">Province/Territory:</label>
                             {editing ? (
-                                <input
-                                    type="text"
-                                    name="province"
+                                <select 
+                                    name="province" 
+                                    id="province"
                                     value={business.province}
                                     onChange={handleInputChange}
-                                />
+                                >
+                                    <option value=""></option>
+                                    {provinces.map((province) => (
+                                        <option key={province} value={province}>{province}</option>
+                                    ))}
+                                </select>
                             ) : (
                                 <p>{business.province}</p>
                             )}
