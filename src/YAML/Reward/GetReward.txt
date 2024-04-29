@@ -1,0 +1,33 @@
+openapi: 3.0.0
+info:
+  title: SSD Reward API
+  version: 1.0.0
+paths:
+  /reward:
+    get:
+      summary: Retrieve all rewards
+      operationId: RewardGet
+      responses:
+        '200':
+          description: A list of all rewards
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    PkRewardId:
+                      type: integer
+                      description: The unique identifier for the reward
+                    FkReferralId:
+                      type: integer
+                      description: The foreign key identifier for the associated referral
+                    RewardAmount:
+                      type: number
+                      format: decimal
+                      description: The amount of the reward
+                    IssueDate:
+                      type: string
+                      format: date
+                      description: The date the reward was issued
