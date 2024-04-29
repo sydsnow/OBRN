@@ -42,6 +42,8 @@ import AdminAllDiscounts from "../pages/AdminAllDiscounts";
 import AddDiscount from "../pages/AddDiscount";
 import AdminFees from "../pages/AdminFees";
 
+import EditService from "../pages/EditService";
+
 
 function AppRouter() {
   const authenticated = localStorage.getItem('token');
@@ -92,6 +94,7 @@ function AppRouter() {
           <Route path="/admin-all-discounts" element={<AdminAllDiscounts />} />
           <Route path="/add-discount" element={<AddDiscount />} />
           <Route path="/admin-fees" element={<AdminFees />} />
+          <Route path="//editservice/:id" element={<EditService />} />
         </Routes>
         <Footer />
       </AuthProvider>
