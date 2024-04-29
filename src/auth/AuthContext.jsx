@@ -7,10 +7,9 @@ export const AuthProvider = ({ children }) => {
         try {
             const response = await axios.post(`${apiUrl}/api/customer/login`, formData);
             const { token } = response.data;
-            localStorage.setItem('token', token);
-            setAuthHeaders(token); 
-            // localStorage.setItem('authenticated', true);
-            return token;
+            localStorage.setItem('token', token.result);
+            setAuthHeaders(token.result); 
+            return token.result;
         } catch (error) {
             console.error('Login failed: ', error);
             return null;

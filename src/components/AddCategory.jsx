@@ -22,7 +22,8 @@ function AddCategoryPage () {
             const response = await axios.post(`${apiUrl}/Category/create`, category);
             console.log("response: ", response);
             const { message, token } = response.data;
-            console.log(message);
+            console.log("message: ", message);
+            console.log("token:", token);
             localStorage.setItem('token', token);
             axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
         } catch (error) {
