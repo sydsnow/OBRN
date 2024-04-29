@@ -1,0 +1,24 @@
+openapi: 3.0.0
+info:
+  title: SSD Product API
+  version: 1.0.0
+paths:
+  /discount/{discountId}:
+    delete:
+      summary: Delete a discount by ID
+      parameters:
+        - in: path
+          name: discountId
+          required: true
+          schema:
+            type: string
+          description: The ID of the discount to delete
+      responses:
+        '200':
+          description: OK
+        '404':
+          description: Discount not found
+        '409':
+          description: Discount is currently in use
+        '500':
+          description: Internal server error

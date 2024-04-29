@@ -1,0 +1,124 @@
+openapi: 3.0.0
+info:
+  title: SSD Product API
+  version: 1.0.0
+paths:
+  /getbusiness/{id}:
+    get:
+      summary: Retrieve a business by ID
+      parameters:
+        - in: path
+          name: id
+          required: true
+          description: The ID of the business to retrieve
+          schema:
+            type: string
+      responses:
+        '200':
+          description: The business was found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Business'
+        '404':
+          description: Business not found
+        '400':
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    description: Error message
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    description: Error message
+components:
+  schemas:
+    Business:
+      type: object
+      properties:
+        PkBusinessId:
+          type: string
+          description: The unique identifier for the business
+          example: "10"
+        BusinessName:
+          type: string
+          description: The business name
+          example: "Business Name"
+        Logo:
+          type: string
+          description: The URL to the business logo
+          example: "https://example.com/logo.jpg"
+        ContactName:
+          type: string
+          description: The contact name of the business
+          example: "John Doe"
+        Address:
+          type: string
+          description: The address of the business
+          example: "123 Main Street"
+        City:
+          type: string
+          description: The city of the business
+          example: "New York"
+        Province:
+          type: string
+          description: The province of the business
+          example: "New York"
+        PostalCode:
+          type: string
+          description: The postal code of the business
+          example: "10001"
+        Email:
+          type: string
+          format: email
+          description: The email address of the business
+          example: "info@example.com"
+        Phone:
+          type: string
+          description: The phone number of the business
+          example: "+1234567890"
+        InsuranceCompany:
+          type: string
+          description: The insurance company of the business
+          example: "ABC Insurance"
+        InsuranceExpiryDate:
+          type: string
+          format: date
+          description: The expiry date of the insurance
+          example: "2023-12-31"
+        RegistrationDate:
+          type: string
+          format: date
+          description: The registration date of the business
+          example: "2022-01-01"
+        CommissionPaid:
+          type: boolean
+          description: Indicates if commission is paid to the business
+          example: true
+        Description:
+          type: string
+          description: Description of the business
+          example: "Lorem ipsum dolor sit amet."
+        VerificationDocument:
+          type: string
+          description: The URL to the verification document of the business
+          example: "https://example.com/verification.pdf"
+        IsVerified:
+          type: boolean
+          description: Indicates if the business is verified
+          example: true
+        Vip:
+          type: boolean
+          description: Indicates if the business is VIP
+          example: false

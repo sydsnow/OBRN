@@ -1,0 +1,50 @@
+openapi: 3.0.0
+info:
+  title: Our Beauty Referral Network API
+  version: 1.0.0
+paths:
+  /testimonial/{testimonialId}:
+    get:
+      summary: Retrieve a testimonial by ID
+      operationId: GetTestimonialById
+      parameters:
+        - in: path
+          name: testimonialId
+          required: true
+          schema:
+            type: integer
+          description: The ID of the testimonial to retrieve
+      responses:
+        '200':
+          description: The requested testimonial
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Testimonial'
+        '404':
+          description: Testimonial not found
+components:
+  schemas:
+    Testimonial:
+      type: object
+      properties:
+        PkTestimonialId:
+          type: integer
+          description: The unique identifier for the testimonial
+        FkBusinessId:
+          type: string
+          description: The unique identifier for the associated business
+        Description:
+          type: string
+          description: The content of the testimonial
+        Rating:
+          type: number
+          format: float
+          description: The rating given in the testimonial
+        TestimonialDate:
+          type: string
+          format: date
+          description: The date when the testimonial was created
+        Approved:
+          type: boolean
+          description: Indicates if the testimonial has been approved

@@ -1,0 +1,30 @@
+openapi: 3.0.0
+info:
+  title: Our Beauty Referral Network API
+  version: 1.0.0
+paths:
+  /GenerateRandomKey/{keyLength}:
+    get:
+      summary: Generate a random key of the specified length
+      parameters:
+        - in: path
+          name: keyLength
+          required: true
+          description: Length of the random key in bits
+          schema:
+            type: integer
+            minimum: 1
+      responses:
+        '200':
+          description: Random key generated successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  RandomKey:
+                    type: string
+                    description: The generated random key
+                    example: "e/9pFyoaGkIWtv1EhZXsMw=="
+        '400':
+          description: Invalid key length provided

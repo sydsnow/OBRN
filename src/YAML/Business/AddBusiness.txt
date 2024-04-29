@@ -1,0 +1,131 @@
+openapi: 3.0.0
+info:
+  title: SSD Product API
+  version: 1.0.0
+paths:
+  /addbusiness:
+    post:
+      summary: Add a new business
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Business'
+      responses:
+        '200':
+          description: Business added successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  Message:
+                    type: string
+                    description: Confirmation message
+                  Token:
+                    type: string
+                    description: JWT token for the added business
+        '400':
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  Errors:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        Code:
+                          type: string
+                          description: Error code
+                        Description:
+                          type: string
+                          description: Error description
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    description: Error message
+components:
+  schemas:
+    Business:
+      type: object
+      properties:
+        PkBusinessId:
+          type: string
+          description: The unique identifier for the business
+          example: "10"
+        BusinessName:
+          type: string
+          description: The business name
+          example: "Business Name"
+        Logo:
+          type: string
+          description: The URL to the business logo
+          example: "https://example.com/logo.jpg"
+        ContactName:
+          type: string
+          description: The contact name of the business
+          example: "John Doe"
+        Address:
+          type: string
+          description: The address of the business
+          example: "123 Main Street"
+        City:
+          type: string
+          description: The city of the business
+          example: "New York"
+        Province:
+          type: string
+          description: The province of the business
+          example: "New York"
+        PostalCode:
+          type: string
+          description: The postal code of the business
+          example: "10001"
+        Email:
+          type: string
+          format: email
+          description: The email address of the business
+          example: "info@example.com"
+        Phone:
+          type: string
+          description: The phone number of the business
+          example: "+1234567890"
+        InsuranceCompany:
+          type: string
+          description: The insurance company of the business
+          example: "ABC Insurance"
+        InsuranceExpiryDate:
+          type: string
+          format: date
+          description: The expiry date of the insurance
+          example: "2023-12-31"
+        CommissionPaid:
+          type: boolean
+          description: Indicates whether commission is paid for the business
+          example: true
+        Description:
+          type: string
+          description: Additional description of the business
+          example: "A description of the business"
+        VerificationDocument:
+          type: string
+          description: The URL to the verification document of the business
+          example: "https://example.com/verification.pdf"
+        IsVerified:
+          type: boolean
+          description: Indicates whether the business is verified
+          example: true
+        Vip:
+          type: boolean
+          description: Indicates whether the business is a VIP member
+          example: false

@@ -1,0 +1,22 @@
+openapi: 3.0.0
+info:
+  title: Our Beauty Referral Network API
+  version: 1.0.0
+paths:
+  /testimonial/{TestimonialId}:
+    delete:
+      summary: Delete a testimonial by ID
+      parameters:
+        - in: path
+          name: TestimonialId
+          required: true
+          description: ID of the testimonial to delete
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Testimonial deleted successfully
+        '404':
+          description: Testimonial not found
+        '500':
+          description: An error occurred during delete

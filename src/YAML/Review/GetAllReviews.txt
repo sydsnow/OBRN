@@ -1,0 +1,50 @@
+openapi: 3.0.0
+info:
+  title: SSD Product API
+  version: 1.0.0
+paths:
+  /review:
+    get:
+      summary: Get all reviews
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Review'
+components:
+  schemas:
+    Review:
+      type: object
+      properties:
+        PkReviewId:
+          type: integer
+          description: The unique identifier for the review
+        FkBusinessId:
+          type: string
+          description: The ID of the business associated with the review
+        FkCustomerId:
+          type: string
+          description: The ID of the customer who submitted the review
+        Description:
+          type: string
+          description: The description of the review
+        Rating:
+          type: number
+          format: float
+          description: The rating given in the review
+        ReviewDate:
+          type: string
+          format: date
+          description: The date of the review
+        Image:
+          type: string
+          nullable: true
+          description: The image associated with the review
+        Provider:
+          type: string
+          nullable: true
+          description: The provider associated with the review
