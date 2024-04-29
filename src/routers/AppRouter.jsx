@@ -71,8 +71,12 @@ function AppRouter() {
           <Route path="/admin" element={<Admin />} />
           <Route path="/testservices" element={<TestServices />} />
           <Route path="/testregister" element={<TestRegisterPage />} />
-          <Route path="/registercustomer" element={<RegisterCustomer />} />
-          <Route path="/registerbusiness" element={<RegisterBusiness />} />
+          {!authenticated && (
+            <>
+              <Route path="/registercustomer" element={<RegisterCustomer />} />
+              <Route path="/registerbusiness" element={<RegisterBusiness />} />
+            </>
+          )}
           <Route path="/customerprofile" element={<CustomerProfile />} />
           <Route path="/businessprofile" element={<BusinessProfile />} />
           <Route path="/editprofile" element={<EditProfile />} />
