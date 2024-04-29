@@ -10,6 +10,7 @@ function Login() {
         email: '',
         password: ''
     });
+    const [errorMessage, setErrorMessage] = useState('');
 
     const handleChange = (e) => {
         setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -17,8 +18,13 @@ function Login() {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        await login(formData);
-        navigate('/');
+        const result = await login(formData);
+        setErrorMessage('');
+        if (!result) {
+            setErrorMessage('Incorrect email or password entered. Please try again.');
+        } else {
+            navigate('/');
+        }
     };
 
   return (
@@ -61,6 +67,7 @@ function Login() {
 
         </div>
         <button type="submit">Login</button>
+        {errorMessage && <p className="error-message">{errorMessage}</p>}
         <div className="login-forgot">
         <p><a href="#">Forgot Password?</a></p>
         </div>
