@@ -1,0 +1,69 @@
+openapi: 3.0.0
+info:
+  title: Our Beauty Referral Network API
+  version: 1.0.0
+paths:
+  /testimonial/create:
+    post:
+      summary: Create a new testimonial
+      operationId: CreateTestimonial
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TestimonialDTO'
+      responses:
+        '201':
+          description: Testimonial created successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Testimonial'
+        '400':
+          description: Bad request
+components:
+  schemas:
+    TestimonialDTO:
+      type: object
+      properties:
+        FkBusinessId:
+          type: string
+          description: The unique identifier for the associated business
+        Description:
+          type: string
+          description: The content of the testimonial
+        Rating:
+          type: number
+          format: float
+          description: The rating given in the testimonial
+        TestimonialDate:
+          type: string
+          format: date
+          description: The date when the testimonial was created
+        Approved:
+          type: boolean
+          description: Indicates if the testimonial has been approved
+    Testimonial:
+      type: object
+      properties:
+        PkTestimonialId:
+          type: integer
+          description: The unique identifier for the testimonial
+        FkBusinessId:
+          type: string
+          description: The unique identifier for the associated business
+        Description:
+          type: string
+          description: The content of the testimonial
+        Rating:
+          type: number
+          format: float
+          description: The rating given in the testimonial
+        TestimonialDate:
+          type: string
+          format: date
+          description: The date when the testimonial was created
+        Approved:
+          type: boolean
+          description: Indicates if the testimonial has been approved

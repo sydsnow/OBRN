@@ -1,0 +1,34 @@
+openapi: 3.0.0
+info:
+  title: SSD Product API
+  version: 1.0.0
+paths:
+  /category/create:
+    post:
+      summary: Create a new category
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Category'
+      responses:
+        '201':
+          description: Created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Category'
+        '400':
+          description: Bad request
+components:
+  schemas:
+    Category:
+      type: object
+      properties:
+        PkCategoryId:
+          type: integer
+          description: The unique identifier for the category
+        CategoryName:
+          type: string
+          description: The name of the category

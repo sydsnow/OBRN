@@ -1,0 +1,30 @@
+openapi: 3.0.0
+info:
+  title: Our Beauty Referral Network API
+  version: 1.0.0
+paths:
+  /GenerateJwtToken:
+    get:
+      summary: Generate a JWT token for the given email
+      parameters:
+        - in: query
+          name: email
+          required: true
+          description: Email address to generate the token for
+          schema:
+            type: string
+            format: email
+      responses:
+        '200':
+          description: JWT token generated successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  Token:
+                    type: string
+                    description: The generated JWT token
+                    example: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImVtYWlsQGV4YW1wbGUuY29tIiwianRpIjoiZjFhMmIzNzktNmRlNy00N2RiLTg4MzItZjJmMjUzNjRjNDczIiwibmJmIjoxNjYzNTQ5MDY5LCJleHAiOjE2NjM1NDkzNjksImlhdCI6MTY2MzU0OTA2OX0.cNR1ueZODrV7tP9rb6fSZ7NZMFZO26LJQASO5J9EQtc"
+        '400':
+          description: Invalid email provided

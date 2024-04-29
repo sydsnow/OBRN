@@ -1,0 +1,49 @@
+openapi: 3.0.0
+info:
+  title: SSD Product API
+  version: 1.0.0
+paths:
+  /discount/create:
+    post:
+      summary: Create a new discount
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Discount'
+      responses:
+        '201':
+          description: Created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Discount'
+        '400':
+          description: Bad request
+components:
+  schemas:
+    Discount:
+      type: object
+      properties:
+        PkDiscountId:
+          type: string
+          description: The unique identifier for the discount
+          example: "12345"
+        Percentage:
+          type: number
+          format: float
+          description: The discount percentage
+          example: 10.5
+        StartDate:
+          type: string
+          format: date
+          nullable: true
+          description: The start date of the discount
+          example: "2023-01-01"
+        EndDate:
+          type: string
+          format: date
+          nullable: true
+          description: The end date of the discount
+          example: "2023-12-31"
