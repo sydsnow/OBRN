@@ -1,5 +1,8 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { AuthProvider } from '../auth/AuthContext';
+import { useEffect } from 'react';
+import { useLocation } from 'react-router-dom';
+
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 import HomePage from '../pages/HomePage';
@@ -42,6 +45,15 @@ import AdminAllDiscounts from "../pages/AdminAllDiscounts";
 import AddDiscount from "../pages/AddDiscount";
 import AdminFees from "../pages/AdminFees";
 
+function ScrollToTop() {
+  const location = useLocation();
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [location]); 
+
+  return null;
+}
 
 function AppRouter() {
   const authenticated = localStorage.getItem('token');
@@ -50,6 +62,7 @@ function AppRouter() {
   return (
     <BrowserRouter>
       <AuthProvider>
+      <ScrollToTop />
         <Header />
         <Routes>
           <Route path="/" element={<HomePage />} />
