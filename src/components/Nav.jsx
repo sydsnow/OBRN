@@ -1,6 +1,7 @@
 import { NavLink, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { useAuth } from '../auth/authUtils';
+import { getRolesFromJWT } from "../utilities/utilities";
 import "../scss/components/_nav.scss";
 import logo from '../assets/obrn-logo.png';
 
@@ -8,6 +9,11 @@ function Nav () {
     const [isActive, setIsActive] = useState(false);
     const { logout } = useAuth();
     const authenticated = localStorage.getItem('token');
+    if (authenticated) {
+        const roles = getRolesFromJWT(authenticated);
+        console.log("roles:", roles);
+    }
+
     const navigate = useNavigate();
 
     const toggleHamburger = () => {
