@@ -1,0 +1,42 @@
+openapi: 3.0.0
+info:
+  title: SSD Product API
+  version: 1.0.0
+paths:
+  /services/{serviceId}:
+    get:
+      summary: Retrieve a specific service by its ID
+      operationId: getServiceById
+      parameters:
+        - name: serviceId
+          in: path
+          required: true
+          description: The unique identifier of the service
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Details of the service including any applicable discount
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ExtendedService'
+        '404':
+          description: Service not found
+components:
+  schemas:
+    ExtendedService:
+      type: object
+      properties:
+        PkServiceId:
+          type: integer
+          description: The primary key identifier for the service
+          example: 1
+        # ... include other properties from your Service model ...
+        DiscountPercentage:
+          type: number
+          format: float
+          nullable: true
+          description: The discount percentage applicable to the service
+          example: 0.1 # Represents 10%
+        # If the ExtendService method adds more properties, list them here as well

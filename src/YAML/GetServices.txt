@@ -1,0 +1,91 @@
+openapi: 3.0.0
+info:
+  title: SSD Product API
+  version: 1.0.0
+paths:
+  /services:
+    get:
+      summary: Retrieve all services
+      operationId: ServiceGetAll
+      responses:
+        '200':
+          description: A list of all services
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    PkServiceId:
+                      type: integer
+                      description: The primary key identifier for the service
+                      example: 1
+                    Image:
+                      type: string
+                      description: The URL to the image of the service
+                      example: "https://example.com/image.jpg"
+                    FkBusinessId:
+                      type: string
+                      description: Foreign key identifier linking to the business
+                      example: "10"
+                    ServiceName:
+                      type: string
+                      description: The name of the service
+                      example: "Full Body Massage"
+                    Description:
+                      type: string
+                      description: Detailed description of the service
+                      example: "A relaxing full body massage."
+                    FkDiscountId:
+                      type: string
+                      description: Foreign key identifier linking to the discount applicable
+                      example: "5"
+                    FkCategoryId:
+                      type: integer
+                      description: Foreign key identifier linking to the category of the service
+                      example: 2
+                    BasePrice:
+                      type: number
+                      format: decimal
+                      description: Base price of the service
+                      example: 59.99
+components:
+  schemas:
+    Service:
+      type: object
+      properties:
+        PkServiceId:
+          type: integer
+          description: The primary key identifier for the service
+          example: 1
+        Image:
+          type: string
+          description: The URL to the image of the service
+          example: "https://example.com/image.jpg"
+        FkBusinessId:
+          type: string
+          description: Foreign key identifier linking to the business
+          example: "10"
+        ServiceName:
+          type: string
+          description: The name of the service
+          example: "Full Body Massage"
+        Description:
+          type: string
+          description: Detailed description of the service
+          example: "A relaxing full body massage."
+        FkDiscountId:
+          type: string
+          description: Foreign key identifier linking to the discount applicable
+          example: "5"
+        FkCategoryId:
+          type: integer
+          description: Foreign key identifier linking to the category of the service
+          example: 2
+        BasePrice:
+          type: number
+          format: decimal
+          description: Base price of the service
+          example: 59.99
+    # Business, Category, and Discount schemas as defined above

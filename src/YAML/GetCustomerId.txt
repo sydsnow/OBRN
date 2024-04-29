@@ -1,0 +1,131 @@
+openapi: 3.0.0
+info:
+  title: SSD Product API
+  version: 1.0.0
+paths:
+  /getcustomer/{id}:
+    get:
+      summary: Retrieve a customer by ID
+      operationId: getCustomerById
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: Unique identifier of the customer
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Details of the customer
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Customer'
+        '404':
+          description: Customer not found
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: "Customer not found"
+        '400':
+          description: Error getting customer
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: "Error getting customer: [error description]"
+components:
+  schemas:
+    Customer:
+      type: object
+      properties:
+        PkCustomerId:
+          type: string
+          example: "johnDoe"
+        FirstName:
+          type: string
+          example: "John"
+        LastName:
+          type: string
+          example: "Doe"
+        Address:
+          type: string
+          nullable: true
+          example: "123 Main St"
+        City:
+          type: string
+          nullable: true
+          example: "Anytown"
+        Province:
+          type: string
+          nullable: true
+          example: "CA"
+        PostalCode:
+          type: string
+          nullable: true
+          example: "12345"
+        Phone:
+          type: string
+          example: "555-555-5555"
+        Birthdate:
+          type: string
+          format: date
+          example: "1990-01-01"
+        Photo:
+          type: string
+          nullable: true
+          example: "http://example.com/path/to/photo.jpg"
+        Email:
+          type: string
+          format: email
+          example: "john.doe@example.com"
+        Vip:
+          type: boolean
+          example: true
+        Confirm18:
+          type: boolean
+          example: true
+        Qr:
+          type: string
+          nullable: true
+          example: "abc123"
+        Appointments:
+          type: array
+          items:
+            $ref: '#/components/schemas/Appointment'
+        Referrals:
+          type: array
+          items:
+            $ref: '#/components/schemas/Referral'
+        Reviews:
+          type: array
+          items:
+            $ref: '#/components/schemas/Review'
+    Appointment:
+      type: object
+      properties:
+        # Define Appointment properties here
+        AppointmentId:
+          type: string
+          example: "appointment001"
+    Referral:
+      type: object
+      properties:
+        # Define Referral properties here
+        ReferralId:
+          type: string
+          example: "referral001"
+    Review:
+      type: object
+      properties:
+        # Define Review properties here
+        ReviewId:
+          type: string
+          example: "review001"

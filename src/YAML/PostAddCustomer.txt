@@ -1,0 +1,96 @@
+openapi: 3.0.0
+info:
+  title: SSD Product API
+  version: 1.0.0
+paths:
+  /addcustomer:
+    post:
+      summary: Adds a new customer
+      operationId: addCustomer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RegisterCustomer'
+      responses:
+        '200':
+          description: Customer added successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  Message:
+                    type: string
+                    example: "Customer added successfully"
+                  Token:
+                    type: string
+                    example: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9..."
+        '400':
+          description: Bad request, issues such as username already exists or validation failures on user creation
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  Errors:
+                    type: array
+                    items:
+                      type: string
+                    example: ["Username unavailable. Please enter a different username.", "Password complexity requirements not met."]
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: "Error adding customer: [error description]"
+components:
+  schemas:
+    RegisterCustomer:
+      type: object
+      required:
+        - PkCustomerId
+        - FirstName
+        - LastName
+        - Phone
+        - Birthdate
+        - Email
+        - Vip
+        - Confirm18
+        - Password
+      properties:
+        PkCustomerId:
+          type: string
+          example: "johnDoe123"
+        FirstName:
+          type: string
+          example: "John"
+        LastName:
+          type: string
+          example: "Doe"
+        Phone:
+          type: string
+          example: "555-555-5555"
+        Birthdate:
+          type: string
+          format: date
+          example: "1990-01-01"
+        Email:
+          type: string
+          format: email
+          example: "john.doe@example.com"
+        Vip:
+          type: boolean
+          example: true
+        Confirm18:
+          type: boolean
+          example: true
+        Password:
+          type: string
+          format: password
+          example: "SecurePassword123!"

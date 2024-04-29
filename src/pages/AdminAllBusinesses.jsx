@@ -9,11 +9,37 @@ function AdminAllBusinesses() {
 
     useEffect(() => {
         // Fetch users from your API when component mounts
+        console.log('Fetching businesses...');
         const fetchBusinesses = async () => {
             try {
+                console.log('THIS IS WORKING')
                 const apiUrl = import.meta.env.VITE_API_BASE_URL;
+                console.log('API URL:', apiUrl);
                 const response = await axios.get(`${apiUrl}/api/Business/getbusinesses`);
                 setBusiness(response.data); // Assuming response.data is an array of users
+                
+                console.log('Sending request to fetch businesses...');
+axios.get('http://localhost:7110/api/Business/getbusinesses')
+  .then(response => {
+    console.log('Successfully fetched businesses:', response.data);
+  })
+  .catch(error => {
+    if (error.response) {
+      // The request was made and the server responded with a status code
+      // that falls out of the range of 2xx
+      console.log('Error data:', error.response.data);
+      console.log('Error status:', error.response.status);
+      console.log('Error headers:', error.response.headers);
+    } else if (error.request) {
+      // The request was made but no response was received
+      console.log('Error request:', error.request);
+    } else {
+      // Something happened in setting up the request that triggered an Error
+      console.log('Error message:', error.message);
+    }
+    console.log('Error config:', error.config);
+  });
+
             } catch (error) {
                 console.error('Failed to fetch users: ', error);
             }

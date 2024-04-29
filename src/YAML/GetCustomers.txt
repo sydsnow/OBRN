@@ -1,0 +1,108 @@
+openapi: 3.0.0
+info:
+  title: SSD Product API
+  version: 1.0.0
+paths:
+  /getcustomers:
+    get:
+      summary: Retrieve all customers
+      responses:
+        '200':
+          description: A list of all customers
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    PkCustomerId:
+                      type: string
+                      description: The unique identifier for the customer
+                      example: "johnDoe"
+                    FirstName:
+                      type: string
+                      description: The first name of the customer
+                      example: "John"
+                    LastName:
+                      type: string
+                      description: The last name of the customer
+                      example: "Doe"
+                    Address:
+                      type: string
+                      description: The address of the customer
+                      example: "123 Main St"
+                      nullable: true
+                    City:
+                      type: string
+                      description: The city of the customer
+                      example: "Anytown"
+                      nullable: true
+                    Province:
+                      type: string
+                      description: The province of the customer
+                      example: "CA"
+                      nullable: true
+                    PostalCode:
+                      type: string
+                      description: The postal code of the customer
+                      example: "12345"
+                      nullable: true
+                    Phone:
+                      type: string
+                      description: The phone number of the customer
+                      example: "555-555-5555"
+                    Birthdate:
+                      type: string
+                      format: date
+                      description: The birthdate of the customer
+                      example: "1990-01-01"
+                    Photo:
+                      type: string
+                      description: URL to the photo of the customer
+                      example: "http://example.com/path/to/photo.jpg"
+                      nullable: true
+                    Email:
+                      type: string
+                      format: email
+                      description: The email address of the customer
+                      example: "john.doe@example.com"
+                    Vip:
+                      type: boolean
+                      description: Indicates if the customer is a VIP
+                      example: true
+                    Confirm18:
+                      type: boolean
+                      description: Indicates if the customer is confirmed to be over 18
+                      example: true
+                    Qr:
+                      type: string
+                      description: The QR code associated with the customer
+                      example: "abc123"
+                      nullable: true
+                    Appointments:
+                      type: array
+                      description: A list of appointments for the customer
+                      items:
+                        $ref: '#/components/schemas/Appointment'
+                    Referrals:
+                      type: array
+                      description: A list of referrals linked to the customer
+                      items:
+                        $ref: '#/components/schemas/Referral'
+                    Reviews:
+                      type: array
+                      description: A list of reviews written by or about the customer
+                      items:
+                        $ref: '#/components/schemas/Review'
+components:
+  schemas:
+    Appointment:
+      type: object
+      # Define Appointment properties here
+    Referral:
+      type: object
+      # Define Referral properties here
+    Review:
+      type: object
+      # Define Review properties here
