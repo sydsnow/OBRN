@@ -1,0 +1,94 @@
+openapi: 3.0.0
+info:
+  title: SSD Product API
+  version: 1.0.0
+paths:
+  /editcustomer:
+    post:
+      summary: Edits an existing customer's details
+      operationId: editCustomer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/EditCustomer'
+      responses:
+        '200':
+          description: Customer updated successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: "Customer updated successfully"
+        '404':
+          description: Customer not found
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: "Customer not found"
+        '400':
+          description: Error editing customer
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: "Error editing customer: [error description]"
+components:
+  schemas:
+    EditCustomer:
+      type: object
+      required:
+        - Email
+        - FirstName
+        - LastName
+        - Phone
+        - Birthdate
+        - Vip
+      properties:
+        FirstName:
+          type: string
+          example: "John"
+        LastName:
+          type: string
+          example: "Doe"
+        Address:
+          type: string
+          example: "123 Main St"
+          nullable: true
+        City:
+          type: string
+          example: "Anytown"
+          nullable: true
+        Province:
+          type: string
+          example: "CA"
+          nullable: true
+        PostalCode:
+          type: string
+          example: "12345"
+          nullable: true
+        Phone:
+          type: string
+          example: "555-555-5555"
+        Birthdate:
+          type: string
+          format: date
+          example: "1990-01-01"
+        Email:
+          type: string
+          format: email
+          example: "john.doe@example.com"
+        Vip:
+          type: boolean
+          example: true

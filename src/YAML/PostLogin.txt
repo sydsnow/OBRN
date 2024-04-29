@@ -1,0 +1,55 @@
+openapi: 3.0.0
+info:
+  title: SSD Product API
+  version: 1.0.0
+paths:
+  /login:
+    post:
+      summary: Authenticate a user and issue a JWT token
+      operationId: loginUser
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UserLogin'
+      responses:
+        '200':
+          description: Login successful
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  Message:
+                    type: string
+                    example: "Login successful"
+                  Token:
+                    type: string
+                    example: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9..."
+        '400':
+          description: Invalid email or password
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  Message:
+                    type: string
+                    example: "Invalid email or password"
+components:
+  schemas:
+    UserLogin:
+      type: object
+      required:
+        - Email
+        - Password
+      properties:
+        Email:
+          type: string
+          format: email
+          example: "john.doe@example.com"
+        Password:
+          type: string
+          format: password
+          example: "SecurePassword123!"
