@@ -1,5 +1,5 @@
 import { NavLink, useNavigate } from "react-router-dom";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useAuth } from '../auth/authUtils';
 import { getRolesFromJWT } from "../utilities/utilities";
 import "../scss/components/_nav.scss";
@@ -7,12 +7,16 @@ import logo from '../assets/obrn-logo.png';
 
 function Nav () {
     const [isActive, setIsActive] = useState(false);
+    const [userRoles, setUserRoles] = useState([]);
     const { logout } = useAuth();
     const authenticated = localStorage.getItem('token');
-    if (authenticated) {
-        const roles = getRolesFromJWT(authenticated);
-        console.log("roles:", roles);
-    }
+
+    useEffect(() => {
+        if (authenticated) {
+            const roles = getRolesFromJWT(authenticated);
+            setUserRoles(roles);
+        }
+    }, [authenticated]);
 
     const navigate = useNavigate();
 
@@ -73,9 +77,15 @@ function Nav () {
                     </li>
                     {authenticated ? (
                         <li>
-                            <NavLink to="/businessprofile">
-                                PROFILE
-                            </NavLink>
+                            {userRoles.includes('customer') ? (
+                                <NavLink to="/customerprofile">
+                                    PROFILE
+                                </NavLink>
+                            ) : (
+                                <NavLink to="/businessprofile">
+                                    PROFILE
+                                </NavLink>
+                            )}
                             <button onClick={handleLogout}>
                                 LOGOUT
                             </button>
