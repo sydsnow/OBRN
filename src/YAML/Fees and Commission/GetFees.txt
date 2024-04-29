@@ -1,0 +1,42 @@
+openapi: 3.0.0
+info:
+  title: SSD Fee API
+  version: 1.0.0
+paths:
+  /fee:
+    get:
+      summary: Retrieve all fees
+      operationId: FeeGet
+      responses:
+        '200':
+          description: A list of all fees
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    PkFeeId:
+                      type: string
+                      description: The unique identifier for the fee
+                    Amount:
+                      type: number
+                      format: decimal
+                      description: The amount associated with the fee
+                    Description:
+                      type: string
+                      description: A description of the fee
+                    Title:
+                      type: string
+                      description: The title of the fee
+                    Percentage:
+                      type: number
+                      format: decimal
+                      description: The percentage that applies to the fee
+                    FeeType:
+                      type: string
+                      description: The type of fee
+                    Frequency:
+                      type: string
+                      description: The frequency at which the fee is applied

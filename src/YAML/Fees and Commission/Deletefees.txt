@@ -1,0 +1,23 @@
+openapi: 3.0.0
+info:
+  title: SSD Fee API
+  version: 1.0.0
+paths:
+  /api/fee/{feeId}:
+    delete:
+      summary: Delete a specific fee by feeId
+      operationId: Delete
+      parameters:
+        - in: path
+          name: feeId
+          required: true
+          schema:
+            type: string
+          description: The unique identifier for the fee to be deleted
+      responses:
+        '200':
+          description: The fee was deleted successfully
+        '404':
+          description: Fee does not exist
+        '500':
+          description: An error occurred during delete

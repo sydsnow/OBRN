@@ -1,0 +1,52 @@
+openapi: 3.0.0
+info:
+  title: SSD Fee API
+  version: 1.0.0
+paths:
+  /api/fee/{feeId}:
+    put:
+      summary: Update an existing fee by feeId
+      parameters:
+        - in: path
+          name: feeId
+          required: true
+          schema:
+            type: string
+          description: The unique identifier for the fee to update
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                PkFeeId:
+                  type: string
+                  description: The unique identifier for the fee (must match feeId in path)
+                Amount:
+                  type: number
+                  format: decimal
+                  description: The amount associated with the fee
+                Description:
+                  type: string
+                  description: A description of the fee
+                Title:
+                  type: string
+                  description: The title of the fee
+                Percentage:
+                  type: number
+                  format: decimal
+                  description: The percentage that applies to the fee
+                FeeType:
+                  type: string
+                  description: The type of fee
+                Frequency:
+                  type: string
+                  description: The frequency at which the fee is applied
+      responses:
+        '200':
+          description: The fee was successfully updated
+        '400':
+          description: Bad Request - The feeId provided in the URL does not match the PkFeeId in the body
+        '404':
+          description: Not Found - Fee not found with the provided ID

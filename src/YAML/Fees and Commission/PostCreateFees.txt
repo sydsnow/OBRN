@@ -1,0 +1,71 @@
+openapi: 3.0.0
+info:
+  title: SSD Fee API
+  version: 1.0.0
+paths:
+  /fee/create:
+    post:
+      summary: Create a new fee
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                PkFeeId:
+                  type: string
+                  description: The unique identifier for the fee
+                Amount:
+                  type: number
+                  format: decimal
+                  description: The amount associated with the fee
+                Description:
+                  type: string
+                  description: A description of the fee
+                Title:
+                  type: string
+                  description: The title of the fee
+                Percentage:
+                  type: number
+                  format: decimal
+                  description: The percentage that applies to the fee
+                FeeType:
+                  type: string
+                  description: The type of fee
+                Frequency:
+                  type: string
+                  description: The frequency at which the fee is applied
+      responses:
+        '201':
+          description: Successfully created the fee
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  PkFeeId:
+                    type: string
+                    description: The unique identifier for the fee
+                  Amount:
+                    type: number
+                    format: decimal
+                    description: The amount associated with the fee
+                  Description:
+                    type: string
+                    description: A description of the fee
+                  Title:
+                    type: string
+                    description: The title of the fee
+                  Percentage:
+                    type: number
+                    format: decimal
+                    description: The percentage that applies to the fee
+                  FeeType:
+                    type: string
+                    description: The type of fee
+                  Frequency:
+                    type: string
+                    description: The frequency at which the fee is applied
+        '400':
+          description: Bad Request - Unable to create the fee
