@@ -1,0 +1,173 @@
+openapi: 3.0.0
+info:
+  title: Our Beauty Referral Network API
+  description: API documentation for Our Beauty Referral Network
+  version: 1.0.0
+servers:
+  - url: https://api.ourbeautyreferralnetwork.com
+paths:
+  /createreferralbusiness:
+    post:
+      summary: Create referral code for business
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                businessId:
+                  type: string
+                  description: ID of the business for which to create a referral code
+                  example: "98765"
+      responses:
+        '200':
+          description: OK. Returns a message with the created referral ID
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  Message:
+                    type: string
+                    description: A message indicating the success of the operation
+                    example: "Referral created successfully"
+                  ReferralId:
+                    type: string
+                    description: The ID of the newly created referral code
+                    example: "def456"
+        '400':
+          description: Bad Request. Error creating referral code
+          content:
+            application/json:
+              schema:
+                type: string
+components:
+  schemas:
+    Referral:
+      type: object
+      properties:
+        PkReferralId:
+          type: string
+        FkReferrerCustomerId:
+          type: string
+        FkReferredCustomerId:
+          type: string
+        FkReferrerBusinessId:
+          type: string
+        FkReferredBusinessId:
+          type: string
+        ReferralDate:
+          type: string
+          format: date
+        Status:
+          type: string
+        ReferredType:
+          type: string
+        FkReferredBusiness:
+          $ref: '#/components/schemas/Business'
+        FkReferredCustomer:
+          $ref: '#/components/schemas/Customer'
+        FkReferrerBusiness:
+          $ref: '#/components/schemas/Business'
+        FkReferrerCustomer:
+          $ref: '#/components/schemas/Customer'
+        Rewards:
+          type: array
+          items:
+            $ref: '#/components/schemas/Reward'
+    Reward:
+      type: object
+      properties:
+        PkRewardId:
+          type: integer
+        FkReferralId:
+          type: string
+        RewardAmount:
+          type: number
+        IssueDate:
+          type: string
+          format: date
+        FkReferral:
+          $ref: '#/components/schemas/Referral'
+    Business:
+      type: object
+      properties:
+        PkBusinessId:
+          type: string
+        BusinessName:
+          type: string
+        Logo:
+          type: string
+        ContactName:
+          type: string
+        Address:
+          type: string
+        City:
+          type: string
+        Province:
+          type: string
+        PostalCode:
+          type: string
+        Email:
+          type: string
+        Phone:
+          type: string
+        InsuranceCompany:
+          type: string
+        InsuranceExpiryDate:
+          type: string
+          format: date
+        RegistrationDate:
+          type: string
+          format: date
+        CommissionPaid:
+          type: boolean
+        Description:
+          type: string
+        VerificationDocument:
+          type: string
+        IsVerified:
+          type: boolean
+        Vip:
+          type: boolean
+        ReferralFkReferredBusinesses:
+          type: array
+          items:
+            $ref: '#/components/schemas/Referral'
+        ReferralFkReferrerBusinesses:
+          type: array
+          items:
+            $ref: '#/components/schemas/Referral'
+    Customer:
+      type: object
+      properties:
+        PkCustomerId:
+          type: string
+        FirstName:
+          type: string
+        LastName:
+          type: string
+        Address:
+          type: string
+        City:
+          type: string
+        Province:
+          type: string
+        PostalCode:
+          type: string
+        Phone:
+          type: string
+        Birthdate:
+          type: string
+          format: date
+        Photo:
+          type: string
+        Email:
+          type: string
+        Vip:
+          type: boolean
+        Confirm18:
+          type: boolean
+        Qr:
+          type: string
