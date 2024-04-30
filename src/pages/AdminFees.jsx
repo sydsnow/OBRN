@@ -12,7 +12,7 @@ function AdminFees() {
             try {
                 const apiUrl = import.meta.env.VITE_API_BASE_URL;
                 const response = await axios.get(`${apiUrl}/fee`);
-                setFees(response.data);
+                setFees(response.data.$values);
             } catch (error) {
                 console.error('Failed to fetch categories: ', error);
             }

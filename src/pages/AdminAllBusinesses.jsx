@@ -16,7 +16,7 @@ function AdminAllBusinesses() {
                 const apiUrl = import.meta.env.VITE_API_BASE_URL;
                 console.log('API URL:', apiUrl);
                 const response = await axios.get(`${apiUrl}/api/Business/getbusinesses`);
-                setBusiness(response.data); // Assuming response.data is an array of users
+                setBusiness(response.data.$values); // Assuming response.data is an array of users
                 
                 console.log('Sending request to fetch businesses...');
 axios.get('http://localhost:7110/api/Business/getbusinesses')
