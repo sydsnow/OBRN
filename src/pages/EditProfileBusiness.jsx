@@ -2,28 +2,13 @@ import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { getEmailFromJWT, formatPhoneNumber } from '../utilities/utilities';
-// import EditProfileInfo from '../components/EditProfileInfo';
-// import EditProfileBusinessInfo from '../components/EditProfileBusinessInfo';
-// import MyDetailsForm from '../components/MyDetailsForm';
 import BusinessDetailsForm from '../components/BusinessDetailsForm';
 
 
 function EditProfileBusiness() {
   const navigate = useNavigate();
-  // const [isEditingDetails, setIsEditingDetails] = useState(false);
   const [isEditingBusiness, setIsEditingBusiness] = useState(false);
-  // const [userDetails, setUserDetails] = useState({
-  //   firstName: '',
-  //   lastName: '',
-  //   phone: '',
-  //   birthdate: '',
-  //   email: '',
-  //   address: '',
-  //   city: '',
-  //   province: '',
-  //   postalCode: ''
-  // });
-
+  
   // Placeholder data for business details
   const businessDetails = {
     contactName: '',
@@ -60,11 +45,6 @@ function EditProfileBusiness() {
     fetchCustomerData();
   }, []); 
 
-  // const handleEditDetailsClick = () => {
-  //   navigate('/editprofile/mydetails');
-  //   setIsEditingDetails(true);
-  // };
-
   const handleEditBusinessClick = () => {
     navigate('/editprofilebusiness/businessdetails');
     setIsEditingBusiness(true);
@@ -73,10 +53,6 @@ function EditProfileBusiness() {
   const handleChangePasswordClick = () => {
     navigate('/editprofile/editpassword');
   };
-
-  // const handleViewCustomerMembershipClick = () => {
-  //   navigate('/editprofile/customer-membership-details');
-  // };
 
   const handleViewBusinessMembershipClick = () => {
     navigate('/editprofilebusiness/business-membership-details');
@@ -99,24 +75,6 @@ function EditProfileBusiness() {
         <p>You can manage your account here.</p>
       </div>
       <div className="edit-profile-wrapper">
-        {/* <div className="edit-profile-section">
-          <h3>My Details</h3>
-          {!isEditingDetails ? (
-            <div>
-              <p>First Name: {userDetails?.firstName}</p>
-              <p>Last Name: {userDetails?.lastName}</p>
-              <p>Email: {userDetails?.email}</p>
-              <p>Phone Number: {formatPhoneNumber(userDetails?.phone)}</p>
-              <p>Address: {(userDetails?.address) ? (userDetails?.address) : 'Unspecified' }</p>
-              <p>City: {(userDetails?.city) ? (userDetails?.city) : 'Unspecified' }</p>
-              <p>Province: {(userDetails?.province) ? (userDetails?.province) : 'Unspecified' }</p>
-              <p>Postal Code: {(userDetails?.postalCode) ? (userDetails?.postalCode) : 'Unspecified' }</p>
-            </div>
-          ) : (
-            <MyDetailsForm />
-          )}
-          <button className="edit-profile-button" onClick={handleEditDetailsClick}>Edit My Details</button>
-        </div> */}
         <div className="edit-profile-section">
           <h3>Business Details</h3>
           {!isEditingBusiness ? (
@@ -140,11 +98,6 @@ function EditProfileBusiness() {
           )}
           <button className="edit-profile-button" onClick={handleEditBusinessClick}>Edit Business Details</button>
         </div>
-        {/* <div className="edit-profile-section">
-          <h3>Customer Membership</h3>
-          <p>Manage your customer membership</p>
-          <button className="edit-profile-button" onClick={handleViewCustomerMembershipClick}>View Customer Membership</button>
-        </div> */}
         <div className="edit-profile-section">
           <h3>Business Membership</h3>
           <p>Manage your business membership</p>
