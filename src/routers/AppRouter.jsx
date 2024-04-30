@@ -48,6 +48,9 @@ import AdminFees from "../pages/AdminFees";
 
 import EditService from "../pages/EditService";
 
+import CreateService from "../components/CreateService";
+import ServiceForm from "../components/ServiceForm";
+
 function ScrollToTop() {
   const location = useLocation();
 
@@ -114,6 +117,8 @@ function AppRouter() {
           <Route path="/add-discount" element={<AddDiscount />} />
           <Route path="/admin-fees" element={<AdminFees />} />
           <Route path="//editservice/:id" element={<EditService />} />
+          <Route path="/create-service/:id" element={<CreateService />} />
+          <Route path="/service-form/:id" element={<ServiceForm />} />
         </Routes>
         <Footer />
       </AuthProvider>

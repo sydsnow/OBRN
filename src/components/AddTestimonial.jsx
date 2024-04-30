@@ -32,12 +32,6 @@ const [errorMessage, setErrorMessage] = useState('');
                     Authorization: `Bearer ${token}`,
                 },
             })
-            // .then(response => {
-            //     const { businessId } = response.data;
-            //     setTestimonial(prevState => ({ ...prevState, pkBusinessId: businessId }));
-            //     console.log('businessId:', businessId);
-            //     console.log(response.data);
-            // })
             .then(response => {
                 const { pkBusinessId } = response.data;
                 setTestimonial(prevState => ({ ...prevState, fkBusinessId: pkBusinessId }));
