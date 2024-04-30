@@ -12,7 +12,7 @@ function AdminTestimonials() {
             try {
                 const apiUrl = import.meta.env.VITE_API_BASE_URL;
                 const response = await axios.get(`${apiUrl}/testimonial`);
-                setTestimonials(response.data); // Assuming response.data is an array of testimonials
+                setTestimonials(response.data.$values); // Assuming response.data is an array of testimonials
             } catch (error) {
                 console.error('Failed to fetch testimonials: ', error);
             }
