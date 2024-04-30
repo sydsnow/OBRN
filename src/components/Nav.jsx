@@ -86,9 +86,10 @@ function Nav () {
                                     PROFILE
                                 </NavLink>
                             )}
-                            <button onClick={handleLogout}>
+                            &nbsp;&nbsp;
+                            <span onClick={handleLogout}>
                                 LOGOUT
-                            </button>
+                            </span>
                         </li>
                     ) : (
                         <li>

@@ -3,6 +3,7 @@ import axios from 'axios';
 import { useParams } from 'react-router-dom';
 
 function AddTestimonial() {
+    
     const [rating, setRating] = useState(0); // State to store the selected rating
     const [testimonial, setTestimonial] = useState({
         fkBusinessId: '',
@@ -12,6 +13,8 @@ function AddTestimonial() {
     });
 
     const { id } = useParams(); // Fetch the customer ID from the URL params
+    const [successMessage, setSuccessMessage] = useState('');
+const [errorMessage, setErrorMessage] = useState('');
 
     // const authenticated = localStorage.getItem('token');
     // console.log('authenticated:', authenticated);
@@ -39,7 +42,7 @@ function AddTestimonial() {
                 const { pkBusinessId } = response.data;
                 setTestimonial(prevState => ({ ...prevState, fkBusinessId: pkBusinessId }));
                 console.log('businessId:', pkBusinessId);
-                console.log(response.data);
+                console.log(response.data.$values);
             })
             
             .catch(error => {
@@ -59,92 +62,73 @@ function AddTestimonial() {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        console.log("testimonial: ", testimonial); // Log the testimonial object
+        setSuccessMessage('');
+        setErrorMessage('');
     
         try {
             const apiUrl = import.meta.env.VITE_API_BASE_URL;
             const response = await axios.post(`${apiUrl}/testimonial/create`, testimonial, {
                 headers: {
-                    Authorization: `Bearer ${localStorage.getItem('token')}`, // Send authorization token in the request header
+                    Authorization: `Bearer ${localStorage.getItem('token')}`,
                 },
             });
-            console.log("response: ", response); // Log the response from the server
-            console.log(localStorage.getItem('token'));
+            console.log("response: ", response);
+            localStorage.setItem('token', response.data.token);
+            axios.defaults.headers.common['Authorization'] = `Bearer ${response.data.token}`;
     
-            const { message, token } = response.data;
-            console.log(message);
-    
-            localStorage.setItem('token', token); // Update token if necessary
-            axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
+            // Set success message
+            setSuccessMessage('Testimonial added successfully!');
         } catch (error) {
-            console.error('Testimonial add failed: ', error); // Log the error response from the server
+            console.error('Testimonial add failed: ', error);
+            // Set error message from the server if available or a generic error message
+            setErrorMessage(error.response?.data?.message || 'Failed to add testimonial.');
         }
-    
-        const storedToken = localStorage.getItem('token');
-        console.log('storedToken:', storedToken);
     };
     
+    
     return (
-        <div className="wrapper">
-            <div className="testimonial-container">
-                <form className="testimonial-form" onSubmit={handleSubmit}>
-                    <h2>Add Testimonial For Our Beauty Referral Network</h2>
-                    <div className="form-group">
-                        <textarea
-                            className='input'
-                            required
-                            autoComplete='off'
-                            id="description"
-                            name="description"
-                            value={testimonial.description}
-                            onChange={handleChange}
-                            style={{ height: "auto", resize: "none", overflow: "hidden" }}
-                            onInput={(e) => {
-                                e.target.style.height = "auto";
-                                e.target.style.height = e.target.scrollHeight + "px";
-                            }}
-                        />
-                        <label className="label" htmlFor="description">
-                            <i className="fa-regular fa-comment"></i> Description
-                        </label>
-                    </div>
-                    {/* <div className="form-group">
-                        <label className="testimonial-label">Rating:</label>
-                        <div className="testimonial-rating-input">
-                            {[1, 2, 3, 4, 5].map((value) => (
-                                <label key={value} htmlFor="rating" className="rating-label">
-                                    <input
-                                        type="radio"
-                                        name="rating"
-                                        value={value}
-                                        checked={rating === value}
-                                        onChange={() => handleRatingChange(value)}
-                                    />
-                                    {value}
-                                </label>
-                            ))}
-                        </div>
-                    </div> */}
-                                        <div className="form-group">
-                        <label className="testimonial-label" id="rating">Rating:</label>
-                        <div className="testimonial-rating-input">
-                            {[1, 2, 3, 4, 5].map((value) => (
-                                <span
-                                    key={value}
-                                    className={`fa-solid fa-star${value <= rating ? ' filled' : ''}`}
-                                    onClick={() => handleRatingChange(value)}
-                                    id="rating"
-                                    name="rating"
-                                    value={testimonial.rating}
-                                    onChange={handleChange}
-                                ></span>
-                            ))}
-                        </div>
-                    </div>
-                    <button>Add Testimonial</button>
-                </form>
+<div className="wrapper">
+    <div className="testimonial-container">
+        <form className="testimonial-form" onSubmit={handleSubmit}>
+            <h2>Add Testimonial For Our Beauty Referral Network</h2>
+            {successMessage && <div className="success-message">{successMessage}</div>}
+            {errorMessage && <div className="error-message">{errorMessage}</div>}
+            <div className="form-group">
+                <textarea
+                    className='input'
+                    required
+                    autoComplete='off'
+                    id="description"
+                    name="description"
+                    value={testimonial.description}
+                    onChange={handleChange}
+                    style={{ height: "auto", resize: "none", overflow: "hidden" }}
+                    onInput={(e) => {
+                        e.target.style.height = "auto";
+                        e.target.style.height = e.target.scrollHeight + "px";
+                    }}
+                />
+                <label className="label" htmlFor="description">
+                    <i className="fa-regular fa-comment"></i> Description
+                </label>
             </div>
-        </div>
+            <div className="form-group">
+                <label className="testimonial-label" id="rating">Rating:</label>
+                <div className="testimonial-rating-input">
+                    {[1, 2, 3, 4, 5].map((value) => (
+                        <span
+                            key={value}
+                            className={`fa-solid fa-star${value <= rating ? ' filled' : ''}`}
+                            onClick={() => handleRatingChange(value)}
+                        ></span>
+                    ))}
+                </div>
+            </div>
+            <button type="submit">Add Testimonial</button>
+        </form>
+    </div>
+</div>
+
     );
 }
 

@@ -16,7 +16,7 @@ function CustomerProfile() {
                     const email = getEmailFromJWT(token);
                     const response = await axios.get(`${apiUrl}/api/customer/getcustomerbyemail?email=${email}`);
                     axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
-                    setCustomer(response.data);
+                    setCustomer(response.data.$values);
                 }
             } catch (error) {
                 console.error('Error fetching user data: ', error);
