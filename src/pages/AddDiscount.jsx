@@ -2,15 +2,11 @@ import { useState } from "react";
 import axios from "axios";
 import { NavLink } from "react-router-dom";
 
-
 function AddDiscount() {
-
     const [discount, setDiscount] = useState({
-        amount: '',
         percent: '',
-        startDate: '',
-        endDate: '',
     });
+    const [errorMessage, setErrorMessage] = useState('');
 
     const handleChange = (e) => {
         setDiscount({ ...discount, [e.target.name]: e.target.value });
@@ -18,14 +14,16 @@ function AddDiscount() {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        console.log("discount: ", discount);
 
-        // Convert percent to decimal
-        const decimalPercent = parseFloat(discount.percent) / 100;
+        // Validate discount percent
+        if (isNaN(discount.percent) || discount.percent < 0 || discount.percent > 100) {
+            setErrorMessage("Discount percent must be a number between 0 and 100.");
+            return;
+        }
 
         try {
             const apiUrl = import.meta.env.VITE_API_BASE_URL;
-            const response = await axios.post(`${apiUrl}/api/Discount/create`, { ...discount, percent: decimalPercent });
+            const response = await axios.post(`${apiUrl}/api/Discount/create`, discount);
             console.log("response: ", response);
             const { message, token } = response.data;
             console.log(message);
@@ -33,77 +31,148 @@ function AddDiscount() {
             axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
         } catch (error) {
             console.error('Registration failed: ', error);
+            setErrorMessage("Failed to add discount. Please try again later.");
         }
     };
 
     return (
         <div className="add-discount">
             <h2 className="add-discount-title">Add Discount</h2>
-            {/* <h5>Choose an Amount or a Percent</h5> */}
             <form className="add-discount-form" onSubmit={handleSubmit}>
-                {/* <div className="form-group-discount">
-                    <label className="discount-label" htmlFor="add-amount">Amount</label>
-                    <input 
-                        className="input" 
-                        type="number" 
-                        id="add-amount" 
-                        required autoComplete="off" 
-                        name="amount"
-                        placeholder="Discount Amount"
-                        min="0"
-                        value={discount.amount}
-                        onChange={handleChange}>
-                    </input>
-                </div> */}
                 <div className="form-group-discount">
                     <label className="discount-label" htmlFor="add-percent">Percent</label>
                     <input 
                         className="input" 
                         type="number" 
                         id="add-percent" 
-                        required autoComplete="off" 
+                        required 
+                        autoComplete="off" 
                         name="percent" 
                         placeholder="Discount Percent"
                         min="0"
                         max="100"
                         value={discount.percent}
-                        onChange={handleChange}>
-                    </input>
+                        onChange={handleChange}
+                    />
                 </div>
-                {/* <div className="form-group-discount">
-                    <label className="discount-label" htmlFor="start-date">Start Date</label>
-                    <input 
-                        className="input" 
-                        type="date" 
-                        id="start-date" 
-                        required autoComplete="off" 
-                        name="startDate" 
-                        value={discount.startDate}
-                        onChange={handleChange}>
-                    </input>
-                </div>
-                <div className="form-group-discount">
-                    <label className="discount-label" htmlFor="end-date">End Date</label>
-                    <input 
-                        className="input" 
-                        type="date" 
-                        id="endDate" 
-                        required autoComplete="off" 
-                        name="discountEndDate" 
-                        value={discount.endDate}
-                        onChange={handleChange}>
-                    </input>
-                </div> */}
                 <div className="button-container">
                     <button><NavLink to="/admin-all-discounts">Cancel</NavLink></button>
                     <button type="submit">Save</button>
                 </div>
+                {errorMessage && <p className="error-message">{errorMessage}</p>}
             </form>
         </div>
     )
 }
 
-export default AddDiscount; 
+export default AddDiscount;
+
+// import { useState } from "react";
+// import axios from "axios";
+// import { NavLink } from "react-router-dom";
+
+
+// function AddDiscount() {
+
+//     const [discount, setDiscount] = useState({
+//         amount: '',
+//         percent: '',
+//         startDate: '',
+//         endDate: '',
+//     });
+
+//     const handleChange = (e) => {
+//         setDiscount({ ...discount, [e.target.name]: e.target.value });
+//     };
+
+//     const handleSubmit = async (e) => {
+//         e.preventDefault();
+//         console.log("discount: ", discount);
+
+//         // Convert percent to decimal
+//         const decimalPercent = parseFloat(discount.percent) / 100;
+
+//         try {
+//             const apiUrl = import.meta.env.VITE_API_BASE_URL;
+//             const response = await axios.post(`${apiUrl}/api/Discount/create`, { ...discount, percent: decimalPercent });
+//             console.log("response: ", response);
+//             const { message, token } = response.data;
+//             console.log(message);
+//             localStorage.setItem('token', token);
+//             axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
+//         } catch (error) {
+//             console.error('Registration failed: ', error);
+//         }
+//     };
+
+//     return (
+//         <div className="add-discount">
+//             <h2 className="add-discount-title">Add Discount</h2>
+//             {/* <h5>Choose an Amount or a Percent</h5> */}
+//             <form className="add-discount-form" onSubmit={handleSubmit}>
+//                 {/* <div className="form-group-discount">
+//                     <label className="discount-label" htmlFor="add-amount">Amount</label>
+//                     <input 
+//                         className="input" 
+//                         type="number" 
+//                         id="add-amount" 
+//                         required autoComplete="off" 
+//                         name="amount"
+//                         placeholder="Discount Amount"
+//                         min="0"
+//                         value={discount.amount}
+//                         onChange={handleChange}>
+//                     </input>
+//                 </div> */}
+//                 <div className="form-group-discount">
+//                     <label className="discount-label" htmlFor="add-percent">Percent</label>
+//                     <input 
+//                         className="input" 
+//                         type="number" 
+//                         id="add-percent" 
+//                         required autoComplete="off" 
+//                         name="percent" 
+//                         placeholder="Discount Percent"
+//                         min="0"
+//                         max="100"
+//                         value={discount.percent}
+//                         onChange={handleChange}>
+//                     </input>
+//                 </div>
+//                 {/* <div className="form-group-discount">
+//                     <label className="discount-label" htmlFor="start-date">Start Date</label>
+//                     <input 
+//                         className="input" 
+//                         type="date" 
+//                         id="start-date" 
+//                         required autoComplete="off" 
+//                         name="startDate" 
+//                         value={discount.startDate}
+//                         onChange={handleChange}>
+//                     </input>
+//                 </div>
+//                 <div className="form-group-discount">
+//                     <label className="discount-label" htmlFor="end-date">End Date</label>
+//                     <input 
+//                         className="input" 
+//                         type="date" 
+//                         id="endDate" 
+//                         required autoComplete="off" 
+//                         name="discountEndDate" 
+//                         value={discount.endDate}
+//                         onChange={handleChange}>
+//                     </input>
+//                 </div> */}
+//                 <div className="button-container">
+//                     <button><NavLink to="/admin-all-discounts">Cancel</NavLink></button>
+//                     <button type="submit">Save</button>
+//                 </div>
+//             </form>
+//         </div>
+//     )
+// }
+
+// export default AddDiscount; 
 // import { useState } from "react";
 // import axios from "axios";
 // import { NavLink } from "react-router-dom";
