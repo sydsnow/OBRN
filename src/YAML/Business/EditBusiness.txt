@@ -1,0 +1,79 @@
+openapi: 3.0.0
+info:
+  version: '1.0.0'
+  title: 'Edit Business API'
+  description: 'API endpoint to edit business information.'
+servers:
+  - url: '/'
+tags:
+  - name: 'Business'
+    description: 'Operations related to business'
+paths:
+  /editbusiness:
+    post:
+      tags:
+        - 'Business'
+      summary: 'Edit business information'
+      description: 'Edits business information based on the provided data.'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/EditBusiness'
+      responses:
+        '200':
+          description: 'Business information updated successfully'
+          content:
+            application/json:
+              schema:
+                type: 'string'
+                description: 'Success message'
+        '400':
+          description: 'Bad request'
+          content:
+            application/json:
+              schema:
+                type: 'string'
+                description: 'Error message'
+components:
+  schemas:
+    EditBusiness:
+      type: 'object'
+      properties:
+        businessName:
+          type: 'string'
+        logo:
+          type: 'string'
+        contactName:
+          type: 'string'
+        address:
+          type: 'string'
+        city:
+          type: 'string'
+        province:
+          type: 'string'
+        postalCode:
+          type: 'string'
+        email:
+          type: 'string'
+        phone:
+          type: 'string'
+        insuranceCompany:
+          type: 'string'
+        insuranceExpiryDate:
+          type: 'string'
+          format: 'date'
+        registrationDate:
+          type: 'string'
+          format: 'date'
+        commissionPaid:
+          type: 'boolean'
+        description:
+          type: 'string'
+        verificationDocument:
+          type: 'string'
+        isVerified:
+          type: 'boolean'
+        vip:
+          type: 'boolean'

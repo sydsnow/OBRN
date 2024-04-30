@@ -1,0 +1,61 @@
+openapi: 3.0.0
+info:
+  version: '1.0.0'
+  title: 'Update Service For Business API'
+  description: 'API endpoint to update a service for a specific business.'
+servers:
+  - url: '/'
+tags:
+  - name: 'Services'
+    description: 'Operations related to services'
+paths:
+  /service/{serviceId}:
+    put:
+      tags:
+        - 'Services'
+      summary: 'Update service for a business'
+      description: 'Updates an existing service for a specific business.'
+      parameters:
+        - name: 'serviceId'
+          in: 'path'
+          description: 'The ID of the service to update'
+          required: true
+          schema:
+            type: 'string'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ServiceDTO'
+      responses:
+        '200':
+          description: 'Service updated successfully'
+        '404':
+          description: 'Service not found'
+components:
+  schemas:
+    ServiceDTO:
+      type: 'object'
+      properties:
+        PkServiceId:
+          type: 'integer'
+        Image:
+          type: 'string'
+        ServiceName:
+          type: 'string'
+        Description:
+          type: 'string'
+        FkDiscountId:
+          type: 'string'
+        FkCategoryId:
+          type: 'integer'
+        BasePrice:
+          type: 'number'
+      required:
+        - PkServiceId
+        - ServiceName
+        - Description
+        - FkDiscountId
+        - FkCategoryId
+        - BasePrice

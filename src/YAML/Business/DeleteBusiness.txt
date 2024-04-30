@@ -1,0 +1,40 @@
+openapi: 3.0.0
+info:
+  version: '1.0.0'
+  title: 'Delete Business API'
+  description: 'API endpoint to delete a business and associated user.'
+servers:
+  - url: '/'
+tags:
+  - name: 'Business'
+    description: 'Operations related to business'
+paths:
+  /deletebusiness/{id}:
+    delete:
+      tags:
+        - 'Business'
+      summary: 'Delete business'
+      description: 'Deletes a business and associated user.'
+      parameters:
+        - in: path
+          name: id
+          required: true
+          description: 'Business ID'
+          schema:
+            type: string
+      responses:
+        '200':
+          description: 'Business and associated user deleted successfully'
+          content:
+            application/json:
+              schema:
+                type: string
+                description: 'Success message'
+        '400':
+          description: 'Bad request'
+          content:
+            application/json:
+              schema:
+                type: string
+                description: 'Error message'
+components: {}

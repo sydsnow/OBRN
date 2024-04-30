@@ -1,0 +1,53 @@
+openapi: 3.0.0
+info:
+  version: '1.0.0'
+  title: 'User Role API'
+  description: 'API endpoint for managing user roles.'
+servers:
+  - url: '/'
+tags:
+  - name: 'User Role'
+    description: 'Operations related to user roles'
+paths:
+  /getuserroles:
+    get:
+      tags:
+        - 'User Role'
+      summary: 'Get user roles'
+      description: 'Retrieve the roles assigned to a user.'
+      parameters:
+        - name: email
+          in: query
+          description: 'User email'
+          required: true
+          schema:
+            type: string
+            example: 'user@example.com'
+      responses:
+        '200':
+          description: 'Successful operation'
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: string
+                description: 'List of user roles'
+                example: ['Admin', 'User']
+        '404':
+          description: 'Not found'
+          content:
+            application/json:
+              schema:
+                type: string
+                description: 'Error message'
+                example: 'User not found.'
+components:
+  schemas:
+    User:
+      type: object
+      properties:
+        Email:
+          type: string
+          description: 'User email'
+          example: 'user@example.com'

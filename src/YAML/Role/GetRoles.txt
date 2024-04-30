@@ -1,0 +1,81 @@
+openapi: 3.0.0
+info:
+  version: '1.0.0'
+  title: 'Get Roles API'
+  description: 'API endpoint to retrieve all roles.'
+servers:
+  - url: '/'
+tags:
+  - name: 'Roles'
+    description: 'Operations related to role management'
+paths:
+  /getroles:
+    get:
+      tags:
+        - 'Roles'
+      summary: 'Get all roles'
+      description: 'Retrieves all roles.'
+      responses:
+        '200':
+          description: 'Successful operation'
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/AspNetRole'
+components:
+  schemas:
+    AspNetRole:
+      type: object
+      properties:
+        Id:
+          type: string
+          description: 'Role ID'
+        Name:
+          type: string
+          description: 'Role name'
+        NormalizedName:
+          type: string
+          description: 'Normalized role name'
+        ConcurrencyStamp:
+          type: string
+          description: 'Concurrency stamp'
+        AspNetRoleClaims:
+          type: array
+          items:
+            $ref: '#/components/schemas/AspNetRoleClaim'
+        Users:
+          type: array
+          items:
+            $ref: '#/components/schemas/AspNetUser'
+    AspNetRoleClaim:
+      type: object
+      properties:
+        Id:
+          type: integer
+          format: int64
+          description: 'Claim ID'
+        RoleId:
+          type: string
+          description: 'Role ID'
+        ClaimType:
+          type: string
+          description: 'Claim type'
+        ClaimValue:
+          type: string
+          description: 'Claim value'
+        Role:
+          $ref: '#/components/schemas/AspNetRole'
+    AspNetUser:
+      type: object
+      properties:
+        Id:
+          type: string
+          description: 'User ID'
+        UserName:
+          type: string
+          description: 'Username'
+        Email:
+          type: string
+          description: 'Email address'

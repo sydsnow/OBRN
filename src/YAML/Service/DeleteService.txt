@@ -1,0 +1,31 @@
+openapi: 3.0.0
+info:
+  version: '1.0.0'
+  title: 'Delete Service API'
+  description: 'API endpoint to delete a service by ID.'
+servers:
+  - url: '/'
+tags:
+  - name: 'Services'
+    description: 'Operations related to services'
+paths:
+  /service/{serviceId}:
+    delete:
+      tags:
+        - 'Services'
+      summary: 'Delete service by ID'
+      description: 'Deletes a service by its ID.'
+      parameters:
+        - name: 'serviceId'
+          in: 'path'
+          description: 'The ID of the service to delete'
+          required: true
+          schema:
+            type: 'integer'
+      responses:
+        '200':
+          description: 'Service deleted successfully'
+        '404':
+          description: 'Service not found'
+        '500':
+          description: 'Internal server error'

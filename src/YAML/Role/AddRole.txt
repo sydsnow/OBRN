@@ -1,0 +1,59 @@
+openapi: 3.0.0
+info:
+  version: '1.0.0'
+  title: 'Add Role API'
+  description: 'API endpoint to add a new role.'
+servers:
+  - url: '/'
+tags:
+  - name: 'Roles'
+    description: 'Operations related to role management'
+paths:
+  /addrole:
+    post:
+      tags:
+        - 'Roles'
+      summary: 'Add a new role'
+      description: 'Adds a new role to the system.'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                roleName:
+                  type: string
+                  description: 'Name of the role to be added'
+                  example: 'Admin'
+      responses:
+        '200':
+          description: 'Successful operation'
+          content:
+            application/json:
+              schema:
+                type: string
+                description: 'Success message'
+                example: 'Role added successfully.'
+        '400':
+          description: 'Bad request'
+          content:
+            application/json:
+              schema:
+                type: string
+                description: 'Error message'
+                example: 'Role already exists in database.'
+components:
+  schemas:
+    IdentityRole:
+      type: object
+      properties:
+        Id:
+          type: string
+          description: 'Role ID'
+        Name:
+          type: string
+          description: 'Role name'
+        NormalizedName:
+          type: string
+          description: 'Normalized role name'
