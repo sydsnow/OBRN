@@ -1,0 +1,93 @@
+openapi: 3.0.0
+info:
+  title: OurBeautyReferralNetwork API
+  version: 1.0.0
+paths:
+  /getreferral/{id}:
+    get:
+      summary: Get a referral by ID
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+          description: The ID of the referral to retrieve
+      responses:
+        '200':
+          description: OK. Returns the referral object
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Referral'
+        '404':
+          description: Referral not found
+          content:
+            application/json:
+              schema:
+                type: string
+        '400':
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                type: string
+
+components:
+  schemas:
+    Referral:
+      type: object
+      properties:
+        PkReferralId:
+          type: string
+        FkReferrerCustomerId:
+          type: string
+          nullable: true
+        FkReferredCustomerId:
+          type: string
+          nullable: true
+        FkReferrerBusinessId:
+          type: string
+          nullable: true
+        FkReferredBusinessId:
+          type: string
+          nullable: true
+        ReferralDate:
+          type: string
+          format: date
+        Status:
+          type: string
+        ReferredType:
+          type: string
+        FkReferredBusiness:
+          type: object
+          nullable: true
+        FkReferredCustomer:
+          type: object
+          nullable: true
+        FkReferrerBusiness:
+          type: object
+          nullable: true
+        FkReferrerCustomer:
+          type: object
+          nullable: true
+        Rewards:
+          type: array
+          items:
+            $ref: '#/components/schemas/Reward'
+
+    Reward:
+      type: object
+      properties:
+        PkRewardId:
+          type: integer
+        FkReferralId:
+          type: string
+        RewardAmount:
+          type: number
+          format: decimal
+        IssueDate:
+          type: string
+          format: date
+        FkReferral:
+          $ref: '#/components/schemas/Referral'

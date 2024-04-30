@@ -1,0 +1,99 @@
+openapi: 3.0.0
+info:
+  title: OurBeautyReferralNetwork API
+  version: 1.0.0
+paths:
+  /createreferralcustomer:
+    post:
+      summary: Create referral code for customer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                customerId:
+                  type: string
+                  description: The ID of the customer for whom to create a referral code
+                  example: "12345"
+      responses:
+        '200':
+          description: OK. Returns a message with the created referral ID
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  Message:
+                    type: string
+                    description: A message indicating the success of the operation
+                    example: "Referral created successfully"
+                  ReferralId:
+                    type: string
+                    description: The ID of the newly created referral code
+                    example: "abc123"
+        '400':
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                type: string
+
+components:
+  schemas:
+    Referral:
+      type: object
+      properties:
+        PkReferralId:
+          type: string
+        FkReferrerCustomerId:
+          type: string
+          nullable: true
+        FkReferredCustomerId:
+          type: string
+          nullable: true
+        FkReferrerBusinessId:
+          type: string
+          nullable: true
+        FkReferredBusinessId:
+          type: string
+          nullable: true
+        ReferralDate:
+          type: string
+          format: date
+        Status:
+          type: string
+        ReferredType:
+          type: string
+        FkReferredBusiness:
+          type: object
+          nullable: true
+        FkReferredCustomer:
+          type: object
+          nullable: true
+        FkReferrerBusiness:
+          type: object
+          nullable: true
+        FkReferrerCustomer:
+          type: object
+          nullable: true
+        Rewards:
+          type: array
+          items:
+            $ref: '#/components/schemas/Reward'
+
+    Reward:
+      type: object
+      properties:
+        PkRewardId:
+          type: integer
+        FkReferralId:
+          type: string
+        RewardAmount:
+          type: number
+        IssueDate:
+          type: string
+          format: date
+        FkReferral:
+          $ref: '#/components/schemas/Referral'
