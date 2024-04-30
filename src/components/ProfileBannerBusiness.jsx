@@ -4,13 +4,14 @@ import { NavLink } from "react-router-dom";
 
 
 
-function ProfileBanner({ title, imagePath, name, email, phone, location }) {
+function ProfileBannerBusiness({ title, imagePath, name, email, phone, location }) {
     return (
         <div className="profile-banner">
             <div className="profile-banner-top-container">
                 <h1 className="profile-banner-title">{title}</h1>
                 <div className="profile-banner-buttons">
-                <NavLink to="/editprofile" className="button">EDIT PROFILE</NavLink>
+                <NavLink to="/editprofilebusiness" className="button">EDIT PROFILE</NavLink>
+                    <NavLink to="/addservice" className="button">ADD SERVICE</NavLink>
                 </div>
             </div>
             <div className="profile-banner-image-container">
@@ -25,7 +26,7 @@ function ProfileBanner({ title, imagePath, name, email, phone, location }) {
         </div>
     );
 }
-ProfileBanner.propTypes = {
+ProfileBannerBusiness.propTypes = {
     title: PropTypes.string.isRequired,
     imagePath: PropTypes.string,
     name: PropTypes.string.isRequired,
@@ -34,4 +35,4 @@ ProfileBanner.propTypes = {
     location: PropTypes.string.isRequired
 };
 
-export default ProfileBanner;
+export default ProfileBannerBusiness;

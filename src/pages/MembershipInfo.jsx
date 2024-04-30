@@ -12,10 +12,11 @@ function MembershipInfo() {
                 if (token) {
                     axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
                     const response = await axios.get(`${apiUrl}/fee`);
-                    const filteredFees = response.data.filter(fee => 
+                    const filteredFees = response.data.$values.filter(fee => 
                         fee.feeType.trim() === "Basic" || fee.feeType.trim() === "VIP"
                     );
                     setFees(filteredFees);
+
                 }
             } catch (error) {
                 console.error('Error fetching fees:', error);
