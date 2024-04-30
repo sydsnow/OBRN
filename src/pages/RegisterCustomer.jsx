@@ -73,8 +73,10 @@ function RegisterCustomer(){
         try {
             const apiUrl = import.meta.env.VITE_API_BASE_URL;
             const response = await axios.post(`${apiUrl}/api/customer/addcustomer`, customer);
-            const { message, token } = response.data;
+            console.log("response.data: ", response.data);
+            const { message, token, referralId } = response.data;
             console.log(message);
+            console.log("Referral ID: ", referralId.referralId);// Do something with the referralId (display to user? email to user?)
             localStorage.setItem('token', token.result);
             axios.defaults.headers.common['Authorization'] = `Bearer ${token.result}`;
             navigate('/');
