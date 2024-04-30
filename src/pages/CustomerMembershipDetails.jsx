@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
-
+import "../scss/components/_button.scss"; 
 
 function CustomerMembershipDetails() {
     const [customerFees, setCustomerFees] = useState([]);
@@ -25,6 +25,10 @@ function CustomerMembershipDetails() {
 
         fetchCustomerFees();
     }, []);
+
+    const handleCancel = () => {
+        navigate('/editprofilebusiness');
+    };
 
     return (
         <div className="customer-membership">
@@ -62,7 +66,7 @@ function CustomerMembershipDetails() {
                         </div>
             </div>
             <div className="button-container">
-                <button className="go-back-button" onClick={() => navigate('/editprofile')}>Go Back</button>           
+                <button type="button" onClick={handleCancel}>Cancel</button>
             </div>
         </div>
     );
