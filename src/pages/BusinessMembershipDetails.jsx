@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 
 function BusinessMembershipDetails() {
     const [businessDetails, setBusinessDetails] = useState({});
@@ -7,7 +8,8 @@ function BusinessMembershipDetails() {
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState('');
 
-    const apiUrl = import.meta.env.VITE_API_BASE_URL; // Use the API base URL from environment variables
+    const apiUrl = import.meta.env.VITE_API_BASE_URL;
+    const navigate = useNavigate();
 
     useEffect(() => {
         const fetchBusinessDetails = async () => {
@@ -71,13 +73,16 @@ function BusinessMembershipDetails() {
                             <p>No membership fees found for this business.</p>
                         )}
                         <div className="upgrade-membership">
-                            <a href="/comingsoon" className="upgrade-link">Upgrade Membership</a>
+                            <a href="/comingsoon" className="upgrade-link">Upgrade Business Membership</a>
                         </div>
                         <div className="membership-info">
                             <a href="/membershipinfo" className="membership-link">Learn more about our Membership</a>
                         </div>
                     </>
                 )}
+            </div>
+            <div className="button-container">
+                <button className="go-back-button" onClick={() => navigate('/editprofilebusiness')}>Go Back</button>           
             </div>
         </div>
     );

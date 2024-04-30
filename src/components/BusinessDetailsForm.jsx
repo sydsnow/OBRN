@@ -289,7 +289,7 @@ function BusinessDetailsForm({ initialData }) {
     };
 
     const handleCancel = () => {
-        navigate('/editprofile');
+        navigate('/editprofilebusiness');
     };
 
     return (
