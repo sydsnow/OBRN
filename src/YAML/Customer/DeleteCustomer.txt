@@ -1,0 +1,48 @@
+openapi: 3.0.0
+info:
+  version: '1.0.0'
+  title: 'Delete Customer API'
+  description: 'API endpoint to delete a customer and associated user.'
+servers:
+  - url: '/'
+tags:
+  - name: 'Customer'
+    description: 'Operations related to customer management'
+paths:
+  /deletecustomer/{id}:
+    delete:
+      tags:
+        - 'Customer'
+      summary: 'Delete customer by ID'
+      description: 'Deletes a customer and associated user by ID.'
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+          description: 'Customer ID'
+      responses:
+        '200':
+          description: 'Customer and associated user deleted successfully'
+          content:
+            application/json:
+              schema:
+                type: string
+                description: 'Success message'
+        '404':
+          description: 'Customer or user not found'
+          content:
+            application/json:
+              schema:
+                type: string
+                description: 'Error message'
+        '400':
+          description: 'Bad request'
+          content:
+            application/json:
+              schema:
+                type: string
+                description: 'Error message'
+components:
+  schemas: {}

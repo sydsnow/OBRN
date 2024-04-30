@@ -1,0 +1,59 @@
+openapi: 3.0.0
+info:
+  version: '1.0.0'
+  title: 'User Role API'
+  description: 'API endpoint for managing user roles.'
+servers:
+  - url: '/'
+tags:
+  - name: 'User Role'
+    description: 'Operations related to user roles'
+paths:
+  /adduserrole:
+    post:
+      tags:
+        - 'User Role'
+      summary: 'Add user role'
+      description: 'Assign a role to a user.'
+      parameters:
+        - name: email
+          in: query
+          description: 'User email'
+          required: true
+          schema:
+            type: string
+            example: 'user@example.com'
+        - name: roleName
+          in: query
+          description: 'Role name'
+          required: true
+          schema:
+            type: string
+            example: 'Admin'
+      responses:
+        '200':
+          description: 'Successful operation'
+          content:
+            application/json:
+              schema:
+                type: string
+                description: 'Success message'
+                example: 'Role assigned to user successfully.'
+        '400':
+          description: 'Bad request'
+          content:
+            application/json:
+              schema:
+                type: string
+                description: 'Error message'
+                example: 'User not found.'
+components:
+  schemas:
+    User:
+      type: object
+      properties:
+        Email:
+          type: string
+          description: 'User email'
+          example: 'user@example.com'
+        

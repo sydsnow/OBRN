@@ -1,0 +1,62 @@
+openapi: 3.0.0
+info:
+  version: '1.0.0'
+  title: 'Get Services For Business API'
+  description: 'API endpoint to get all services for a specific business.'
+servers:
+  - url: '/'
+tags:
+  - name: 'Services'
+    description: 'Operations related to services'
+paths:
+  /service:
+    get:
+      tags:
+        - 'Services'
+      summary: 'Get services for a business'
+      description: 'Retrieves all services for a specific business.'
+      parameters:
+        - name: 'businessId'
+          in: 'query'
+          description: 'The ID of the business'
+          required: true
+          schema:
+            type: 'string'
+      responses:
+        '200':
+          description: 'Successful operation'
+          content:
+            application/json:
+              schema:
+                type: 'array'
+                items:
+                  $ref: '#/components/schemas/Service'
+components:
+  schemas:
+    Service:
+      type: 'object'
+      properties:
+        PkServiceId:
+          type: 'integer'
+        Image:
+          type: 'string'
+        FkBusinessId:
+          type: 'string'
+        ServiceName:
+          type: 'string'
+        Description:
+          type: 'string'
+        FkDiscountId:
+          type: 'string'
+        FkCategoryId:
+          type: 'integer'
+        BasePrice:
+          type: 'number'
+      required:
+        - PkServiceId
+        - FkBusinessId
+        - ServiceName
+        - Description
+        - FkDiscountId
+        - FkCategoryId
+        - BasePrice

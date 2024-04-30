@@ -1,0 +1,91 @@
+openapi: 3.0.0
+info:
+  version: '1.0.0'
+  title: 'Create Service For Business API'
+  description: 'API endpoint to create a service for a specific business.'
+servers:
+  - url: '/'
+tags:
+  - name: 'Services'
+    description: 'Operations related to services'
+paths:
+  /service/create:
+    post:
+      tags:
+        - 'Services'
+      summary: 'Create service for a business'
+      description: 'Creates a new service for a specific business.'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ServiceDTO'
+      parameters:
+        - name: 'businessID'
+          in: 'query'
+          description: 'The ID of the business'
+          required: true
+          schema:
+            type: 'string'
+      responses:
+        '201':
+          description: 'Service created successfully'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Service'
+        '400':
+          description: 'Bad request'
+components:
+  schemas:
+    ServiceDTO:
+      type: 'object'
+      properties:
+        PkServiceId:
+          type: 'integer'
+        Image:
+          type: 'string'
+        ServiceName:
+          type: 'string'
+        Description:
+          type: 'string'
+        FkDiscountId:
+          type: 'string'
+        FkCategoryId:
+          type: 'integer'
+        BasePrice:
+          type: 'number'
+      required:
+        - ServiceName
+        - Description
+        - FkDiscountId
+        - FkCategoryId
+        - BasePrice
+    Service:
+      type: 'object'
+      properties:
+        PkServiceId:
+          type: 'integer'
+        Image:
+          type: 'string'
+        FkBusinessId:
+          type: 'string'
+        ServiceName:
+          type: 'string'
+        Description:
+          type: 'string'
+        FkDiscountId:
+          type: 'string'
+        FkCategoryId:
+          type: 'integer'
+        BasePrice:
+          type: 'number'
+      required:
+        - PkServiceId
+        - FkBusinessId
+        - ServiceName
+        - Description
+        - FkDiscountId
+        - FkCategoryId
+        - BasePrice
