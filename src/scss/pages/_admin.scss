@@ -159,6 +159,7 @@
         justify-content: center;
         border-top:1px solid #ccc;
         padding:20px;
+        width:100%;
     }
     &-testimonial-copy{
         @include flex-col;
@@ -197,7 +198,7 @@
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            background-color:#4CA633;
+            background-color:#BF0426;
             color: white;
             border: none;
             padding: 10px 20px;
@@ -210,9 +211,12 @@
                 background-color: #4d4d4d;
             }
         }
-        :nth-child(2){
-            background-color: #BF0426;
-        }
+    }
+    &-testimonial{
+        @include flex-row;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
     }
     &-all-container{
         @include flex-col;

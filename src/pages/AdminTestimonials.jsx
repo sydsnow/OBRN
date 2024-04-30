@@ -5,7 +5,6 @@ import axios from 'axios';
 function AdminTestimonials() {
     const [testimonials, setTestimonials] = useState([]);
     const [currentPage, setCurrentPage] = useState(1);
-    const [searchQuery, setSearchQuery] = useState('');
 
     useEffect(() => {
         const fetchTestimonials = async () => {
@@ -25,9 +24,14 @@ function AdminTestimonials() {
         };
     }, []);
 
-    const handleSearchInputChange = (e) => {
-        setSearchQuery(e.target.value);
-        setCurrentPage(1);
+    const handleDeleteTestimonial = async (testimonialId) => {
+        try {
+            const apiUrl = import.meta.env.VITE_API_BASE_URL;
+            await axios.delete(`${apiUrl}/api/Testimonial/${testimonialId}`);
+            setTestimonials(testimonials.filter(testimonial => testimonial.pkTestimonialId !== testimonialId));
+        } catch (error) {
+            console.error('Failed to delete testimonial: ', error);
+        }
     };
 
     const testimonialsPerPage = 5;
@@ -35,22 +39,11 @@ function AdminTestimonials() {
     const indexOfFirstTestimonial = indexOfLastTestimonial - testimonialsPerPage;
     const currentTestimonials = testimonials.slice(indexOfFirstTestimonial, indexOfLastTestimonial);
 
-    const filteredTestimonials = currentTestimonials.filter(testimonial =>
-        testimonial.fkBusinessId.toLowerCase().includes(searchQuery.toLowerCase()) ||
-        testimonial.description.toLowerCase().includes(searchQuery.toLowerCase())
-    );
-
     return (
         <div className="wrapper">
             <div className="admin">
                 <Link to="/admin"><button>Back to Admin</button></Link>
                 <div className="admin-testimonials-container">
-                    <input
-                        type="text"
-                        placeholder="Search testimonials..."
-                        value={searchQuery}
-                        onChange={handleSearchInputChange}
-                    />
                     <div className="admin-testimonials-copy">
                         <h1>Testimonials</h1>
                     </div>
@@ -58,7 +51,7 @@ function AdminTestimonials() {
                         {/* Add button to add testimonial if needed */}
                     </div>
                     <div className="admin-testimonials">
-                        {filteredTestimonials.map(testimonial => (
+                        {currentTestimonials.map(testimonial => (
                             <div className="admin-testimonial" key={testimonial.pkTestimonialId}>
                                 <div className="admin-testimonial-details">
                                     <div className="admin-testimonial-copy">
@@ -67,8 +60,7 @@ function AdminTestimonials() {
                                         <p>{testimonial.description}</p>
                                     </div>
                                     <div className="admin-testimonial-btns">
-                                        <button>Edit</button>
-                                        <button>Delete</button>
+                                        <button onClick={() => handleDeleteTestimonial(testimonial.pkTestimonialId)}>Delete</button>
                                     </div>
                                 </div>
                             </div>
@@ -77,7 +69,7 @@ function AdminTestimonials() {
                     <div className="admin-pagination">
                         <button onClick={() => setCurrentPage(currentPage - 1)} disabled={currentPage === 1}>Previous</button>
                         <span>{currentPage}</span>
-                        <button onClick={() => setCurrentPage(currentPage + 1)} disabled={filteredTestimonials.length < testimonialsPerPage}>Next</button>
+                        <button onClick={() => setCurrentPage(currentPage + 1)} disabled={currentTestimonials.length < testimonialsPerPage}>Next</button>
                     </div>
                 </div>
             </div>

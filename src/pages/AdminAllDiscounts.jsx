@@ -10,7 +10,7 @@ function AdminAllDiscounts() {
         const fetchDiscounts = async () => {
             try {
                 const apiUrl = import.meta.env.VITE_API_BASE_URL;
-                const response = await axios.get(`${apiUrl}/api/Discount/discount`);
+                const response = await axios.get(`${apiUrl}/discount`);
                 setDiscount(response.data.$values); // Assuming response.data is an array of discounts 
             } catch (error) {
                 console.error('Failed to fetch discounts: ', error);
