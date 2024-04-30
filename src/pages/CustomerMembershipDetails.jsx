@@ -1,8 +1,11 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
+
 
 function CustomerMembershipDetails() {
     const [customerFees, setCustomerFees] = useState([]);
+    const navigate = useNavigate();
 
     useEffect(() => {
         const fetchCustomerFees = async () => {
@@ -38,7 +41,7 @@ function CustomerMembershipDetails() {
                 </div>
             </div>
             <div className="edit-business-container">
-                <h2 className="edit-business-title">Membership</h2>
+                <h2 className="edit-business-title">Manage Customer Membership</h2>
                 {customerFees.length > 0 ? (
                     customerFees.map(fee => (
                         <div key={fee.pkFeeId}>
@@ -52,11 +55,14 @@ function CustomerMembershipDetails() {
                     <p>No membership fees found for this customer.</p>
                 )}
                 <div className="upgrade-membership">
-                    <a href="/comingsoon" className="upgrade-link">Upgrade Membership</a>
+                    <a href="/comingsoon" className="upgrade-link">Upgrade Customer Membership</a>
                 </div>
                 <div className="membership-info">
                             <a href="/membershipinfo" className="membership-link">Learn more about our Membership</a>
                         </div>
+            </div>
+            <div className="button-container">
+                <button className="go-back-button" onClick={() => navigate('/editprofile')}>Go Back</button>           
             </div>
         </div>
     );

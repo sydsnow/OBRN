@@ -14,6 +14,7 @@ import RegisterBusiness from '../pages/RegisterBusiness';
 import TestServices from "../pages/TestServices";
 
 import EditProfile from "../pages/EditProfile";
+import EditProfileBusiness from "../pages/EditProfileBusiness";
 import EditProfileMyDetails from "../pages/EditProfileMyDetails";
 import EditProfileBusinessDetails from "../pages/EditProfileBusinessDetails";
 import EditPasswordPage from "../pages/EditPasswordPage";
@@ -84,6 +85,7 @@ function AppRouter() {
           <Route path="/customerprofile" element={<CustomerProfile />} />
           <Route path="/businessprofile" element={<BusinessProfile />} />
           <Route path="/editprofile" element={<EditProfile />} />
+          <Route path="/editprofilebusiness" element={<EditProfileBusiness />} />
           <Route path="/membershipinfo" element={<MembershipInfo />} />
           <Route path="/termscondition" element={<TermsCondition />} />
           <Route path="/privacystatement" element={<PrivacyStatement />} />

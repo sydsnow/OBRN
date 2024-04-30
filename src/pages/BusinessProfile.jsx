@@ -5,7 +5,7 @@ import nails from "../assets/nails.jpeg";
 import facial from "../assets/facial.jpeg";
 import botox from "../assets/botox.jpeg";
 import ServiceGallery from "../components/ServiceGallery";
-import ProfileBanner from '../components/ProfileBanner';
+import ProfileBannerBusiness from '../components/ProfileBannerBusiness';
 
 function BusinessProfile () {
     // State to handle the selected category
@@ -43,7 +43,7 @@ function BusinessProfile () {
 
     return (
         <div className="business-profile">
-            <ProfileBanner 
+            <ProfileBannerBusiness 
                 title="Business Profile"
                 imagePath={cat}
                 name="Purrfect Styles"
