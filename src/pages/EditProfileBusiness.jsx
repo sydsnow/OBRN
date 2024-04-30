@@ -66,7 +66,7 @@ function EditProfileBusiness() {
   // };
 
   const handleEditBusinessClick = () => {
-    navigate('/editprofile/businessdetails');
+    navigate('/editprofilebusiness/businessdetails');
     setIsEditingBusiness(true);
   };
 
@@ -79,7 +79,7 @@ function EditProfileBusiness() {
   // };
 
   const handleViewBusinessMembershipClick = () => {
-    navigate('/editprofile/business-membership-details');
+    navigate('/editprofilebusiness/business-membership-details');
   };
 
   return (
@@ -140,11 +140,6 @@ function EditProfileBusiness() {
           )}
           <button className="edit-profile-button" onClick={handleEditBusinessClick}>Edit Business Details</button>
         </div>
-        <div className="edit-profile-section">
-          <h3>Password</h3>
-          <p>*******</p>
-          <button className="edit-profile-button" onClick={handleChangePasswordClick}>Change Password</button>
-        </div>
         {/* <div className="edit-profile-section">
           <h3>Customer Membership</h3>
           <p>Manage your customer membership</p>
@@ -153,7 +148,12 @@ function EditProfileBusiness() {
         <div className="edit-profile-section">
           <h3>Business Membership</h3>
           <p>Manage your business membership</p>
-          <button className="edit-profile-button" onClick={handleViewBusinessMembershipClick}>View Business Membership</button>
+          <button className="edit-profile-button" onClick={handleViewBusinessMembershipClick}>View Membership</button>
+        </div>
+        <div className="edit-profile-section">
+          <h3>Password</h3>
+          <p>*******</p>
+          <button className="edit-profile-button" onClick={handleChangePasswordClick}>Change Password</button>
         </div>
       </div>
     </div>

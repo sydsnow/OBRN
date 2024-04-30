@@ -141,14 +141,14 @@ function EditProfile() {
           <button className="edit-profile-button" onClick={handleEditBusinessClick}>Edit Business Details</button>
         </div> */}
         <div className="edit-profile-section">
+          <h3>Customer Membership</h3>
+          <p>Manage your customer membership</p>
+          <button className="edit-profile-button" onClick={handleViewCustomerMembershipClick}>View Membership</button>
+        </div>
+        <div className="edit-profile-section">
           <h3>Password</h3>
           <p>*******</p>
           <button className="edit-profile-button" onClick={handleChangePasswordClick}>Change Password</button>
-        </div>
-        <div className="edit-profile-section">
-          <h3>Customer Membership</h3>
-          <p>Manage your customer membership</p>
-          <button className="edit-profile-button" onClick={handleViewCustomerMembershipClick}>View Customer Membership</button>
         </div>
         {/* <div className="edit-profile-section">
           <h3>Business Membership</h3>

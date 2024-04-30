@@ -93,10 +93,11 @@ function AppRouter() {
           {authenticated && (
           <Route path="/editprofile/mydetails" element={<EditProfileMyDetails />} />
           )}
-          <Route path="/editprofile/businessdetails" element={<EditProfileBusinessDetails />} />
+          <Route path="/editprofilebusiness/businessdetails" element={<EditProfileBusinessDetails />} />
           <Route path="/editprofile/editpassword" element={<EditPasswordPage />} />
           <Route path="/editprofile/customer-membership-details" element={<CustomerMembershipDetails />} />
-          <Route path="/editprofile/business-membership-details" element={<BusinessMembershipDetails />} />
+          <Route path="/editprofilebusiness/business-membership-details" element={<BusinessMembershipDetails />} />
+          
           <Route path="/services" element={<ServicesPage />} />
           <Route path="/testimonials" element={<TestimonialsPage />} />
           <Route path="/about" element={<About />} />
