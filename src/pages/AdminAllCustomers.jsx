@@ -13,7 +13,7 @@ function AdminAllCustomers() {
             try {
                 const apiUrl = import.meta.env.VITE_API_BASE_URL;
                 const response = await axios.get(`${apiUrl}/api/customer/getcustomers`);
-                setUsers(response.data); // Assuming response.data is an array of users
+                setUsers(response.data.$values); // Assuming response.data is an array of users
             } catch (error) {
                 console.error('Failed to fetch users: ', error);
             }
@@ -34,7 +34,6 @@ function AdminAllCustomers() {
 
      // Pagination variables
      const usersPerPage = 10; // Change this to the desired number of users per page
-
     const indexOfLastUser = currentPage * usersPerPage;
     const indexOfFirstUser = indexOfLastUser - usersPerPage;
     const currentUsers = users.slice(indexOfFirstUser, indexOfLastUser);
