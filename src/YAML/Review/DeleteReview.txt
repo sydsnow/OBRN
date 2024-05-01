@@ -1,0 +1,31 @@
+openapi: 3.0.0
+info:
+  title: Reviews API
+  version: 1.0.0
+paths:
+  /reviews/{reviewId}:
+    delete:
+      summary: Delete Review
+      operationId: DeleteReview
+      parameters:
+        - name: reviewId
+          in: path
+          description: ID of the review to delete
+          required: true
+          schema:
+            type: integer
+            format: int32
+      responses:
+        '200':
+          description: OK
+        '404':
+          description: Review not found
+        '500':
+          description: Internal Server Error
+components:
+  schemas:
+    Error:
+      type: object
+      properties:
+        message:
+          type: string

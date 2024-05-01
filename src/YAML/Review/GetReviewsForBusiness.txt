@@ -1,0 +1,64 @@
+openapi: 3.0.0
+info:
+  title: Reviews API
+  version: 1.0.0
+paths:
+  /api/GetReviewsForBusiness:
+    get:
+      summary: Get Reviews for Business
+      operationId: GetReviewsForBusiness
+      parameters:
+        - name: businessId
+          in: query
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Review'
+        'default':
+          description: Error
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                  details:
+                    type: string
+components:
+  schemas:
+    Review:
+      type: object
+      properties:
+        pkReviewId:
+          type: integer
+        fkBusinessId:
+          type: string
+        fkCustomerId:
+          type: string
+        description:
+          type: string
+        rating:
+          type: number
+        reviewDate:
+          type: string
+          format: date
+        image:
+          type: string
+        provider:
+          type: string
+      required:
+        - pkReviewId
+        - fkBusinessId
+        - fkCustomerId
+        - description
+        - rating
+        - reviewDate
