@@ -22,6 +22,7 @@
       font-family: $secondary-font;
       margin-bottom: 15px;
       font-size: 18px;
+      
     }
 
     &-top {
@@ -36,6 +37,12 @@
 
     &-section {
       text-align: center; 
+      > p {
+        font-size: 0.7rem;
+        @media(min-width: 1024px) {
+          font-size: 0.9rem
+        }
+      }
     }
 
     &-link {
@@ -43,6 +50,10 @@
       margin-bottom: 5px; 
       color: inherit; 
       text-decoration: none; 
+      font-size: 0.7rem;
+      @media(min-width: 1024px) {
+        font-size: 0.9rem
+      }
     }
 
     &-bottom {
