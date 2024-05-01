@@ -26,6 +26,13 @@
         border-radius: 4px;
     }
 
+    &-container a {
+        font-size: 0.7rem;
+        @media(min-width: 1440px) {
+            font-size: 0.9rem;
+        }
+    }
+
     @media (min-width: 768px) {
         &-container {
             display: flex;

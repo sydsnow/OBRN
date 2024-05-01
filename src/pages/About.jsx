@@ -13,7 +13,7 @@ function About() {
             </div>
             <div className="about-container">
                 <div className="about-content">
-                    <h1>Hi, I'm Calli Jensen!</h1>
+                    <h1>Hi, I&apos;m Calli Jensen!</h1>
                     <p>I was born and raised in Vancouver. I always had a passion for business from a very young age. My mother Judi raised me as a single mother and has been an entrepreneur since I can remember. I have always had the burning desire to create something amazing to truly empower people. Calli is a Best Selling author and loves promoting other people. She has a passion for business and drive like no other. Her only purpose is to create a positive impact for our community for generations to come. With having extensive experience in promotions, direct sales and network marketing, creating an affiliate program for the beauty and health industry is something definitely needed. She went to work designing the master plan and referral program to be a catalyst for supporting the community.</p>
                 </div>
                 <img src="/src/assets/about-us-01.JPG" alt="Calli Jensen" />
@@ -34,7 +34,7 @@ function About() {
                 </div>
                 <img src="/src/assets/about-us-03.jpg" alt="Calli Jensen" />
             </div>
-            <div className="about-container">
+            {/* <div className="about-container">
                 <div className="about-content">
                 <h1>Come Join Our Community!</h1>
                     <p>Join our community and start referring your favorite businesses to our referral program. Start sending your favorite enrolled businesses brand new clients. Enroll your friends and family and start earning rewards! <br/><br/>
@@ -52,7 +52,29 @@ function About() {
                     </p>
                 </div>
                 <img src="/src/assets/about-us-04.jpg" alt="Calli Jensen" />
+            </div> */}
+             <div className="about-container">
+            <div className="about-content">
+                <h1>Come Join Our Community!</h1>
+                <p>
+                    Join our community and start referring your favorite businesses to our referral program. Start sending your favorite enrolled businesses brand new clients. Enroll your friends and family and start earning rewards!
+                    <br /><br />
+                    1. Enroll as a customer for free <br />
+                    2. Book your first service. <br />
+                    3. Enroll your favorite businesses. <br />
+                    4. Refer your friends to your favorite businesses <br /><br />
+
+                    Our Facebook Group <br />
+                    <a href="https://www.facebook.com/groups/ourbeautysquad/">https://www.facebook.com/groups/ourbeautysquad/</a> <br /><br />
+
+                    Follow us on IG <br />
+                    <a href="https://www.instagram.com/ourbeautyreferralnetwork">https://www.instagram.com/ourbeautyreferralnetwork</a>
+                </p>
             </div>
+            {/* <div className="about-image"> */}
+                <img src="/src/assets/about-us-04.jpg" alt="Calli Jensen" />
+            {/* </div> */}
+        </div>
         </div>
     );
 }
