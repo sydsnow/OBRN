@@ -25,6 +25,16 @@ function EditService () {
 
     return (
         <div className="edit-service">
+            <div className="testimonials-banner">
+                <p className="testimonials-small">EDIT BUSINESS SERVICE</p>
+                <p className="testimonials-large">Edit Service</p>
+                <div className="testimonials-path">
+                <i className="fa-solid fa-house"></i>
+                <p>HOME</p>
+                <i className="fa-solid fa-angle-right"></i>
+                <p>EDIT BUSINESS SERVICE</p>
+                </div>
+            </div>
             <CreateService serviceObj={serviceObj}/>
         </div>
     );
