@@ -198,7 +198,7 @@
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            background-color:#BF0426;
+            background-color:#CA2222;
             color: white;
             border: none;
             padding: 10px 20px;
@@ -524,6 +524,20 @@
             &:hover{
                 background-color: #4d4d4d;
             }
+        }
+    }
+    &-delete-message{
+        @include flex-col;
+        justify-content: center;
+        align-items: center;
+        gap: 1vh;
+        width: 100%;
+        padding: 20px;
+        margin: 0 auto;
+        p{
+            font-family: $secondary-font;
+            font-size: 1rem;
+            font-weight: 400;
         }
     }
     @media (min-width: 960px) {

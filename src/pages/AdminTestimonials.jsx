@@ -5,6 +5,8 @@ import axios from 'axios';
 function AdminTestimonials() {
     const [testimonials, setTestimonials] = useState([]);
     const [currentPage, setCurrentPage] = useState(1);
+    const [successMessage, setSuccessMessage] = useState('');
+
 
     useEffect(() => {
         const fetchTestimonials = async () => {
@@ -29,10 +31,19 @@ function AdminTestimonials() {
             const apiUrl = import.meta.env.VITE_API_BASE_URL;
             await axios.delete(`${apiUrl}/api/Testimonial/${testimonialId}`);
             setTestimonials(testimonials.filter(testimonial => testimonial.pkTestimonialId !== testimonialId));
+            setSuccessMessage('Testimonial deleted successfully!');
+    
+            // Clear the success message after 3 seconds
+            setTimeout(() => {
+                setSuccessMessage('');
+            }, 10000);
+    
         } catch (error) {
             console.error('Failed to delete testimonial: ', error);
+            // Optionally, handle error message display here
         }
     };
+    
 
     const testimonialsPerPage = 5;
     const indexOfLastTestimonial = currentPage * testimonialsPerPage;
@@ -44,6 +55,7 @@ function AdminTestimonials() {
             <div className="admin">
                 <Link to="/admin"><button>Back to Admin</button></Link>
                 <div className="admin-testimonials-container">
+                {successMessage && <div className="testimonial-error-message">{successMessage}</div>}
                     <div className="admin-testimonials-copy">
                         <h1>Testimonials</h1>
                     </div>

@@ -82,9 +82,9 @@ function Nav () {
                                 </NavLink>
                             )}
                             &nbsp;&nbsp;
-                            <span onClick={handleLogout}>
+                            <NavLink onClick={handleLogout}>
                                 LOGOUT
-                            </span>
+                            </NavLink>
                         </li>
                     ) : (
                         <li>

@@ -32,12 +32,6 @@ const [errorMessage, setErrorMessage] = useState('');
                     Authorization: `Bearer ${token}`,
                 },
             })
-            // .then(response => {
-            //     const { businessId } = response.data;
-            //     setTestimonial(prevState => ({ ...prevState, pkBusinessId: businessId }));
-            //     console.log('businessId:', businessId);
-            //     console.log(response.data);
-            // })
             .then(response => {
                 const { pkBusinessId } = response.data;
                 setTestimonial(prevState => ({ ...prevState, fkBusinessId: pkBusinessId }));
@@ -89,10 +83,11 @@ const [errorMessage, setErrorMessage] = useState('');
     return (
 <div className="wrapper">
     <div className="testimonial-container">
+    {successMessage && <div className="testimonial-success-message">{successMessage}</div>}
+            {errorMessage && <div className="testimonial-error-message">{errorMessage}</div>}
         <form className="testimonial-form" onSubmit={handleSubmit}>
             <h2>Add Testimonial For Our Beauty Referral Network</h2>
-            {successMessage && <div className="success-message">{successMessage}</div>}
-            {errorMessage && <div className="error-message">{errorMessage}</div>}
+
             <div className="form-group">
                 <textarea
                     className='input'
