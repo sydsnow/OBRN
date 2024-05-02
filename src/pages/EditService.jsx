@@ -1,11 +1,11 @@
-import ServiceForm from "../components/ServiceForm";
+//import ServiceForm from "../components/ServiceForm";
+import CreateService from "../components/CreateService";
 import "../scss/pages/_editservice.scss"
 
 function EditService () {
     return (
         <div className="edit-service">
-            <h2 className="edit-service-title">Edit Service</h2>
-            <ServiceForm />
+            <CreateService />
         </div>
     );
 
