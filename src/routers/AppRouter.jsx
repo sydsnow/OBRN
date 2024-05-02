@@ -49,6 +49,9 @@ import AdminFees from "../pages/AdminFees";
 
 import EditService from "../pages/EditService";
 
+import CreateService from "../components/CreateService";
+import ServiceForm from "../components/ServiceForm";
+
 function ScrollToTop() {
   const location = useLocation();
 
@@ -112,11 +115,13 @@ function AppRouter() {
           
           <Route path="/admin-all-categories" element={<AdminAllCategories />} />
           <Route path="/admin-edit-business/:id" element={<AdminEditBusiness />} />
-          <Route path="/admin-edit-business/:id/new-testimonial" element={<NewTestimonial />} />
+          <Route path="/testimonials/:id/new-testimonial" element={<NewTestimonial />} />
           <Route path="/admin-all-discounts" element={<AdminAllDiscounts />} />
           <Route path="/add-discount" element={<AddDiscount />} />
           <Route path="/admin-fees" element={<AdminFees />} />
           <Route path="//editservice/:id" element={<EditService />} />
+          <Route path="/create-service/:id" element={<CreateService />} />
+          <Route path="/add-service/:id" element={<ServiceForm />} />
         </Routes>
         <Footer />
       </AuthProvider>

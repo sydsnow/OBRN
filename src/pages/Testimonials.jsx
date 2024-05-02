@@ -6,7 +6,6 @@ import { useState, useEffect } from 'react';
 import axios from 'axios';
 
 function TestimonialsPage() {
-  
 
   const [testimonials, setTestimonials] = useState([]);
 
@@ -39,7 +38,7 @@ function TestimonialsPage() {
                 fetchedTestimonials.map(async testimonial => {
                     const businessId = testimonial.fkBusinessId;
                     const businessResponse = await axios.get(`${apiUrl}/api/Business/getbusiness/${businessId}`);
-                    const business = businessResponse.data.$values;
+                    const business = businessResponse.data;
                     
                     // Merge testimonial object with business information
                     return {
@@ -73,9 +72,6 @@ function TestimonialsPage() {
           <i className="fa-solid fa-angle-right"></i>
           <NavLink to="/testimonials" className="testimonials-links">TESTIMONIALS</NavLink>
         </div>
-      </div>
-      <div className="testimonials-add">
-
       </div>
       <TestimonialGallery testimonials={testimonials}></TestimonialGallery>
     </div>

@@ -1,7 +1,8 @@
 // import React, { useState } from "react";
 // import { NavLink } from "react-router-dom";
-import "../scss/pages/_addservice.scss";
-import ServiceForm from "../components/ServiceForm";
+// import "../scss/pages/_addservice.scss";
+// import ServiceForm from "../components/ServiceForm";
+import CreateService from "../components/CreateService";
 
 function AddServicePage() {
     // // Soon will dynamically get all the categories 
@@ -28,8 +29,9 @@ function AddServicePage() {
                 </div>
             </div>
             <div className="add-service">
-                <h2 className="add-service-title">Add Service</h2>
-                <ServiceForm />
+                {/* <h2 className="add-service-title">Add Service</h2> */}
+                <CreateService />
+                {/* <ServiceForm /> */}
                 {/* <form className="add-service-form">
                     <div className="form-group-service">
                         <label className="service-label" htmlFor="category">Category</label>
