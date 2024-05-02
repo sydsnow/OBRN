@@ -1,0 +1,97 @@
+openapi: 3.0.0
+info:
+  title: Reviews API
+  version: 1.0.0
+paths:
+  /review/create:
+    post:
+      summary: Create Review for Business
+      operationId: CreateReviewForBusiness
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ReviewDTO'
+      parameters:
+        - name: businessID
+          in: query
+          required: true
+          schema:
+            type: string
+      responses:
+        '201':
+          description: Created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Review'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+        'default':
+          description: Error
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+components:
+  schemas:
+    ReviewDTO:
+      type: object
+      properties:
+        PkReviewId:
+          type: integer
+        FkBusinessId:
+          type: string
+        FkCustomerId:
+          type: string
+        Description:
+          type: string
+        Rating:
+          type: number
+        Image:
+          type: string
+        Provider:
+          type: string
+      required:
+        - FkBusinessId
+        - FkCustomerId
+        - Description
+        - Rating
+    Review:
+      type: object
+      properties:
+        PkReviewId:
+          type: integer
+        FkBusinessId:
+          type: string
+        FkCustomerId:
+          type: string
+        Description:
+          type: string
+        Rating:
+          type: number
+        ReviewDate:
+          type: string
+          format: date
+        Image:
+          type: string
+        Provider:
+          type: string
+      required:
+        - PkReviewId
+        - FkBusinessId
+        - FkCustomerId
+        - Description
+        - Rating
+        - ReviewDate

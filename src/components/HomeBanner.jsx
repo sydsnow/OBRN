@@ -7,7 +7,7 @@ function HomeBanner() {
             <div className="home-banner-container">
             <div className="home-banner-copy">
             <h1>The World&apos;s Largest Online Referral Network</h1>
-            <p>World&apos;s No.1 Referral Portal for</p>
+            <p>World&apos;s No.1 Referral Portal</p>
             </div>
             <div className="home-btns">
             <Link to="/registerbusiness">
