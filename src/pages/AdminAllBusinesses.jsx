@@ -19,7 +19,7 @@ function AdminAllBusinesses() {
                 setBusiness(response.data.$values); // Assuming response.data is an array of users
                 
                 console.log('Sending request to fetch businesses...');
-axios.get('http://localhost:7110/api/Business/getbusinesses')
+axios.get(`${apiUrl}/api/Business/getbusinesses`)
   .then(response => {
     console.log('Successfully fetched businesses:', response.data);
   })

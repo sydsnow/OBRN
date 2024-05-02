@@ -128,7 +128,7 @@ if (!service.fkBusinessId) {
             {successMessage && <div className="success-message">{successMessage}</div>}
             {errorMessage && <div className="error-message">{errorMessage}</div>}
 
-            <div className="form-group-service">
+            <div className="form-group">
 
                 <input
                     className='input'
@@ -141,7 +141,7 @@ if (!service.fkBusinessId) {
                 />
                 <label className="label" htmlFor="serviceName">Service Name</label>
             </div>
-            <div className="form-group-service">
+            <div className="form-group">
 
                 <textarea
                     className='input'
@@ -155,8 +155,8 @@ if (!service.fkBusinessId) {
                 <label className="label" htmlFor="description">Description</label>
             </div>
 
-<div className="form-group-service">
-    <label className="service-label" htmlFor="image">Image URL</label>
+<div className="form-group">
+
     <input
         className='input'
         type="text"
@@ -167,6 +167,7 @@ if (!service.fkBusinessId) {
         value={service.image}
         onChange={handleChange}
     />
+        <label className="label" htmlFor="image">Image URL</label>
 </div>
 
             {/* <div className="form-group-service">
@@ -182,7 +183,7 @@ if (!service.fkBusinessId) {
                     onChange={handleChange}
                 />
             </div> */}
-            <div className="form-group-service">
+            <div className="form-group">
 
                 <input
                     type="number"
@@ -197,7 +198,7 @@ if (!service.fkBusinessId) {
                 <label className="label" htmlFor="basePrice">Base Price</label>
             </div>
 
-            <div className="form-group-service">
+            <div className="form-group">
             <select
     className='input2'
     required
@@ -216,7 +217,7 @@ if (!service.fkBusinessId) {
 
                 <label className="label" htmlFor="fkCategoryId">Category</label>
             </div>
-            <div className="form-group-service">
+            <div className="form-group">
     <select
         className='input'
         id="fkDiscountId"
@@ -233,8 +234,9 @@ if (!service.fkBusinessId) {
     </select>
     <label className="label" htmlFor="fkDiscountId">Discount</label>
 </div>
-
+            <div className="button-container">
             <button type="submit">Add Service</button>
+            </div>
         </form>
     </div>
 </div>

@@ -6,6 +6,8 @@ import AddCategory from "../components/AddCategory";
 function AdminAllCategories() {
     const [category, setCategory] = useState([]);
     const [showAddCategory, setShowAddCategory] = useState(false); // State to control visibility
+    const [deleteMessage, setDeleteMessage] = useState('');
+    // const [errorMessage, setErrorMessage] = useState('');
 
     useEffect(() => {
         const fetchCategories = async () => {
@@ -25,6 +27,10 @@ function AdminAllCategories() {
             const apiUrl = import.meta.env.VITE_API_BASE_URL;
             await axios.delete(`${apiUrl}/api/Category/${categoryId}`);
             setCategory(category.filter(category => category.pkCategoryId !== categoryId));
+            setDeleteMessage('Category deleted successfully!');
+            setTimeout(() => {
+                setDeleteMessage('');
+            }, 10000);
         } catch (error) {
             console.error('Failed to delete category: ', error);
         }
@@ -35,7 +41,9 @@ function AdminAllCategories() {
             <div className="admin">
                 <Link to="/admin"><button>Back to Admin</button></Link>
                 <div className="admin-category-container">
+              
                     <h1>All Categories</h1>
+                    {deleteMessage && <div className="admin-delete-message">{deleteMessage}</div>}
                     <button onClick={() => setShowAddCategory(!showAddCategory)}>Add Category</button>
                     {showAddCategory && (
                         <div className="admin-category-box">
