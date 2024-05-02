@@ -17,14 +17,15 @@ function ServiceGallery ({ services }) {
                 const apiUrl = import.meta.env.VITE_API_BASE_URL;
 
                 // Fetch discounts for each service
-                const promises = services.map(service => {
+                const promises = services.map(async service => {
                     // Assuming service has a fkDiscountId
-                    return fetch(`${apiUrl}/discount/${service.fkDiscountId}`)
-                        .then(response => response.json())
-                        .catch(error => {
-                            console.error('Error fetching discount:', error);
-                            return null; // Return null in case of error
-                        });
+                    try {
+                        const response = await fetch(`${apiUrl}/discount/${service.fkDiscountId}`);
+                        return await response.json();
+                    } catch (error) {
+                        console.error('Error fetching discount:', error);
+                        return null;
+                    }
                 });
 
                 // Wait for all discount fetch requests to complete

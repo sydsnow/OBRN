@@ -11,16 +11,7 @@ import ProfileBannerBusiness from '../components/ProfileBannerBusiness';
 function BusinessProfile () {
     // State to handle the selected category
     const [category, setCategory] = useState('');
-    const [services, setServices] = useState({
-        pkSerivceId: '',
-        image: '',
-        fkBusinessId: '',
-        serviceName: '',
-        description: '',
-        fkDiscountId: '',
-        fkCategoryId: '',
-        basePrice: '',
-    });
+    const [services, setServices] = useState([]);
 
     useEffect(() => {
         // Fetch the token from localStorage
