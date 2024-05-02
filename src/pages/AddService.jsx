@@ -16,6 +16,16 @@ function AddServicePage() {
     //     setSelectedCategory(e.target.value);
     // };
 
+    const serviceObj = {
+        fkBusinessId: '',
+        serviceName: '',
+        description: '',
+        basePrice: 0,
+        fkCategoryId: '',
+        fkDiscountId: '',
+        image: '',
+    }
+
     return (
         <div>
             <div className="testimonials-banner">
@@ -30,7 +40,7 @@ function AddServicePage() {
             </div>
             <div className="add-service">
                 {/* <h2 className="add-service-title">Add Service</h2> */}
-                <CreateService />
+                <CreateService serviceObj={serviceObj}/>
                 {/* <ServiceForm /> */}
                 {/* <form className="add-service-form">
                     <div className="form-group-service">
