@@ -2,6 +2,8 @@ import { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useParams } from 'react-router-dom';
 import "../scss/components/_serviceform.scss";
+import { useLocation } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 
 
 function CreateService() {
@@ -19,6 +21,10 @@ function CreateService() {
     const [discounts, setDiscounts] = useState([]);
     const [successMessage, setSuccessMessage] = useState('');
     const [errorMessage, setErrorMessage] = useState('');
+
+    const location = useLocation();
+    const isEditServicePage = location.pathname.includes("/editservice");
+
 
     useEffect(() => {
         const token = localStorage.getItem('token');
@@ -124,7 +130,7 @@ if (!service.fkBusinessId) {
 <div className="wrapper">
     <div className="service-container">
         <form className="service-form" onSubmit={handleSubmit}>
-            <h2>Add Service</h2>
+            <h2>{isEditServicePage ? 'Edit Service' : 'Add Service'}</h2>
             {successMessage && <div className="success-message">{successMessage}</div>}
             {errorMessage && <div className="error-message">{errorMessage}</div>}
 
@@ -192,6 +198,7 @@ if (!service.fkBusinessId) {
                     autoComplete='off'
                     id="basePrice"
                     name="basePrice"
+                    min="0"
                     value={service.basePrice}
                     onChange={handleChange}
                 />
@@ -235,7 +242,11 @@ if (!service.fkBusinessId) {
     <label className="label" htmlFor="fkDiscountId">Discount</label>
 </div>
             <div className="button-container">
-            <button type="submit">Add Service</button>
+                <button><NavLink to="/businessprofile">Cancel</NavLink></button>
+                <button type="submit">Save</button>
+                {isEditServicePage && (
+                    <button className="delete-button">Delete</button>
+                )}
             </div>
         </form>
     </div>
