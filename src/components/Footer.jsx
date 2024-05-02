@@ -35,6 +35,7 @@ function Footer() {
           <Link to="/about" className="footer-link">OUR HISTORY</Link>
           <Link to="/termscondition" className="footer-link">TERMS & CONDITIONS</Link>
           <Link to="/privacystatement" className="footer-link">PRIVACY STATEMENT</Link>
+          <Link to="/cancellationpolicy" className="footer-link">CANCELLATION POLICY</Link>
           <Link to="/businessprofile" className="footer-link">BUSINESS PROFILE</Link>
           <Link to="/customerprofile" className="footer-link">CUSTOMER PROFILE</Link>
         </div>
