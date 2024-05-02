@@ -20,7 +20,7 @@ jobs:
         with:
           submodules: true
           lfs: false
-          node-version: 20
+          node-version: 18
           run: npm ci
       - name: Build And Deploy
         id: builddeploy
