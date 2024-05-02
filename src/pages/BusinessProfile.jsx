@@ -1,45 +1,93 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+import axios from 'axios';
 import cat from '../assets/cat.jpeg';
-import hair from "../assets/hair.jpeg";
-import nails from "../assets/nails.jpeg";
-import facial from "../assets/facial.jpeg";
-import botox from "../assets/botox.jpeg";
+// import hair from "../assets/hair.jpeg";
+// import nails from "../assets/nails.jpeg";
+// import facial from "../assets/facial.jpeg";
+// import botox from "../assets/botox.jpeg";
 import ServiceGallery from "../components/ServiceGallery";
 import ProfileBannerBusiness from '../components/ProfileBannerBusiness';
 
 function BusinessProfile () {
     // State to handle the selected category
     const [category, setCategory] = useState('');
-    const services = [
-        {
-            id: 1,
-            service: "Nails",
-            price: 80,
-            image: nails,
-            discount: 10
-        },
-        {
-            id: 2, 
-            service: "Hair",
-            price: 120,
-            image: hair,
-            //discount: 25
-        },
-        {
-            id: 3,
-            service: "Botox",
-            price: 12,
-            image: botox,
-            discount: 15,
-        },
-        {
-            id: 4,
-            service: "Facial",
-            price: 300,
-            image: facial,
-            discount: 50
+    const [services, setServices] = useState({
+        pkSerivceId: '',
+        image: '',
+        fkBusinessId: '',
+        serviceName: '',
+        description: '',
+        fkDiscountId: '',
+        fkCategoryId: '',
+        basePrice: '',
+    });
+
+    useEffect(() => {
+        // Fetch the token from localStorage
+        const token = localStorage.getItem('token');
+        console.log('token:', token);
+    
+        if (token) {
+            const apiUrl = import.meta.env.VITE_API_BASE_URL;
+            axios.get(`${apiUrl}/getbusiness/${token.email}`, {
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                },
+            })
+            .then(response => {
+                // Assuming response.data contains the business data including pkBusinessId
+                const pkBusinessId = response.data.pkBusinessId;
+    
+                axios.get(`${apiUrl}/service/${pkBusinessId}`, {
+                    headers: {
+                        Authorization: `Bearer ${token}`,
+                    },
+                })
+                .then(serviceResponse => {
+                    // Assuming serviceResponse.data contains the list of services
+                    setServices(serviceResponse.data.$values);
+                })
+                .catch(error => {
+                    console.error('Error fetching services:', error);
+                });
+            })
+            .catch(error => {
+                console.error('Error fetching business data:', error);
+            });
         }
-    ]
+    }, []);
+    
+        
+    // const services = [
+    //     {
+    //         id: 1,
+    //         service: "Nails",
+    //         price: 80,
+    //         image: nails,
+    //         discount: 10
+    //     },
+    //     {
+    //         id: 2, 
+    //         service: "Hair",
+    //         price: 120,
+    //         image: hair,
+    //         //discount: 25
+    //     },
+    //     {
+    //         id: 3,
+    //         service: "Botox",
+    //         price: 12,
+    //         image: botox,
+    //         discount: 15,
+    //     },
+    //     {
+    //         id: 4,
+    //         service: "Facial",
+    //         price: 300,
+    //         image: facial,
+    //         discount: 50
+    //     }
+    // ]
 
     return (
         <div className="business-profile">
