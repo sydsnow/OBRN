@@ -23,15 +23,20 @@ function RegisterBusiness(){
         logo: '',
         password: '',
         confirmPassword: '',
+        // if registering breaks, it might be this 
+        fkReferralId: '',
     });
 
     const [errorMessage, setErrorMessage] = useState('');
+
+    const [isValidReferral, setIsValidReferral] = useState(false);
+
 
     // const handleChange = (e) => {
     //     setBusiness({ ...business, [e.target.name]: e.target.value });
     // };
 
-    const handleChange = (e) => {
+    const handleChange = async (e) => {
         let value = e.target.value;
         let errorMessage = '';
 
@@ -50,6 +55,22 @@ function RegisterBusiness(){
                 value = value.slice(0, 30);
                 if (value.length === 30) {
                     errorMessage = 'Username is limited to 30 characters.';
+                }
+                break;
+            // if registering breaks, it might be this 
+            case 'fkReferralId':
+                try {
+                    const apiUrl = import.meta.env.VITE_API_BASE_URL;
+                    const response = await axios.get(`${apiUrl}/getreferral/${value}`);
+                    if(response.data) {
+                        setIsValidReferral(true);
+                    } else {
+                        setIsValidReferral(false);
+                        errorMessage = 'Invalid referral code';
+                    }
+                } catch (error) {
+                    console.error('Error validating referral code: ', error);
+                    // Handle the error, maybe display an error message
                 }
                 break;
             default:
@@ -91,6 +112,11 @@ function RegisterBusiness(){
 
         if (business.password !== business.confirmPassword) {
             setErrorMessage('Password and Confirm Password must match');
+            return;
+        }
+        // if registering breaks, it might be this 
+        if (!isValidReferral) {
+            setErrorMessage('Please enter a valid referral code.');
             return;
         }
 
@@ -322,6 +348,19 @@ function RegisterBusiness(){
             onChange={handleChange}
         />
         <label className="label" htmlFor="confirmPassword"> <i className="fa-solid fa-key"></i> Confirm Password</label>
+        </div>
+        <div className="form-group">
+        <input 
+            className='input' 
+            type="text" 
+            id="fkReferralId" 
+            //required="false"
+            autoComplete='off' 
+            name="fkReferralId"
+            value={business.fkReferralId}
+            onChange={handleChange}
+        />
+        <label className="label" htmlFor="fkReferralId">Referral Code <small> *optional</small></label>
         </div>
 
         <button type="submit">Register</button>
