@@ -30,6 +30,7 @@ import About from "../pages/About";
 import PageNotFound from "../pages/PageNotFound";
 import PageComingSoon from "../pages/PageComingSoon";
 import TermsCondition from "../pages/TermsCondition";
+import CancellationPolicy from "../pages/CancellationPolicy";
 import PrivacyStatement from "../pages/PrivacyStatement";
 
 import Admin from "../pages/Admin";
@@ -92,6 +93,7 @@ function AppRouter() {
           <Route path="/membershipinfo" element={<MembershipInfo />} />
           <Route path="/termscondition" element={<TermsCondition />} />
           <Route path="/privacystatement" element={<PrivacyStatement />} />
+          <Route path="/cancellationpolicy" element={<CancellationPolicy />} />
 
           {authenticated && (
           <Route path="/editprofile/mydetails" element={<EditProfileMyDetails />} />
@@ -119,7 +121,7 @@ function AppRouter() {
           <Route path="/admin-all-discounts" element={<AdminAllDiscounts />} />
           <Route path="/add-discount" element={<AddDiscount />} />
           <Route path="/admin-fees" element={<AdminFees />} />
-          <Route path="//editservice/:id" element={<EditService />} />
+          <Route path="/editservice/:id" element={<EditService />} />
           <Route path="/create-service/:id" element={<CreateService />} />
           <Route path="/add-service/:id" element={<ServiceForm />} />
         </Routes>

@@ -2,23 +2,22 @@ import { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useParams } from 'react-router-dom';
 import "../scss/components/_serviceform.scss";
+import { useLocation } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
+import PropTypes from 'prop-types';
 
 
-function CreateService() {
+function CreateService({ serviceObj = {} }) {
     const { id } = useParams(); // Assuming 'id' here would be the business ID or relevant identifier
-    const [service, setService] = useState({
-        fkBusinessId: '',
-        serviceName: '',
-        description: '',
-        basePrice: 0,
-        fkCategoryId: '',
-        fkDiscountId: '',
-        image: '',
-    });
+    const [service, setService] = useState(serviceObj);
     const [categories, setCategories] = useState([]);
     const [discounts, setDiscounts] = useState([]);
     const [successMessage, setSuccessMessage] = useState('');
     const [errorMessage, setErrorMessage] = useState('');
+
+    const location = useLocation();
+    const isEditServicePage = location.pathname.includes("/editservice");
+
 
     useEffect(() => {
         const token = localStorage.getItem('token');
@@ -124,7 +123,7 @@ if (!service.fkBusinessId) {
 <div className="wrapper">
     <div className="service-container">
         <form className="service-form" onSubmit={handleSubmit}>
-            <h2>Add Service</h2>
+            <h2>{isEditServicePage ? 'Edit Service' : 'Add Service'}</h2>
             {successMessage && <div className="success-message">{successMessage}</div>}
             {errorMessage && <div className="error-message">{errorMessage}</div>}
 
@@ -136,7 +135,7 @@ if (!service.fkBusinessId) {
                     autoComplete='off'
                     id="serviceName"
                     name="serviceName"
-                    value={service.serviceName}
+                    value={service.serviceName || ''}
                     onChange={handleChange}
                 />
                 <label className="label" htmlFor="serviceName">Service Name</label>
@@ -149,7 +148,7 @@ if (!service.fkBusinessId) {
                     autoComplete='off'
                     id="description"
                     name="description"
-                    value={service.description}
+                    value={service.description || ''}
                     onChange={handleChange}
                 />
                 <label className="label" htmlFor="description">Description</label>
@@ -164,7 +163,7 @@ if (!service.fkBusinessId) {
         autoComplete='off'
         id="image"
         name="image"
-        value={service.image}
+        value={service.image || ''}
         onChange={handleChange}
     />
         <label className="label" htmlFor="image">Image URL</label>
@@ -192,7 +191,8 @@ if (!service.fkBusinessId) {
                     autoComplete='off'
                     id="basePrice"
                     name="basePrice"
-                    value={service.basePrice}
+                    min="0"
+                    value={service.basePrice || ''}
                     onChange={handleChange}
                 />
                 <label className="label" htmlFor="basePrice">Base Price</label>
@@ -235,12 +235,27 @@ if (!service.fkBusinessId) {
     <label className="label" htmlFor="fkDiscountId">Discount</label>
 </div>
             <div className="button-container">
-            <button type="submit">Add Service</button>
+                <button><NavLink to="/businessprofile">Cancel</NavLink></button>
+                <button type="submit">Save</button>
+                {isEditServicePage && (
+                    <button className="delete-button">Delete</button>
+                )}
             </div>
         </form>
     </div>
 </div>
     );
 }
+CreateService.propTypes = {
+    serviceObj: PropTypes.shape({
+        fkBusinessId: PropTypes.string,
+        serviceName: PropTypes.string,
+        description: PropTypes.string,
+        basePrice: PropTypes.number,
+        fkCategoryId: PropTypes.string,
+        fkDiscountId: PropTypes.string,
+        image: PropTypes.string,
+    }),
+};
 
 export default CreateService;
