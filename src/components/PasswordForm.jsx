@@ -50,7 +50,7 @@ function PasswordForm() {
             setErrorMessage('New Password must be at least 8 characters long and contain at least one lowercase letter, one uppercase letter, one numeric digit, and one special character.');
             setTimeout(() => {
                 setErrorMessage('');
-            }, 5000);
+            }, 3000);
             return;
         }
 

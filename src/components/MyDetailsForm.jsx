@@ -125,14 +125,18 @@ const MyDetailsForm = () => {
 
         try {
             const response = await axios.post(`${apiUrl}/api/customer/editcustomer`, userDetails);
-            console.log(response.data);
+            console.log("response: ", response.data);
+            setErrorMessage(response.data);
+            setTimeout(() => {
+                setErrorMessage('');
+            }, 3000);
         } catch (error) {
             console.error('Updating customer failed: ', error);
             console.log("error.response.data: ", error.response.data);
             if (error.response && error.response.data) {
-                setErrorMessage(`Registration failed: ${error.response.data}`);
+                setErrorMessage(`Updating customer details failed: ${error.response.data}`);
             } else {
-                setErrorMessage('Registration failed. Please try again later.');
+                setErrorMessage('Updating customer details failed. Please try again later.');
             }
         }
     }
@@ -188,18 +192,6 @@ const MyDetailsForm = () => {
                     name="birthdate"
                     required
                     value={userDetails.birthdate}
-                    onChange={handleChange}
-                />
-            </div>
-            <div className="profile-form-group">
-                <label className="profile-label" htmlFor="email">Email</label>
-                <input
-                    className="input"
-                    type="email"
-                    id="email"
-                    name="email"
-                    required
-                    value={userDetails.email}
                     onChange={handleChange}
                 />
             </div>
