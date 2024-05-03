@@ -1,5 +1,8 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { AuthProvider } from '../auth/AuthContext';
+import { useEffect } from 'react';
+import { useLocation } from 'react-router-dom';
+
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 import HomePage from '../pages/HomePage';
@@ -42,7 +45,18 @@ import AdminAllDiscounts from "../pages/AdminAllDiscounts";
 import AddDiscount from "../pages/AddDiscount";
 import AdminFees from "../pages/AdminFees";
 
+
 import EditService from "../pages/EditService";
+
+function ScrollToTop() {
+  const location = useLocation();
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [location]); 
+
+  return null;
+}
 
 
 function AppRouter() {
@@ -52,6 +66,7 @@ function AppRouter() {
   return (
     <BrowserRouter>
       <AuthProvider>
+      <ScrollToTop />
         <Header />
         <Routes>
           <Route path="/" element={<HomePage />} />
@@ -60,8 +75,12 @@ function AppRouter() {
           <Route path="/admin" element={<Admin />} />
           <Route path="/testservices" element={<TestServices />} />
           <Route path="/testregister" element={<TestRegisterPage />} />
-          <Route path="/registercustomer" element={<RegisterCustomer />} />
-          <Route path="/registerbusiness" element={<RegisterBusiness />} />
+          {!authenticated && (
+            <>
+              <Route path="/registercustomer" element={<RegisterCustomer />} />
+              <Route path="/registerbusiness" element={<RegisterBusiness />} />
+            </>
+          )}
           <Route path="/customerprofile" element={<CustomerProfile />} />
           <Route path="/businessprofile" element={<BusinessProfile />} />
           <Route path="/editprofile" element={<EditProfile />} />

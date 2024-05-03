@@ -100,8 +100,8 @@ function RegisterCustomer(){
             const response = await axios.post(`${apiUrl}/api/customer/addcustomer`, customer);
             const { message, token } = response.data;
             console.log(message);
-            localStorage.setItem('token', token);
-            axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
+            localStorage.setItem('token', token.result);
+            axios.defaults.headers.common['Authorization'] = `Bearer ${token.result}`;
             navigate('/');
         } catch (error) {
             console.error('Registration failed: ', error);
