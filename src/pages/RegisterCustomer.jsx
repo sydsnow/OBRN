@@ -19,11 +19,15 @@ function RegisterCustomer(){
         password: '',
         confirmPassword: '',
         photo: placeholderImg,
+        // if registering breaks, it might be this 
+        fkReferralId: '',
     });
+
+    const [isValidReferral, setIsValidReferral] = useState(false);
 
     const [errorMessage, setErrorMessage] = useState('');
 
-    const handleChange = (e) => {
+    const handleChange = async (e) => {
         let value = e.target.value;
         let errorMessage = '';
     
@@ -45,6 +49,22 @@ function RegisterCustomer(){
                 value = value.slice(0, 20);
                 if (value.length === 20) {
                     errorMessage = 'Username is limited to 20 characters.';
+                }
+                break;
+            // if registering breaks, it might be this 
+            case 'fkReferralId':
+                try {
+                    const apiUrl = import.meta.env.VITE_API_BASE_URL;
+                    const response = await axios.get(`${apiUrl}/getreferral/${value}`);
+                    if(response.data) {
+                        setIsValidReferral(true);
+                    } else {
+                        setIsValidReferral(false);
+                        errorMessage = 'Invalid referral code';
+                    }
+                } catch (error) {
+                    console.error('Error validating referral code: ', error);
+                    // Handle the error, maybe display an error message
                 }
                 break;
             default:
@@ -69,7 +89,12 @@ function RegisterCustomer(){
             setErrorMessage('Password and Confirm Password must match.');
             return;
         }
-    
+        // if registering breaks, it might be this 
+        if (!isValidReferral) {
+            setErrorMessage('Please enter a valid referral code.');
+            return;
+        }
+
         try {
             const apiUrl = import.meta.env.VITE_API_BASE_URL;
             const response = await axios.post(`${apiUrl}/api/customer/addcustomer`, customer);
@@ -204,6 +229,19 @@ function RegisterCustomer(){
             onChange={handleChange}
         />
         <label className="label" htmlFor="confirmPassword"> <i className="fa-solid fa-key"></i> Confirm Password</label>
+        </div>
+        <div className="form-group">
+        <input 
+            className='input' 
+            type="text" 
+            id="fkReferralId" 
+            autoComplete='off' 
+            name="fkReferralId"
+            required
+            value={customer.fkReferralId}
+            onChange={handleChange}
+        />
+        <label className="label" htmlFor="fkReferralId">Referral Code <small> *optional</small></label>
         </div>
         <div className="form-group">
     <input className='input-checkbox' type="checkbox" id="overEighteen" name="confirm18" required value={customer.confirm18} onChange={handleChange} />
