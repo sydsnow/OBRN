@@ -1,13 +1,29 @@
 import "../scss/components/_services.scss";
-import { useState } from "react";
-import hair from "../assets/hair.jpeg";
-import nails from "../assets/nails.jpeg";
-import facial from "../assets/facial.jpeg";
-import botox from "../assets/botox.jpeg";
+import { useEffect, useState } from "react";
+import axios from "axios";
+// import hair from "../assets/hair.jpeg";
+// import nails from "../assets/nails.jpeg";
+// import facial from "../assets/facial.jpeg";
+// import botox from "../assets/botox.jpeg";
 import ServiceGallery from "../components/ServiceGallery";
 
 
 function ServicesPage () {
+
+    const [services, setServices] = useState([]);
+
+    useEffect (() => {
+        const fetchServices = async () => {
+            try {
+                const apiUrl = import.meta.env.VITE_API_BASE_URL;
+                const response = await axios.get(`${apiUrl}/services`); 
+                setServices(response.data.$values);
+            } catch (error) {
+                console.error('Failed to fetch services:', error);
+            }
+        }
+        fetchServices();
+    }, []);
     
     // Define your sorting options
     const sortingOptions = ["Newest", "Oldest", "Price: High to Low", "Price: Low to High"];
@@ -24,36 +40,36 @@ function ServicesPage () {
         // else if (e.target.value === "Oldest") { ... }
     };
 
-    const services = [
-        {
-            id: 1,
-            service: "Nails",
-            price: 80,
-            image: nails,
-            discount: 10
-        },
-        {
-            id: 2, 
-            service: "Hair",
-            price: 120,
-            image: hair,
-            //discount: 25
-        },
-        {
-            id: 3,
-            service: "Botox",
-            price: 12,
-            image: botox,
-            discount: 15,
-        },
-        {
-            id: 4,
-            service: "Facial",
-            price: 300,
-            image: facial,
-            discount: 50
-        }
-    ]
+    // const services = [
+    //     {
+    //         id: 1,
+    //         service: "Nails",
+    //         price: 80,
+    //         image: nails,
+    //         discount: 10
+    //     },
+    //     {
+    //         id: 2, 
+    //         service: "Hair",
+    //         price: 120,
+    //         image: hair,
+    //         //discount: 25
+    //     },
+    //     {
+    //         id: 3,
+    //         service: "Botox",
+    //         price: 12,
+    //         image: botox,
+    //         discount: 15,
+    //     },
+    //     {
+    //         id: 4,
+    //         service: "Facial",
+    //         price: 300,
+    //         image: facial,
+    //         discount: 50
+    //     }
+    // ]
 
     return (
         <div className="services">
