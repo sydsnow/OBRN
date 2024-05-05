@@ -24,7 +24,7 @@ function RegisterBusiness(){
         password: '',
         confirmPassword: '',
         // if registering breaks, it might be this 
-        fkReferralId: '',
+        fkReferralId: null,
     });
 
     const [errorMessage, setErrorMessage] = useState('');
@@ -61,7 +61,7 @@ function RegisterBusiness(){
             case 'fkReferralId':
                 try {
                     const apiUrl = import.meta.env.VITE_API_BASE_URL;
-                    const response = await axios.get(`${apiUrl}/getreferral/${value}`);
+                    const response = await axios.get(`${apiUrl}/api/referral/getreferral/${value}`);
                     if(response.data) {
                         setIsValidReferral(true);
                     } else {
@@ -115,7 +115,7 @@ function RegisterBusiness(){
             return;
         }
         // if registering breaks, it might be this 
-        if (!isValidReferral) {
+        if (!isValidReferral && business.fkReferralId) {
             setErrorMessage('Please enter a valid referral code.');
             return;
         }
@@ -355,7 +355,6 @@ function RegisterBusiness(){
             className='input' 
             type="text" 
             id="fkReferralId" 
-            //required="false"
             autoComplete='off' 
             name="fkReferralId"
             value={business.fkReferralId}
