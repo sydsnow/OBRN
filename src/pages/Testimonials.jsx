@@ -37,7 +37,7 @@ function TestimonialsPage() {
             const updatedTestimonials = await Promise.all(
                 fetchedTestimonials.map(async testimonial => {
                     const businessId = testimonial.fkBusinessId;
-                    const businessResponse = await axios.get(`${apiUrl}/api/Business/getbusiness/${businessId}`);
+                    const businessResponse = await axios.get(`${apiUrl}/api/Business/get-business/${businessId}`);
                     const business = businessResponse.data;
                     
                     // Merge testimonial object with business information

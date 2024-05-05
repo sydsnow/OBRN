@@ -12,7 +12,7 @@ function AdminAllCustomers() {
         const fetchUsers = async () => {
             try {
                 const apiUrl = import.meta.env.VITE_API_BASE_URL;
-                const response = await axios.get(`${apiUrl}/api/customer/getcustomers`);
+                const response = await axios.get(`${apiUrl}/api/customer/get-customers`);
                 setUsers(response.data.$values); // Assuming response.data is an array of users
             } catch (error) {
                 console.error('Failed to fetch users: ', error);

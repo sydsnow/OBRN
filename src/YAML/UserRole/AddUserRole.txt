@@ -9,7 +9,7 @@ tags:
   - name: 'User Role'
     description: 'Operations related to user roles'
 paths:
-  /adduserrole:
+  /add-user-role:
     post:
       tags:
         - 'User Role'

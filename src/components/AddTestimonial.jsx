@@ -27,7 +27,7 @@ const [errorMessage, setErrorMessage] = useState('');
         if (token) {
             // Make a request to your API to fetch the business ID associated with the token
             const apiUrl = import.meta.env.VITE_API_BASE_URL;
-            axios.get(`${apiUrl}/api/Business/getbusiness/${id}`, {
+            axios.get(`${apiUrl}/api/Business/get-business/${id}`, {
                 headers: {
                     Authorization: `Bearer ${token}`,
                 },

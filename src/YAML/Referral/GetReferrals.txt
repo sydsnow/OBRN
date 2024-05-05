@@ -3,7 +3,7 @@ info:
   title: OurBeautyReferralNetwork API
   version: 1.0.0
 paths:
-  /getreferrals:
+  /get-referrals:
     get:
       summary: Get all referrals
       responses:

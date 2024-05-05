@@ -3,7 +3,7 @@ info:
   title: OurBeautyReferralNetwork API
   version: 1.0.0
 paths:
-  /createreferralcustomer:
+  /create-referral-customer:
     post:
       summary: Create referral code for customer
       requestBody:

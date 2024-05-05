@@ -8,7 +8,7 @@ import provinces from '../data/provinces';
 
 async function fetchCustomerData(token, apiUrl) {
     const email = getEmailFromJWT(token);
-    const response = await axios.get(`${apiUrl}/api/customer/getcustomerbyemail?email=${email}`);
+    const response = await axios.get(`${apiUrl}/api/customer/get-customer-by-email?email=${email}`);
     axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
     return response.data;
 }
@@ -124,7 +124,7 @@ const MyDetailsForm = () => {
         }
 
         try {
-            const response = await axios.post(`${apiUrl}/api/customer/editcustomer`, userDetails);
+            const response = await axios.post(`${apiUrl}/api/customer/edit-customer`, userDetails);
             console.log("response: ", response.data);
             setErrorMessage(response.data);
             setTimeout(() => {

@@ -3,7 +3,7 @@ info:
   title: SSD Product API
   version: 1.0.0
 paths:
-  /addcustomer:
+  /add-customer:
     post:
       summary: Adds a new customer
       operationId: addCustomer

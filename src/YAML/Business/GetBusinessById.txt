@@ -3,7 +3,7 @@ info:
   title: SSD Product API
   version: 1.0.0
 paths:
-  /getbusiness/{id}:
+  /get-business/{id}:
     get:
       summary: Retrieve a business by ID
       parameters:

@@ -9,7 +9,7 @@ tags:
   - name: 'Customer'
     description: 'Operations related to customer management'
 paths:
-  /deletecustomer/{id}:
+  /delete-customer/{id}:
     delete:
       tags:
         - 'Customer'

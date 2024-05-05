@@ -21,7 +21,7 @@ function EditProfileMyDetails() {
         const token = localStorage.getItem('token');
         if (token) {
           const email = getEmailFromJWT(token);
-          const response = await axios.get(`${apiUrl}/api/customer/getcustomerbyemail?email=${email}`);
+          const response = await axios.get(`${apiUrl}/api/customer/get-customer-by-email?email=${email}`);
           axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
           setUserDetails(response.data);
         }

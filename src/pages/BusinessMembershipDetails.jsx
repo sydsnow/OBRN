@@ -19,7 +19,7 @@ function BusinessMembershipDetails() {
                 const token = localStorage.getItem('token');
                 if (token && businessId) {
                     axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
-                    const response = await axios.get(`${apiUrl}/api/Business/getbusiness/${businessId}`);
+                    const response = await axios.get(`${apiUrl}/api/Business/get-business/${businessId}`);
                     setBusinessDetails(response.data);
                     const feeResponse = await axios.get(`${apiUrl}/fee`);
                     const relevantFees = feeResponse.data.filter(fee => fee.feeType.trim() === (response.data.vip ? "VIP" : "Basic"));
