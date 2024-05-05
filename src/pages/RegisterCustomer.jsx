@@ -20,7 +20,7 @@ function RegisterCustomer(){
         confirmPassword: '',
         photo: placeholderImg,
         // if registering breaks, it might be this 
-        fkReferralId: '',
+        fkReferralId: null,
     });
 
     const [isValidReferral, setIsValidReferral] = useState(false);
@@ -55,7 +55,7 @@ function RegisterCustomer(){
             case 'fkReferralId':
                 try {
                     const apiUrl = import.meta.env.VITE_API_BASE_URL;
-                    const response = await axios.get(`${apiUrl}/getreferral/${value}`);
+                    const response = await axios.get(`${apiUrl}/api/referral/getreferral/${value}`);
                     if(response.data) {
                         setIsValidReferral(true);
                     } else {
@@ -90,7 +90,7 @@ function RegisterCustomer(){
             return;
         }
         // if registering breaks, it might be this 
-        if (!isValidReferral) {
+        if (!isValidReferral && customer.fkReferralId) {
             setErrorMessage('Please enter a valid referral code.');
             return;
         }
@@ -237,7 +237,6 @@ function RegisterCustomer(){
             id="fkReferralId" 
             autoComplete='off' 
             name="fkReferralId"
-            required
             value={customer.fkReferralId}
             onChange={handleChange}
         />
