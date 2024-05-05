@@ -6,7 +6,7 @@ info:
 servers:
   - url: https://api.ourbeautyreferralnetwork.com
 paths:
-  /createreferralbusiness:
+  /create-referral-business:
     post:
       summary: Create referral code for business
       requestBody:

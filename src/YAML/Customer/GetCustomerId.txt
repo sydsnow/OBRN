@@ -3,7 +3,7 @@ info:
   title: SSD Product API
   version: 1.0.0
 paths:
-  /getcustomer/{id}:
+  /get-customer/{id}:
     get:
       summary: Retrieve a customer by ID
       operationId: getCustomerById

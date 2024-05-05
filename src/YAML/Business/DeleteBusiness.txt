@@ -9,7 +9,7 @@ tags:
   - name: 'Business'
     description: 'Operations related to business'
 paths:
-  /deletebusiness/{id}:
+  /delete-business/{id}:
     delete:
       tags:
         - 'Business'

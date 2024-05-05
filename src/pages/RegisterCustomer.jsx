@@ -55,7 +55,7 @@ function RegisterCustomer(){
             case 'fkReferralId':
                 try {
                     const apiUrl = import.meta.env.VITE_API_BASE_URL;
-                    const response = await axios.get(`${apiUrl}/api/referral/getreferral/${value}`);
+                    const response = await axios.get(`${apiUrl}/api/referral/get-referral/${value}`);
                     if(response.data) {
                         setIsValidReferral(true);
                     } else {
@@ -97,7 +97,7 @@ function RegisterCustomer(){
 
         try {
             const apiUrl = import.meta.env.VITE_API_BASE_URL;
-            const response = await axios.post(`${apiUrl}/api/customer/addcustomer`, customer);
+            const response = await axios.post(`${apiUrl}/api/customer/add-customer`, customer);
             console.log("response.data: ", response.data);
             const { message, token, referralId } = response.data;
             console.log(message);

@@ -56,7 +56,7 @@ function PasswordForm() {
 
         try {
             const apiUrl = import.meta.env.VITE_API_BASE_URL;
-            const response = await axios.post(`${apiUrl}/api/customer/updatepassword`, passwordData);
+            const response = await axios.post(`${apiUrl}/api/customer/update-password`, passwordData);
             console.log("response: ", response.data);
             setErrorMessage(response.data);
             setTimeout(() => {

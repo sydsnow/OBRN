@@ -27,7 +27,7 @@ function CreateService({ serviceObj = {} }) {
         if (token) {
 
         // Assuming 'id' is relevant for fetching business details
-        axios.get(`${apiUrl}/api/Business/getbusiness/${id}`, {
+        axios.get(`${apiUrl}/api/Business/get-business/${id}`, {
             headers: {
                 Authorization: `Bearer ${token}`,
             },

@@ -14,7 +14,7 @@ function AdminEditBusiness() {
         const fetchBusiness = async () => {
             try {
                 const apiUrl = import.meta.env.VITE_API_BASE_URL;
-                const response = await axios.get(`${apiUrl}/api/Business/getbusiness/${id}`);
+                const response = await axios.get(`${apiUrl}/api/Business/get-business/${id}`);
                 setBusiness(response.data); // Assuming response.data is the customer details
             } catch (error) {
                 console.error('Failed to fetch business: ', error);
@@ -319,7 +319,7 @@ export default AdminEditBusiness;
 //         const fetchBusiness = async () => {
 //             try {
 //                 const apiUrl = import.meta.env.VITE_API_BASE_URL;
-//                 const response = await axios.get(`${apiUrl}/api/Business/getbusiness/${id}`);
+//                 const response = await axios.get(`${apiUrl}/api/Business/get-business/${id}`);
 //                 setBusiness(response.data); // Assuming response.data is the customer details
 //             } catch (error) {
 //                 console.error('Failed to fetch business: ', error);

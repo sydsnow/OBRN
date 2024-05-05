@@ -9,7 +9,7 @@ tags:
   - name: 'Roles'
     description: 'Operations related to role management'
 paths:
-  /getroles:
+  /get-roles:
     get:
       tags:
         - 'Roles'

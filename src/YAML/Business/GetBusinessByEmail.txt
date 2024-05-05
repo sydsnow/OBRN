@@ -3,7 +3,7 @@ info:
   title: SSD Product API
   version: 1.0.0
 paths:
-  /getbusinessbyemail:
+  /get-business-by-email:
     get:
       summary: Retrieve a business by email
       parameters:

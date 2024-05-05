@@ -3,7 +3,7 @@ info:
   title: SSD Product API
   version: 1.0.0
 paths:
-  /getbusinesses:
+  /get-businesses:
     get:
       summary: Retrieve all businesses
       responses:
