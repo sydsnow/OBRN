@@ -46,6 +46,8 @@ import AdminEditBusiness from "../pages/AdminEditBusiness";
 import AdminAllDiscounts from "../pages/AdminAllDiscounts";
 import AddDiscount from "../pages/AddDiscount";
 import AdminFees from "../pages/AdminFees";
+import ServiceAdd from "../pages/ServiceAdd";
+import ServiceEdit from "../pages/ServiceEdit";
 
 
 import EditService from "../pages/EditService";
@@ -123,10 +125,16 @@ function AppRouter() {
           <Route path="/admin-all-discounts" element={<AdminAllDiscounts />} />
           <Route path="/add-discount" element={<AddDiscount />} />
           <Route path="/admin-fees" element={<AdminFees />} />
-          <Route path="/editservice/:id" element={<EditService />} />
+          <Route path="/edit-service/:id" element={<EditService />} />
+          <Route path="/service-add/:id" element={<ServiceAdd />} />
+          <Route path="/service-edit/:serviceId" element={<ServiceEdit />} />
+          {/* <Route path="/editservice/:id" element={<EditService />} /> */}
           <Route path="/create-service/:id" element={<CreateService />} />
           <Route path="/add-service/:id" element={<ServiceForm />} />
+
           <Route path="/businessprofile/:businessId" element={<BusinessProfile />} />
+          
+    
 
         </Routes>
         <Footer />

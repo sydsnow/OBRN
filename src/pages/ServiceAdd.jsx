@@ -2,116 +2,84 @@ import { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useParams } from 'react-router-dom';
 import "../scss/components/_serviceform.scss";
-import { useLocation } from 'react-router-dom';
 import { NavLink } from 'react-router-dom';
+
 import PropTypes from 'prop-types';
 
-
-function CreateService({ serviceObj = {} }) {
-    const { id } = useParams(); // Assuming 'id' here would be the business ID or relevant identifier
+function ServiceAdd({ serviceObj = {} }) {
+    const { id } = useParams(); // Assuming 'id' is relevant for fetching related data, like business ID
     const [service, setService] = useState(serviceObj);
     const [categories, setCategories] = useState([]);
     const [discounts, setDiscounts] = useState([]);
     const [successMessage, setSuccessMessage] = useState('');
     const [errorMessage, setErrorMessage] = useState('');
 
-    const location = useLocation();
-    const isEditServicePage = location.pathname.includes("/editservice");
-
-
-    
-
     useEffect(() => {
         const token = localStorage.getItem('token');
-        console.log('token:', token);
         const apiUrl = import.meta.env.VITE_API_BASE_URL;
-        setService(serviceObj);
-        if (token) {
 
-        // Assuming 'id' is relevant for fetching business details
-        axios.get(`${apiUrl}/api/Business/getbusiness/${id}`, {
-            headers: {
-                Authorization: `Bearer ${token}`,
-            },
+
+                // Assuming 'id' is relevant for fetching business details
+                axios.get(`${apiUrl}/api/Business/getbusiness/${id}`, {
+                    headers: {
+                        Authorization: `Bearer ${token}`,
+                    },
+                })
+                .then(response => {
+                    const pkBusinessId = response.data.pkBusinessId; // Assuming this is the correct path
+                    if (pkBusinessId) {
+                        setService(prevState => ({ ...prevState, fkBusinessId: pkBusinessId }));
+                        console.log('businessId:', pkBusinessId);
+                    } else {
+                        console.error('No business ID found in the response');
+                    }
+                })
+                
+                .catch(error => {
+                    console.error('Error fetching business ID:', error);
+                    console.error('Error details:', error.response?.data);
+                });
+
+        // Fetch categories
+        axios.get(`${apiUrl}/Category`, {
+            headers: { Authorization: `Bearer ${token}` }
         })
         .then(response => {
-            const pkBusinessId = response.data.pkBusinessId; // Assuming this is the correct path
-            if (pkBusinessId) {
-                setService(prevState => ({ ...prevState, fkBusinessId: pkBusinessId }));
-                console.log('businessId:', pkBusinessId);
-            } else {
-                console.error('No business ID found in the response');
-            }
-        })
-        
-        .catch(error => {
-            console.error('Error fetching business ID:', error);
-            console.error('Error details:', error.response?.data);
+            setCategories(response.data.$values);
+            console.log('Categories:', response.data.$values)
+        }).catch(error => {
+            console.error('Error fetching categories:', error);
         });
-        
-        
 
-            // Fetch categories
-            axios.get(`${apiUrl}/Category`, {
-                headers: {
-                    Authorization: `Bearer ${token}`,
-                },
-                
-            })
-    
-            .then(response => {
-                setCategories(response.data.$values);
-            }).catch(error => {
-                console.error('Error fetching categories:', error);
-            });
+        // Fetch discounts
+        axios.get(`${apiUrl}/discount`, {
+            headers: { Authorization: `Bearer ${token}` }
+        })
+        .then(response => {
+            setDiscounts(response.data.$values);
+        }).catch(error => {
+            console.error('Error fetching discounts:', error);
+        });
+    }, [id]);
 
-            // Fetch discounts
-            axios.get(`${apiUrl}/discount`, {
-                headers: {
-                    Authorization: `Bearer ${token}`,
-                },
-            }).then(response => {
-                setDiscounts(response.data.$values);
-            }).catch(error => {
-                console.error('Error fetching discounts:', error);
-            });
-
-            // Optionally fetch business ID if needed
-        }
-    }, [id, serviceObj]);
-
-    // const handleChange = (e) => {
-    //     const { name, value } = e.target;
-    //     setService(prevState => ({ ...prevState, [name]: value }));
-    // };
     const handleChange = (e) => {
         try {
-            const { name, type } = e.target;
-            const value = type === 'file' ? e.target.files[0] : e.target.value;
+            const { name, value } = e.target;
             setService(prevState => ({ ...prevState, [name]: value }));
         } catch (error) {
             console.error("Error handling form input change:", error);
         }
     };
-    
-    
 
     const handleSubmit = async (e) => {
         e.preventDefault();
         const apiUrl = import.meta.env.VITE_API_BASE_URL;
         const token = localStorage.getItem('token');
-    
-        if (!service.fkBusinessId) {
-            setErrorMessage("Business ID is required.");
-            return; // Prevent form submission if critical information is missing
-        }
-    
-        const serviceUrl = `${apiUrl}/Service/${isEditServicePage ? 'update' : 'create'}`; // Adjust the API endpoint based on the page
-        const method = isEditServicePage ? 'put' : 'post'; // Choose the method based on the page
-    
+        const serviceUrl = `${apiUrl}/Service/create`;
+
         try {
             const response = await axios({
-                method: method,
+                method: 'post',
                 url: serviceUrl,
                 data: service,
                 headers: {
@@ -119,24 +87,22 @@ function CreateService({ serviceObj = {} }) {
                     'Content-Type': 'application/json'
                 },
             });
-            console.log('Service operation:', response.data);
-            setSuccessMessage(isEditServicePage ? 'Service updated successfully!' : 'Service added successfully!');
+            console.log('Service added:', response.data);
+            setSuccessMessage('Service added successfully!');
         } catch (error) {
-            console.error('Service operation failed: ', error);
-            setErrorMessage(error.response?.data?.message || (isEditServicePage ? 'Failed to update service.' : 'Failed to add service.'));
+            console.error('Failed to add service: ', error);
+            setErrorMessage(error.response?.data?.message || 'Failed to add service.');
         }
     };
-    
-    
-    return (
-<div className="wrapper">
-    <div className="service-container">
-        <form className="service-form" onSubmit={handleSubmit}>
-            <h2>{isEditServicePage ? 'Edit Service' : 'Add Service'}</h2>
-            {successMessage && <div className="success-message">{successMessage}</div>}
-            {errorMessage && <div className="error-message">{errorMessage}</div>}
 
-            <div className="form-group">
+    return (
+        <div className="wrapper">
+            <div className="service-container">
+                <form className="service-form" onSubmit={handleSubmit}>
+                    <h2>Add Service</h2>
+                    {successMessage && <div className="success-message">{successMessage}</div>}
+                    {errorMessage && <div className="error-message">{errorMessage}</div>}
+                    <div className="form-group">
                 <input
                     className='input'
                     required
@@ -231,25 +197,23 @@ function CreateService({ serviceObj = {} }) {
             <div className="button-container">
                 <button><NavLink to="/businessprofile">Cancel</NavLink></button>
                 <button type="submit">Save</button>
-                {isEditServicePage && (
-                    <button className="delete-button">Delete</button>
-                )}
+
             </div>
-        </form>
-    </div>
-</div>
+                </form>
+            </div>
+        </div>
     );
 }
-CreateService.propTypes = {
+
+ServiceAdd.propTypes = {
     serviceObj: PropTypes.shape({
-        fkBusinessId: PropTypes.string,
         serviceName: PropTypes.string,
         description: PropTypes.string,
+        image: PropTypes.string,
         basePrice: PropTypes.number,
         fkCategoryId: PropTypes.string,
         fkDiscountId: PropTypes.string,
-        image: PropTypes.string,
     }),
 };
 
-export default CreateService;
+export default ServiceAdd;

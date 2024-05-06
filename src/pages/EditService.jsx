@@ -7,6 +7,7 @@ import { useParams } from "react-router-dom";
 
 function EditService () {
     const [serviceObj, setServiceObj] = useState({});
+    
     const { id } = useParams();
 
     useEffect(() => {
@@ -22,6 +23,7 @@ function EditService () {
         };
         fetchServiceById();
     }, [id]);
+    
     
 
     return (

@@ -73,6 +73,28 @@ import { useParams } from 'react-router-dom';
         fetchServicesAndDiscounts();
     }, [businessId]);
 
+
+
+    const handleDeleteService = async (serviceId) => {
+        console.log('serviceId:', serviceId);
+        try {
+            const apiUrl = import.meta.env.VITE_API_BASE_URL;
+            const response = await fetch(`${apiUrl}/api/Service/${serviceId}`, {
+                method: 'DELETE',
+            });
+
+            if (!response.ok) {
+                console.error('Failed to delete service:', response.statusText);
+                return;
+            }
+
+            // Remove the deleted service from the list
+            setServices(prevServices => prevServices.filter(service => service.pkServiceId !== serviceId));
+        } catch (error) {
+            console.error('Error deleting service:', error);
+        }
+    }
+
     return (
         <div className="services-gallery-content">
             {services.map((service, index) => (
@@ -85,10 +107,16 @@ import { useParams } from 'react-router-dom';
                             <div className='services-card-info-container'>
                                 <p className="services-card-info-name">{service.serviceName}</p>
                                 {isBusinessProfileRoute && (
-                                    <NavLink to={`/editservice/${service.pkServiceId}`} className="service-card-info-button">
+                                    <NavLink to={`/edit-service/${service.pkServiceId}`} className="service-card-info-button">
                                         Edit
                                     </NavLink>
+
                                 )}
+                            {isBusinessProfileRoute && (
+                                <button className="service-card-info-button" onClick={() => handleDeleteService(service.pkServiceId)}>
+                                    Delete
+                                </button>
+                            )}
                             </div>
                             <div className="services-card-info-prices">
                                 <div>
