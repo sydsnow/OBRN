@@ -25,8 +25,11 @@
             }
         }
         &-info {
-
-        
+            &-name {
+                display: flex;
+                line-height: 0;
+                font-size: 0.9rem;
+            }
             &-prices {
                 font-size: 0.8rem;
                 line-height: 0;

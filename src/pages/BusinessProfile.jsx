@@ -16,13 +16,15 @@ function BusinessProfile () {
             service: "Nails",
             price: 80,
             image: nails,
-            discount: 10
+            discount: 10,
+            businessName: "Nail Salon"
         },
         {
             id: 2, 
             service: "Hair",
             price: 120,
             image: hair,
+            businessName: "Hair Salon",
             //discount: 25
         },
         {
@@ -31,13 +33,15 @@ function BusinessProfile () {
             price: 12,
             image: botox,
             discount: 15,
+            businessName: "Botox Clinic"
         },
         {
             id: 4,
             service: "Facial",
             price: 300,
             image: facial,
-            discount: 50
+            discount: 50,
+            businessName: "Facial Spa"
         }
     ]
 
