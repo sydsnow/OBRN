@@ -81,7 +81,7 @@ function Nav () {
                             ABOUT
                         </NavLink>
                     </li>
-                    {isAuthenticated ? (
+                    {(isAuthenticated && token) ? (
                         <li>
                             {userRoles.includes('customer') ? (
                                 <NavLink to="/customerprofile">

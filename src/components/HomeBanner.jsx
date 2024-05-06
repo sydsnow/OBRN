@@ -1,6 +1,27 @@
+import { useState, useEffect } from 'react';
+import { getEmailFromJWT } from '../utilities/utilities';
+import axios from 'axios';
 import { Link } from 'react-router-dom';
 
 function HomeBanner() {
+    const [isAuthenticated, setIsAuthenticated] = useState(false);
+    const token = localStorage.getItem('token');
+    const apiUrl = import.meta.env.VITE_API_BASE_URL;
+
+    useEffect(() => {
+        async function confirmUser() {
+            if (token) {
+                const email = getEmailFromJWT(token);
+                const response = await axios.get(`${apiUrl}/api/customer/get-customer-by-email?email=${email}`);
+                axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
+                if (response.data) {
+                    setIsAuthenticated(true);
+                }
+            }
+        }
+        confirmUser();
+    }, [token, apiUrl]);
+
     return (
         <div className="home">
         <div className="home-banner">
@@ -10,12 +31,16 @@ function HomeBanner() {
             <p>World&apos;s No.1 Referral Portal</p>
             </div>
             <div className="home-btns">
-            <Link to="/registerbusiness">
-    <button className="home-btn">Join as a Business</button>
-</Link>
-<Link to="/registercustomer">
-    <button className="home-btn">Join as a Customer</button>
-</Link>
+            {(!isAuthenticated && !token) &&
+                <>
+                    <Link to="/registerbusiness">
+                            <button className="home-btn">Join as a Business</button>
+                    </Link>
+                    <Link to="/registercustomer">
+                            <button className="home-btn">Join as a Customer</button>
+                    </Link>
+                </>
+            }
             </div>
             </div>
         </div>

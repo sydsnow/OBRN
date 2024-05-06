@@ -7,7 +7,6 @@ export const AuthProvider = ({ children }) => {
         try {
             const response = await axios.post(`${apiUrl}/api/customer/login`, formData);
             const { token } = response.data;
-            // console.log("token: ", token.result);
             localStorage.setItem('token', token.result);
             setAuthHeaders(token.result); 
             return token.result;
@@ -20,7 +19,6 @@ export const AuthProvider = ({ children }) => {
     const logout = () => {
         localStorage.removeItem('token');
         delete axios.defaults.headers.common['Authorization'];
-        // localStorage.removeItem('authenticated');
     };
 
     return (
