@@ -14,14 +14,15 @@ function EditService () {
             try {
                 const apiUrl = import.meta.env.VITE_API_BASE_URL;
                 const response = await axios.get(`${apiUrl}/service/${id}`);
-                console.log('response:', response.data.$values);
-                setServiceObj(response.data.$values);
+                console.log('Service data:', response.data);
+                setServiceObj(response.data);  // Assuming the data is the service object directly
             } catch (error) {
                 console.error('Failed to fetch service: ', error);
             }
-        }
+        };
         fetchServiceById();
     }, [id]);
+    
 
     return (
         <div className="edit-service">
