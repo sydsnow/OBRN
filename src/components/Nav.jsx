@@ -1,23 +1,34 @@
 import { NavLink, useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { useAuth } from '../auth/authUtils';
-import { getRolesFromJWT } from "../utilities/utilities";
+import axios from 'axios';
+import { getRolesFromJWT, getEmailFromJWT } from "../utilities/utilities";
 import "../scss/components/_nav.scss";
 import logo from '../assets/obrn-logo.png';
 
 function Nav () {
     const [isActive, setIsActive] = useState(false);
     const [userRoles, setUserRoles] = useState([]);
+    const [isAuthenticated, setIsAuthenticated] = useState(false);
     const { logout } = useAuth();
-    const authenticated = localStorage.getItem('token');
+    const token = localStorage.getItem('token');
+    const apiUrl = import.meta.env.VITE_API_BASE_URL;
 
     useEffect(() => {
-        if (authenticated) {
-            const roles = getRolesFromJWT(authenticated);
-            setUserRoles(roles);
+        async function confirmUser() {
+            if (token) {
+                const roles = getRolesFromJWT(token);
+                setUserRoles(roles);
+                const email = getEmailFromJWT(token);
+                const response = await axios.get(`${apiUrl}/api/customer/get-customer-by-email?email=${email}`);
+                axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
+                if (response.data) {
+                    setIsAuthenticated(true);
+                }
+            }
         }
-    }, [authenticated]);
-
+        confirmUser();
+    }, [token, apiUrl]);
     const navigate = useNavigate();
 
     const toggleHamburger = () => {
@@ -70,7 +81,7 @@ function Nav () {
                             ABOUT
                         </NavLink>
                     </li>
-                    {authenticated ? (
+                    {isAuthenticated ? (
                         <li>
                             {userRoles.includes('customer') ? (
                                 <NavLink to="/customerprofile">
