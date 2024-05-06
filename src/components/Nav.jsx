@@ -21,6 +21,7 @@ function Nav () {
                 setUserRoles(roles);
                 const email = getEmailFromJWT(token);
                 const response = await axios.get(`${apiUrl}/api/customer/get-customer-by-email?email=${email}`);
+                console.log(response)
                 axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
                 if (response.data) {
                     setIsAuthenticated(true);

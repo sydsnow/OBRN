@@ -6,25 +6,28 @@ import kitty from '../assets/kitty.jpg';
 
 function CustomerProfile() {
     const [customer, setCustomer] = useState(null);
+    const [referralCode, setReferralCode] = useState(null);
+    const apiUrl = import.meta.env.VITE_API_BASE_URL;
 
     useEffect(() => {
         const fetchCustomerData = async () => {
             try {
-                const apiUrl = import.meta.env.VITE_API_BASE_URL;
                 const token = localStorage.getItem('token');
                 if (token) {
                     const email = getEmailFromJWT(token);
-                    const response = await axios.get(`${apiUrl}/api/customer/get-customer-by-email?email=${email}`);
+                    const customerResponse = await axios.get(`${apiUrl}/api/customer/get-customer-by-email?email=${email}`);
                     axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
-                    setCustomer(response.data);
+                    setCustomer(customerResponse.data);
+                    const customerId = customer.pkCustomerId;
+                    const referralResponse = await axios.get(`${apiUrl}/api/referral/get-customer-referral-code/${customerId}`);
+                    setReferralCode(referralResponse.data);
                 }
             } catch (error) {
                 console.error('Error fetching user data: ', error);
             }
         };
-
         fetchCustomerData();
-    }, []);
+    });
 
     return (
         <div className="customer-profile">
@@ -36,6 +39,7 @@ function CustomerProfile() {
                     email={customer.email}
                     phone={formatPhoneNumber(customer.phone)}
                     location={(customer.city && customer.province) ? `${customer.city}, ${customer.province}` : 'Location unspecified'}
+                    referralCode={referralCode}
                 />
             )}
             <div className="customer-profile-upcoming">

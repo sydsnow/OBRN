@@ -20,7 +20,7 @@ function RegisterCustomer(){
         confirmPassword: '',
         photo: placeholderImg,
         // if registering breaks, it might be this 
-        fkReferralId: null,
+        fkReferralId: undefined,
     });
 
     const [isValidReferral, setIsValidReferral] = useState(false);
