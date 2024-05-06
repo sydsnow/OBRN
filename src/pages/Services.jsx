@@ -11,7 +11,9 @@ function ServicesPage () {
 
     const [searchQuery, setSearchQuery] = useState('');
     const [selectedOption, setSelectedOption] = useState(""); // Default sorting option
-    const [displayedServices, setDisplayedServices] = useState([]); // State to manage displayed services
+    const [currentPage, setCurrentPage] = useState(1); // Current page of pagination
+    const [servicesPerPage] = useState(12); // Number of services to display per page
+   
 
     const sortingOptions = ["Price: High to Low", "Price: Low to High", "None"];
 
@@ -30,7 +32,6 @@ function ServicesPage () {
             price: 120,
             image: hair,
             businessName: "Hair Salon",
-            //discount: 25
         },
         {
             id: 3,
@@ -47,13 +48,84 @@ function ServicesPage () {
             image: facial,
             discount: 50,
             businessName: "Facial Spa"
+        },
+        // Additional services
+        {
+            id: 5,
+            service: "Massage",
+            price: 90,
+            image: hair,
+            discount: 20,
+            businessName: "Massage Spa"
+        },
+        {
+            id: 6,
+            service: "Pedicure",
+            price: 60,
+            image: nails,
+            businessName: "Pedicure Salon"
+        },
+        {
+            id: 7,
+            service: "Manicure",
+            price: 50,
+            image: nails,
+            discount: 10,
+            businessName: "Manicure Salon"
+        },
+        {
+            id: 8,
+            service: "Hair Coloring",
+            price: 150,
+            image: hair,
+            businessName: "Hair Color Salon"
+        },
+        {
+            id: 9,
+            service: "Waxing",
+            price: 40,
+            image: facial,
+            businessName: "Waxing Studio"
+        },
+        {
+            id: 10,
+            service: "Eyebrow Threading",
+            price: 20,
+            image: facial,
+            businessName: "Eyebrow Threading Salon"
+        },
+        {
+            id: 11,
+            service: "Eyelash Extensions",
+            price: 200,
+            image: facial,
+            discount: 30,
+            businessName: "Eyelash Studio"
+        },
+        {
+            id: 12,
+            service: "Permanent Makeup",
+            price: 180,
+            image: facial,
+            businessName: "Permanent Makeup Studio"
+        },
+        {
+            id: 13,
+            service: "Teeth Whitening",
+            price: 100,
+            image: botox,
+            businessName: "Teeth Whitening Clinic"
+        },
+        {
+            id: 14,
+            service: "Tattoo Removal",
+            price: 250,
+            image: botox,
+            discount: 20,
+            businessName: "Tattoo Removal Clinic"
         }
     ];
-
-    // Initialize displayed services with the services array
-    useState(() => {
-        setDisplayedServices(services);
-    }, []);
+    const [displayedServices, setDisplayedServices] = useState(services); // State to manage displayed services   
 
     // Filter services based on search query
     const filterServices = (query) => {
@@ -94,14 +166,32 @@ function ServicesPage () {
 
         // Perform sorting logic based on the selected sorting option
         if (selectedSortOption === "Price: High to Low") {
-            sortedServices.sort((a, b) => b.price - a.price);
+            sortedServices.sort((a, b) => {
+                // Sort by discounted price if discount exists, otherwise use base price
+                const priceA = a.discount ? a.price * (1 - a.discount / 100) : a.price;
+                const priceB = b.discount ? b.price * (1 - b.discount / 100) : b.price;
+                return priceB - priceA;
+            });
         } else if (selectedSortOption === "Price: Low to High") {
-            sortedServices.sort((a, b) => a.price - b.price);
+            sortedServices.sort((a, b) => {
+                // Sort by discounted price if discount exists, otherwise use base price
+                const priceA = a.discount ? a.price * (1 - a.discount / 100) : a.price;
+                const priceB = b.discount ? b.price * (1 - b.discount / 100) : b.price;
+                return priceA - priceB;
+            });
         }
 
         setDisplayedServices(sortedServices); // Update the displayedServices state with the sorted array
     };
 
+
+    // Pagination logic
+    const indexOfLastService = currentPage * servicesPerPage;
+    const indexOfFirstService = indexOfLastService - servicesPerPage;
+    const currentServices = displayedServices.slice(indexOfFirstService, indexOfLastService);
+    //setDisplayedServices(currentServices);
+    console.log("displayed", displayedServices);
+    console.log("current", currentServices);
 
     return (
         <div className="services">
@@ -125,7 +215,7 @@ function ServicesPage () {
                 <div className="services-gallery-header">
                     <div className="services-gallery-header-results">
                         {/* This will need to be dynamic */}
-                        <p>Showing {displayedServices.length} Results</p> 
+                        <p>Showing {currentServices.length} of {displayedServices.length} Results</p> 
                     </div>
                     <div className="services-gallery-header-filter">
                         {/* <p>Sort By</p> */}
@@ -150,7 +240,22 @@ function ServicesPage () {
                     {/* <i className="fa-solid fa-list"></i> */}
                     </div>
                 </div>
-                <ServiceGallery displayedServices={displayedServices}></ServiceGallery>
+                {currentServices && (
+                    <ServiceGallery displayedServices={currentServices}></ServiceGallery>
+                )}
+            </div>
+            {/* Pagination */}
+            <div className="pagination">
+                {displayedServices.length > servicesPerPage && (
+                    <button onClick={() => setCurrentPage(currentPage - 1)} disabled={currentPage === 1}>
+                        <i className="fa-solid fa-arrow-left"></i>
+                    </button>
+                )}
+                {displayedServices.length > servicesPerPage && (
+                    <button onClick={() => setCurrentPage(currentPage + 1)} disabled={indexOfLastService >= displayedServices.length}>
+                        <i className="fa-solid fa-arrow-right"></i>
+                    </button>
+                )}
             </div>
         </div>
     )
