@@ -2,15 +2,18 @@ import PropTypes from 'prop-types';
 import "../scss/components/_servicegallery.scss"
 import { NavLink, useLocation } from 'react-router-dom';
 
-function ServiceGallery ({services}) {
+function ServiceGallery ({displayedServices}) {
 
     // Get the current location
     const location = useLocation();
     const isBusinessProfileRoute = location.pathname === '/businessprofile';
 
+    // If displayedServices is undefined, default to an empty array
+    const servicesToDisplay = displayedServices || [];
+
     return (
         <div className="services-gallery-content">
-            {services.map((service) => (
+            {servicesToDisplay.map((service) => (
                 <div className="services-card" key={service.id}>
                     <div>
                         <div className="services-card-image-container">
@@ -18,13 +21,14 @@ function ServiceGallery ({services}) {
                         </div>
                         <div className="services-card-info">
                             <div className='services-card-info-container'>
-                                <p className="services-card-info-name">{service.service}</p>
+                                <p className='services-card-info-business-name'>{service.businessName}</p>
                                 {isBusinessProfileRoute && (
                                     <NavLink to={`/editservice/${service.id}`} className="service-card-info-button">
                                         Edit
                                     </NavLink>
                                 )}
                             </div>
+                            <p className="services-card-info-name">{service.service}</p>
                             <div className="services-card-info-prices">
                                 <div>
                                     {service.discount && (
@@ -51,7 +55,7 @@ function ServiceGallery ({services}) {
 }
 
 ServiceGallery.propTypes = {
-    services: PropTypes.array.isRequired
+    displayedServices: PropTypes.array.isRequired
 };
 
 export default ServiceGallery;

@@ -22,7 +22,7 @@
             font-size: 3rem;
         }
     }
-    &-search-wrapper {
+    &-search {
         background-color: white;
         border-radius: 5px;
         padding: 15px;
@@ -35,7 +35,7 @@
         @media(min-width: 768px) {
             width: 620px;
         }
-        > button {
+        &-button {
             background-color: black;
             color: white;
             border: none;
@@ -48,6 +48,23 @@
                 margin-top: 0;
                 padding: 10px;
                 width: 100px;
+            }
+        }
+        &-cancel-button {
+            border: none;
+            background-color: white;
+            position: absolute;
+            margin-left: 258px;
+            margin-bottom: 44px;
+            @media(min-width: 375px) {
+                margin-left: 292px;
+            }
+            @media(min-width: 425px) {
+                margin-left: 330px;
+            }
+            @media(min-width: 768PX) {
+                margin-left: 367px;
+                margin-bottom: 0;
             }
         }
         > label {
@@ -64,6 +81,7 @@
             margin-right: 20px;
             @media(min-width: 768px) {
                 width: 440px;
+                margin-right: 24px;
             }
     
         }
