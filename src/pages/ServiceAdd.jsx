@@ -96,6 +96,17 @@ function ServiceAdd({ serviceObj = {} }) {
     };
 
     return (
+        <div className="edit-service">
+        <div className="testimonials-banner">
+            <p className="testimonials-small">ADD A BUSINESS SERVICE</p>
+            <p className="testimonials-large">Add a Service</p>
+            <div className="testimonials-path">
+            <i className="fa-solid fa-house"></i>
+            <p>HOME</p>
+            <i className="fa-solid fa-angle-right"></i>
+            <p>ADD BUSINESS SERVICE</p>
+            </div>
+        </div>
         <div className="wrapper">
             <div className="service-container">
                 <form className="service-form" onSubmit={handleSubmit}>
@@ -201,6 +212,7 @@ function ServiceAdd({ serviceObj = {} }) {
             </div>
                 </form>
             </div>
+        </div>
         </div>
     );
 }

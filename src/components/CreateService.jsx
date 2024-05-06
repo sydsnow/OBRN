@@ -18,7 +18,9 @@ function CreateService({ serviceObj = {} }) {
     const location = useLocation();
     const isEditServicePage = location.pathname.includes("/editservice");
 
-
+    useEffect(() => {
+        setService(serviceObj);
+    }, [serviceObj]);
     
 
     useEffect(() => {

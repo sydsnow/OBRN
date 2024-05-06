@@ -125,7 +125,7 @@ function AppRouter() {
           <Route path="/admin-all-discounts" element={<AdminAllDiscounts />} />
           <Route path="/add-discount" element={<AddDiscount />} />
           <Route path="/admin-fees" element={<AdminFees />} />
-          <Route path="/edit-service/:id" element={<EditService />} />
+          <Route path="/edit-service/:serviceId" element={<EditService />} />
           <Route path="/service-add/:id" element={<ServiceAdd />} />
           <Route path="/service-edit/:serviceId" element={<ServiceEdit />} />
           {/* <Route path="/editservice/:id" element={<EditService />} /> */}

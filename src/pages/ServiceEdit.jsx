@@ -97,10 +97,21 @@ function ServiceEdit() {
 };
 
     return (
-        <div className="wrapper">
-            <div className="service-container">
+   
+        <div className="edit-service">
+            <div className="testimonials-banner">
+                <p className="testimonials-small">EDIT BUSINESS SERVICE</p>
+                <p className="testimonials-large">Edit Service</p>
+                <div className="testimonials-path">
+                <i className="fa-solid fa-house"></i>
+                <p>HOME</p>
+                <i className="fa-solid fa-angle-right"></i>
+                <p>EDIT BUSINESS SERVICE</p>
+                </div>
+            </div>
+            <div className="wrapper">
                 <form className="service-form" onSubmit={handleSubmit}>
-                    <h2>Edit Service</h2>
+                    {/* <h2>Edit Service</h2> */}
                     {successMessage && <div className="success-message">{successMessage}</div>}
                     {errorMessage && <div className="error-message">{errorMessage}</div>}
                     <div className="form-group">
@@ -147,7 +158,8 @@ function ServiceEdit() {
                     </div>
                 </form>
             </div>
-        </div>
+            </div>
+        
     );
 }
 
