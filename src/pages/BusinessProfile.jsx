@@ -22,7 +22,7 @@ function BusinessProfile() {
                 // console.log ('businessDetails', businessDetails)
                 if (token) {
                     const email = getEmailFromJWT(token);
-                    const response = await axios.get(`${apiUrl}/api/business/getbusinessbyemail?email=${email}`, {
+                    const response = await axios.get(`${apiUrl}/api/business/get-business-by-email?email=${email}`, {
                         headers: {
                             'Authorization': `Bearer ${token}`
                         }
