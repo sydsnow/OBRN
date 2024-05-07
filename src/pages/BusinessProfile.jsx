@@ -98,7 +98,7 @@ function BusinessProfile () {
                 </button>
                 </div>
                 <div className="business-profile-services">
-                <ServiceGallery services={services} />
+                <ServiceGallery displayedServices={services} />
             </div>
             </div>
         </div>
