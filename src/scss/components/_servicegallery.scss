@@ -58,12 +58,15 @@
                 display: flex;
                 line-height: 0;
                 font-size: 0.9rem;
+                &:hover {
+                    color: #C93482;
+                }
             }
             &-prices {
                 font-size: 0.8rem;
                 line-height: 0;
                 @media(min-width: 1024px) {
-                    font-size: 1rem
+                    font-size: 0.9rem
                 }
                 > div {
                     @include flex-row;
