@@ -128,10 +128,10 @@ function ServicesPage () {
     const [displayedServices, setDisplayedServices] = useState(services); // State to manage displayed services   
 
     // Filter services based on search query
-    const filterServices = (query) => {
+    const filterServices = (searchQuery) => {
         return services.filter(service =>
-            service.service.toLowerCase().includes(query.toLowerCase()) ||
-            service.businessName.toLowerCase().includes(query.toLowerCase())
+            service.service.toLowerCase().includes(searchQuery.toLowerCase()) ||
+            service.businessName.toLowerCase().includes(searchQuery.toLowerCase())
         );
     };
 
@@ -145,7 +145,7 @@ function ServicesPage () {
     const handleSearchInputChange = (e) => {
         const query = e.target.value;
         setSearchQuery(query);
-        const filteredServices = filterServices(query);
+        const filteredServices = filterServices(searchQuery);
         setDisplayedServices(filteredServices);
     };
 

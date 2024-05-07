@@ -23,7 +23,7 @@ function AdminAllDiscounts() {
         return () => {
             // Cleanup logic if needed
         };
-    }, [discount]);
+    }, []);
 
     // Function to handle deletion of a discount
     const handleDeleteDiscount = async (discountId) => {
@@ -31,7 +31,7 @@ function AdminAllDiscounts() {
             const apiUrl = import.meta.env.VITE_API_BASE_URL;
             await axios.delete(`${apiUrl}/api/Discount/${discountId}`);
             // Update local state after successful deletion
-            setDiscount(discount.filter(discount => discount.id !== discountId));
+            setDiscount(discount.filter(discount => discount.pkDiscountId !== discountId));
         } catch (error) {
             console.error('Failed to delete discount: ', error);
         }
