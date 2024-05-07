@@ -97,7 +97,10 @@ function RegisterCustomer(){
 
         try {
             const apiUrl = import.meta.env.VITE_API_BASE_URL;
-            const response = await axios.post(`${apiUrl}/api/customer/add-customer`, customer);
+            const response = await axios.post(`${apiUrl}/api/customer/add-customer`, customer, {
+                headers: {
+                    'Ocp-Apim-Subscription-Key': import.meta.env.VITE_API_KEY,
+                }});
             console.log("response.data: ", response.data);
             const { message, token, referralId } = response.data;
             console.log(message);
