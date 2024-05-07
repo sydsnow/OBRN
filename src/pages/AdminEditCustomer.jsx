@@ -184,42 +184,42 @@
 //     );
 // }
 
-// export default AdminEditCustomer;
 import { Link, useParams } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 
 function AdminEditCustomer() {
-    const { id } = useParams(); // Fetch the customer ID from the URL params
+    const { id } = useParams();
     const [customer, setCustomer] = useState(null);
     const [editing, setEditing] = useState(false);
     const [errorMessage, setErrorMessage] = useState('');
+    const [successMessage, setSuccessMessage] = useState('');
 
     useEffect(() => {
-        // Fetch customer details when component mounts
         const fetchCustomer = async () => {
             try {
                 const apiUrl = import.meta.env.VITE_API_BASE_URL;
                 const response = await axios.get(`${apiUrl}/api/Customer/get-customer/${id}`);
-                setCustomer(response.data); // Assuming response.data is the customer details
+                setCustomer(response.data);
             } catch (error) {
                 console.error('Failed to fetch customer: ', error);
+                setErrorMessage('Failed to load customer details.');
             }
         };
-
         fetchCustomer();
-
-        // Cleanup function
-        return () => {
-            // Cleanup logic if needed
-        };
     }, [id]);
 
     const handleInputChange = (e) => {
+        // Clear messages when the user starts editing
+        setErrorMessage('');
+        setSuccessMessage('');
         setCustomer({ ...customer, [e.target.name]: e.target.value });
     };
 
     const handleIsVip = () => {
+        // Clear messages when the user toggles VIP status
+        setErrorMessage('');
+        setSuccessMessage('');
         setCustomer({ ...customer, vip: !customer.vip });
     };
 
@@ -239,25 +239,24 @@ function AdminEditCustomer() {
             return false;
         }
 
-        // Additional validation logic for other fields can be added here
-
         return true;
     };
 
     const validateEmail = (email) => {
-        // Regular expression for validating email format
         const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
         return emailRegex.test(email);
     };
 
     const validatePhone = (phone) => {
-        // Regular expression for validating phone number format
         const phoneRegex = /^\d{10}$/;
         return phoneRegex.test(phone);
     };
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+        setErrorMessage('');
+        setSuccessMessage('');
+
         if (!validateInput()) {
             return;
         }
@@ -267,14 +266,17 @@ function AdminEditCustomer() {
             const response = await axios.post(`${apiUrl}/api/Customer/edit-customer/`, customer);
             console.log('Customer updated:', response.data);
             setEditing(false);
+            setSuccessMessage('Your updates have been saved successfully.');
         } catch (error) {
             console.error('Failed to update customer: ', error);
+            setErrorMessage('Your update has not been saved successfully.');
         }
     };
 
     if (!customer) {
         return <div>Loading...</div>;
     }
+
 
     return (
         <div className="wrapper">
@@ -283,6 +285,7 @@ function AdminEditCustomer() {
                 <div className="admin-edit-container">
                     <h1>Edit Customer Details</h1>
                     {errorMessage && <p className="error-message">{errorMessage}</p>}
+                    {successMessage && <p className="success-message">{successMessage}</p>}                    
                     <div className="admin-customer-details">
                         <div className="admin-customer-info">
                             <label>VIP</label>
@@ -396,4 +399,3 @@ function AdminEditCustomer() {
 }
 
 export default AdminEditCustomer;
-

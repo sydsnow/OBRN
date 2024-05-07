@@ -122,14 +122,15 @@ const MyDetailsForm = () => {
             setErrorMessage('You must be 18 years or older in order to be registered with Our Beauty Referral Network.');
             return;
         }
-
+    
         try {
             const response = await axios.post(`${apiUrl}/api/customer/edit-customer`, userDetails);
             console.log("response: ", response.data);
             setErrorMessage(response.data);
             setTimeout(() => {
-                setErrorMessage('');
-            }, 3000);
+                navigate('/editprofile'); 
+                setErrorMessage(''); 
+            }, 2000); 
         } catch (error) {
             console.error('Updating customer failed: ', error);
             console.log("error.response.data: ", error.response.data);
@@ -140,7 +141,7 @@ const MyDetailsForm = () => {
             }
         }
     }
-
+    
     const handleCancel = () => {
         navigate('/editprofile');
     };
@@ -254,11 +255,11 @@ const MyDetailsForm = () => {
                     accept="image/*"
                 />
             </div>
+            <p id="register-error">{errorMessage}</p>
             <div className="button-container">
                 <button type="submit">Save</button>
                 <button type="button" onClick={handleCancel}>Cancel</button>
             </div>
-            <p id="register-error">{errorMessage}</p>
         </form>
     );
 }
