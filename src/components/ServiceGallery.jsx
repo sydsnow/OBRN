@@ -4,6 +4,7 @@ import { useLocation } from 'react-router-dom';
 import "../scss/components/_servicegallery.scss";
 import { useParams } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
 
 // function ServiceGallery() {
     // const { businessId } = useParams();
@@ -24,80 +25,63 @@ import { useNavigate } from 'react-router-dom';
     };
 
     useEffect(() => {
+        const token = localStorage.getItem('token');
+        const apiUrl = import.meta.env.VITE_API_BASE_URL;
+    
         const fetchServicesAndDiscounts = async () => {
+            if (!businessId) {
+                console.log('No businessId provided or found.');
+                return;
+            }
+    
             try {
-                const apiUrl = import.meta.env.VITE_API_BASE_URL;
-        
-                // Fetch services for the businessId
-                const serviceResponse = await fetch(`${apiUrl}/service/business/${businessId}`);
-                if (!serviceResponse.ok) {
-                    console.error('Failed to fetch services:', serviceResponse.statusText);
-                    return; // Stop execution if there's an error
-                }
-                const servicesData = await serviceResponse.json();
+                // Fetch services for the businessId using axios
+                const serviceResponse = await axios.get(`${apiUrl}/service/business/${businessId}`, {
+                    headers: {
+                        Authorization: `Bearer ${token}`,
+                    },
+                });
+                const servicesData = serviceResponse.data;
                 console.log('servicesData:', servicesData);
     
-        
-                // Since the actual services are within the $values property
+                // Assuming the actual services are within the $values property
                 const actualServices = servicesData.$values || [];
                 setServices(actualServices);
                 console.log('actualServices:', actualServices);
-        
+    
                 // Fetch discounts for each service
-                const promises = actualServices.map(async service => {
-                    try {
-                        const response = await fetch(`${apiUrl}/discount/${service.fkDiscountId}`);
-                        console.log("response", response);
-                        console.log("fkDiscount", service.fkDiscount);
-                        console.log("fkDiscountId", service.fkDiscountId);
-                        if (!response.ok) {
-                            console.error('Error fetching discount:', response.statusText);
-                            return null;
-                        }
-                        return await response.json();
-                    } catch (error) {
-                        console.error('Error fetching discount:', error);
-                        return null;
-                    }
-                });
-        
-                // Wait for all discount fetch requests to complete
-                const discountsData = await Promise.all(promises);
+                const discountPromises = actualServices.map(service => axios.get(`${apiUrl}/discount/${service.fkDiscountId}`, {
+                    headers: {
+                        Authorization: `Bearer ${token}`,
+                    },
+                }));
+    
+                const discountsResponses = await Promise.all(discountPromises);
+                const discountsData = discountsResponses.map(response => response.data);
                 setDiscounts(discountsData);
             } catch (error) {
                 console.error('Error in API operations:', error);
             }
         };
-
-        if (!businessId) {
-            console.log('No businessId provided or found.');
-            return;
-        }
-
-        
-
+    
         fetchServicesAndDiscounts();
     }, [businessId]);
-
-
-
+    
     const handleDeleteService = async (serviceId) => {
+        const token = localStorage.getItem('token');
         console.log('serviceId:', serviceId);
         try {
             const apiUrl = import.meta.env.VITE_API_BASE_URL;
-            const response = await fetch(`${apiUrl}/api/Service/${serviceId}`, {
-                method: 'DELETE',
+            await axios.delete(`${apiUrl}/Service/${serviceId}`, {
+                headers: {
+                    Authorization: `Bearer ${token}`, // Make sure token is accessible here, or fetch again as needed
+                },
             });
-
-            if (!response.ok) {
-                console.error('Failed to delete service:', response.statusText);
-                return;
-            }
-
+    
             // Remove the deleted service from the list
             setServices(prevServices => prevServices.filter(service => service.pkServiceId !== serviceId));
         } catch (error) {
-            console.error('Error deleting service:', error);
+            console.error('Failed to delete service:', error);
         }
     }
 
