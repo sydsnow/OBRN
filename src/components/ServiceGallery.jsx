@@ -1,8 +1,9 @@
 import PropTypes from 'prop-types';
 import { useEffect, useState } from 'react';
-import { NavLink, useLocation } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
 import "../scss/components/_servicegallery.scss";
 import { useParams } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 // function ServiceGallery() {
     // const { businessId } = useParams();
@@ -16,6 +17,11 @@ import { useParams } from 'react-router-dom';
     // Get the current location
     const location = useLocation();
     const isBusinessProfileRoute = location.pathname === '/businessprofile';
+
+    const navigate = useNavigate();
+    const handleEditService = (serviceId) => {
+        navigate(`/edit-service/${serviceId}`);
+    };
 
     useEffect(() => {
         const fetchServicesAndDiscounts = async () => {
@@ -106,17 +112,7 @@ import { useParams } from 'react-router-dom';
                         <div className="services-card-info">
                             <div className='services-card-info-container'>
                                 <p className="services-card-info-name">{service.serviceName}</p>
-                                {isBusinessProfileRoute && (
-                                    <NavLink to={`/edit-service/${service.pkServiceId}`} className="service-card-info-button">
-                                        Edit
-                                    </NavLink>
-
-                                )}
-                            {isBusinessProfileRoute && (
-                                <button className="service-card-info-button" onClick={() => handleDeleteService(service.pkServiceId)}>
-                                    Delete
-                                </button>
-                            )}
+                                
                             </div>
                             <div className="services-card-info-prices">
                                 <div>
@@ -129,6 +125,18 @@ import { useParams } from 'react-router-dom';
                                     <p className="services-card-info-price">${service.basePrice}</p>
                                 </div>
                             </div>
+                            <div className="services-card-btns">
+            {isBusinessProfileRoute && (
+                <button className="services-card-info-button" onClick={() => handleEditService(service.pkServiceId)}>
+                    Edit
+                </button>
+            )}
+            {isBusinessProfileRoute && (
+                <button className="services-card-info-button" onClick={() => handleDeleteService(service.pkServiceId)}>
+                    Delete
+                </button>
+            )}
+        </div>
                         </div>
                     </div>
                 </div>

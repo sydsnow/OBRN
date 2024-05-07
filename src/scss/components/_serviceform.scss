@@ -26,6 +26,7 @@
             @media(min-width: 768px) {
                 width: 250px;
                 height: 40px;
+                font-size:1.1rem;
             }
             @media(min-width: 1024px) {
                 width: 325px;
@@ -93,27 +94,28 @@
         margin-left: 0;
         margin-bottom: 20px;
         margin-top: 10px;
-        > button {
-            margin: 5px;
-            padding: 3px;
-            width: 120px;
-            border-radius: 5px;
-            background-color: black;
-            color: white;
-            border: 1px solid black;
-            @media(min-width: 768px) {
-                font-size: 1rem;
-                padding: 10px;
-                width: 180px;
-            }
-            @media(min-width: 1024px) {
-                font-size: 1.2rem;
-                width: 95px;
-            }
-            > a {
-                color: white;
-                font-weight: 600;
-            }
-        }
+ 
+
+    }
+}
+
+.button-container{
+    @include flex-row;
+    justify-content: center;
+    button{
+        @include flex-row;
+        justify-content: center;
+        background:#000;
+        color:#fff;
+        // border:1px solid #000;
+        min-width:180px;
+        padding:15px;
+        font-size:1.1rem;
+        font-family: $secondary-font;
+    }
+    :nth-child(2){
+        background:green;
+        // color:#000;
+        border:none;
     }
 }
