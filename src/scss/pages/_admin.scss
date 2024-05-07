@@ -549,3 +549,14 @@
 
     }
 }
+.pagination {
+    display: flex;
+    margin: 0 auto;
+    > button {
+        background-color: white;
+        color: black;
+        padding: 7px;
+        font-size: 0.9rem;
+        margin: 0;
+    }
+}
