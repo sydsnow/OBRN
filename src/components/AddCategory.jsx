@@ -1,6 +1,5 @@
 import { useState } from "react";
 import axios from "axios";
-import { NavLink } from "react-router-dom";
 import PropTypes from 'prop-types';
 
 function AddCategoryPage({ onCategoryAdded }) {
@@ -61,7 +60,6 @@ function AddCategoryPage({ onCategoryAdded }) {
                     {error && <p className="error-message">{error}</p>}
                 </div>
                 <div className="button-container">
-                    <button><NavLink to="/admin-all-categories">Cancel</NavLink></button>
                     <button type="submit">Save</button>
                 </div>
             </form>

@@ -1,11 +1,12 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
+import AddDiscount from "./AddDiscount";
 
 function AdminAllDiscounts() {
 
     const [discount, setDiscount] = useState([]);
-
+    const [showAddDiscount, setShowAddDiscount] = useState(false);
     useEffect(() => {
         const fetchDiscounts = async () => {
             try {
@@ -44,16 +45,37 @@ function AdminAllDiscounts() {
         return '';
     };
 
+        // Function to update the list of categories
+        const updateDiscounts = async () => {
+            try {
+                const apiUrl = import.meta.env.VITE_API_BASE_URL;
+                const response = await axios.get(`${apiUrl}/category`);
+                setDiscount(response.data.$values);
+            } catch (error) {
+                console.error('Failed to fetch categories: ', error);
+            }
+        };
+
+
     return (
         <div className="wrapper">
             <div className="admin">
                 <Link to="/admin"><button>Back to Admin</button></Link>
-                <Link to="/add-discount"><button>Add Discount</button></Link>
-                <div className="admin-all-container">
-                    <h2>All Discounts</h2>
-                    <div className="admin-all-discounts">
+                <div className="admin-category-container">
+                    <h1>All Discounts</h1>
+
+                    {/* <Link to="/add-discount"><button>Add Discount</button></Link>
+                    <AddDiscount /> */}
+
+<button onClick={() => setShowAddDiscount(!showAddDiscount)}>Add Discount</button>
+                    {showAddDiscount && (
+                        <div className="admin-category-box">
+                            <AddDiscount onDiscountAdded={updateDiscounts} />
+                        </div>
+                    )}
+                    <div className="admin-all-categories">
                         {discount.map((discount) => (
-                            <div key={discount.pkDiscountId} className="admin-discount">
+                            <div key={discount.pkDiscountId} className="admin-category">
                                 <p>Discount Value: {formatDiscountValue(discount)}</p>
                                 <button onClick={() => handleDeleteDiscount(discount.pkDiscountId)}>Delete</button>
                             </div>
