@@ -53,6 +53,9 @@ import EditService from "../pages/EditService";
 import CreateService from "../components/CreateService";
 import ServiceForm from "../components/ServiceForm";
 
+import axios from "axios";
+axios.defaults.headers.common['Ocp-Apim-Subscription-Key'] = import.meta.env.VITE_API_KEY;
+
 function ScrollToTop() {
   const location = useLocation();
 
