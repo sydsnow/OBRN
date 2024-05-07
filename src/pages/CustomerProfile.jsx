@@ -5,7 +5,17 @@ import { getEmailFromJWT, formatPhoneNumber } from '../utilities/utilities';
 import kitty from '../assets/kitty.jpg';
 
 function CustomerProfile() {
-    const [customer, setCustomer] = useState(null);
+    const [customer, setCustomer] = useState({
+        pkCustomerId: '',
+        firstName: '',
+        lastName: '',
+        phone: '',
+        email: '',
+        address: '',
+        city: '',
+        province: '',
+        postalCode: ''
+    });
     const [referralCode, setReferralCode] = useState(null);
     const apiUrl = import.meta.env.VITE_API_BASE_URL;
 
@@ -27,7 +37,7 @@ function CustomerProfile() {
             }
         };
         fetchCustomerData();
-    });
+    }, [apiUrl, customer.pkCustomerId]);
 
     return (
         <div className="customer-profile">
