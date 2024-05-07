@@ -47,6 +47,12 @@ function AdminAllCustomers() {
         setCurrentPage(1); // Reset to first page when search query changes
     };
 
+    // Handle clear search
+    const handleClearSearch = () => {
+        setSearchQuery('');
+        setDisplayedUsers(users); // Reset displayed services to all services
+    };
+
     // Handler for going to the first page
     const handleGoToFirstPage = () => {
         setCurrentPage(1);
@@ -79,14 +85,19 @@ function AdminAllCustomers() {
                 <Link to="/admin"><button>Back to Admin</button></Link>
                 <div className="admin-all-container">
                     <h1>All Customers</h1>
-
-                    <input
-                        type="text"
-                        placeholder="Search users..."
-                        value={searchQuery}
-                        onChange={handleSearchInputChange}
-                    />
-                    {searchQuery && <button onClick={() => setSearchQuery('')} >x</button>}
+                    <div className="search-bar">
+                        <label htmlFor='customer-search'></label>
+                        <input
+                            type="text"
+                            id='customer-search'
+                            placeholder="Search businesses..."
+                            value={searchQuery}
+                            onChange={handleSearchInputChange}
+                        />
+                        {searchQuery && (
+                            <button onClick={handleClearSearch} className='clear-search-button'>x</button>
+                        )}
+                    </div>
                     <div className="admin-all-users">
                         <p>Showing {displayedUsers.length} of {users.length} Results</p>
                         {displayedUsers.map(user => (

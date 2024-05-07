@@ -560,3 +560,16 @@
         margin: 0;
     }
 }
+.search-bar {
+    display: flex;
+    > input {
+        width: 200px;
+        @media(min-width: 768px) {
+            width: 300px;
+        }
+    }
+    > button {
+        background-color: white;
+        color: black;
+    }
+}
