@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { getEmailFromJWT } from '../utilities/utilities';
+import { getEmailFromJWT, getRolesFromJWT } from '../utilities/utilities';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
 
@@ -11,11 +11,22 @@ function HomeBanner() {
     useEffect(() => {
         async function confirmUser() {
             if (token) {
-                const email = getEmailFromJWT(token);
-                const response = await axios.get(`${apiUrl}/api/customer/get-customer-by-email?email=${email}`);
-                axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
-                if (response.data) {
-                    setIsAuthenticated(true);
+                const roles = getRolesFromJWT(token);
+                if (roles.includes('customer')) {
+                    const email = getEmailFromJWT(token);
+                    console.log(email)
+                    const response = await axios.get(`${apiUrl}/api/customer/get-customer-by-email?email=${email}`);
+                    axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
+                    if (response.data) {
+                        setIsAuthenticated(true);
+                    }
+                } else if (roles.includes('business')) {
+                    const email = getEmailFromJWT(token);
+                    const response = await axios.get(`${apiUrl}/api/business/get-business-by-email?email=${email}`);
+                    axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
+                    if (response.data) {
+                        setIsAuthenticated(true);
+                    }
                 }
             }
         }
