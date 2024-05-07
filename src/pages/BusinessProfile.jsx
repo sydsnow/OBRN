@@ -1,33 +1,34 @@
-import  { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import { getEmailFromJWT } from '../utilities/utilities';
-import BusinessDetailsForm from '../components/BusinessDetailsForm';
 import ProfileBannerBusiness from '../components/ProfileBannerBusiness';
 import ServiceGallery from "../components/ServiceGallery";
 import cat from '../assets/cat.jpeg';
 
-
 function BusinessProfile() {
     const navigate = useNavigate();
     const [businessDetails, setBusinessDetails] = useState(null);
-    const [editMode, setEditMode] = useState(false);
     const [category, setCategory] = useState('');
+    const [referralCode, setReferralCode] = useState(null); 
 
     useEffect(() => {
         const fetchBusinessData = async () => {
             try {
                 const apiUrl = import.meta.env.VITE_API_BASE_URL;
                 const token = localStorage.getItem('token');
-                // console.log ('businessDetails', businessDetails)
                 if (token) {
                     const email = getEmailFromJWT(token);
-                    const response = await axios.get(`${apiUrl}/api/business/get-business-by-email?email=${email}`, {
+                    const response = await axios.get(`${apiUrl}/api/Business/get-business-by-email?email=${email}`, {
                         headers: {
                             'Authorization': `Bearer ${token}`
                         }
                     });
                     setBusinessDetails(response.data);
+                    if (response.data && response.data.pkBusinessId) {
+                        const referralResponse = await axios.get(`${apiUrl}/api/Referral/get-business-referral-code/${response.data.pkBusinessId}`);
+                        setReferralCode(referralResponse.data);
+                    }
                 }
             } catch (error) {
                 console.error('Error fetching business data:', error);
@@ -38,13 +39,11 @@ function BusinessProfile() {
         fetchBusinessData();
     }, [navigate]);
 
-
     if (!businessDetails) {
         return <div>Loading...</div>;
-    }else{
-        console.log('businessDetails', businessDetails)
+    } else {
+        console.log('businessDetails', businessDetails);
     }
-
 
     return (
         <div className="business-profile">
@@ -55,6 +54,7 @@ function BusinessProfile() {
                 email={businessDetails?.email || 'N/A'}
                 phone={businessDetails?.phone || 'N/A'}
                 location={businessDetails?.city ? `${businessDetails.city}, ${businessDetails.province}` : 'Location N/A'}
+                referralCode={referralCode || "Not available"} 
             />
 
             <div className="business-profile-about">
@@ -74,40 +74,15 @@ function BusinessProfile() {
                     </select>
                 </div>
                 <div className ="business-profile-services-buttons">
-                <button
-                    onClick={() => setCategory('beauty')}
-                    className={`business-profile-services-button-desktop ${category === 'beauty' ? 'active' : ''}`}
-                >
-                    Beauty
-                </button>
-                <button
-                    onClick={() => setCategory('fashion')}
-                    className={`business-profile-services-button-desktop ${category === 'fashion' ? 'active' : ''}`}
-                >
-                    Fashion
-                </button>
-                <button
-                    onClick={() => setCategory('wellness')}
-                    className={`business-profile-services-button-desktop ${category === 'wellness' ? 'active' : ''}`}
-                >
-                    Wellness
-                </button>
-                <button
-                    onClick={() => setCategory('other')}
-                    className={`business-profile-services-button-desktop ${category === 'other' ? 'active' : ''}`}
-                >
-                    Other
-                </button>
+                    <button onClick={() => setCategory('beauty')} className={`business-profile-services-button-desktop ${category === 'beauty' ? 'active' : ''}`}>Beauty</button>
+                    <button onClick={() => setCategory('fashion')} className={`business-profile-services-button-desktop ${category === 'fashion' ? 'active' : ''}`}>Fashion</button>
+                    <button onClick={() => setCategory('wellness')} className={`business-profile-services-button-desktop ${category === 'wellness' ? 'active' : ''}`}>Wellness</button>
+                    <button onClick={() => setCategory('other')} className={`business-profile-services-button-desktop ${category === 'other' ? 'active' : ''}`}>Other</button>
                 </div>
                 <div className="business-profile-services">
-                <ServiceGallery businessId={businessDetails?.pkBusinessId} />
-
+                    <ServiceGallery businessId={businessDetails?.pkBusinessId} />
+                </div>
             </div>
-            </div>
-
-            {editMode && (
-                <BusinessDetailsForm initialData={businessDetails} />
-            )}
         </div>
     );
 }
