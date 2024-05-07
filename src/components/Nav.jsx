@@ -27,7 +27,7 @@ function Nav () {
                     if (response.data) {
                         setIsAuthenticated(true);
                     }
-                } else if (roles.includes('business')) {
+                } else {
                     const response = await axios.get(`${apiUrl}/api/business/get-business-by-email?email=${email}`);
                     // console.log(response);
                     axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
