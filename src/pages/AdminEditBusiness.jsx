@@ -4,78 +4,85 @@ import axios from 'axios';
 import provinces from '../data/provinces';
 
 function AdminEditBusiness() {
-    const { id } = useParams(); // Fetch the customer ID from the URL params
+    const { id } = useParams(); 
     const [business, setBusiness] = useState(null);
     const [editing, setEditing] = useState(false);
     const [errorMessage, setErrorMessage] = useState('');
+    const [successMessage, setSuccessMessage] = useState('');
 
     useEffect(() => {
-        // Fetch customer details when component mounts
         const fetchBusiness = async () => {
             try {
                 const apiUrl = import.meta.env.VITE_API_BASE_URL;
                 const response = await axios.get(`${apiUrl}/api/Business/get-business/${id}`);
-                setBusiness(response.data); // Assuming response.data is the customer details
+                setBusiness(response.data);
             } catch (error) {
                 console.error('Failed to fetch business: ', error);
+                setErrorMessage('Failed to load business details.');
             }
         };
-
         fetchBusiness();
-
-        // Cleanup function
-        return () => {
-            // Cleanup logic if needed
-        };
     }, [id]);
 
     const handleInputChange = (e) => {
         setBusiness({ ...business, [e.target.name]: e.target.value });
     };
+
     const handleIsVerifiedChange = () => {
         setBusiness({ ...business, isVerified: !business.isVerified });
     };
 
     const validateInput = () => {
-        if (!business.businessName || !business.contactName || !business.email || !business.phone || !business.address || !business.city || !business.province || !business.postalCode || !business.insuranceCompany || !business.insuranceExpiryDate || !business.verificationDocument) {
-            setErrorMessage('All fields are required.');
-            return false;
+        const requiredFields = [
+            { key: 'businessName', label: 'Business Name' },
+            { key: 'contactName', label: 'Contact Name' },
+            { key: 'email', label: 'Email' },
+            { key: 'phone', label: 'Phone' },
+            { key: 'address', label: 'Address' },
+            { key: 'city', label: 'City' },
+            { key: 'province', label: 'Province' },
+            { key: 'postalCode', label: 'Postal Code' },
+            { key: 'insuranceCompany', label: 'Insurance Company' },
+            { key: 'insuranceExpiryDate', label: 'Insurance Expiry Date' }
+        ];
+    
+        for (const { key, label } of requiredFields) {
+            if (!business[key] || business[key].trim() === '') {
+                setErrorMessage(`${label} is required.`);
+                return false;
+            }
         }
-
+    
         if (!validateEmail(business.email)) {
             setErrorMessage('Invalid email format.');
             return false;
         }
-
+    
         if (!validatePhone(business.phone)) {
             setErrorMessage('Invalid phone number format.');
             return false;
         }
-
+    
         if (!validatePostalCode(business.postalCode)) {
             setErrorMessage('Invalid postal code format.');
             return false;
         }
-
-        // Additional validation logic for other fields can be added here
-
+            setErrorMessage('');
         return true;
-    };
+    };    
+    
 
     const validateEmail = (email) => {
-        // Regular expression for validating email format
         const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
         return emailRegex.test(email);
     };
 
     const validatePhone = (phone) => {
-        // Regular expression for validating phone number format
         const phoneRegex = /^\d{10}$/;
         return phoneRegex.test(phone);
     };
 
     const validatePostalCode = (postalCode) => {
-        // Regular expression for validating postal code format
         const postalCodeRegex = /^[A-Za-z]\d[A-Za-z][ -]?\d[A-Za-z]\d$/;
         return postalCodeRegex.test(postalCode);
     };
@@ -86,15 +93,25 @@ function AdminEditBusiness() {
             return;
         }
 
+        const formattedBusiness = {
+            ...business,
+            insuranceExpiryDate: new Date(business.insuranceExpiryDate).toISOString().slice(0, 10)
+        };
+
         try {
             const apiUrl = import.meta.env.VITE_API_BASE_URL;
-            const response = await axios.put(`${apiUrl}/api/Customer/updatecustomer/${id}`, business);
+            const response = await axios.post(`${apiUrl}/api/Business/edit-business/`, formattedBusiness);
             console.log('Business updated:', response.data);
             setEditing(false);
+            setSuccessMessage('Your updates have been saved successfully.');
+            setErrorMessage('');
         } catch (error) {
             console.error('Failed to update business: ', error);
+            setErrorMessage('Your update has not been saved successfully.');
+            setSuccessMessage('');
         }
     };
+    
 
     if (!business) {
         return <div>Loading...</div>;
@@ -107,6 +124,7 @@ function AdminEditBusiness() {
                 <div className="admin-edit-container">
                     <h1>Edit Business Details</h1>
                     {errorMessage && <p className="error-message">{errorMessage}</p>}
+                    {successMessage && <p className="success-message">{successMessage}</p>}<br/>                    
                     <div className="admin-customer-details">
                         <div className="admin-customer-info">
                             <label>Is Verified?</label>
@@ -288,7 +306,6 @@ function AdminEditBusiness() {
                             )}
                         </div>
                     </div>
-
                     <div className="admin-edit-btns">
                         {editing ? (
                             <button onClick={handleSubmit}>Save</button>

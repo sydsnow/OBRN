@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { getEmailFromJWT, formatPhoneNumber } from '../utilities/utilities';
 import MyDetailsForm from '../components/MyDetailsForm';
+import { NavLink } from 'react-router-dom';
 
 function EditProfile() {
   const navigate = useNavigate();
@@ -67,6 +68,7 @@ function EditProfile() {
       <div className="edit-profile-header">
         <h2>Customer Settings</h2>
         <p>You can manage your account here.</p>
+        <NavLink to="/customerprofile">Go Back</NavLink>
       </div>
       <div className="edit-profile-wrapper">
         <div className="edit-profile-section">

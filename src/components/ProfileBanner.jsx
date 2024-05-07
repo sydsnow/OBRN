@@ -21,11 +21,12 @@ function ProfileBanner({ title, imagePath, name, email, phone, location, referra
                 <p><i className="fa-solid fa-envelope"></i> {email}</p>
                 <p><i className="fa-solid fa-phone"></i> {phone}</p>
                 <p><i className="fa-solid fa-location-dot"></i> {location}</p>
-                <p>Referral Code: {referralCode}</p>
+                <p><i className="fa-solid fa-user-plus"></i> {referralCode}</p>
             </div>
         </div>
     );
 }
+
 ProfileBanner.propTypes = {
     title: PropTypes.string.isRequired,
     imagePath: PropTypes.string,
@@ -33,7 +34,8 @@ ProfileBanner.propTypes = {
     email: PropTypes.string.isRequired,
     phone: PropTypes.string.isRequired,
     location: PropTypes.string.isRequired,
-    referralCode: PropTypes.string.isRequired,
+    referralCode: PropTypes.string.isRequired
+
 };
 
 export default ProfileBanner;
