@@ -184,14 +184,27 @@ function ServicesPage () {
         setDisplayedServices(sortedServices); // Update the displayedServices state with the sorted array
     };
 
+    // Handler for going back to the first page
+    const handleGoToFirstPage = () => {
+        setCurrentPage(1);
+    };
 
+    const handleGoToLastPage = () => { 
+        setCurrentPage(Math.ceil(displayedServices.length / servicesPerPage)); 
+    };
+    
     // Pagination logic
     const indexOfLastService = currentPage * servicesPerPage;
     const indexOfFirstService = indexOfLastService - servicesPerPage;
     const currentServices = displayedServices.slice(indexOfFirstService, indexOfLastService);
     //setDisplayedServices(currentServices);
-    console.log("displayed", displayedServices);
-    console.log("current", currentServices);
+    //console.log("displayed", displayedServices);
+    //console.log("current", currentServices);
+    
+    const pageNumbers = [];
+    for (let i = 1; i <= Math.ceil(displayedServices.length / servicesPerPage); i++) {
+        pageNumbers.push(i);
+    }
 
     return (
         <div className="services">
@@ -245,7 +258,10 @@ function ServicesPage () {
                 )}
             </div>
             {/* Pagination */}
-            <div className="pagination">
+            {/* <div className="pagination">
+            {displayedServices.length > servicesPerPage && (
+        <button onClick={handleGoToFirstPage}>Go to First Page</button>
+    )}
                 {displayedServices.length > servicesPerPage && (
                     <button onClick={() => setCurrentPage(currentPage - 1)} disabled={currentPage === 1}>
                         <i className="fa-solid fa-arrow-left"></i>
@@ -256,6 +272,19 @@ function ServicesPage () {
                         <i className="fa-solid fa-arrow-right"></i>
                     </button>
                 )}
+            </div> */}
+            <div className="pagination">
+                <button onClick={handleGoToFirstPage} disabled={currentPage === 1}>
+                    <i className="fa-solid fa-backward"></i>
+                </button>
+                {pageNumbers.map(number => (
+                    <button key={number} onClick={() => setCurrentPage(number)} className={currentPage === number ? 'active' : ''}>
+                        {number}
+                    </button>
+                ))}
+                <button onClick={handleGoToLastPage} disabled={currentPage === Math.ceil(displayedServices.length / servicesPerPage)}>
+                    <i className="fa-solid fa-forward"></i>
+                </button>
             </div>
         </div>
     )
