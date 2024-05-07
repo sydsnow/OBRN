@@ -1,8 +1,9 @@
 import { useState } from "react";
 import axios from "axios";
 import { NavLink } from "react-router-dom";
+import PropTypes from 'prop-types';
 
-function AddCategoryPage() {
+function AddCategoryPage({ onCategoryAdded }) {
     const [category, setCategory] = useState({
         categoryName: ''
     });
@@ -31,6 +32,11 @@ function AddCategoryPage() {
             console.log("token:", token);
             localStorage.setItem('token', token);
             axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
+
+            // Call the callback function to update the list of categories
+            if (onCategoryAdded) {
+                onCategoryAdded();
+            }
         } catch (error) {
             console.error('Registration failed: ', error);
         }
@@ -62,5 +68,9 @@ function AddCategoryPage() {
         </div>
     )
 }
+// PropTypes validation
+AddCategoryPage.propTypes = {
+    onCategoryAdded: PropTypes.func // Validate that onCategoryAdded is a function
+};
 
 export default AddCategoryPage;
