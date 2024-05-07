@@ -127,8 +127,8 @@ function RegisterBusiness(){
             const { message, token, referralId } = response.data;
             console.log(message);
             console.log("Referral ID: ", referralId.referralId); // Do something with the referralId (display to user? email to user?)
-            localStorage.setItem('token', token.result);
-            axios.defaults.headers.common['Authorization'] = `Bearer ${token.result}`;
+            localStorage.setItem('token', token);
+            axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
             navigate('/');
         } catch (error) {
             console.error('Registration failed: ', error);
