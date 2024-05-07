@@ -2,19 +2,18 @@ import { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useParams } from 'react-router-dom';
 import "../scss/components/_serviceform.scss";
-// import { NavLink } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 
 import PropTypes from 'prop-types';
-import { useNavigate } from 'react-router-dom';
 
-function CreateService({ serviceObj = {} }) {
+function ServiceAdd({ serviceObj = {} }) {
     const { id } = useParams(); // Assuming 'id' is relevant for fetching related data, like business ID
     const [service, setService] = useState(serviceObj);
     const [categories, setCategories] = useState([]);
     const [discounts, setDiscounts] = useState([]);
     const [successMessage, setSuccessMessage] = useState('');
     const [errorMessage, setErrorMessage] = useState('');
-    const navigate = useNavigate();
+
     useEffect(() => {
         const token = localStorage.getItem('token');
         const apiUrl = import.meta.env.VITE_API_BASE_URL;
@@ -62,9 +61,6 @@ function CreateService({ serviceObj = {} }) {
             console.error('Error fetching discounts:', error);
         });
     }, [id]);
-    const handleCancel = () => {
-        navigate('/businessprofile');
-    };
 
     const handleChange = (e) => {
         try {
@@ -106,7 +102,7 @@ function CreateService({ serviceObj = {} }) {
             <p className="testimonials-large">Add a Service</p>
             <div className="testimonials-path">
             <i className="fa-solid fa-house"></i>
-            <p>BUSINESS PROFILE</p>
+            <p>HOME</p>
             <i className="fa-solid fa-angle-right"></i>
             <p>ADD BUSINESS SERVICE</p>
             </div>
@@ -209,10 +205,11 @@ function CreateService({ serviceObj = {} }) {
     </select>
     <label className="label" htmlFor="fkDiscountId">Discount</label>
 </div>
-<div className="button-container">
-            <button onClick={handleCancel}>Cancel</button>
-            <button type="submit">Save</button>
-        </div>
+            <div className="button-container">
+                <button><NavLink to="/businessprofile">Cancel</NavLink></button>
+                <button type="submit">Save</button>
+
+            </div>
                 </form>
             </div>
         </div>
@@ -220,7 +217,7 @@ function CreateService({ serviceObj = {} }) {
     );
 }
 
-CreateService.propTypes = {
+ServiceAdd.propTypes = {
     serviceObj: PropTypes.shape({
         serviceName: PropTypes.string,
         description: PropTypes.string,
@@ -231,4 +228,4 @@ CreateService.propTypes = {
     }),
 };
 
-export default CreateService;
+export default ServiceAdd;

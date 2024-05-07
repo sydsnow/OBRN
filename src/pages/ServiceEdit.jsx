@@ -1,22 +1,17 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios';
-import { useParams} from 'react-router-dom';
+import { useParams, NavLink } from 'react-router-dom';
 import "../scss/components/_serviceform.scss";
 import PropTypes from 'prop-types';
-import { useNavigate } from 'react-router-dom';
 
-function EditService() {
+function ServiceEdit() {
     const { serviceId } = useParams(); // Assuming 'serviceId' is the ID of the service to edit
     const [service, setService] = useState({});
     const [categories, setCategories] = useState([]);
     const [discounts, setDiscounts] = useState([]);
     const [successMessage, setSuccessMessage] = useState('');
     const [errorMessage, setErrorMessage] = useState('');
-    const navigate = useNavigate();
 
-    const handleGoBack = () => {
-        navigate('/businessprofile');
-    };
     useEffect(() => {
         const token = localStorage.getItem('token');
         const apiUrl = import.meta.env.VITE_API_BASE_URL;
@@ -109,7 +104,7 @@ function EditService() {
                 <p className="testimonials-large">Edit Service</p>
                 <div className="testimonials-path">
                 <i className="fa-solid fa-house"></i>
-                <p>BUSINESS PROFILE</p>
+                <p>HOME</p>
                 <i className="fa-solid fa-angle-right"></i>
                 <p>EDIT BUSINESS SERVICE</p>
                 </div>
@@ -158,9 +153,9 @@ function EditService() {
                         <label className="label" htmlFor="fkDiscountId">Discount</label>
                     </div>
                     <div className="button-container">
-            <button onClick={handleGoBack}>Go Back</button>
-            <button type="submit">Save</button>
-        </div>
+                        <button><NavLink to="/businessprofile">Cancel</NavLink></button>
+                        <button type="submit">Save</button>
+                    </div>
                 </form>
             </div>
             </div>
@@ -168,7 +163,7 @@ function EditService() {
     );
 }
 
-EditService.propTypes = {
+ServiceEdit.propTypes = {
     serviceObj: PropTypes.shape({
         serviceName: PropTypes.string,
         description: PropTypes.string,
@@ -179,4 +174,4 @@ EditService.propTypes = {
     }),
 };
 
-export default EditService;
+export default ServiceEdit;

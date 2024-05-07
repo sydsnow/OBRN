@@ -11,7 +11,7 @@ function ProfileBannerBusiness({ title, imagePath, name, email, phone, location 
                 <h1 className="profile-banner-title">{title}</h1>
                 <div className="profile-banner-buttons">
                 <NavLink to="/editprofilebusiness" className="button">EDIT PROFILE</NavLink>
-                    <NavLink to="/addservice" className="button">ADD SERVICE</NavLink>
+                    <NavLink to="/create-service" className="button">ADD SERVICE</NavLink>
                 </div>
             </div>
             <div className="profile-banner-image-container">

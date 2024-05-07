@@ -1,65 +1,67 @@
-import { useState } from 'react';
-import cat from '../assets/cat.jpeg';
-import hair from "../assets/hair.jpeg";
-import nails from "../assets/nails.jpeg";
-import facial from "../assets/facial.jpeg";
-import botox from "../assets/botox.jpeg";
-import ServiceGallery from "../components/ServiceGallery";
+import  { useState, useEffect } from 'react';
+import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
+import { getEmailFromJWT } from '../utilities/utilities';
+import BusinessDetailsForm from '../components/BusinessDetailsForm';
 import ProfileBannerBusiness from '../components/ProfileBannerBusiness';
+import ServiceGallery from "../components/ServiceGallery";
+import cat from '../assets/cat.jpeg';
 
-function BusinessProfile () {
-    // State to handle the selected category
+
+function BusinessProfile() {
+    const navigate = useNavigate();
+    const [businessDetails, setBusinessDetails] = useState(null);
+    const [editMode, setEditMode] = useState(false);
     const [category, setCategory] = useState('');
-    const services = [
-        {
-            id: 1,
-            service: "Nails",
-            price: 80,
-            image: nails,
-            discount: 10,
-            businessName: "Nail Salon"
-        },
-        {
-            id: 2, 
-            service: "Hair",
-            price: 120,
-            image: hair,
-            businessName: "Hair Salon",
-            //discount: 25
-        },
-        {
-            id: 3,
-            service: "Botox",
-            price: 12,
-            image: botox,
-            discount: 15,
-            businessName: "Botox Clinic"
-        },
-        {
-            id: 4,
-            service: "Facial",
-            price: 300,
-            image: facial,
-            discount: 50,
-            businessName: "Facial Spa"
-        }
-    ]
+
+    useEffect(() => {
+        const fetchBusinessData = async () => {
+            try {
+                const apiUrl = import.meta.env.VITE_API_BASE_URL;
+                const token = localStorage.getItem('token');
+                // console.log ('businessDetails', businessDetails)
+                if (token) {
+                    const email = getEmailFromJWT(token);
+                    const response = await axios.get(`${apiUrl}/api/business/getbusinessbyemail?email=${email}`, {
+                        headers: {
+                            'Authorization': `Bearer ${token}`
+                        }
+                    });
+                    setBusinessDetails(response.data);
+                }
+            } catch (error) {
+                console.error('Error fetching business data:', error);
+                navigate('/error');
+            }
+        };
+
+        fetchBusinessData();
+    }, [navigate]);
+
+
+    if (!businessDetails) {
+        return <div>Loading...</div>;
+    }else{
+        console.log('businessDetails', businessDetails)
+    }
+
 
     return (
         <div className="business-profile">
-            <ProfileBannerBusiness 
+            <ProfileBannerBusiness
                 title="Business Profile"
-                imagePath={cat}
-                name="Purrfect Styles"
-                email="catfe@home.com"
-                phone="+123 456 7890"
-                location="Vancouver, Canada"
+                imagePath={businessDetails?.logo || cat}
+                name={businessDetails?.businessName || 'N/A'}
+                email={businessDetails?.email || 'N/A'}
+                phone={businessDetails?.phone || 'N/A'}
+                location={businessDetails?.city ? `${businessDetails.city}, ${businessDetails.province}` : 'Location N/A'}
             />
+
             <div className="business-profile-about">
                 <h2 className="business-profile-title">About Us</h2>
-                <p className="business-profile-about-details">Welcome to Purrfect Styles, where we specialize in providing top-notch grooming services for your feline companions. Our dedicated team of professionals understands the unique grooming needs of cats and is committed to ensuring that each cat receives personalized care and attention. From stylish haircuts to soothing baths and meticulous nail trims, we offer a wide range of services designed to keep your cat looking and feeling their best.
-                    <br/><br/>At Purrfect Styles, we prioritize the comfort and well-being of your cat above all else. Our salon is designed to create a stress-free environment, and our gentle approach ensures that even the most nervous cats feel at ease during their grooming session. We use only the finest products that are safe and gentle on your cats skin and coat, leaving them looking and smelling fresh. Treat your cat to the ultimate pampering experience at Purrfect Styles, where we treat every cat like royalty.</p>            
+                <p className="business-profile-about-details">{businessDetails?.description || 'No description available.'}</p>            
             </div>
+
             <div className="business-profile-services">
                 <h2 className="business-profile-services-title">Our Services</h2>
                 <div className="business-profile-services-dropdown-mobile">
@@ -98,11 +100,16 @@ function BusinessProfile () {
                 </button>
                 </div>
                 <div className="business-profile-services">
-                <ServiceGallery displayedServices={services} />
+                <ServiceGallery businessId={businessDetails?.pkBusinessId} />
+
             </div>
             </div>
+
+            {editMode && (
+                <BusinessDetailsForm initialData={businessDetails} />
+            )}
         </div>
-    )
+    );
 }
 
 export default BusinessProfile;
