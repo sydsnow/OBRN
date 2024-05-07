@@ -541,7 +541,7 @@
         }
     }
     @media (min-width: 960px) {
-        @include flex-row;
+        @include flex-col;
 
         &-btns{
             @include flex-row;
