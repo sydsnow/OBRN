@@ -53,6 +53,8 @@ import AdminFees from "../pages/AdminFees";
 // import ServiceAdd from "../pages/ServiceAdd";
 // import ServiceEdit from "../pages/ServiceEdit";
 
+import ServiceGallery from "../components/ServiceGallery";
+
 
 import EditService from "../pages/EditService";
 
@@ -135,6 +137,8 @@ function AppRouter() {
           <Route path="/add-service/:id" element={<ServiceForm />} />
 
           <Route path="/businessprofile/:businessId" element={<BusinessProfile />} />
+
+          <Route path="/servicegallery" element={<ServiceGallery />} />
           
     
 

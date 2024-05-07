@@ -21,6 +21,7 @@ function RegisterCustomer(){
         photo: placeholderImg,
         // if registering breaks, it might be this 
         fkReferralId: undefined,
+        membershipType: 'basic'
     });
 
     const [isValidReferral, setIsValidReferral] = useState(false);
@@ -30,6 +31,14 @@ function RegisterCustomer(){
     const handleChange = async (e) => {
         let value = e.target.value;
         let errorMessage = '';
+        const { name, type, checked } = e.target;
+        let actualValue = type === 'checkbox' ? checked : value;
+    
+        // For radio buttons (membershipType)
+        if (name === "membershipType") {
+            setCustomer(prev => ({ ...prev, membershipType: actualValue }));
+            return;
+        }
     
         switch (e.target.name) {
             case 'confirm18':
@@ -245,6 +254,29 @@ function RegisterCustomer(){
         />
         <label className="label" htmlFor="fkReferralId">Referral Code <small> *optional</small></label>
         </div>
+        <div className="form-group">
+    <label>
+        <input 
+            type="radio" 
+            name="membershipType" 
+            value="basic" 
+            checked={customer.membershipType === 'basic'} 
+            onChange={handleChange} 
+        />
+        Basic Membership ($0)
+    </label>
+    <label>
+        <input 
+            type="radio" 
+            name="membershipType" 
+            value="vip" 
+            checked={customer.membershipType === 'vip'} 
+            onChange={handleChange} 
+        />
+        VIP Membership ($25)
+    </label>
+</div>
+
         <div className="form-group">
     <input className='input-checkbox' type="checkbox" id="overEighteen" name="confirm18" required value={customer.confirm18} onChange={handleChange} />
     <label  htmlFor="overEighteen">I confirm that I am over 18 years old</label>
