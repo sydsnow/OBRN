@@ -50,13 +50,13 @@ function PasswordForm() {
             setErrorMessage('New Password must be at least 8 characters long and contain at least one lowercase letter, one uppercase letter, one numeric digit, and one special character.');
             setTimeout(() => {
                 setErrorMessage('');
-            }, 5000);
+            }, 3000);
             return;
         }
 
         try {
             const apiUrl = import.meta.env.VITE_API_BASE_URL;
-            const response = await axios.post(`${apiUrl}/api/customer/updatepassword`, passwordData);
+            const response = await axios.post(`${apiUrl}/api/customer/update-password`, passwordData);
             console.log("response: ", response.data);
             setErrorMessage(response.data);
             setTimeout(() => {

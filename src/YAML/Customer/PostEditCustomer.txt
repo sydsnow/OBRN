@@ -3,7 +3,7 @@ info:
   title: SSD Product API
   version: 1.0.0
 paths:
-  /editcustomer:
+  /edit-customer:
     post:
       summary: Edits an existing customer's details
       operationId: editCustomer

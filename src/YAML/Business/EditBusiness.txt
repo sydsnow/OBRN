@@ -9,7 +9,7 @@ tags:
   - name: 'Business'
     description: 'Operations related to business'
 paths:
-  /editbusiness:
+  /edit-business:
     post:
       tags:
         - 'Business'

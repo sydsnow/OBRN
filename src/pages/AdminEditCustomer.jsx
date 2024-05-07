@@ -12,7 +12,7 @@
 //         const fetchCustomer = async () => {
 //             try {
 //                 const apiUrl = import.meta.env.VITE_API_BASE_URL;
-//                 const response = await axios.get(`${apiUrl}/api/Customer/getcustomer/${id}`);
+//                 const response = await axios.get(`${apiUrl}/api/Customer/get-customer/${id}`);
 //                 setCustomer(response.data); // Assuming response.data is the customer details
 //             } catch (error) {
 //                 console.error('Failed to fetch customer: ', error);
@@ -40,7 +40,7 @@
 //         e.preventDefault();
 //         try {
 //             const apiUrl = import.meta.env.VITE_API_BASE_URL;
-//             const response = await axios.post(`${apiUrl}/api/Customer/editcustomer/`, customer);
+//             const response = await axios.post(`${apiUrl}/api/Customer/edit-customer/`, customer);
 //             console.log('Customer updated:', response.data);
 //             setEditing(false);
 //         } catch (error) {
@@ -200,7 +200,7 @@ function AdminEditCustomer() {
         const fetchCustomer = async () => {
             try {
                 const apiUrl = import.meta.env.VITE_API_BASE_URL;
-                const response = await axios.get(`${apiUrl}/api/Customer/getcustomer/${id}`);
+                const response = await axios.get(`${apiUrl}/api/Customer/get-customer/${id}`);
                 setCustomer(response.data); // Assuming response.data is the customer details
             } catch (error) {
                 console.error('Failed to fetch customer: ', error);
@@ -264,7 +264,7 @@ function AdminEditCustomer() {
 
         try {
             const apiUrl = import.meta.env.VITE_API_BASE_URL;
-            const response = await axios.post(`${apiUrl}/api/Customer/editcustomer/`, customer);
+            const response = await axios.post(`${apiUrl}/api/Customer/edit-customer/`, customer);
             console.log('Customer updated:', response.data);
             setEditing(false);
         } catch (error) {

@@ -5,9 +5,12 @@ import axios from 'axios';
 export const AuthProvider = ({ children }) => {
     const login = async (formData) => {
         try {
-            const response = await axios.post(`${apiUrl}/api/customer/login`, formData);
+            const response = await axios.post(`${apiUrl}/api/customer/login`, formData, {
+                headers: {
+                    'Ocp-Apim-Subscription-Key': import.meta.env.VITE_API_KEY,
+                }
+            });
             const { token } = response.data;
-            // console.log("token: ", token.result);
             localStorage.setItem('token', token.result);
             setAuthHeaders(token.result); 
             return token.result;
@@ -20,7 +23,6 @@ export const AuthProvider = ({ children }) => {
     const logout = () => {
         localStorage.removeItem('token');
         delete axios.defaults.headers.common['Authorization'];
-        // localStorage.removeItem('authenticated');
     };
 
     return (

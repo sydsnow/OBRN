@@ -7,9 +7,9 @@ function Topnav () {
                 <a href="https://www.facebook.com/groups/ourbeautysquad/" target="_blank" rel="noopener noreferrer">
                     <i className="fa-brands fa-facebook-f"></i>
                 </a>
-                <a href="#" target="_blank" rel="noopener noreferrer">
+                {/* <a href="#" target="_blank" rel="noopener noreferrer">
                     <i className="fa-brands fa-twitter"></i>
-                    </a>
+                    </a> */}
                 <a href="https://www.instagram.com/ourbeautyreferralnetwork/" target="_blank" rel="noopener noreferrer">
                     <i className="fa-brands fa-instagram"></i>
                 </a>

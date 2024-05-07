@@ -114,6 +114,7 @@ import { useNavigate } from 'react-router-dom';
                                 <p className="services-card-info-name">{service.serviceName}</p>
                                 
                             </div>
+                            <p className="services-card-info-name">{service.service}</p>
                             <div className="services-card-info-prices">
                                 <div>
                                     {discounts[index] && (

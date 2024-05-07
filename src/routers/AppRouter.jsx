@@ -3,6 +3,7 @@ import { AuthProvider } from '../auth/AuthContext';
 import { useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 
+// ensure that Azure subscription key header is sent for all axios requests 
 import axios from "axios";
 axios.defaults.headers.common['Ocp-Apim-Subscription-Key'] = import.meta.env.VITE_API_KEY;
 
@@ -57,8 +58,6 @@ import EditService from "../pages/EditService";
 
 import CreateService from "../components/CreateService";
 import ServiceForm from "../components/ServiceForm";
-
-// import ServiceGallery from "../components/ServiceGallery";
 
 function ScrollToTop() {
   const location = useLocation();

@@ -3,7 +3,7 @@ info:
   title: SSD Product API
   version: 1.0.0
 paths:
-  /addbusiness:
+  /add-business:
     post:
       summary: Add a new business
       requestBody:
