@@ -3,7 +3,6 @@ import logo from '../assets/obrn-logo.png';
 import { getYear } from "../utilities/utilities";
 
 function Footer() {
-  const isAuthenticated = !localStorage.getItem('token'); 
 
   return (
     <footer className="footer">
@@ -16,12 +15,8 @@ function Footer() {
           <Link to="/" className="footer-link">HOME</Link>
           <Link to="/services" className="footer-link">SERVICES</Link>
           <Link to="/comingsoon" className="footer-link">SHOP</Link>
-          {isAuthenticated && (
-            <>
               <Link to="/registerbusiness" className="footer-link">BUSINESS REGISTRATION</Link>
               <Link to="/registercustomer" className="footer-link">CUSTOMER REGISTRATION</Link>
-            </>
-          )}
           <Link to="/admin" className="footer-link">ADMIN</Link>
         </div>
         <div className="footer-section">

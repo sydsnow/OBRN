@@ -4,7 +4,7 @@ import { NavLink } from "react-router-dom";
 
 
 
-function ProfileBannerBusiness({ title, imagePath, name, email, phone, location }) {
+function ProfileBannerBusiness({ title, imagePath, name, email, phone, location, referralCode }) {
     return (
         <div className="profile-banner">
             <div className="profile-banner-top-container">
@@ -22,6 +22,7 @@ function ProfileBannerBusiness({ title, imagePath, name, email, phone, location 
                 <p><i className="fa-solid fa-envelope"></i> {email}</p>
                 <p><i className="fa-solid fa-phone"></i> {phone}</p>
                 <p><i className="fa-solid fa-location-dot"></i> {location}</p>
+                <p><i className="fa-solid fa-user-plus"></i> {referralCode}</p>
             </div>
         </div>
     );
@@ -32,7 +33,9 @@ ProfileBannerBusiness.propTypes = {
     name: PropTypes.string.isRequired,
     email: PropTypes.string.isRequired,
     phone: PropTypes.string.isRequired,
-    location: PropTypes.string.isRequired
+    location: PropTypes.string.isRequired,
+    referralCode: PropTypes.string.isRequired
+
 };
 
 export default ProfileBannerBusiness;
