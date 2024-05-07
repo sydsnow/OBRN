@@ -18,13 +18,22 @@ function Nav () {
         async function confirmUser() {
             if (token) {
                 const roles = getRolesFromJWT(token);
-                setUserRoles(roles);
                 const email = getEmailFromJWT(token);
-                const response = await axios.get(`${apiUrl}/api/customer/get-customer-by-email?email=${email}`);
-                console.log(response)
-                axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
-                if (response.data) {
-                    setIsAuthenticated(true);
+                setUserRoles(roles);
+                if (roles.includes('customer')) {
+                    const response = await axios.get(`${apiUrl}/api/customer/get-customer-by-email?email=${email}`);
+                    // console.log(response);
+                    axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
+                    if (response.data) {
+                        setIsAuthenticated(true);
+                    }
+                } else if (roles.includes('business')) {
+                    const response = await axios.get(`${apiUrl}/api/business/get-business-by-email?email=${email}`);
+                    // console.log(response);
+                    axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
+                    if (response.data) {
+                        setIsAuthenticated(true);
+                    }
                 }
             }
         }
