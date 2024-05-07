@@ -37,25 +37,25 @@ function AdminAllDiscounts() {
         }
     };
 
-     // Function to format discount value
-     const formatDiscountValue = (discount) => {
+    // Function to format discount value
+    const formatDiscountValue = (discount) => {
         if (discount.percentage !== null) {
-            return `${(parseFloat(discount.percentage) * 100).toFixed(2)}%`;
+            const percentage = parseFloat(discount.percentage) * 100;
+            return percentage % 1 === 0 ? `${percentage}%` : `${percentage.toFixed(2)}%`;
         }
         return '';
     };
 
-        // Function to update the list of categories
-        const updateDiscounts = async () => {
-            try {
-                const apiUrl = import.meta.env.VITE_API_BASE_URL;
-                const response = await axios.get(`${apiUrl}/category`);
-                setDiscount(response.data.$values);
-            } catch (error) {
-                console.error('Failed to fetch categories: ', error);
-            }
-        };
-
+    // Function to update the list of categories
+    const updateDiscounts = async () => {
+        try {
+            const apiUrl = import.meta.env.VITE_API_BASE_URL;
+            const response = await axios.get(`${apiUrl}/category`);
+            setDiscount(response.data.$values);
+        } catch (error) {
+            console.error('Failed to fetch categories: ', error);
+        }
+    };
 
     return (
         <div className="wrapper">
@@ -67,7 +67,7 @@ function AdminAllDiscounts() {
                     {/* <Link to="/add-discount"><button>Add Discount</button></Link>
                     <AddDiscount /> */}
 
-<button onClick={() => setShowAddDiscount(!showAddDiscount)}>Add Discount</button>
+                    <button onClick={() => setShowAddDiscount(!showAddDiscount)}>Add Discount</button>
                     {showAddDiscount && (
                         <div className="admin-category-box">
                             <AddDiscount onDiscountAdded={updateDiscounts} />
