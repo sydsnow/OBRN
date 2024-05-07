@@ -11,7 +11,8 @@ function AdminAllDiscounts() {
             try {
                 const apiUrl = import.meta.env.VITE_API_BASE_URL;
                 const response = await axios.get(`${apiUrl}/discount`);
-                setDiscount(response.data.$values); // Assuming response.data is an array of discounts 
+                setDiscount(response.data.$values.sort((a, b) => a.percentage - b.percentage)); // Sort discounts by percentage
+                //console.log(discount)
             } catch (error) {
                 console.error('Failed to fetch discounts: ', error);
             }
@@ -21,7 +22,7 @@ function AdminAllDiscounts() {
         return () => {
             // Cleanup logic if needed
         };
-    }, []);
+    }, [discount]);
 
     // Function to handle deletion of a discount
     const handleDeleteDiscount = async (discountId) => {
@@ -37,10 +38,8 @@ function AdminAllDiscounts() {
 
      // Function to format discount value
      const formatDiscountValue = (discount) => {
-        if (discount.amount !== null) {
-            return `$${parseFloat(discount.amount).toFixed(2)}`;
-        } else if (discount.percent !== null) {
-            return `${(parseFloat(discount.percent) * 100).toFixed(2)}%`;
+        if (discount.percentage !== null) {
+            return `${(parseFloat(discount.percentage) * 100).toFixed(2)}%`;
         }
         return '';
     };
@@ -56,7 +55,7 @@ function AdminAllDiscounts() {
                         {discount.map((discount) => (
                             <div key={discount.pkDiscountId} className="admin-discount">
                                 <p>Discount Value: {formatDiscountValue(discount)}</p>
-                                <button onClick={() => handleDeleteDiscount(discount.id)}>Delete</button>
+                                <button onClick={() => handleDeleteDiscount(discount.pkDiscountId)}>Delete</button>
                             </div>
                         ))}
                     </div>

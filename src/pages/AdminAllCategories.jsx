@@ -36,6 +36,17 @@ function AdminAllCategories() {
         }
     };
 
+    // Function to update the list of categories
+    const updateCategories = async () => {
+        try {
+            const apiUrl = import.meta.env.VITE_API_BASE_URL;
+            const response = await axios.get(`${apiUrl}/category`);
+            setCategory(response.data.$values);
+        } catch (error) {
+            console.error('Failed to fetch categories: ', error);
+        }
+    };
+
     return (
         <div className="wrapper">
             <div className="admin">
@@ -47,7 +58,7 @@ function AdminAllCategories() {
                     <button onClick={() => setShowAddCategory(!showAddCategory)}>Add Category</button>
                     {showAddCategory && (
                         <div className="admin-category-box">
-                            <AddCategory />
+                            <AddCategory onCategoryAdded={updateCategories} />
                         </div>
                     )}
                     <div className="admin-all-categories">
