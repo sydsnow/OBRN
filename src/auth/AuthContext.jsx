@@ -10,7 +10,6 @@ export const AuthProvider = ({ children }) => {
                     'Ocp-Apim-Subscription-Key': import.meta.env.VITE_API_KEY,
                 }
             });
-            console.log(import.meta.env.VITE_API_KEY);
             const { token } = response.data;
             localStorage.setItem('token', token.result);
             setAuthHeaders(token.result); 
