@@ -13,7 +13,7 @@ function PublicBusinessProfile() {
     //console.log('id', businessId);
     const [businessDetails, setBusinessDetails] = useState(null);
     const [services, setServices] = useState([]);
-    const [category, setCategory] = useState('');
+    //const [category, setCategory] = useState('');
 
 
     useEffect(() => {
@@ -34,7 +34,7 @@ function PublicBusinessProfile() {
             }
         }
         fetchBusinessData();
-    }, [businessDetails, businessId]);
+    }, [businessDetails, businessId, services]);
     if (!businessDetails) {
         return <div>Loading...</div>;
     }
@@ -58,7 +58,7 @@ function PublicBusinessProfile() {
 
             <div className="business-profile-services">
                 <h2 className="business-profile-services-title">Our Services</h2>
-                <div className="business-profile-services-dropdown-mobile">
+                {/* <div className="business-profile-services-dropdown-mobile">
                     <select value={category} onChange={(e) => setCategory(e.target.value)} className="business-profile-services-dropdown-menu">
                         <option value="">Select a Category</option>
                         <option value="beauty">Beauty</option>
@@ -66,13 +66,13 @@ function PublicBusinessProfile() {
                         <option value="wellness">Wellness</option>
                         <option value="other">Other</option>
                     </select>
-                </div>
-                <div className ="business-profile-services-buttons">
+                </div> */}
+                {/* <div className ="business-profile-services-buttons">
                     <button onClick={() => setCategory('beauty')} className={`business-profile-services-button-desktop ${category === 'beauty' ? 'active' : ''}`}>Beauty</button>
                     <button onClick={() => setCategory('fashion')} className={`business-profile-services-button-desktop ${category === 'fashion' ? 'active' : ''}`}>Fashion</button>
                     <button onClick={() => setCategory('wellness')} className={`business-profile-services-button-desktop ${category === 'wellness' ? 'active' : ''}`}>Wellness</button>
                     <button onClick={() => setCategory('other')} className={`business-profile-services-button-desktop ${category === 'other' ? 'active' : ''}`}>Other</button>
-                </div>
+                </div> */}
                 <div className="business-profile-services">
                 {services.length > 0 && (
                     <ServiceGallery displayedServices={services}></ServiceGallery>
