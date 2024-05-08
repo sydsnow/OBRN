@@ -62,6 +62,7 @@ import CreateService from "../components/CreateService";
 import ServiceForm from "../components/ServiceForm";
 
 import TransactionConfirmation from "../pages/TransactionConfirmation";
+import RefundConfirmation from "../pages/RefundConfirmation";
 
 function ScrollToTop() {
   const location = useLocation();
@@ -143,6 +144,7 @@ function AppRouter() {
 
           <Route path="/servicegallery" element={<ServiceGallery />} />
           <Route path="/transaction-confirmation" element={<TransactionConfirmation />} />
+          <Route path="/refund-confirmation" element={<RefundConfirmation />} />
     
 
         </Routes>
