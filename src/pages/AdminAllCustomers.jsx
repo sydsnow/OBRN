@@ -30,6 +30,23 @@ function AdminAllCustomers() {
         };
     }, [usersPerPage]);
 
+    // Function to handle deletion of a customer
+    const handleDeleteCustomer = async (customerId) => {
+        try {
+            const apiUrl = import.meta.env.VITE_API_BASE_URL;
+            console.log('customerId', customerId);
+            const customer = await axios.get(`${apiUrl}/api/Customer/get-customer/${customerId}`);
+            console.log('customer', customer.data);
+            await axios.delete(`${apiUrl}/api/Customer/delete-customer/${customerId}`);
+            // Update local state after successful deletion
+            const updatedUsers = users.filter(user => user.pkCustomerId !== customerId);
+            setUsers(updatedUsers);
+            setDisplayedUsers(updatedUsers.slice(0, usersPerPage)); // Update displayed users
+        } catch (error) {
+            console.error('Failed to delete customer: ', error);
+        }
+    };
+
     // Filter users based on search query
     const filterUsers = (query) => {
         return users.filter(user =>
@@ -109,7 +126,7 @@ function AdminAllCustomers() {
                                     </div>
                                     <div className="admin-user-btns">
                                         <Link to={`/admin-edit-customer/${user.pkCustomerId}`}><button>Edit</button></Link>
-                                        <button>Delete</button>
+                                        <button onClick={() => handleDeleteCustomer(user.pkCustomerId)}>Delete</button>
                                     </div>
                                 </div>
                             </div>

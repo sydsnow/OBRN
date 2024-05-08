@@ -288,11 +288,12 @@ function AdminEditCustomer() {
                     {successMessage && <p className="success-message">{successMessage}</p>}                    
                     <div className="admin-customer-details">
                         <div className="admin-customer-info">
-                            <label>VIP</label>
+                            <label htmlFor='vip'>VIP</label>
                             {editing ? (
                                 <input
                                     type="checkbox"
-                                    name="vip"
+                                    name="vip-checkbox"
+                                    id='vip'
                                     checked={customer.isVerified}
                                     onChange={handleIsVip}
                                 />
@@ -301,11 +302,12 @@ function AdminEditCustomer() {
                             )}
                         </div>
                         <div className="admin-customer-info">
-                            <label>First Name:</label>
+                            <label htmlFor='firstName'>First Name:</label>
                             {editing ? (
                                 <input
                                     type="text"
                                     name="firstName"
+                                    id='firstName'
                                     value={customer.firstName}
                                     onChange={handleInputChange}
                                 />
@@ -314,11 +316,12 @@ function AdminEditCustomer() {
                             )}
                         </div>
                         <div className="admin-customer-info">
-                            <label>Last Name:</label>
+                            <label htmlFor='lastName'>Last Name:</label>
                             {editing ? (
                                 <input
                                     type="text"
                                     name="lastName"
+                                    id='lastName'
                                     value={customer.lastName}
                                     onChange={handleInputChange}
                                 />
@@ -327,11 +330,12 @@ function AdminEditCustomer() {
                             )}
                         </div>
                         <div className="admin-customer-info">
-                            <label>Email:</label>
+                            <label htmlFor='email'>Email:</label>
                             {editing ? (
                                 <input
                                     type="email"
                                     name="email"
+                                    id='email'
                                     value={customer.email}
                                     onChange={handleInputChange}
                                 />
@@ -340,11 +344,12 @@ function AdminEditCustomer() {
                             )}
                         </div>
                         <div className="admin-customer-info">
-                            <label>Phone:</label>
+                            <label htmlFor='phone'>Phone:</label>
                             {editing ? (
                                 <input
                                     type="tel"
                                     name="phone"
+                                    id='phone'
                                     value={customer.phone}
                                     onChange={handleInputChange}
                                 />
@@ -353,12 +358,13 @@ function AdminEditCustomer() {
                             )}
                         </div>
                         <div className="admin-customer-info">
-                            <label>Username:</label>
+                            <label htmlFor='userName'>Username:</label>
                             {editing ? (
                                 <input
                                     className='readonly-input'
                                     type="text"
                                     name="username"
+                                    id='userName'
                                     readOnly
                                     value={customer.pkCustomerId}
                                     onChange={handleInputChange}
@@ -368,11 +374,12 @@ function AdminEditCustomer() {
                             )}
                         </div>
                         <div className="admin-customer-info">
-                            <label>Birthdate:</label>
+                            <label htmlFor='birthdate'>Birthdate:</label>
                             {editing ? (
                                 <input
                                     type="text"
                                     name="birthdate"
+                                    id='birthdate'
                                     value={customer.birthdate}
                                     onChange={handleInputChange}
                                 />
@@ -381,7 +388,7 @@ function AdminEditCustomer() {
                             )}
                         </div>
                         <div className="admin-customer-info">
-                            <label>Is Over the Age of 18?</label>
+                            <label >Is Over the Age of 18?</label>
                             <p>{customer.confirm18 ? 'Yes' : 'No'}</p>
                         </div>
                     </div>
