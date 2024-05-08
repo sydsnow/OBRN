@@ -61,6 +61,7 @@ import EditService from "../pages/EditService";
 import CreateService from "../components/CreateService";
 import ServiceForm from "../components/ServiceForm";
 import PublicBusinessProfile from "../pages/PublicBusinessProfile";
+import ServiceDetailPage from "../pages/ServiceDetailPage";
 
 import TransactionConfirmation from "../pages/TransactionConfirmation";
 import RefundConfirmation from "../pages/RefundConfirmation";
@@ -142,6 +143,7 @@ function AppRouter() {
           <Route path="/add-service/:id" element={<ServiceForm />} />
 
           <Route path="/:businessId" element={<PublicBusinessProfile />} />
+          <Route path="/:businessId/:serviceId" element={<ServiceDetailPage />} />
 
           <Route path="/servicegallery" element={<ServiceGallery />} />
           <Route path="/Checkout/OrderConfirmation" element={<TransactionConfirmation />} />
