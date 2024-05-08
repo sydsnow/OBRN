@@ -17,6 +17,7 @@ function Admin() {
             <Link to="/admin-testimonials"><button>View Testimonials</button></Link>
             <Link to="/admin-all-categories"><button>View All Categories</button></Link>
             <Link to="/admin-all-discounts"><button>View All Discounts</button></Link>
+            <Link to="/admin-roles"><button>Roles</button></Link>
           </div>
         </div>
       </div>

@@ -64,6 +64,7 @@ import PublicBusinessProfile from "../pages/PublicBusinessProfile";
 
 import TransactionConfirmation from "../pages/TransactionConfirmation";
 import RefundConfirmation from "../pages/RefundConfirmation";
+import Roles from "../pages/AdminRoles";
 
 function ScrollToTop() {
   const location = useLocation();
@@ -146,7 +147,7 @@ function AppRouter() {
           <Route path="/servicegallery" element={<ServiceGallery />} />
           <Route path="/transaction-confirmation" element={<TransactionConfirmation />} />
           <Route path="/refund-confirmation" element={<RefundConfirmation />} />
-    
+          <Route path="/admin-roles" element={<Roles />} />
 
         </Routes>
         <Footer />

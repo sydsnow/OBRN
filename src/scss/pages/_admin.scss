@@ -548,6 +548,7 @@
         }
 
     }
+
 }
 .pagination {
     display: flex;
@@ -572,4 +573,27 @@
         background-color: white;
         color: black;
     }
+}
+.add-role-form {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    &-input {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        width: 250px;
+        >input {
+            width: 150px;
+            margin-left: 10px;
+        }
+        > button {
+           margin-left: 0; 
+        }
+    }
+}
+.button-container {
+    margin-left: 0;
+    margin-bottom: 25px;
+    margin-top: 20px;
 }

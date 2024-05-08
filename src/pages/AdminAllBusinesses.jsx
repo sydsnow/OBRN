@@ -26,6 +26,19 @@ function AdminAllBusinesses() {
         };
     }, []);
 
+    const handleDeleteBusiness = async (businessId) => {
+        try {
+            const apiUrl = import.meta.env.VITE_API_BASE_URL;
+            console.log('businessId', businessId);
+            await axios.delete(`${apiUrl}/api/Business/delete-business/${businessId}`);
+            // Update local state after successful deletion
+            const updatedBusiness = business.filter(b => b.pkBusinessId !== businessId);
+            setBusiness(updatedBusiness);
+        } catch (error) {
+            console.error('Failed to delete business: ', error);
+        }
+    };
+    
     const handleSearchInputChange = (e) => {
         setSearchQuery(e.target.value);
         setCurrentPage(1); // Reset to first page when search query changes
@@ -82,7 +95,7 @@ function AdminAllBusinesses() {
                                     </div>
                                     <div className="admin-user-btns">
                                         <Link to={`/admin-edit-business/${business.pkBusinessId}`}><button>Edit</button></Link>
-                                        <button>Delete</button>
+                                        <button onClick={() => handleDeleteBusiness(business.pkBusinessId)}>Delete</button>
                                     </div>
                                 </div>
                             </div>
