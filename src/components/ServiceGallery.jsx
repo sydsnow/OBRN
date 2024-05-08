@@ -1,7 +1,9 @@
 import PropTypes from 'prop-types';
-import { useLocation } from 'react-router-dom';
+import { NavLink, useLocation } from 'react-router-dom';
 import "../scss/components/_servicegallery.scss";
 import { useNavigate } from 'react-router-dom';
+import ImagePlaceholder from '../assets/image-placeholder.jpg';
+
 function ServiceGallery({ displayedServices }) {
 
     // Get the current location
@@ -19,11 +21,18 @@ function ServiceGallery({ displayedServices }) {
                 <div className="services-card" key={service.pkServiceId}>
                     <div>
                         <div className="services-card-image-container">
-                            <img src={service.image} alt="Service Image" className="services-card-image" />
+                            <img src={ImagePlaceholder} alt="Service Image" className="services-card-image"/>
+                            {/* <img src={service.image} alt="Service Image" className="services-card-image" /> */}
                         </div>
                         <div className="services-card-info">
                             <div className='services-card-info-container'>
-                                <p className="services-card-info-name">{service.business.businessName}</p>
+                                {/* <p className="services-card-info-name">{service.business.businessName}</p> */}
+                                {!isBusinessProfileRoute && (
+                                    <NavLink to={`/${service.business.pkBusinessId}/${service.pkServiceId}`} className="services-card-link">
+                                        {service.business.businessName}
+                                    </NavLink>
+                                    // <NavLink to={`/${service.business.pkBusinessId}`} className="services-card-info-business">{service.business.businessName}</NavLink>
+                                )}
                                 {isBusinessProfileRoute && (
                                     <button className="services-card-info-button" onClick={() => handleEditService(service.pkServiceId)}>
                                         Edit
