@@ -4,6 +4,8 @@ import axios from 'axios';
 import placeholderImg from "../assets/profile-placeholder.png";
 
 import registerimg from '../assets/register-img.jpg';
+import { loadStripe } from '@stripe/stripe-js';
+
 
 function RegisterCustomer() {
     const navigate = useNavigate();
@@ -23,6 +25,9 @@ function RegisterCustomer() {
         fkReferralId: undefined,
         membershipType: 'basic'
     });
+
+    const stripePromise = loadStripe('pk_test_51PC4N2Eq0H2sm5gKGagCwf7DZxgs7pBlCWmtg4iykT95DXpGtNV9iLqjcv3EtJn3riZTOib1dXI1ACY67X0fnGGB00xRqOZkM8');
+
 
     const [isValidReferral, setIsValidReferral] = useState(false);
 
@@ -86,6 +91,25 @@ function RegisterCustomer() {
         setCustomer({ ...customer, [e.target.name]: value });
         setErrorMessage(errorMessage);
     };
+    const handleStripeCheckout = async (userId, itemId) => {
+        try {
+            const stripe = await stripePromise;
+            const apiUrl = import.meta.env.VITE_API_BASE_URL; // Ensure your API URL is correctly defined in your environment variables
+            const checkoutSession = await axios.post(`${apiUrl}/api/Payment/create-checkout-session/${userId}/${itemId}`);
+            const { sessionId } = checkoutSession.data;
+            // When the checkout session is created, redirect to Stripe's hosted checkout page.
+            const result = await stripe.redirectToCheckout({
+                sessionId
+            });
+    
+            if (result.error) {
+                alert(result.error.message);
+            }
+        } catch (error) {
+            console.error('Failed to create a checkout session', error);
+        }
+    };
+    
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -125,17 +149,20 @@ function RegisterCustomer() {
             localStorage.setItem('token', response.data.token);
             axios.defaults.headers.common['Authorization'] = `Bearer ${response.data.token}`;
 
-            // Redirect based on membership type
-            if (customer.membershipType === 'vip') {
-                // Redirect to Stripe for VIP membership payment
-                window.location.href = 'https://checkout.stripe.com/c/pay/cs_test_a1EEoKGuTuR7F5ojwCwBe4BNSPPCadb036gSBHHxwFwolHCJghgD7Buqhp#fidkdWxOYHwnPyd1blpxYHZxWjA0VUYxSzdAdDVNN3ZoMGJOQmRiRnJjMkFffWJ2MnVHaUZSaHFiMWx8blE8MEFddUJxS1M8bEl0b2ZzNkBxT2s2d2xfUUpsZzRhXUw0REZcMzJdNWNrQkJHNTV9V3RKX25IPScpJ2N3amhWYHdzYHcnP3F3cGApJ2lkfGpwcVF8dWAnPyd2bGtiaWBabHFgaCcpJ2BrZGdpYFVpZGZgbWppYWB3dic%2FcXdwYHgl';
-            } else {
-                // Navigate to home or another page upon successful registration for Basic membership
-                navigate('/');
-            }
+            // // Redirect based on membership type
+            // if (customer.membershipType === 'vip') {
+            //     // Redirect to Stripe for VIP membership payment
+            //     window.location.href = 'https://checkout.stripe.com/c/pay/cs_test_a1EEoKGuTuR7F5ojwCwBe4BNSPPCadb036gSBHHxwFwolHCJghgD7Buqhp#fidkdWxOYHwnPyd1blpxYHZxWjA0VUYxSzdAdDVNN3ZoMGJOQmRiRnJjMkFffWJ2MnVHaUZSaHFiMWx8blE8MEFddUJxS1M8bEl0b2ZzNkBxT2s2d2xfUUpsZzRhXUw0REZcMzJdNWNrQkJHNTV9V3RKX25IPScpJ2N3amhWYHdzYHcnP3F3cGApJ2lkfGpwcVF8dWAnPyd2bGtiaWBabHFgaCcpJ2BrZGdpYFVpZGZgbWppYWB3dic%2FcXdwYHgl';
+            // } else {
+            //     // Navigate to home or another page upon successful registration for Basic membership
+            //     navigate('/');
+            // }
         } catch (error) {
             console.error('Registration failed: ', error);
             setErrorMessage(`Registration failed: ${error.response ? error.response.data : "Please try again later."}`);
+        }
+        if (customer.membershipType === 'vip') {
+            handleStripeCheckout(customer.pkCustomerId, 'price_1PDEdTEq0H2sm5gKFzTAU6L5');
         }
     };
 
