@@ -3,6 +3,7 @@ import { NavLink, useLocation } from 'react-router-dom';
 import "../scss/components/_servicegallery.scss";
 import { useNavigate } from 'react-router-dom';
 import ImagePlaceholder from '../assets/image-placeholder.jpg';
+import axios from 'axios';
 
 function ServiceGallery({ displayedServices }) {
 
@@ -14,6 +15,22 @@ function ServiceGallery({ displayedServices }) {
     const handleEditService = (serviceId) => {
         navigate(`/edit-service/${serviceId}`);
     };
+    const handleDeleteService = async (serviceId) => {
+        const token = localStorage.getItem('token');
+        console.log('serviceId:', serviceId);
+        try {
+            const apiUrl = import.meta.env.VITE_API_BASE_URL;
+            await axios.delete(`${apiUrl}/api/Service/${serviceId}`, {
+                headers: {
+                    Authorization: `Bearer ${token}`, // Make sure token is accessible here, or fetch again as needed
+                },
+            });
+            // Remove the deleted service from the list
+            // setServices(prevServices => prevServices.filter(service => service.pkServiceId !== serviceId));
+        } catch (error) {
+            console.error('Failed to delete service:', error);
+        }
+    }
 
     return (
         <div className="services-gallery-content">
@@ -33,11 +50,7 @@ function ServiceGallery({ displayedServices }) {
                                     </NavLink>
                                     // <NavLink to={`/${service.business.pkBusinessId}`} className="services-card-info-business">{service.business.businessName}</NavLink>
                                 )}
-                                {isBusinessProfileRoute && (
-                                    <button className="services-card-info-button" onClick={() => handleEditService(service.pkServiceId)}>
-                                        Edit
-                                    </button>
-                                )}
+                           
                             </div>
                             <p className="services-card-info-name">{service.serviceName}</p>
                             <div className="services-card-info-prices">
@@ -50,12 +63,17 @@ function ServiceGallery({ displayedServices }) {
                                 </div>
                             </div>
                             <div className="services-card-btns">
+                            {isBusinessProfileRoute && (
+                                    <button className="services-card-info-button" onClick={() => handleEditService(service.pkServiceId)}>
+                                        Edit
+                                    </button>
+                                )}
             
-            {/* {isBusinessProfileRoute && (
+            {isBusinessProfileRoute && (
                 <button className="services-card-info-button" onClick={() => handleDeleteService(service.pkServiceId)}>
                     Delete
                 </button>
-            )} */}
+            )}
         </div>
                         </div>
                     </div>

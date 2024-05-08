@@ -54,6 +54,9 @@
         }
         
         &-info {
+            @include flex-col;
+            justify-content: space-around;
+            align-items: center;
             &-name {
                 display: flex;
                 line-height: 0;
