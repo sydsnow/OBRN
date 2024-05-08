@@ -61,6 +61,8 @@ import EditService from "../pages/EditService";
 import CreateService from "../components/CreateService";
 import ServiceForm from "../components/ServiceForm";
 
+import TransactionConfirmation from "../pages/TransactionConfirmation";
+
 function ScrollToTop() {
   const location = useLocation();
 
@@ -140,7 +142,7 @@ function AppRouter() {
           <Route path="/businessprofile/:businessId" element={<BusinessProfile />} />
 
           <Route path="/servicegallery" element={<ServiceGallery />} />
-          
+          <Route path="/transaction-confirmation" element={<TransactionConfirmation />} />
     
 
         </Routes>
