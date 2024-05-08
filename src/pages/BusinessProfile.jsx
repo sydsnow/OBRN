@@ -11,6 +11,7 @@ function BusinessProfile() {
     const [businessDetails, setBusinessDetails] = useState(null);
     const [category, setCategory] = useState('');
     const [referralCode, setReferralCode] = useState(null); 
+    const [services, setServices] = useState([]);
 
     useEffect(() => {
         const fetchBusinessData = async () => {
@@ -27,7 +28,19 @@ function BusinessProfile() {
                     setBusinessDetails(response.data);
                     if (response.data && response.data.pkBusinessId) {
                         const referralResponse = await axios.get(`${apiUrl}/api/Referral/get-business-referral-code/${response.data.pkBusinessId}`);
+                        console.log('referralResponse', referralResponse);
                         setReferralCode(referralResponse.data);
+                        const serviceResponse = await axios.get(`${apiUrl}/service/business/${response.data.pkBusinessId}`);
+                        console.log('id:', response.data.pkBusinessId)
+                        console.log("business name", response.data.businessName);
+                        console.log('serviceResponse', serviceResponse.data.$values);
+                        // Update service objects to include business data
+                        const servicesWithBusinessName = serviceResponse.data.$values.map(service => ({
+                            ...service,
+                            business: response.data
+                        }));
+                        setServices(servicesWithBusinessName);
+                        console.log('services', services);
                     }
                 }
             } catch (error) {
@@ -37,7 +50,7 @@ function BusinessProfile() {
         };
 
         fetchBusinessData();
-    }, [navigate]);
+    }, [navigate, services]);
 
     if (!businessDetails) {
         return <div>Loading...</div>;
@@ -80,7 +93,9 @@ function BusinessProfile() {
                     <button onClick={() => setCategory('other')} className={`business-profile-services-button-desktop ${category === 'other' ? 'active' : ''}`}>Other</button>
                 </div>
                 <div className="business-profile-services">
-                    <ServiceGallery businessId={businessDetails?.pkBusinessId} />
+                {services.length > 0 && (
+                    <ServiceGallery displayedServices={services}></ServiceGallery>
+                )}
                 </div>
             </div>
         </div>
