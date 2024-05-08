@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import "../scss/components/_mydetailsform.scss";
-import { getEmailFromJWT } from '../utilities/utilities';
+import { getEmailFromJWT, capitalizeFirstLetters, formatPhoneNumber } from '../utilities/utilities';
 import provinces from '../data/provinces';
 
 async function fetchCustomerData(token, apiUrl) {
@@ -156,7 +156,7 @@ const MyDetailsForm = () => {
                     id="firstName"
                     name="firstName"
                     required
-                    value={userDetails.firstName}
+                    value={capitalizeFirstLetters(userDetails.firstName)}
                     onChange={handleChange}
                 />
             </div>
@@ -168,7 +168,7 @@ const MyDetailsForm = () => {
                     id="lastName"
                     name="lastName"
                     required
-                    value={userDetails.lastName}
+                    value={capitalizeFirstLetters(userDetails.lastName)}
                     onChange={handleChange}
                 />
             </div>
@@ -180,7 +180,7 @@ const MyDetailsForm = () => {
                     id="phone"
                     name="phone"
                     required
-                    value={userDetails.phone}
+                    value={formatPhoneNumber(userDetails.phone)}
                     onChange={handleChange}
                 />
             </div>
@@ -203,7 +203,7 @@ const MyDetailsForm = () => {
                     type="text"
                     id="address"
                     name="address"
-                    value={userDetails.address}
+                    value={capitalizeFirstLetters(userDetails.address)}
                     onChange={handleChange}
                 />
             </div>
@@ -214,7 +214,7 @@ const MyDetailsForm = () => {
                     type="text"
                     id="city"
                     name="city"
-                    value={userDetails.city}
+                    value={capitalizeFirstLetters(userDetails.city)}
                     onChange={handleChange}
                 />
             </div>
@@ -240,7 +240,7 @@ const MyDetailsForm = () => {
                     type="text"
                     id="postalCode"
                     name="postalCode"
-                    value={userDetails.postalCode}
+                    value={capitalizeFirstLetters(userDetails.postalCode)}
                     onChange={handleChange}
                 />
             </div>

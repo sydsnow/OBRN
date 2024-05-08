@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import axios from 'axios';
 import ProfileBanner from '../components/ProfileBanner';
 import { getEmailFromJWT, formatPhoneNumber } from '../utilities/utilities';
-import kitty from '../assets/kitty.jpg';
+import defaultProfile from '../assets/profile-placeholder.png';
 
 function CustomerProfile() {
     const [customer, setCustomer] = useState({
@@ -46,7 +46,7 @@ function CustomerProfile() {
             {customer && (
                 <ProfileBanner 
                 title="Customer Profile"
-                imagePath={kitty}
+                imagePath={defaultProfile}
                 name={customer.firstName + ' ' + customer.lastName}
                 email={customer.email}
                 phone={formatPhoneNumber(customer.phone)}

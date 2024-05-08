@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
-import { getEmailFromJWT } from '../utilities/utilities';
+import { getEmailFromJWT, capitalizeFirstLetters, formatPhoneNumber } from '../utilities/utilities';
 import provinces from '../data/provinces';
 import "../scss/components/_businessdetailsform.scss"; 
 
@@ -94,9 +94,9 @@ const BusinessDetailsForm = () => {
         }
 
         if (e.target.name === 'firstName' || e.target.name === 'lastName' || e.target.name === 'address' || e.target.name === 'city') {
-            const namePattern = /^[a-zA-Z\s]*$/;
+            const namePattern = /^[a-zA-Z0-9\s.,-]*$/;
             if (!namePattern.test(value)) {
-                errorMessage = 'Invalid input format. Only letters and spaces are allowed.';
+                errorMessage = 'Invalid input format. Only letters, numbers, spaces, periods, commas, and dashes are allowed.';
             }
         }
 
@@ -148,7 +148,7 @@ const BusinessDetailsForm = () => {
                     type="text"
                     id="contactName"
                     name="contactName"
-                    value={businessDetails.contactName}
+                    value={capitalizeFirstLetters(businessDetails.contactName)}
                     onChange={handleChange}
                     required
                 />
@@ -160,7 +160,7 @@ const BusinessDetailsForm = () => {
                     type="text"
                     id="businessName"
                     name="businessName"
-                    value={businessDetails.businessName}
+                    value={capitalizeFirstLetters(businessDetails.businessName)}
                     onChange={handleChange}
                     required
                 />
@@ -172,9 +172,9 @@ const BusinessDetailsForm = () => {
                     type="text"
                     id="address"
                     name="address"
-                    value={businessDetails.address}
+                    value={capitalizeFirstLetters(businessDetails.address)}
                     onChange={handleChange}
-                    required
+                    
                 />
             </div>
             <div className="business-form-group">
@@ -184,7 +184,7 @@ const BusinessDetailsForm = () => {
                     type="text"
                     id="city"
                     name="city"
-                    value={businessDetails.city}
+                    value={capitalizeFirstLetters(businessDetails.city)}
                     onChange={handleChange}
                     required
                 />
@@ -212,7 +212,7 @@ const BusinessDetailsForm = () => {
                     type="text"
                     id="postalCode"
                     name="postalCode"
-                    value={businessDetails.postalCode}
+                    value={capitalizeFirstLetters(businessDetails.postalCode)}
                     onChange={handleChange}
                     required
                 />
@@ -236,7 +236,7 @@ const BusinessDetailsForm = () => {
                     type="text"
                     id="phone"
                     name="phone"
-                    value={businessDetails.phone}
+                    value={formatPhoneNumber(businessDetails.phone)}
                     onChange={handleChange}
                     required
                 />
@@ -274,7 +274,7 @@ const BusinessDetailsForm = () => {
                     type="text"
                     id="insuranceCompany"
                     name="insuranceCompany"
-                    value={businessDetails.insuranceCompany}
+                    value={capitalizeFirstLetters(businessDetails.insuranceCompany)}
                     onChange={handleChange}
                     required
                 />
