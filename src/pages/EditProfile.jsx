@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
-import { getEmailFromJWT, formatPhoneNumber } from '../utilities/utilities';
+import { getEmailFromJWT, formatPhoneNumber, capitalizeFirstLetters } from '../utilities/utilities';
 import MyDetailsForm from '../components/MyDetailsForm';
 import { NavLink } from 'react-router-dom';
 
@@ -75,14 +75,14 @@ function EditProfile() {
           <h3>My Details</h3>
           {!isEditingDetails ? (
             <div>
-              <p>First Name: {userDetails?.firstName}</p>
-              <p>Last Name: {userDetails?.lastName}</p>
+              <p>First Name: {capitalizeFirstLetters(userDetails?.firstName)}</p>
+              <p>Last Name: {capitalizeFirstLetters(userDetails?.lastName)}</p>
               <p>Email: {userDetails?.email}</p>
               <p>Phone Number: {formatPhoneNumber(userDetails?.phone)}</p>
-              <p>Address: {(userDetails?.address) ? (userDetails?.address) : 'Unspecified' }</p>
-              <p>City: {(userDetails?.city) ? (userDetails?.city) : 'Unspecified' }</p>
+              <p>Address: {capitalizeFirstLetters((userDetails?.address) ? (userDetails?.address) : 'Unspecified' )}</p>
+              <p>City: {capitalizeFirstLetters((userDetails?.city) ? (userDetails?.city) : 'Unspecified' )}</p>
               <p>Province: {(userDetails?.province) ? (userDetails?.province) : 'Unspecified' }</p>
-              <p>Postal Code: {(userDetails?.postalCode) ? (userDetails?.postalCode) : 'Unspecified' }</p>
+              <p>Postal Code: {capitalizeFirstLetters((userDetails?.postalCode) ? (userDetails?.postalCode) : 'Unspecified' )}</p>
             </div>
           ) : (
             <MyDetailsForm />

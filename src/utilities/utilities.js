@@ -49,4 +49,9 @@ function formatPhoneNumber(phone) {
     return phone; // If the phone number doesn't match the format, do not modify it
 }
 
-export { getYear, getEmailFromJWT, getIdFromJWT, getRolesFromJWT, formatPhoneNumber }
+function capitalizeFirstLetters(string) {
+    if (!string) return '';
+    return string.split(' ').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' ');
+}
+
+export { getYear, getEmailFromJWT, getIdFromJWT, getRolesFromJWT, formatPhoneNumber, capitalizeFirstLetters };

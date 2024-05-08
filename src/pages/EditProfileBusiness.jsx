@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
-import { getEmailFromJWT, formatPhoneNumber } from '../utilities/utilities';
+import { getEmailFromJWT, formatPhoneNumber, capitalizeFirstLetters } from '../utilities/utilities';
 import BusinessDetailsForm from '../components/BusinessDetailsForm';
 import { NavLink } from "react-router-dom";
 
@@ -81,8 +81,8 @@ function EditProfileBusiness() {
           {!isEditingBusiness ? (
             <div>
               {/* <p>Contact Name: {businessDetails.contactName}</p> */}
-              <p>Business Name: {businessDetails.businessName}</p>
-              <p>Address: {businessDetails.address}</p>
+              <p>Business Name: {capitalizeFirstLetters(businessDetails.businessName)}</p>
+              <p>Address: {capitalizeFirstLetters(businessDetails.address)}</p>
               {/* <p>City: {businessDetails.city}</p> */}
               {/* <p>Province: {businessDetails.province}</p>
               <p>Postal Code: {businessDetails.postalCode}</p> */}
@@ -90,7 +90,7 @@ function EditProfileBusiness() {
               <p>Phone: {formatPhoneNumber(businessDetails.phone)}</p>
               {/* <p>Description: {businessDetails.description}</p> */}
               {/* <p>Logo: {businessDetails.logo}</p> */}
-              <p>Insurance Company: {businessDetails.insuranceCompany}</p>
+              <p>Insurance Company: {capitalizeFirstLetters(businessDetails.insuranceCompany)}</p>
               {/* <p>Insurance Expiry: {businessDetails.insuranceExpiry}</p> */}
               {/* <p>Business License: {businessDetails.verificationDocument}</p> */}
             </div>
