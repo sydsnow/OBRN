@@ -70,7 +70,8 @@
                 }
                 > div {
                     @include flex-row;
-                    justify-content: center;
+                    //changed this 
+                    justify-content: flex-start;
                     align-items: center;
                     > :nth-child(2) {
                         color: rgb(142, 142, 142);
@@ -79,8 +80,8 @@
                         font-size:0.9rem;
                     }
                     > p {
-                        font-weight:700;
-                        font-size:1.1rem;
+                        //font-weight:700;
+                        //font-size:1.1rem;
                         padding-right: 10px;
                         
                     }
