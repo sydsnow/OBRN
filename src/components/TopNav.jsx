@@ -18,7 +18,7 @@ function Topnav () {
                 </a>
             </div>
             <div className="header-contact">
-                <p>PHONE: (+92) 3012699778</p>
+                <p>PHONE: 604-902-5234</p>
                 <p>EMAIL: OURBEAUTY@GMAIL.COM</p>
             </div>
         </div>
