@@ -122,6 +122,7 @@ const BusinessDetailsForm = () => {
         e.preventDefault();
         try {
             const response = await axios.post(`${apiUrl}/api/Business/edit-business`, businessDetails);
+            console.log(response);
             setSuccessMessage('Business details updated successfully.');
             setTimeout(() => navigate('/editprofilebusiness'), 1000); 
         } catch (error) {
