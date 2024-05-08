@@ -12,7 +12,7 @@ function RegisterCustomer(){
         firstName: '',
         lastName: '',
         phone: '',
-        birthdate: new Date(),
+        birthdate: new Date().toISOString().slice(0, 10), // Set initial birthdate to today's date in the correct format
         email: '',
         confirm18: false,
         vip: false,
@@ -37,6 +37,9 @@ function RegisterCustomer(){
         if (name === "membershipType") {
             setCustomer(prev => ({ ...prev, membershipType: actualValue }));
             return;
+        }
+        if (name === 'birthdate') {
+            actualValue = new Date(value).toISOString().slice(0, 10);
         }
     
         switch (e.target.name) {
@@ -85,11 +88,13 @@ function RegisterCustomer(){
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+    
         const birthdate = new Date(customer.birthdate);
         const today = new Date();
         const eighteenYearsAgo = new Date(today.getFullYear() - 18, today.getMonth(), today.getDate());
+    
         if (birthdate > eighteenYearsAgo) {
-            setErrorMessage('You must be 18 years or older in order to register with Our Beauty Referral Network.');
+            setErrorMessage('You must be 18 years or older to register.');
             return;
         }
     
@@ -97,36 +102,42 @@ function RegisterCustomer(){
             setErrorMessage('Password and Confirm Password must match.');
             return;
         }
-        // if registering breaks, it might be this 
+    
         if (!isValidReferral && customer.fkReferralId) {
             setErrorMessage('Please enter a valid referral code.');
             return;
         }
-
+    
+        // Perform registration regardless of membership type
         try {
             const apiUrl = import.meta.env.VITE_API_BASE_URL;
-            const response = await axios.post(`${apiUrl}/api/customer/add-customer`, customer, {
+            const response = await axios.post(`${apiUrl}/api/customer/add-customer`, {
+                ...customer,
+                vip: customer.membershipType === 'vip'  // Ensure to send vip status
+            }, {
                 headers: {
                     'Ocp-Apim-Subscription-Key': import.meta.env.VITE_API_KEY,
-                }});
+                }
+            });
+    
             console.log("response.data: ", response.data);
-            const { message, token, referralId } = response.data;
-            console.log("Message: ", message);
-            console.log("Referral ID: ", referralId.referralId);// Do something with the referralId (display to user? email to user?)
-            localStorage.setItem('token', token);
-            axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
-            navigate('/');
+            localStorage.setItem('token', response.data.token);
+            axios.defaults.headers.common['Authorization'] = `Bearer ${response.data.token}`;
+    
+            // Redirect based on membership type
+            if (customer.membershipType === 'vip') {
+                // Redirect to Stripe for VIP membership payment
+                window.location.href = 'https://checkout.stripe.com/c/pay/cs_test_a1EEoKGuTuR7F5ojwCwBe4BNSPPCadb036gSBHHxwFwolHCJghgD7Buqhp#fidkdWxOYHwnPyd1blpxYHZxWjA0VUYxSzdAdDVNN3ZoMGJOQmRiRnJjMkFffWJ2MnVHaUZSaHFiMWx8blE8MEFddUJxS1M8bEl0b2ZzNkBxT2s2d2xfUUpsZzRhXUw0REZcMzJdNWNrQkJHNTV9V3RKX25IPScpJ2N3amhWYHdzYHcnP3F3cGApJ2lkfGpwcVF8dWAnPyd2bGtiaWBabHFgaCcpJ2BrZGdpYFVpZGZgbWppYWB3dic%2FcXdwYHgl';
+            } else {
+                // Navigate to home or another page upon successful registration for Basic membership
+                navigate('/');
+            }
         } catch (error) {
             console.error('Registration failed: ', error);
-            console.log("error.response.data: ", error.response.data)
-            if (error.response && error.response.data) {
-                // Display the specific error message from the backend
-                setErrorMessage(`Registration failed: ${error.response.data}`);
-            } else {
-                setErrorMessage('Registration failed. Please try again later.');
-            }
+            setErrorMessage(`Registration failed: ${error.response ? error.response.data : "Please try again later."}`);
         }
-    };    
+    };
+    
 
     return (
     <div className="wrapper">
