@@ -34,25 +34,6 @@ function About() {
                 </div>
                 <img src="/src/assets/about-us-03.jpg" alt="Calli Jensen" />
             </div>
-            {/* <div className="about-container">
-                <div className="about-content">
-                <h1>Come Join Our Community!</h1>
-                    <p>Join our community and start referring your favorite businesses to our referral program. Start sending your favorite enrolled businesses brand new clients. Enroll your friends and family and start earning rewards! <br/><br/>
-                        1.	Enroll as a customer for free <br/>
-                        2.	Book your first service.<br/>
-                        3.	Enroll your favorite businesses.<br/>
-                        4.	Refer your friends to your favorite businesses<br/><br/>
-
-                        
-                        Our Facebook Group <br/>
-                        https://www.facebook.com/groups/ourbeautysquad/ <br/> <br/>
-
-                        Follow us on IG <br/>
-                        https://www.instagram.com/ourbeautyreferralnetwork
-                    </p>
-                </div>
-                <img src="/src/assets/about-us-04.jpg" alt="Calli Jensen" />
-            </div> */}
              <div className="about-container">
             <div className="about-content">
                 <h1>Come Join Our Community!</h1>
@@ -71,9 +52,7 @@ function About() {
                     <a href="https://www.instagram.com/ourbeautyreferralnetwork">https://www.instagram.com/ourbeautyreferralnetwork</a>
                 </p>
             </div>
-            {/* <div className="about-image"> */}
                 <img src="/src/assets/about-us-04.jpg" alt="Calli Jensen" />
-            {/* </div> */}
         </div>
         </div>
     );
