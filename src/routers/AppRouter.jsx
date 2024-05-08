@@ -60,6 +60,7 @@ import EditService from "../pages/EditService";
 
 import CreateService from "../components/CreateService";
 import ServiceForm from "../components/ServiceForm";
+import PublicBusinessProfile from "../pages/PublicBusinessProfile";
 
 function ScrollToTop() {
   const location = useLocation();
@@ -137,7 +138,7 @@ function AppRouter() {
           <Route path="/create-service/:id" element={<CreateService />} />
           <Route path="/add-service/:id" element={<ServiceForm />} />
 
-          <Route path="/businessprofile/:businessId" element={<BusinessProfile />} />
+          <Route path="/:businessId" element={<PublicBusinessProfile />} />
 
           <Route path="/servicegallery" element={<ServiceGallery />} />
           

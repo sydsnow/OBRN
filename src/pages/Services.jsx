@@ -172,18 +172,22 @@ function ServicesPage () {
                 )}
             </div>
             <div className="pagination">
-                <button onClick={handleGoToFirstPage} disabled={currentPage === 1}>
-                    <i className="fa-solid fa-backward"></i>
-                </button>
-                {pageNumbers.map(number => (
-                    <button key={number} onClick={() => setCurrentPage(number)} className={currentPage === number ? 'active' : ''}>
-                        {number}
+            {pageNumbers.length > 1 && (
+                <>
+                    <button onClick={handleGoToFirstPage} disabled={currentPage === 1}>
+                        <i className="fa-solid fa-backward"></i>
                     </button>
-                ))}
-                <button onClick={handleGoToLastPage} disabled={currentPage === Math.ceil(displayedServices.length / servicesPerPage)}>
-                    <i className="fa-solid fa-forward"></i>
-                </button>
-            </div>
+                    {pageNumbers.map(number => (
+                        <button key={number} onClick={() => setCurrentPage(number)} className={currentPage === number ? 'active' : ''}>
+                            {number}
+                        </button>
+                    ))}
+                    <button onClick={handleGoToLastPage} disabled={currentPage === Math.ceil(displayedServices.length / servicesPerPage)}>
+                        <i className="fa-solid fa-forward"></i>
+                    </button>
+                </>
+            )}
+        </div>
         </div>
     )
 }
