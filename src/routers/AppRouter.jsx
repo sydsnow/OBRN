@@ -70,7 +70,7 @@ function ScrollToTop() {
 
   useEffect(() => {
     window.scrollTo(0, 0);
-  }, [location]); 
+  }, [location]);
 
   return null;
 }
@@ -78,12 +78,12 @@ function ScrollToTop() {
 
 function AppRouter() {
   const authenticated = localStorage.getItem('token');
-  
+
 
   return (
     <BrowserRouter>
       <AuthProvider>
-      <ScrollToTop />
+        <ScrollToTop />
         <Header />
         <Routes>
           <Route path="/" element={<HomePage />} />
@@ -115,7 +115,7 @@ function AppRouter() {
           <Route path="/editprofile/editpassword" element={<EditPasswordPage />} />
           <Route path="/editprofile/customer-membership-details" element={<CustomerMembershipDetails />} />
           <Route path="/editprofilebusiness/business-membership-details" element={<BusinessMembershipDetails />} />
-          
+
           <Route path="/services" element={<ServicesPage />} />
           <Route path="/testimonials" element={<TestimonialsPage />} />
           <Route path="/about" element={<About />} />
@@ -126,8 +126,8 @@ function AppRouter() {
           <Route path="/admin-all-customers" element={<AdminAllCustomers />} />
           <Route path="/admin-users" element={<AdminUsers />} />
           <Route path="/admin-all-businesses" element={<AdminAllBusinesses />} />
-          <Route path="/admin-edit-customer/:id" element={<AdminEditCustomer/>} />
-          
+          <Route path="/admin-edit-customer/:id" element={<AdminEditCustomer />} />
+
           <Route path="/admin-all-categories" element={<AdminAllCategories />} />
           <Route path="/admin-edit-business/:id" element={<AdminEditBusiness />} />
           <Route path="/testimonials/:id/new-testimonial" element={<NewTestimonial />} />
@@ -144,9 +144,9 @@ function AppRouter() {
           <Route path="/:businessId" element={<PublicBusinessProfile />} />
 
           <Route path="/servicegallery" element={<ServiceGallery />} />
-          <Route path="/transaction-confirmation" element={<TransactionConfirmation />} />
+          <Route path="/Checkout/OrderConfirmation" element={<TransactionConfirmation />} />
           <Route path="/refund-confirmation" element={<RefundConfirmation />} />
-    
+
 
         </Routes>
         <Footer />
