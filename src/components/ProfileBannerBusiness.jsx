@@ -1,7 +1,7 @@
 //import React from 'react';
 import PropTypes from 'prop-types';
 import { NavLink, useLocation } from "react-router-dom";
-import { capitalizeFirstLetters } from '../utilities/utilities';
+import { capitalizeFirstLetters, formatPhoneNumber } from '../utilities/utilities';
 
 
 function ProfileBannerBusiness({ title, imagePath, name, email, phone, location, referralCode }) {
@@ -26,7 +26,7 @@ function ProfileBannerBusiness({ title, imagePath, name, email, phone, location,
             <div className="profile-banner-details"> 
                 <h2 className="profile-banner-name">{capitalizeFirstLetters(name)}</h2>
                 <p><i className="fa-solid fa-envelope"></i> {email}</p>
-                <p><i className="fa-solid fa-phone"></i> {phone}</p>
+                <p><i className="fa-solid fa-phone"></i> {formatPhoneNumber(phone)}</p>
                 <p><i className="fa-solid fa-location-dot"></i> {capitalizeFirstLetters(location)}</p>
                 {isBusinessProfileRoute && (
                     <p><i className="fa-solid fa-user-plus"></i> {referralCode}</p>

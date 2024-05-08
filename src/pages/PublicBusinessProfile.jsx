@@ -3,8 +3,8 @@ import axios from 'axios';
 //import { useLocation } from 'react-router-dom';
 import { useParams } from 'react-router-dom';
 import ProfileBannerBusiness from '../components/ProfileBannerBusiness';
-import cat from '../assets/cat.jpeg';
 import ServiceGallery from '../components/ServiceGallery';
+import defaultBusinessLogo from '../assets/business-placeholder.png';
 
 function PublicBusinessProfile() {
     // Get the current location
@@ -14,7 +14,6 @@ function PublicBusinessProfile() {
     const [businessDetails, setBusinessDetails] = useState(null);
     const [services, setServices] = useState([]);
     //const [category, setCategory] = useState('');
-
 
     useEffect(() => {
         const fetchBusinessData = async () => {
@@ -28,13 +27,36 @@ function PublicBusinessProfile() {
                     business: response.data
                 }));
                 setServices(servicesWithBusinessName);
-                //console.log('businessDetails', businessDetails);
             } catch (error) {
                 console.error('Error fetching business data:', error);
             }
         }
-        fetchBusinessData();
-    }, [businessDetails, businessId, services]);
+        if (businessId) {
+            fetchBusinessData();
+        }
+    }, [businessId]); 
+    
+
+    // useEffect(() => {
+    //     const fetchBusinessData = async () => {
+    //         try {
+    //             const apiUrl = import.meta.env.VITE_API_BASE_URL;   
+    //             const response = await axios.get(`${apiUrl}/api/Business/get-business/${businessId}`);
+    //             setBusinessDetails(response.data);
+    //             const serviceResponse = await axios.get(`${apiUrl}/service/business/${response.data.pkBusinessId}`);
+    //             const servicesWithBusinessName = serviceResponse.data.$values.map(service => ({
+    //                 ...service,
+    //                 business: response.data
+    //             }));
+    //             setServices(servicesWithBusinessName);
+    //             //console.log('businessDetails', businessDetails);
+    //         } catch (error) {
+    //             console.error('Error fetching business data:', error);
+    //         }
+    //     }
+    //     fetchBusinessData();
+    // }, [businessDetails, businessId, services]);
+    
     if (!businessDetails) {
         return <div>Loading...</div>;
     }
@@ -43,11 +65,12 @@ function PublicBusinessProfile() {
         <div className="business-profile">
             <ProfileBannerBusiness
                 title="Business Profile"
-                imagePath={businessDetails?.logo || cat}
+                // imagePath={businessDetails?.logo || 'N/A'}
+                imagePath={defaultBusinessLogo}
                 name={businessDetails?.businessName || 'N/A'}
                 email={businessDetails?.email || 'N/A'}
                 phone={businessDetails?.phone || 'N/A'}
-                location={businessDetails?.city ? `${businessDetails.city}, ${businessDetails.province}` : 'Location N/A'}
+                location={businessDetails?.city ? `${businessDetails.address}, ${businessDetails.city}, ${businessDetails.province}` : 'Location N/A'}
                 referralCode={""} 
             />
 
