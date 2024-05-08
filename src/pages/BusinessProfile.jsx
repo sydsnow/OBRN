@@ -28,19 +28,19 @@ function BusinessProfile() {
                     setBusinessDetails(response.data);
                     if (response.data && response.data.pkBusinessId) {
                         const referralResponse = await axios.get(`${apiUrl}/api/Referral/get-business-referral-code/${response.data.pkBusinessId}`);
-                        console.log('referralResponse', referralResponse);
+                        //console.log('referralResponse', referralResponse);
                         setReferralCode(referralResponse.data);
                         const serviceResponse = await axios.get(`${apiUrl}/service/business/${response.data.pkBusinessId}`);
-                        console.log('id:', response.data.pkBusinessId)
-                        console.log("business name", response.data.businessName);
-                        console.log('serviceResponse', serviceResponse.data.$values);
+                        // console.log('id:', response.data.pkBusinessId)
+                        // console.log("business name", response.data.businessName);
+                        // console.log('serviceResponse', serviceResponse.data.$values);
                         // Update service objects to include business data
                         const servicesWithBusinessName = serviceResponse.data.$values.map(service => ({
                             ...service,
                             business: response.data
                         }));
                         setServices(servicesWithBusinessName);
-                        console.log('services', services);
+                        // console.log('services', services);
                     }
                 }
             } catch (error) {
@@ -54,9 +54,10 @@ function BusinessProfile() {
 
     if (!businessDetails) {
         return <div>Loading...</div>;
-    } else {
-        console.log('businessDetails', businessDetails);
-    }
+    } 
+    // else {
+    //     console.log('businessDetails', businessDetails);
+    // }
 
     return (
         <div className="business-profile">
