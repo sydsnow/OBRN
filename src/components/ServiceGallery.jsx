@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types';
-import { useLocation } from 'react-router-dom';
+import { NavLink, useLocation } from 'react-router-dom';
 import "../scss/components/_servicegallery.scss";
 import { useNavigate } from 'react-router-dom';
 function ServiceGallery({ displayedServices }) {
@@ -23,7 +23,10 @@ function ServiceGallery({ displayedServices }) {
                         </div>
                         <div className="services-card-info">
                             <div className='services-card-info-container'>
-                                <p className="services-card-info-name">{service.business.businessName}</p>
+                                {/* <p className="services-card-info-name">{service.business.businessName}</p> */}
+                                {!isBusinessProfileRoute && (
+                                    <NavLink to={`/${service.business.pkBusinessId}`} className="services-card-info-business">{service.business.businessName}</NavLink>
+                                )}
                                 {isBusinessProfileRoute && (
                                     <button className="services-card-info-button" onClick={() => handleEditService(service.pkServiceId)}>
                                         Edit
