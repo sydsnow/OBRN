@@ -20,8 +20,7 @@ function RegisterCustomer(){
         confirmPassword: '',
         photo: placeholderImg,
         // if registering breaks, it might be this 
-        fkReferralId: undefined,
-        membershipType: 'basic'
+        fkReferralId: undefined
     });
 
     const [isValidReferral, setIsValidReferral] = useState(false);
@@ -260,7 +259,7 @@ function RegisterCustomer(){
             type="radio" 
             name="membershipType" 
             value="basic" 
-            checked={customer.membershipType === 'basic'} 
+            checked={customer.vip === false} 
             onChange={handleChange} 
         />
         Basic Membership ($0)
@@ -270,7 +269,7 @@ function RegisterCustomer(){
             type="radio" 
             name="membershipType" 
             value="vip" 
-            checked={customer.membershipType === 'vip'} 
+            checked={customer.vip === true} 
             onChange={handleChange} 
         />
         VIP Membership ($25)
