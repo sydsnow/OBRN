@@ -4,12 +4,11 @@ import { useNavigate } from 'react-router-dom';
 import { getEmailFromJWT } from '../utilities/utilities';
 import ProfileBannerBusiness from '../components/ProfileBannerBusiness';
 import ServiceGallery from "../components/ServiceGallery";
-import cat from '../assets/cat.jpeg';
+import defaultBusinessLogo from '../assets/business-placeholder.png';
 
 function BusinessProfile() {
     const navigate = useNavigate();
     const [businessDetails, setBusinessDetails] = useState(null);
-    //const [category, setCategory] = useState('');
     const [referralCode, setReferralCode] = useState(null); 
     const [services, setServices] = useState([]);
 
@@ -63,11 +62,12 @@ function BusinessProfile() {
         <div className="business-profile">
             <ProfileBannerBusiness
                 title="Business Profile"
-                imagePath={businessDetails?.logo || cat}
+                // imagePath={businessDetails?.logo || 'N/A'}
+                imagePath={defaultBusinessLogo}
                 name={businessDetails?.businessName || 'N/A'}
                 email={businessDetails?.email || 'N/A'}
                 phone={businessDetails?.phone || 'N/A'}
-                location={businessDetails?.city ? `${businessDetails.city}, ${businessDetails.province}` : 'Location N/A'}
+                location={businessDetails?.city ? `${businessDetails.address}, ${businessDetails.city}, ${businessDetails.province}` : 'Location N/A'}
                 referralCode={referralCode || "Not available"} 
             />
 
