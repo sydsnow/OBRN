@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import PasswordForm from '../components/PasswordForm';
+import { Link } from 'react-router-dom';
 
 function EditPasswordPage() {
     return (
@@ -9,9 +10,9 @@ function EditPasswordPage() {
                 <p className="testimonials-large">Edit Password</p>
                 <div className="testimonials-path">
                     <i className="fa-solid fa-house"></i>
-                    <p>HOME</p>
-                    <i className="fa-solid fa-angle-right"></i>
-                    <p>EDIT PROFILE</p>
+                    <Link to="/">HOME</Link>
+                    {/* <i className="fa-solid fa-angle-right"></i>
+                    <p>EDIT PROFILE</p> */}
                     <i className="fa-solid fa-angle-right"></i>
                     <p>CHANGE PASSWORD</p>
                 </div>

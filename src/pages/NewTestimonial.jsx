@@ -1,4 +1,6 @@
 import AddTestimonial from "../components/AddTestimonial";
+import react from "react";
+import { Link } from 'react-router-dom';
 
 function TestimonialsPage() {
 
@@ -11,9 +13,9 @@ function TestimonialsPage() {
         <p className="testimonials-large">Testimonials</p>
         <div className="testimonials-path">
           <i className="fa-solid fa-house"></i>
-          <p>HOME</p>
+          <Link to="/">HOME</Link> 
           <i className="fa-solid fa-angle-right"></i>
-          <p>TESTIMONIALS</p>
+          <Link to="/testimonials">TESTIMONIALS</Link>
           <i className="fa-solid fa-angle-right"></i>
           <p>ADD NEW TESTIMONIAL</p>
         </div>

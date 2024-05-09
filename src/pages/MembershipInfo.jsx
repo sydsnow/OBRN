@@ -1,5 +1,7 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios';
+import React from 'react';
+import { Link } from 'react-router-dom';
 
 function MembershipInfo() {
     const [fees, setFees] = useState([]);
@@ -54,7 +56,9 @@ function MembershipInfo() {
                 <p className="testimonials-large">Membership</p>
                 <div className="testimonials-path">
                     <i className="fa-solid fa-house"></i>
-                    <p>HOME</p>
+                    <Link to="/">HOME</Link> 
+                    <i className="fa-solid fa-angle-right"></i>
+                    <Link to="/editprofile">EDIT PROFILE</Link> 
                     <i className="fa-solid fa-angle-right"></i>
                     <p>MEMBERSHIP INFO</p>
                 </div>

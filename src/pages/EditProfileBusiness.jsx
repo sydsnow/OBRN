@@ -4,6 +4,8 @@ import axios from 'axios';
 import { getEmailFromJWT, formatPhoneNumber, capitalizeFirstLetters } from '../utilities/utilities';
 import BusinessDetailsForm from '../components/BusinessDetailsForm';
 import { NavLink } from "react-router-dom";
+import React from "react";
+import { Link } from "react-router-dom";
 
 
 function EditProfileBusiness() {
@@ -65,9 +67,9 @@ function EditProfileBusiness() {
         <p className="testimonials-large">Edit  Profile</p>
         <div className="testimonials-path">
           <i className="fa-solid fa-house"></i>
-          <p>HOME</p>
+          <Link to="/businessprofile">BACK TO PROFILE</Link> 
           <i className="fa-solid fa-angle-right"></i>
-          <p>EDIT BUSINESS PROFILE</p>
+          <p>EDIT PROFILE</p>
         </div>
       </div>
       <div className="edit-profile-header">

@@ -3,6 +3,8 @@ import { getEmailFromJWT } from '../utilities/utilities';
 import axios from 'axios';
 // import EditProfileInfo from "../components/EditProfileInfo";
 import MyDetailsForm from "../components/MyDetailsForm";
+import react from "react";
+import { Link } from "react-router-dom";
 
 
 function EditProfileMyDetails() {
@@ -39,9 +41,9 @@ function EditProfileMyDetails() {
           <p className="testimonials-large">Edit Profile</p>
           <div className="testimonials-path">
             <i className="fa-solid fa-house"></i>
-            <p>HOME</p>
+            <Link to="/">HOME</Link>
             <i className="fa-solid fa-angle-right"></i>
-            <p>EDIT PROFILE</p>
+            <Link to="/editprofile">EDIT PROFILE</Link>
             <i className="fa-solid fa-angle-right"></i>
             <p>MY DETAILS</p>
           </div>

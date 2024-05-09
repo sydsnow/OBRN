@@ -4,10 +4,9 @@ import { NavLink, useLocation } from "react-router-dom";
 import { capitalizeFirstLetters, formatPhoneNumber } from '../utilities/utilities';
 
 
-function ProfileBannerBusiness({ title, imagePath, name, email, phone, location, referralCode }) {
-        // Get the current location
-        const currentLocation = useLocation();
-        const isBusinessProfileRoute = currentLocation.pathname === '/businessprofile';
+function ProfileBannerBusiness({ title, imagePath, name, email, phone, location, referralCode, businessId }) {
+    const currentLocation = useLocation();
+    const isBusinessProfileRoute = currentLocation.pathname === '/businessprofile';
     
     return (
         <div className="profile-banner">
@@ -16,7 +15,7 @@ function ProfileBannerBusiness({ title, imagePath, name, email, phone, location,
                 {isBusinessProfileRoute && (
                     <div className="profile-banner-buttons">
                         <NavLink to="/editprofilebusiness" className="button">EDIT PROFILE</NavLink>
-                        <NavLink to="/create-service" className="button">ADD SERVICE</NavLink>
+                        <NavLink to={`/create-service/${businessId}`} className="button">ADD SERVICE</NavLink>
                     </div>
                 )}
             </div>

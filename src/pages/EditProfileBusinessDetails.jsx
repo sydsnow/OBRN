@@ -1,4 +1,6 @@
 import BusinessDetailsForm from "../components/BusinessDetailsForm";
+import React from "react";
+import { Link } from "react-router-dom";
 
 function EditProfileBusinessDetails() {
     const businessDetails = {
@@ -15,9 +17,9 @@ function EditProfileBusinessDetails() {
             <p className="testimonials-large">Edit Profile</p>
             <div className="testimonials-path">
                 <i className="fa-solid fa-house"></i>
-                <p>HOME</p>
+                <Link to="/">HOME</Link> 
                 <i className="fa-solid fa-angle-right"></i>
-                <p>EDIT PROFILE</p>
+                <Link to="/editprofilebusiness">EDIT PROFILE</Link>
                 <i className="fa-solid fa-angle-right"></i>
                 <p>MY BUSINESS DETAILS</p>
             </div>

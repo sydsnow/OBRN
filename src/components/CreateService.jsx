@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useParams } from 'react-router-dom';
 import "../scss/components/_serviceform.scss";
-// import { NavLink } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 
 import PropTypes from 'prop-types';
 import { useNavigate } from 'react-router-dom';
@@ -80,7 +80,7 @@ function CreateService({ serviceObj = {} }) {
         const apiUrl = import.meta.env.VITE_API_BASE_URL;
         const token = localStorage.getItem('token');
         const serviceUrl = `${apiUrl}/Service/create`;
-
+    
         try {
             const response = await axios({
                 method: 'post',
@@ -93,11 +93,19 @@ function CreateService({ serviceObj = {} }) {
             });
             console.log('Service added:', response.data);
             setSuccessMessage('Service added successfully!');
+            
+            // Navigate back to the business profile after a short delay to show success message
+            setTimeout(() => {
+                navigate('/businessprofile');
+            }, 2000); // 2000 milliseconds = 2 seconds
+    
         } catch (error) {
             console.error('Failed to add service: ', error);
             setErrorMessage(error.response?.data?.message || 'Failed to add service.');
         }
     };
+    
+    
 
     return (
         <div className="edit-service">
@@ -115,8 +123,6 @@ function CreateService({ serviceObj = {} }) {
             <div className="service-container">
                 <form className="service-form" onSubmit={handleSubmit}>
                     <h2>Add Service</h2>
-                    {successMessage && <div className="success-message">{successMessage}</div>}
-                    {errorMessage && <div className="error-message">{errorMessage}</div>}
                     <div className="form-group">
                 <input
                     className='input'
@@ -209,6 +215,8 @@ function CreateService({ serviceObj = {} }) {
     </select>
     <label className="label" htmlFor="fkDiscountId">Discount</label>
 </div>
+{successMessage && <div className="success-message">{successMessage}</div>}
+{errorMessage && <div className="error-message">{errorMessage}</div>}
 <div className="button-container">
             <button onClick={handleCancel}>Cancel</button>
             <button type="submit">Save</button>

@@ -69,6 +69,8 @@ function BusinessProfile() {
                 phone={businessDetails?.phone || 'N/A'}
                 location={businessDetails?.city ? `${businessDetails.address}, ${businessDetails.city}, ${businessDetails.province}` : 'Location N/A'}
                 referralCode={referralCode || "Not available"} 
+                businessId={businessDetails?.pkBusinessId || "N/A"}
+
             />
 
             <div className="business-profile-about">
