@@ -3,77 +3,208 @@ import { useEffect, useState } from 'react';
 import axios from 'axios';
 
 function AdminRoles() {
-  const [roles, setRoles] = useState([]);
-  const [role, setRole] = useState({ name: '' });
+    const [roles, setRoles] = useState([]);
+    const [role, setRole] = useState({ roleName: '' });
+    const [users, setUsers] = useState([]);
+    const [filter, setFilter] = useState('All Users');
+    const [searchQuery, setSearchQuery] = useState('');
+    const [displayedUsers, setDisplayedUsers] = useState([]); // State to manage displayed users   
+    const [usersPerPage] = useState(12); // Number of users to display per page
+    const [currentPage, setCurrentPage] = useState(1);
 
-  useEffect(() => {
     const fetchRoles = async () => {
       try {
-        const apiUrl = import.meta.env.VITE_API_BASE_URL;
-        const response = await axios.get(`${apiUrl}/api/Role/get-roles`);
-        setRoles(response.data);
+          const apiUrl = import.meta.env.VITE_API_BASE_URL;
+          const response = await axios.get(`${apiUrl}/api/Role/get-roles`);
+          setRoles(response.data);
       } catch (error) {
-        console.error('Failed to fetch roles: ', error);
+          console.error('Failed to fetch roles: ', error);
       }
     };
-    fetchRoles();
-  }, []);
 
-  const handleChange = (e) => {
-    setRole({ ...role, [e.target.name]: e.target.value });
+    useEffect(() => {
+        const fetchAllUsers = async () => {
+            try {
+                const apiUrl = import.meta.env.VITE_API_BASE_URL;
+                const response = await axios.get(`${apiUrl}/api/User/get-all-users`);
+                const usersData = response.data.$values;
+
+                // Fetch roles for each user and update the users state
+                const updatedUsers = await Promise.all(usersData.map(async (user) => {
+                    const roleResponse = await axios.get(`${apiUrl}/api/UserRole/get-user-roles/${user.email}`);
+                    const userRole = roleResponse.data.$values[0]; // Assuming each user has only one role
+                    const updatedUser = { ...user, role: userRole ? userRole : 'N/A' };
+                    return updatedUser;
+                }));
+
+                setUsers(updatedUsers);
+                setDisplayedUsers(updatedUsers.slice(0, usersPerPage)); // Set displayed users to first two users
+            } catch (error) {
+                console.error('Failed to fetch users: ', error);
+            }
+        };
+
+        fetchRoles();
+        fetchAllUsers();
+    }, [users, usersPerPage]);
+
+    const handleChange = (e) => {
+        setRole({ ...role, [e.target.name]: e.target.value });
+    };
+
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+
+        try {
+            const apiUrl = import.meta.env.VITE_API_BASE_URL;
+            const response = await axios.post(`${apiUrl}/api/Role/add-role`, { roleName: role.roleName });
+            console.log("response: ", response);
+            // Handle the response as needed
+
+            // Clear the input field after successful submission
+            setRole({ ...role, roleName: '' });
+
+            // Fetch roles again to update the list after adding a new role
+            fetchRoles();
+        } catch (error) {
+            console.error('Role creation failed: ', error);
+        }
+    };
+    // Filter users based on search query
+    const filterUsers = (query) => {
+      return users.filter(user =>
+          user.email.toLowerCase().includes(query.toLowerCase())
+      );
+    };
+
+    // Handle search input change
+    const handleSearchInputChange = (e) => {
+      const query = e.target.value;
+      setSearchQuery(query);
+      const filteredUsers = filterUsers(query);
+      setDisplayedUsers(filteredUsers.slice(0, usersPerPage)); // Update displayed users with filtered results and reset to first page
+      setCurrentPage(1); // Reset to first page when search query changes
+    };
+
+    // Handle clear search
+    const handleClearSearch = () => {
+      setSearchQuery('');
+      setDisplayedUsers(users); // Reset displayed services to all services
   };
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-
-    try {
-      const apiUrl = import.meta.env.VITE_API_BASE_URL;
-      const response = await axios.post(`${apiUrl}/api/Role/add-role`, { roleName: role.name });
-      console.log("response: ", response);
-      // Handle the response as needed
-
-      // Clear the input field after successful submission
-      setRole({ ...role, name: '' });
-    } catch (error) {
-      console.error('Role creation failed: ', error);
-    }
+  // Handler for going to the first page
+  const handleGoToFirstPage = () => {
+      setCurrentPage(1);
+      setDisplayedUsers(users.slice(0, usersPerPage)); // Update displayed users to show first page
   };
 
-  return (
-    <div className="wrapper">
-      <div className="admin">
-        <Link to="/admin"><button>Back to Admin</button></Link>
-        <div className='admin-all-container'>
-          <h1>Roles</h1>
-          <form className='add-role-form' onSubmit={handleSubmit}>
-            <div className='add-role-form-input'>
-              <label htmlFor='roleName'>Role Name</label>
-              <input
-                className='input'
-                type='text'
-                id='roleName'
-                name='name'
-                autoComplete='off'
-                placeholder='Role Name'
-                value={role.name}
-                onChange={handleChange}
-              />
+  // Handler for going to the last page
+  const handleGoToLastPage = () => { 
+      const lastPage = Math.ceil(users.length / usersPerPage);
+      setCurrentPage(lastPage);
+      setDisplayedUsers(users.slice((lastPage - 1) * usersPerPage)); // Update displayed users to show last page
+  };
+
+  // Handler for changing current page
+  const handlePageChange = (pageNumber) => {
+      setCurrentPage(pageNumber);
+      setDisplayedUsers(users.slice((pageNumber - 1) * usersPerPage, pageNumber * usersPerPage)); // Update displayed users based on selected page
+  };
+
+  // Pagination variables
+  const totalPages = Math.ceil(users.length / usersPerPage);
+  const pageNumbers = [];
+  for (let i = 1; i <= Math.ceil(users.length / usersPerPage); i++) {
+      pageNumbers.push(i);
+  }
+
+    // Filter users based on the selected role name or display all users
+    const filteredUsers = filter === 'All Users' ? users : users.filter(user => user.role === filter);
+
+    return (
+        <div className="wrapper">
+            <div className="admin">
+                <Link to="/admin"><button>Back to Admin</button></Link>
+                <div className='admin-all-container'>
+                    <h1>Roles</h1>
+                    <form className='add-role-form' onSubmit={handleSubmit}>
+                        <div className='add-role-form-input'>
+                            <label htmlFor='roleName'>Role Name</label>
+                            <input
+                                className='input'
+                                type='text'
+                                id='roleName'
+                                name='roleName'
+                                autoComplete='off'
+                                placeholder='Role Name'
+                                value={role.roleName}
+                                onChange={handleChange}
+                            />
+                        </div>
+                        <div className="button-container">
+                            <button type="submit">Save</button>
+                        </div>
+                    </form>
+                    <div className='admin-all-roles'>
+                        <button className={filter === 'All Users' ? 'admin-role-button active' : 'admin-role-button'} onClick={() => setFilter("All Users")}>
+                            All Users
+                        </button>
+                        {roles.map((role) => (
+                            <div key={role.id} className='admin-role'>
+                                <button className={filter === role.name ? 'admin-role-button active' : 'admin-role-button'} onClick={() => setFilter(role.name)}>
+                                    {role.name.charAt(0).toUpperCase() + role.name.slice(1).toLowerCase()}
+                                </button>
+                            </div>
+                        ))}
+                    </div>
+                    <div>
+                        <h1>Users</h1>
+                        <div className="search-bar">
+                        <label htmlFor='customer-search'></label>
+                        <input
+                            type="text"
+                            id='customer-search'
+                            placeholder="Search businesses..."
+                            value={searchQuery}
+                            onChange={handleSearchInputChange}
+                        />
+                        {searchQuery && (
+                            <button onClick={handleClearSearch} className='clear-search-button'>x</button>
+                        )}
+                    </div>
+                    <div className='admin-all-users'>
+                        <p>Showing {displayedUsers.length} of {users.length} Results</p>
+                        {filteredUsers.length > 0 ? (
+                            filteredUsers.map((user) => (
+                                <div key={user.id} className='admin-user'>
+                                    <p className='admin-user-button'>{user.email} - Roles: {user.roles}</p>
+                                </div>
+                            ))
+                        ) : (
+                            <p>No users for that filter.</p>
+                        )}
+                    </div>
+
+                        {totalPages > 1 && (
+                        <div className="pagination">
+                            <button onClick={handleGoToFirstPage} disabled={currentPage === 1}>
+                                <i className="fa-solid fa-backward"></i>
+                            </button>
+                            {pageNumbers.map(number => (
+                                <button key={number} onClick={() => handlePageChange(number)} className={currentPage === number ? 'active' : ''}>
+                                    {number}
+                                </button>
+                            ))}
+                            <button onClick={handleGoToLastPage} disabled={currentPage === totalPages}>
+                                <i className="fa-solid fa-forward"></i>
+                            </button>
+                        </div>
+                    )}
+                    </div>
+                </div>
             </div>
-            <div className="button-container">
-              <button type="submit">Save</button>
-            </div>
-          </form>
-          <div className='admin-all-roles'>
-            {roles.map((role) => (
-              <div key={role.id} className='admin-role'>
-                <p>{role.name}</p>
-              </div>
-            ))}
-          </div>
         </div>
-      </div>
-    </div>
-  );
+    );
 }
 
 export default AdminRoles;
