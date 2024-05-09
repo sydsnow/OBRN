@@ -204,9 +204,6 @@ function RegisterBusiness() {
                                 />
                                 <label className="label" htmlFor="email">            <i className="fa-regular fa-envelope"></i> Email</label>
                             </div>
-                        </div>
-                        <div className="register-business-block">
-
                             <div className="form-group">
                                 <input
                                     className='input'
@@ -233,6 +230,9 @@ function RegisterBusiness() {
                                 />
                                 <label className="label" htmlFor="insuranceExpiryDate"> Insurance Expiry</label>
                             </div>
+
+                        </div>
+                        <div className="register-business-block">
                             <div className="form-group">
                                 <input
                                     className='input2'
@@ -248,6 +248,7 @@ function RegisterBusiness() {
                                 <label className="label" htmlFor="verificationDocument">
                                     <i className="fa-solid fa-upload"></i> Business License</label>
                             </div>
+
                             <div className="form-group">
                                 <input
                                     className='input2'
@@ -313,7 +314,7 @@ function RegisterBusiness() {
                                 />
                                 <label className="label" htmlFor="fkReferralId">Referral Code <small> *optional</small></label>
                             </div>
-                            <div className="form-group">
+                            <div className="form-group form-membership">
                                 <label>
                                     <input type="radio" name="membershipType" value="basic-yearly" checked={business.membershipType === 'basic-yearly'} onChange={handleChange} />
                                     Basic Membership ($250 yearly)
