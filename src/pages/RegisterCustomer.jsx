@@ -26,7 +26,7 @@ function RegisterCustomer() {
         membershipType: 'basic'
     });
 
-    const stripePromise = loadStripe('pk_test_51PC4N2Eq0H2sm5gKGagCwf7DZxgs7pBlCWmtg4iykT95DXpGtNV9iLqjcv3EtJn3riZTOib1dXI1ACY67X0fnGGB00xRqOZkM8');
+    const stripePromise = loadStripe(import.meta.env.VITE_STRIPE_PUBLIC_KEY);
 
 
     const [isValidReferral, setIsValidReferral] = useState(false);
@@ -162,7 +162,7 @@ function RegisterCustomer() {
             setErrorMessage(`Registration failed: ${error.response ? error.response.data : "Please try again later."}`);
         }
         if (customer.membershipType === 'vip') {
-            handleStripeCheckout(customer.pkCustomerId, 'price_1PDEdTEq0H2sm5gKFzTAU6L5');
+            handleStripeCheckout(customer.pkCustomerId, import.meta.env.VITE_STRIPE_CUSTOMER_VIP);
         }
     };
 
