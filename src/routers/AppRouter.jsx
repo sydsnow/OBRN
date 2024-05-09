@@ -147,7 +147,7 @@ function AppRouter() {
           <Route path="/:businessId/:serviceId" element={<ServiceDetailPage />} />
 
           <Route path="/servicegallery" element={<ServiceGallery />} />
-          <Route path="/Checkout/OrderConfirmation" element={<TransactionConfirmation />} />
+          <Route path="/CheckOut/OrderConfirmation" element={<TransactionConfirmation />} />
           <Route path="/refund-confirmation" element={<RefundConfirmation />} />
 
           <Route path="/admin-roles" element={<Roles />} />
