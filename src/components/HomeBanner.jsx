@@ -8,7 +8,7 @@ function HomeBanner() {
     const { isAuthenticated } = useAuth(); 
 
     useEffect(() => {
-        console.log('Join buttons is not shown in home banner:', isAuthenticated); 
+        // console.log('Join buttons is not shown in home banner:', isAuthenticated); 
 
         const token = localStorage.getItem('token');
         const apiUrl = import.meta.env.VITE_API_BASE_URL;

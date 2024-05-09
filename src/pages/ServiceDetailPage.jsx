@@ -15,11 +15,16 @@ function ServiceDetailPage() {
     const fetchServiceDetails = async () => {
       try {
         const apiUrl = import.meta.env.VITE_API_BASE_URL;
+        console.log(`API Base URL: ${apiUrl}`); // Log the API base URL
         const [serviceResponse, businessResponse] = await Promise.all([
           axios.get(`${apiUrl}/service/${businessId}/${serviceId}`),
           axios.get(`${apiUrl}/api/Business/get-business/${businessId}`)
         ]);
-        setService(serviceResponse.data.$values[0]);
+
+        console.log('Service Response:', serviceResponse.data); // Log service response data
+        console.log('Business Response:', businessResponse.data); // Log business response data
+        
+        setService(serviceResponse.data); // Set service data directly
         setBusiness(businessResponse.data);
       } catch (error) {
         console.error('Failed to fetch details:', error);
