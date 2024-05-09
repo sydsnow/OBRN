@@ -15,7 +15,7 @@ function Footer() {
     userRoles = getRolesFromJWT(token);
   }
 
-  console.log('Customer and Business Registration is not shown in the footer:', isAuthenticated);
+  // console.log('Customer and Business Registration is not shown in the footer:', isAuthenticated);
 
   return (
     <footer className="footer">

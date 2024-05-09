@@ -1,43 +1,43 @@
 .service-detail {
-    display: block; 
-    margin: 60px;
+  display: block; 
+  margin: 60px;
+  overflow: hidden; /* Prevents content from overflowing */
 
+  &-content {
+    display: flex;
+    flex-direction: column; 
+    align-items: center; 
+  }
+  
+  &-image img {
+    max-width: 100%; /* Ensures the image does not overflow its container */
+    height: auto;
+    object-fit: cover; /* Ensures the image covers the area appropriately without distortion */
+  }
+  
+  &-info {
+    text-align: center;
+    padding: 20px;
+    word-wrap: break-word; /* Ensures that text breaks to prevent overflow */
+  }
+  
+  @media (min-width: 768px) {
+    margin: 100px;
     &-content {
-      display: flex;
-      flex-direction: column; 
-      align-items: center; 
+      flex-direction: row; 
+      justify-content: center; 
+      align-items: flex-start; 
     }
-    
-    &-image img {
-      max-width: 250px;
-      height: auto;
+    &-image {
+      flex: 1; 
+      max-width: 400px; /* Constrain image width */
     }
     
     &-info {
-      text-align: center;
-      padding: 20px;
+      flex: 1;
+      text-align: left; 
+      padding: 60px;
+      max-width: 600px; 
     }
-    @media (min-width: 768px) {
-      margin: 100px;
-      &-content {
-        flex-direction: row; 
-        justify-content: center; 
-        align-items: flex-start; 
-      }
-      &-image img {
-        max-width: 300px;
-      }
-      
-      &-image {
-        flex: 1; 
-        max-width: 400px;
-      }
-      
-      &-info {
-        flex: 1;
-        text-align: left; 
-        padding: 60px;
-      }
   }
 }
-  

@@ -145,6 +145,8 @@ function CreateService({ serviceObj = {} }) {
                     name="description"
                     value={service.description || ''}
                     onChange={handleChange}
+                    maxLength="255" 
+                    // placeholder="Describe your service (max 255 characters)"
                 />
                 <label className="label" htmlFor="description">Description</label>
             </div>
