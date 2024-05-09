@@ -1,7 +1,7 @@
 .service-detail {
   display: block; 
   margin: 60px;
-  overflow: hidden; /* Prevents content from overflowing */
+  overflow: hidden; 
 
   &-content {
     display: flex;
@@ -10,15 +10,16 @@
   }
   
   &-image img {
-    max-width: 100%; /* Ensures the image does not overflow its container */
+    padding: 20px;
+    max-width: 100%; 
     height: auto;
-    object-fit: cover; /* Ensures the image covers the area appropriately without distortion */
+    object-fit: cover; 
   }
   
   &-info {
-    text-align: center;
+    // text-align: center;
     padding: 20px;
-    word-wrap: break-word; /* Ensures that text breaks to prevent overflow */
+    word-wrap: break-word; 
   }
   
   @media (min-width: 768px) {
@@ -30,7 +31,7 @@
     }
     &-image {
       flex: 1; 
-      max-width: 400px; /* Constrain image width */
+      max-width: 400px; 
     }
     
     &-info {
