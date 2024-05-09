@@ -148,7 +148,7 @@ function CreateService({ serviceObj = {} }) {
                     maxLength="255" 
                     // placeholder="Describe your service (max 255 characters)"
                 />
-                <label className="label" htmlFor="description">Description</label>
+                <label className="label" htmlFor="description">Description (Maximum 255 characters)</label>
             </div>
 
 <div className="form-group">

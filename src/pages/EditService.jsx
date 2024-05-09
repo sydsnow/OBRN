@@ -129,7 +129,7 @@ function EditService() {
                     </div>
                     <div className="form-group">
                         <textarea className='input' required autoComplete='off' id="description" name="description" value={service.description || ''} onChange={handleChange} />
-                        <label className="label" htmlFor="description">Description</label>
+                        <label className="label" htmlFor="description">Description (Maximum 255 characters)</label>
                     </div>
                     <div className="form-group">
                         <input className='input' type="text" required autoComplete='off' id="image" name="image" value={service.image || ''} onChange={handleChange} />
