@@ -1,3 +1,6 @@
+import React from "react";
+import { Link } from "react-router-dom";
+
 function PrivacyStatement() {
     return (
         <div className="privacy-statement">
@@ -6,7 +9,7 @@ function PrivacyStatement() {
                 <p className="testimonials-large">Privacy Statement</p>
                 <div className="testimonials-path">
                     <i className="fa-solid fa-house"></i>
-                    <p>HOME</p>
+                    <Link to="/">HOME</Link> 
                     <i className="fa-solid fa-angle-right"></i>
                     <p>PRIVACY STATEMENT</p>
                 </div>

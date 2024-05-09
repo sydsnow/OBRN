@@ -69,37 +69,43 @@ function EditService() {
         setService(prevState => ({ ...prevState, [name]: value }));
     };
 
-   const handleSubmit = async (e) => {
-    e.preventDefault();
-    const apiUrl = import.meta.env.VITE_API_BASE_URL;
-    const token = localStorage.getItem('token');
-    const serviceUrl = `${apiUrl}/api/Service/${serviceId}`;
-
-    console.log("Service Data being sent:", service);  // Debug the service data
-
-    if (!service.fkBusinessId || !service.fkCategoryId) {
-        console.error('Required fields are missing');
-        setErrorMessage('Business ID and Category ID are required.');
-        return;  // Prevent submission if required fields are missing
-    }
-
-    try {
-        const response = await axios({
-            method: 'put',
-            url: serviceUrl,
-            data: service,
-            headers: {
-                Authorization: `Bearer ${token}`,
-                'Content-Type': 'application/json'
-            },
-        });
-        console.log('Service updated:', response.data);
-        setSuccessMessage('Service updated successfully!');
-    } catch (error) {
-        console.error('Failed to update service: ', error);
-        setErrorMessage(error.response?.data?.message || 'Failed to update service.');
-    }
-};
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        const apiUrl = import.meta.env.VITE_API_BASE_URL;
+        const token = localStorage.getItem('token');
+        const serviceUrl = `${apiUrl}/api/Service/${serviceId}`;
+    
+        console.log("Service Data being sent:", service); 
+    
+        if (!service.fkBusinessId || !service.fkCategoryId) {
+            console.error('Required fields are missing');
+            setErrorMessage('Business ID and Category ID are required.');
+            return; 
+        }
+    
+        try {
+            const response = await axios({
+                method: 'put',
+                url: serviceUrl,
+                data: service,
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                    'Content-Type': 'application/json'
+                },
+            });
+            console.log('Service updated:', response.data);
+            setSuccessMessage('Service updated successfully!');
+    
+            setTimeout(() => {
+                navigate('/businessprofile');
+            }, 2000); // Redirect to business profile after 2 seconds
+    
+        } catch (error) {
+            console.error('Failed to update service: ', error);
+            setErrorMessage(error.response?.data?.message || 'Failed to update service.');
+        }
+    };
+    
 
     return (
    
@@ -117,8 +123,6 @@ function EditService() {
             <div className="wrapper">
                 <form className="service-form" onSubmit={handleSubmit}>
                     {/* <h2>Edit Service</h2> */}
-                    {successMessage && <div className="success-message">{successMessage}</div>}
-                    {errorMessage && <div className="error-message">{errorMessage}</div>}
                     <div className="form-group">
                         <input className='input' required autoComplete='off' id="serviceName" name="serviceName" value={service.serviceName || ''} onChange={handleChange} />
                         <label className="label" htmlFor="serviceName">Service Name</label>
@@ -157,6 +161,8 @@ function EditService() {
                         </select>
                         <label className="label" htmlFor="fkDiscountId">Discount</label>
                     </div>
+                    {successMessage && <div className="success-message">{successMessage}</div>}
+                    {errorMessage && <div className="error-message">{errorMessage}</div>}
                     <div className="button-container">
             <button onClick={handleGoBack}>Go Back</button>
             <button type="submit">Save</button>

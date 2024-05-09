@@ -1,3 +1,6 @@
+import React from 'react';
+import { Link } from 'react-router-dom';
+
 function About() {
     return (
         <div className="about">
@@ -6,7 +9,7 @@ function About() {
                     <p className="testimonials-large">About Us</p>
                 <div className="testimonials-path">
                     <i className="fa-solid fa-house"></i>
-                    <p>HOME</p>
+                    <Link to="/">HOME</Link> 
                     <i className="fa-solid fa-angle-right"></i>
                     <p>ABOUT</p>
                 </div>

@@ -72,16 +72,16 @@
         max-width:150px;
         padding: 1rem;
         border-radius: 5px;
-        background: #222;
-        color: #fff;
+        background: #dd9595;
+        color: rgb(0, 0, 0);
         font-family: $secondary-font;
         font-size: 0.8rem;
-        font-weight: 400;
+        font-weight: 800;
         cursor: pointer;
         transition: all 0.3s ease;
         border:none;
         &:hover{
-            background:#CE97AD;
+            background:#eeaeae;
         }
     }
     &-services-container{
@@ -154,7 +154,7 @@
             transition: all 0.3s ease;
             border:none;
             &:hover{
-                background:#CE97AD;
+                background:#eeaeae;
             }
         
         }
@@ -252,7 +252,7 @@
             transition: all 0.3s ease;
             border:none;
             &:hover{
-                background:#CE97AD;
+                background:#eeaeae;
             }
         
         }
@@ -390,16 +390,16 @@ width:100%;
         max-width:200px;
         padding: 1rem;
         border-radius: 5px;
-        background: #222;
-        color: #fff;
+        background: #dd9595;
+        color: black;
         font-family: $secondary-font;
         font-size: 1rem;
-        font-weight: 400;
+        font-weight: 800;
         cursor: pointer;
         transition: all 0.3s ease;
         border:none;
         &:hover{
-            background:#CE97AD;
+            background:#eeaeae;
         }
     }
     &-services-container{
@@ -478,7 +478,7 @@ width:100%;
             transition: all 0.3s ease;
             border:none;
             &:hover{
-                background:#CE97AD;
+                background:#eeaeae;
             }
         
         }
@@ -572,7 +572,7 @@ width:100%;
             transition: all 0.3s ease;
             border:none;
             &:hover{
-                background:#CE97AD;
+                background:#eeaeae;
             }
         
         }

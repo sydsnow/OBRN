@@ -1,6 +1,8 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import React from 'react';
+import { Link } from 'react-router-dom';
 
 function BusinessMembershipDetails() {
     const [businessDetails, setBusinessDetails] = useState({});
@@ -43,9 +45,9 @@ function BusinessMembershipDetails() {
                 <p className="testimonials-large">Membership</p>
                 <div className="testimonials-path">
                     <i className="fa-solid fa-house"></i>
-                    <p>HOME</p>
+                    <Link to="/">HOME</Link> 
                     <i className="fa-solid fa-angle-right"></i>
-                    <p>EDIT PROFILE</p>
+                    <Link to="/editprofilebusiness">EDIT PROFILE</Link> 
                     <i className="fa-solid fa-angle-right"></i>
                     <p>BUSINESS MEMBERSHIP</p>
                 </div>

@@ -1,4 +1,6 @@
 import "../scss/pages/_termscondition.scss";
+import React from "react";
+import { Link } from "react-router-dom";
 
 function TermsCondition() {
     return (
@@ -8,7 +10,7 @@ function TermsCondition() {
                 <p className="testimonials-large">Terms & Condition</p>
                 <div className="testimonials-path">
                     <i className="fa-solid fa-house"></i>
-                    <p>HOME</p>
+                    <Link to="/">HOME</Link> 
                     <i className="fa-solid fa-angle-right"></i>
                     <p>TERMS & CONDITION</p>
                 </div>

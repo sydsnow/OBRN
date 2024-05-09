@@ -2,6 +2,37 @@
 @use "mixins" as *;
 
 .testimonials {
+    &-btn {
+        // margin-left: 50px;
+        margin-top: 20px;
+        text-align: center;
+        @media (min-width: 425px) {
+            text-align: left;
+            margin-left: 60px;
+        @media (min-width: 768px) {
+            margin-left: 100px;
+        }
+
+        }
+        a {  
+            text-decoration: none;  
+        }
+
+        button {
+            background-color: black; 
+            color: white; 
+            padding: 10px 20px; 
+            border: none; 
+            border-radius: 5px; 
+            font-size: 1rem;
+            cursor: pointer; 
+            transition: background-color 0.3s ease; 
+
+            &:hover {
+                background-color: #333; 
+            }
+        }
+    }
     &-banner {
         @include page-banner;
         justify-content: center;

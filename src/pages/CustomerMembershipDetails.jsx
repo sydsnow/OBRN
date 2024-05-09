@@ -2,6 +2,8 @@ import { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import "../scss/components/_button.scss"; 
+import React from 'react';
+import { Link } from 'react-router-dom';
 
 function CustomerMembershipDetails() {
     const [customerFees, setCustomerFees] = useState([]);
@@ -37,9 +39,9 @@ function CustomerMembershipDetails() {
                 <p className="testimonials-large">Membership</p>
                 <div className="testimonials-path">
                     <i className="fa-solid fa-house"></i>
-                    <p>HOME</p>
+                    <Link to="/">HOME</Link>
                     <i className="fa-solid fa-angle-right"></i>
-                    <p>EDIT PROFILE</p>
+                    <Link to="/editprofile">EDIT PROFILE</Link>
                     <i className="fa-solid fa-angle-right"></i>
                     <p>CUSTOMER MEMBERSHIP</p>
                 </div>

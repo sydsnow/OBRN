@@ -8,7 +8,7 @@ function ServicesPage () {
     const [searchQuery, setSearchQuery] = useState('');
     const [selectedOption, setSelectedOption] = useState(""); // Default sorting option
     const [currentPage, setCurrentPage] = useState(1); // Current page of pagination
-    const [servicesPerPage] = useState(12); // Number of services to display per page
+    const [servicesPerPage] = useState(20); // Number of services to display per page
    
     const sortingOptions = ["Price: High to Low", "Price: Low to High", "None"];
 
