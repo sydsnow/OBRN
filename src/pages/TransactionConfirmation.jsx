@@ -6,7 +6,7 @@ function TransactionConfirmation() {
       <div className="transaction-confirmation-text">
         <h2>Woohoo! Your membership has been upgraded!</h2>
         <p>
-          We&absp;re excited to let you know that your membership has been successfully upgraded. Enjoy your new benefits and thanks for being a valued member!
+          We&absp;re excited to let you know that your membership has been successfully upgraded. Enjoy your new benefits and thanks for being a valued member!!!
         </p>
         <Link to="/">Return to Homepage</Link>
       </div>
