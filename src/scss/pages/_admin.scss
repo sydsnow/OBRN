@@ -597,3 +597,26 @@
     margin-bottom: 25px;
     margin-top: 20px;
 }
+.admin-all-roles {
+    display: flex;
+    align-items: center;
+    > div {
+        //margin: 5px;
+        > button {
+            border: none;
+            height: 40px;
+        }
+    }
+}
+.admin-role-button {
+    margin: 5px;
+    &.active {
+        background-color: white;
+        border: 1px solid black;
+        color: black;
+        &:hover {
+            background-color: white;
+            color: black;
+        }
+    }
+}
