@@ -25,6 +25,7 @@ function RegisterBusiness(){
         confirmPassword: '',
         // if registering breaks, it might be this 
         fkReferralId: null,
+        membershipType: 'basic-yearly'  // Default to 'basic-yearly'
     });
 
     const [errorMessage, setErrorMessage] = useState('');
@@ -362,6 +363,26 @@ function RegisterBusiness(){
         />
         <label className="label" htmlFor="fkReferralId">Referral Code <small> *optional</small></label>
         </div>
+        <div className="form-group form-membership">
+                                <label>
+                                    <input type="radio" name="membershipType" value="basic-yearly" checked={business.membershipType === 'basic-yearly'} onChange={handleChange} />
+                                    Basic Membership ($250 yearly)
+                                </label>
+                                <label>
+                                    <input type="radio" name="membershipType" value="vip-yearly" checked={business.membershipType === 'vip-yearly'} onChange={handleChange} />
+                                    VIP Membership ($650 yearly)
+                                </label>
+                                <label>
+                                    <input type="radio" name="membershipType" value="basic-monthly" checked={business.membershipType === 'basic-monthly'} onChange={handleChange} />
+                                    Basic Membership ($27 monthly)
+                                </label>
+                                <label>
+                                    <input type="radio" name="membershipType" value="vip-monthly" checked={business.membershipType === 'vip-monthly'} onChange={handleChange} />
+                                    VIP Membership ($63 monthly)
+                                </label>
+                            </div>
+
+        
 
         <button type="submit">Register</button>
         <p id="register-error">{errorMessage}</p>
