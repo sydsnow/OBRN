@@ -10,6 +10,7 @@ function AdminAllCategories() {
     const [displayedCategories, setDisplayedCategories] = useState([]); // State to manage displayed categories
     const [currentPage, setCurrentPage] = useState(1);
     const [categoriesPerPage] = useState(12); // Number of categories to display per page
+    const [categoryDeleted, setCategoryDeleted] = useState(false); // State to track if a category was successfully deleted
 
     useEffect(() => {
         const fetchCategories = async () => {
@@ -21,46 +22,30 @@ function AdminAllCategories() {
             } catch (error) {
                 console.error('Failed to fetch categories: ', error);
             }
-        }
+        };
         fetchCategories();
     }, [categoriesPerPage]);
 
-    // Filter categories based on search query
-    const filterCategories = (query) => {
-        return category.filter(category =>
-            category.categoryName.toLowerCase().includes(query.toLowerCase())
-        );
-    };
-
-    // Handle search input change
-    const handleSearchInputChange = (e) => {
-        const query = e.target.value;
-        setSearchQuery(query);
-        const filteredCategories = filterCategories(query);
-        setDisplayedCategories(filteredCategories.slice(0, categoriesPerPage));
-        setCurrentPage(1); // Reset to first page when search query changes
-    };
-
-    // Handle clear search
-    const handleClearSearch = () => {
-        setSearchQuery('');
-        setDisplayedCategories(category.slice(0, categoriesPerPage)); // Reset displayed categories to all categories
-        setCurrentPage(1); // Reset to first page
-    };
-
-    // Handle pagination
-    const handlePageChange = (pageNumber) => {
-        setCurrentPage(pageNumber);
-        setDisplayedCategories(category.slice((pageNumber - 1) * categoriesPerPage, pageNumber * categoriesPerPage));
+    // Function to refresh categories list
+    const refreshCategories = async () => {
+        try {
+            const apiUrl = import.meta.env.VITE_API_BASE_URL;
+            const response = await axios.get(`${apiUrl}/category`);
+            setCategory(response.data.$values);
+            setDisplayedCategories(response.data.$values.slice(0, categoriesPerPage));
+        } catch (error) {
+            console.error('Failed to refresh categories: ', error);
+        }
     };
 
     const handleDeleteCategory = async (categoryId) => {
         try {
             const apiUrl = import.meta.env.VITE_API_BASE_URL;
             await axios.delete(`${apiUrl}/api/Category/${categoryId}`);
-            setCategory(category.filter(category => category.pkCategoryId !== categoryId));
-            // Refresh displayed categories after deletion
-            setDisplayedCategories(category.slice(0, categoriesPerPage));
+            // Set categoryDeleted to true to display success message
+            setCategoryDeleted(true);
+            // Refresh categories after deletion
+            refreshCategories();
         } catch (error) {
             console.error('Failed to delete category: ', error);
         }
@@ -73,17 +58,28 @@ function AdminAllCategories() {
         pageNumbers.push(i);
     }
 
+    // Handle pagination
+    const handlePageChange = (pageNumber) => {
+        setCurrentPage(pageNumber);
+        setDisplayedCategories(category.slice((pageNumber - 1) * categoriesPerPage, pageNumber * categoriesPerPage));
+    };
+
     return (
         <div className="wrapper">
             <div className="admin">
                 <Link to="/admin"><button>Back to Admin</button></Link>
                 <div className="admin-all-container">
                     <h1>All Categories</h1>
-                    {/* Toggle "Add Category" functionality */}
-                    <button onClick={() => setShowAddCategory(!showAddCategory)}>{showAddCategory ? "Hide Add Category" : "Add Category"}</button>
+                    {categoryDeleted && (
+                        <div className="success-message">Category has been successfully deleted.</div>
+                    )}
+                    <button onClick={() => setShowAddCategory(!showAddCategory)}>
+                        {showAddCategory ? "Hide Add Category" : "Add Category"}
+                    </button>
                     {showAddCategory && (
                         <div className="admin-category-box">
-                            <AddCategory />
+                            {/* Pass refreshCategories function as a prop */}
+                            <AddCategory onCategoryAdded={refreshCategories} />
                         </div>
                     )}
                     <div className="search-bar">
@@ -93,10 +89,10 @@ function AdminAllCategories() {
                             placeholder="Search categories..."
                             id="category-search"
                             value={searchQuery}
-                            onChange={handleSearchInputChange}
+                            onChange={(e) => setSearchQuery(e.target.value)}
                         />
                         {searchQuery && (
-                            <button onClick={handleClearSearch} className='clear-search-button'>x</button>
+                            <button onClick={() => setSearchQuery('')} className='clear-search-button'>x</button>
                         )}
                     </div>
                     <div className="admin-all-categories">
@@ -108,7 +104,6 @@ function AdminAllCategories() {
                             </div>
                         ))}
                     </div>
-
                     {/* Pagination */}
                     {totalPages > 1 && (
                         <div className="pagination">

@@ -12,12 +12,11 @@ function Admin() {
             <Link to="/admin-all-customers"><button>View All Customers</button></Link>
             <Link to="/admin-all-businesses"><button>View All Businesses</button></Link>
 
-            <Link to="/admin-users"><button>View All Admin Users</button></Link>
+            <Link to="/admin-roles"><button>View All Users and Roles</button></Link>
             <Link to="/admin-fees"><button>View Fees & Commissions</button></Link>
             <Link to="/admin-testimonials"><button>View Testimonials</button></Link>
             <Link to="/admin-all-categories"><button>View All Categories</button></Link>
             <Link to="/admin-all-discounts"><button>View All Discounts</button></Link>
-            <Link to="/admin-roles"><button>Roles</button></Link>
           </div>
         </div>
       </div>

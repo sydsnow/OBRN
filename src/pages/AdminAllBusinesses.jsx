@@ -6,6 +6,7 @@ function AdminAllBusinesses() {
     const [currentPage, setCurrentPage] = useState(1);
     const [searchQuery, setSearchQuery] = useState('');
     const [business, setBusiness] = useState([]);
+    const [businessDeleted, setBusinessDeleted] = useState(false); // State to track if a business has been deleted successfully
 
     useEffect(() => {
         console.log('Fetching businesses...');
@@ -34,6 +35,7 @@ function AdminAllBusinesses() {
             // Update local state after successful deletion
             const updatedBusiness = business.filter(b => b.pkBusinessId !== businessId);
             setBusiness(updatedBusiness);
+            setBusinessDeleted(true); // Set businessDeleted to true to display success message
         } catch (error) {
             console.error('Failed to delete business: ', error);
         }
@@ -72,6 +74,9 @@ function AdminAllBusinesses() {
                 <Link to="/admin"><button>Back to Admin</button></Link>
                 <div className="admin-all-container">
                     <h1>All Businesses</h1>
+                    {businessDeleted && (
+                        <div className="success-message">Business has been successfully deleted.</div>
+                    )}
                     <div className="search-bar">
                         <label htmlFor='business-search' ></label>
                         <input

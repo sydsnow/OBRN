@@ -9,6 +9,7 @@ function AddUserRole() {
         email: email, // Assign the email parameter to userRole.email,
         roleName: ''
     });
+    const [roleAdded, setRoleAdded] = useState(false); // State to track if a role was successfully added
 
     useEffect(() => {
         const fetchRoles = async () => {
@@ -36,6 +37,7 @@ function AddUserRole() {
             console.log("userRole: ", userRole);
             const response = await axios.post(`${apiUrl}/api/UserRole/add-user-role`, userRole);
             console.log("response: ", response);
+            setRoleAdded(true); // Set roleAdded to true to display success message
         } catch (error) {
             console.error('Failed to add user role: ', error);
         }
@@ -44,9 +46,12 @@ function AddUserRole() {
     return (
         <div className="wrapper">
             <div className="admin">
-                <Link to="/admin-roles"><button>Back to Admin</button></Link>
+                <Link to="/admin-roles"><button>Back to Users</button></Link>
                 <div className="admin-all-container">
                     <h1>Add User Role</h1>
+                    {roleAdded && (
+                        <div className="success-message">User role has been successfully added.</div>
+                    )}
                     <p>User: {email}</p>
                     <form onSubmit={handleSubmit}> {/* Added onSubmit event handler */}
                         <div className="form-group">

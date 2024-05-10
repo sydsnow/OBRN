@@ -4,40 +4,40 @@ import { Link } from "react-router-dom";
 import AddDiscount from "./AddDiscount";
 
 function AdminAllDiscounts() {
-
-    const [discount, setDiscount] = useState([]);
+    const [discounts, setDiscounts] = useState([]);
     const [showAddDiscount, setShowAddDiscount] = useState(false);
+    const [deleteSuccess, setDeleteSuccess] = useState(false);
+    const [errorMessage, setErrorMessage] = useState('');
+
     useEffect(() => {
         const fetchDiscounts = async () => {
             try {
                 const apiUrl = import.meta.env.VITE_API_BASE_URL;
                 const response = await axios.get(`${apiUrl}/discount`);
-                setDiscount(response.data.$values.sort((a, b) => a.percentage - b.percentage)); // Sort discounts by percentage
-                //console.log(discount)
+                setDiscounts(response.data.$values.sort((a, b) => a.percentage - b.percentage));
+                console.log("discounts: ", discounts);
             } catch (error) {
                 console.error('Failed to fetch discounts: ', error);
             }
         }
         fetchDiscounts();
+    }, [discounts]);
 
-        return () => {
-            // Cleanup logic if needed
-        };
-    }, []);
-
-    // Function to handle deletion of a discount
     const handleDeleteDiscount = async (discountId) => {
         try {
             const apiUrl = import.meta.env.VITE_API_BASE_URL;
             await axios.delete(`${apiUrl}/api/Discount/${discountId}`);
-            // Update local state after successful deletion
-            setDiscount(discount.filter(discount => discount.pkDiscountId !== discountId));
+            setDiscounts(discounts.filter(discount => discount.pkDiscountId !== discountId));
+            setDeleteSuccess(true); // Set delete success message
         } catch (error) {
-            console.error('Failed to delete discount: ', error);
+            if (error.response && error.response.status === 409) {
+                setErrorMessage("Discount is in use and cannot be deleted.");
+            } else {
+                console.error('Failed to delete discount: ', error);
+            }
         }
     };
 
-    // Function to format discount value
     const formatDiscountValue = (discount) => {
         if (discount.percentage !== null) {
             const percentage = parseFloat(discount.percentage) * 100;
@@ -46,14 +46,13 @@ function AdminAllDiscounts() {
         return '';
     };
 
-    // Function to update the list of categories
     const updateDiscounts = async () => {
         try {
             const apiUrl = import.meta.env.VITE_API_BASE_URL;
-            const response = await axios.get(`${apiUrl}/category`);
-            setDiscount(response.data.$values);
+            const response = await axios.get(`${apiUrl}/discount`);
+            setDiscounts(response.data.$values.sort((a, b) => a.percentage - b.percentage));
         } catch (error) {
-            console.error('Failed to fetch categories: ', error);
+            console.error('Failed to fetch discounts: ', error);
         }
     };
 
@@ -63,10 +62,9 @@ function AdminAllDiscounts() {
                 <Link to="/admin"><button>Back to Admin</button></Link>
                 <div className="admin-category-container">
                     <h1>All Discounts</h1>
-
-                    {/* <Link to="/add-discount"><button>Add Discount</button></Link>
-                    <AddDiscount /> */}
-
+                    {/* Display delete success message */}
+                    {deleteSuccess && <div className="success-message">Discount has been successfully deleted.</div>}
+                    {errorMessage && <div className="error-message">{errorMessage}</div>}
                     <button onClick={() => setShowAddDiscount(!showAddDiscount)}>Add Discount</button>
                     {showAddDiscount && (
                         <div className="admin-category-box">
@@ -74,7 +72,7 @@ function AdminAllDiscounts() {
                         </div>
                     )}
                     <div className="admin-all-categories">
-                        {discount.map((discount) => (
+                        {discounts.map((discount) => (
                             <div key={discount.pkDiscountId} className="admin-category">
                                 <p>Discount Value: {formatDiscountValue(discount)}</p>
                                 <button onClick={() => handleDeleteDiscount(discount.pkDiscountId)}>Delete</button>
