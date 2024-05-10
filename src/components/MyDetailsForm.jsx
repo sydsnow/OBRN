@@ -5,6 +5,9 @@ import axios from 'axios';
 import "../scss/components/_mydetailsform.scss";
 import { getEmailFromJWT, capitalizeFirstLetters, formatPhoneNumber } from '../utilities/utilities';
 import provinces from '../data/provinces';
+import { BlobServiceClient } from '@azure/storage-blob';
+
+const apiUrl = import.meta.env.VITE_API_BASE_URL;
 
 async function fetchCustomerData(token, apiUrl) {
     const email = getEmailFromJWT(token);
@@ -13,9 +16,15 @@ async function fetchCustomerData(token, apiUrl) {
     return response.data;
 }
 
+async function fetchSasToken() {
+    const response = await axios.get(`${apiUrl}/api/sastoken/get-sas-token`);
+    return response.data.sasToken;
+}
+
 const MyDetailsForm = () => {
     const navigate = useNavigate();
-    const apiUrl = import.meta.env.VITE_API_BASE_URL;
+    const account = import.meta.env.VITE_STORAGE_ACCOUNT;
+    const containerName = import.meta.env.VITE_STORAGE_CONTAINER;
     const token = localStorage.getItem('token');
     const [userDetails, setUserDetails] = useState({
         firstName: '',
@@ -28,22 +37,26 @@ const MyDetailsForm = () => {
         province: '',
         postalCode: '',
         vip: false,
-        photo: ''
+        // photo: ''
     });
     const [errorMessage, setErrorMessage] = useState('');
+    const [file, setFile] = useState(null);
+    const [sasToken, setSasToken] = useState(null);
 
     useEffect(() => {
         async function fetchData() {
             try {
-                const response = await fetchCustomerData(token, apiUrl);
-                updateUserDetails(response);
+                const customerResponse = await fetchCustomerData(token, apiUrl);
+                updateUserDetails(customerResponse);
+                const sasResponse = await fetchSasToken();
+                setSasToken(sasResponse);
             } catch (error) {
                 console.error('Fetching customer data failed: ', error);
                 setErrorMessage('Failed to fetch user details. Please try again later.');
             }
         }
         fetchData();
-    }, [token, apiUrl]);
+    }, [token]);
 
     const updateUserDetails = (data) => {
         const updatedUserDetails = {
@@ -57,7 +70,7 @@ const MyDetailsForm = () => {
             province: data.province || '',
             postalCode: data.postalCode || '',
             vip: data.vip || false,
-            photo: data.photo || ''
+            // photo: data.photo || ''
         };
         setUserDetails(updatedUserDetails);
     }
@@ -99,19 +112,19 @@ const MyDetailsForm = () => {
         setErrorMessage(errorMessage);
     };
 
-    const handleImageChange = (event) => {
-        const file = event.target.files[0];
-        const reader = new FileReader();
-        reader.onloadend = () => {
-            setUserDetails(prevState => ({
-                ...prevState,
-                photo: reader.result 
-            }));
-        };
-        if (file) {
-            reader.readAsDataURL(file);
-        }
-    };
+    // const handleImageChange = (event) => {
+    //     const file = event.target.files[0];
+    //     const reader = new FileReader();
+    //     reader.onloadend = () => {
+    //         setUserDetails(prevState => ({
+    //             ...prevState,
+    //             photo: reader.result 
+    //         }));
+    //     };
+    //     if (file) {
+    //         reader.readAsDataURL(file);
+    //     }
+    // };
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -130,7 +143,15 @@ const MyDetailsForm = () => {
             setTimeout(() => {
                 navigate('/editprofile'); 
                 setErrorMessage(''); 
-            }, 2000); 
+            }, 2000);
+            if (file) {
+                const blobServiceClient = new BlobServiceClient(`https://${account}.blob.core.windows.net/?${sasToken}`);
+                const containerClient = blobServiceClient.getContainerClient(containerName);
+                const blobName = `${new Date().getTime()}-${file.name}`;
+                const blobClient = containerClient.getBlockBlobClient(blobName);
+                await blobClient.uploadData(file, { blobHTTPHeaders: { blobClientType: file.type } });
+                setErrorMessage('');
+            } 
         } catch (error) {
             console.error('Updating customer failed: ', error);
             console.log("error.response.data: ", error.response.data);
@@ -251,7 +272,7 @@ const MyDetailsForm = () => {
                     type="file"
                     id="photo"
                     name="photo"
-                    onChange={handleImageChange}
+                    onChange={(e) => setFile(e.target.files[0])}
                     accept="image/*"
                 />
             </div>
@@ -269,4 +290,3 @@ MyDetailsForm.propTypes = {
 }
 
 export default MyDetailsForm;
-
