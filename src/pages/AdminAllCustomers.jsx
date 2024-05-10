@@ -8,6 +8,7 @@ function AdminAllCustomers() {
     const [users, setUsers] = useState([]);
     const [displayedUsers, setDisplayedUsers] = useState([]); // State to manage displayed users   
     const [usersPerPage] = useState(12); // Number of users to display per page
+    const [customerDeleted, setCustomerDeleted] = useState(false); // State to track if a customer has been deleted
 
     useEffect(() => {
         // Fetch users from your API when component mounts
@@ -42,6 +43,7 @@ function AdminAllCustomers() {
             const updatedUsers = users.filter(user => user.pkCustomerId !== customerId);
             setUsers(updatedUsers);
             setDisplayedUsers(updatedUsers.slice(0, usersPerPage)); // Update displayed users
+            setCustomerDeleted(true); // Set customerDeleted to true to display success message
         } catch (error) {
             console.error('Failed to delete customer: ', error);
         }
@@ -102,6 +104,9 @@ function AdminAllCustomers() {
                 <Link to="/admin"><button>Back to Admin</button></Link>
                 <div className="admin-all-container">
                     <h1>All Customers</h1>
+                    {customerDeleted && (
+                        <div className="success-message">Customer has been successfully deleted.</div>
+                    )}
                     <div className="search-bar">
                         <label htmlFor='customer-search'></label>
                         <input
