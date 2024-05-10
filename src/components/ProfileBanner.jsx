@@ -54,10 +54,10 @@ function ProfileBanner({ title, imagePath, name, email, phone, location, referra
             </div>
             <div className="profile-banner-details"> 
                 <h2 className="profile-banner-name">{capitalizeFirstLetters(name)}</h2>
+                <p><i className="fa-solid fa-user-plus"></i> {referralCode}</p>
                 <p><i className="fa-solid fa-envelope"></i> {email}</p>
                 <p><i className="fa-solid fa-phone"></i> {phone}</p>
                 <p><i className="fa-solid fa-location-dot"></i> {capitalizeFirstLetters(location)}</p>
-                <p><i className="fa-solid fa-user-plus"></i> {referralCode}</p>
             </div>
         </div>
     );

@@ -38,6 +38,7 @@ function Footer() {
               PROFILE
             </Link>
           )}
+          <Link to="/testimonials" className="footer-link">TESTIMONIALS</Link>
           <Link to="/admin" className="footer-link">ADMIN</Link>
         </div>
         {/* <div className="footer-section">

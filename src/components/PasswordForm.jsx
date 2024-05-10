@@ -73,7 +73,7 @@ function PasswordForm() {
     }
 
     const handleCancel = () => {
-        navigate('/editprofile'); 
+        navigate(-1) ;
     };
 
     return (
