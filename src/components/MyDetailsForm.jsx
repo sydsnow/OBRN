@@ -37,7 +37,7 @@ const MyDetailsForm = () => {
         province: '',
         postalCode: '',
         vip: false,
-        // photo: ''
+        photo: ''
     });
     const [errorMessage, setErrorMessage] = useState('');
     const [file, setFile] = useState(null);
@@ -70,7 +70,7 @@ const MyDetailsForm = () => {
             province: data.province || '',
             postalCode: data.postalCode || '',
             vip: data.vip || false,
-            // photo: data.photo || ''
+            photo: data.photo || ''
         };
         setUserDetails(updatedUserDetails);
     }
@@ -137,21 +137,32 @@ const MyDetailsForm = () => {
         }
     
         try {
-            const response = await axios.post(`${apiUrl}/api/customer/edit-customer`, userDetails);
-            console.log("response: ", response.data);
-            setErrorMessage(response.data);
-            setTimeout(() => {
-                navigate('/editprofile'); 
-                setErrorMessage(''); 
-            }, 2000);
             if (file) {
                 const blobServiceClient = new BlobServiceClient(`https://${account}.blob.core.windows.net/?${sasToken}`);
                 const containerClient = blobServiceClient.getContainerClient(containerName);
                 const blobName = `${new Date().getTime()}-${file.name}`;
                 const blobClient = containerClient.getBlockBlobClient(blobName);
                 await blobClient.uploadData(file, { blobHTTPHeaders: { blobClientType: file.type } });
-                setErrorMessage('');
-            } 
+                console.log("Blob uploaded successfully: ", blobName);
+                // Update userDetails.photo with the blobName
+                const updatedUserDetails = { ...userDetails, photo: blobName };
+                const response = await axios.post(`${apiUrl}/api/customer/edit-customer`, updatedUserDetails);
+                console.log("Response from edit-customer: ", response.data);
+                setErrorMessage(response.data);
+                setTimeout(() => {
+                    navigate('/editprofile');
+                    setErrorMessage('');
+                }, 2000);
+            } else {
+                // If no file is selected, directly call axios.post with userDetails
+                const response = await axios.post(`${apiUrl}/api/customer/edit-customer`, userDetails);
+                console.log("Response from edit-customer: ", response.data);
+                setErrorMessage(response.data);
+                setTimeout(() => {
+                    navigate('/editprofile');
+                    setErrorMessage('');
+                }, 2000);
+            }
         } catch (error) {
             console.error('Updating customer failed: ', error);
             console.log("error.response.data: ", error.response.data);
@@ -161,7 +172,7 @@ const MyDetailsForm = () => {
                 setErrorMessage('Updating customer details failed. Please try again later.');
             }
         }
-    }
+    }    
     
     const handleCancel = () => {
         navigate('/editprofile');
