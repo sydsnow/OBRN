@@ -2,7 +2,7 @@ import PropTypes from 'prop-types';
 import { NavLink, useLocation } from 'react-router-dom';
 import "../scss/components/_servicegallery.scss";
 import { useNavigate } from 'react-router-dom';
-import ImagePlaceholder from '../assets/image-placeholder.jpg';
+import HaircutMen from '../assets/haircut-men.jpg';
 import axios from 'axios';
 
 function ServiceGallery({ displayedServices }) {
@@ -38,7 +38,7 @@ function ServiceGallery({ displayedServices }) {
                 <div className="services-card" key={service.pkServiceId}>
                     <div>
                         <div className="services-card-image-container">
-                            <img src={ImagePlaceholder} alt="Service Image" className="services-card-image"/>
+                            <img src={HaircutMen} alt="Service Image" className="services-card-image"/>
                             {/* <img src={service.image} alt="Service Image" className="services-card-image" /> */}
                         </div>
                         <div className="services-card-info">
