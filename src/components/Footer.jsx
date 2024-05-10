@@ -40,13 +40,13 @@ function Footer() {
           )}
           <Link to="/admin" className="footer-link">ADMIN</Link>
         </div>
-        <div className="footer-section">
+        {/* <div className="footer-section">
           <h4 className="footer-heading">Categories</h4>
           <Link to="/comingsoon" className="footer-link">HAIR</Link>
           <Link to="/comingsoon" className="footer-link">NAILS</Link>
           <Link to="/comingsoon" className="footer-link">FACIAL</Link>
           <Link to="/comingsoon" className="footer-link">SPA</Link>
-        </div>
+        </div> */}
         <div className="footer-section">
           <h4 className="footer-heading">About Us</h4>
           <Link to="/about" className="footer-link">OUR HISTORY</Link>
