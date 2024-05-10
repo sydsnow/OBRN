@@ -8,6 +8,7 @@ function AddDiscount({ onDiscountAdded }) {
         pkDiscountId: '',
     });
     const [errorMessage, setErrorMessage] = useState('');
+    const [discountAdded, setDiscountAdded] = useState(false);
 
     useEffect(() => {
         generateNewPkId(); // Call generateNewPkId function when component mounts
@@ -42,6 +43,7 @@ function AddDiscount({ onDiscountAdded }) {
             console.log(message);
             localStorage.setItem('token', token);
             axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
+            setDiscountAdded(true);
 
             // Update discounts array with the newly created discount
             if (onDiscountAdded) {
@@ -60,6 +62,7 @@ function AddDiscount({ onDiscountAdded }) {
     return (
         <div className="add-category">
             <h2 className="add-category-title">Add Discount</h2>
+            {discountAdded && <p className="success-message">Discount added successfully!</p>}
             <form className="add-category-form" onSubmit={handleSubmit}>
                 <div className="form-group-category">
                     <input 

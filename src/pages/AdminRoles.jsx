@@ -211,7 +211,7 @@ function AdminRoles() {
                                                 );
                                             })}
                                         </p>
-                                        <NavLink to={`/admin-add-role/${user.email}`}><button>Add Role</button></NavLink>
+                                        <NavLink to={`/admin-add-role/${user.email}`}><button className='add-role-button'>Add Role</button></NavLink>
                                     </div>
                                 </div>
                             ))
