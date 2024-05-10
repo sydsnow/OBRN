@@ -78,11 +78,14 @@ function AdminTestimonials() {
                             </div>
                         ))}
                     </div>
-                    <div className="admin-pagination">
+                    {testimonials.length > 10 && (
+                        <div className="admin-pagination">
                         <button onClick={() => setCurrentPage(currentPage - 1)} disabled={currentPage === 1}>Previous</button>
                         <span>{currentPage}</span>
                         <button onClick={() => setCurrentPage(currentPage + 1)} disabled={currentTestimonials.length < testimonialsPerPage}>Next</button>
                     </div>
+                    )}
+                    
                 </div>
             </div>
         </div>

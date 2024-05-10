@@ -64,6 +64,14 @@ function AdminAllCategories() {
         setDisplayedCategories(category.slice((pageNumber - 1) * categoriesPerPage, pageNumber * categoriesPerPage));
     };
 
+    // Filter categories based on search query
+    useEffect(() => {
+        const filteredCategories = category.filter(cat =>
+            cat.categoryName.toLowerCase().includes(searchQuery.toLowerCase())
+        );
+        setDisplayedCategories(filteredCategories.slice(0, categoriesPerPage));
+    }, [searchQuery, category, categoriesPerPage]);
+
     return (
         <div className="wrapper">
             <div className="admin">

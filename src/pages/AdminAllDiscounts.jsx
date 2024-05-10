@@ -15,7 +15,7 @@ function AdminAllDiscounts() {
                 const apiUrl = import.meta.env.VITE_API_BASE_URL;
                 const response = await axios.get(`${apiUrl}/discount`);
                 setDiscounts(response.data.$values.sort((a, b) => a.percentage - b.percentage));
-                console.log("discounts: ", discounts);
+                //console.log("discounts: ", discounts);
             } catch (error) {
                 console.error('Failed to fetch discounts: ', error);
             }
