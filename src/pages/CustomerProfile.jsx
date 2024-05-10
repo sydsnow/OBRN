@@ -14,7 +14,8 @@ function CustomerProfile() {
         address: '',
         city: '',
         province: '',
-        postalCode: ''
+        postalCode: '',
+        photo: ''
     });
     const [referralCode, setReferralCode] = useState(null);
     const apiUrl = import.meta.env.VITE_API_BASE_URL;
@@ -46,7 +47,7 @@ function CustomerProfile() {
             {customer && (
                 <ProfileBanner 
                 title="Customer Profile"
-                imagePath={defaultProfile}
+                imagePath={customer.photo || defaultProfile}
                 name={customer.firstName + ' ' + customer.lastName}
                 email={customer.email}
                 phone={formatPhoneNumber(customer.phone)}
