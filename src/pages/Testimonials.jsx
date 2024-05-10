@@ -29,11 +29,10 @@ function TestimonialsPage() {
   //   };
   // }, []);
   useEffect(() => {
-
     const token = localStorage.getItem('token');
-    console.log('token:', token);
-
-    if (token) {
+    console.log('Token:', token);
+  
+    if (token && businessId) {
       const apiUrl = import.meta.env.VITE_API_BASE_URL;
       axios.get(`${apiUrl}/api/Business/get-business/${businessId}`, {
         headers: {
@@ -42,17 +41,14 @@ function TestimonialsPage() {
       })
         .then(response => {
           const { pkBusinessId } = response.data;
-          setTestimonial(prevState => ({ ...prevState, fkBusinessId: pkBusinessId }));
-          console.log('businessId:', pkBusinessId);
-          console.log(response.data.$values);
-        }
-        )
+          console.log('Successfully fetched business ID:', pkBusinessId);
+        })
         .catch(error => {
-          console.error('Error fetching business ID:', error);
-        }
-        );
+          console.error('Error fetching business ID:', error.response ? error.response.data : error.message);
+        });
+    } else {
+      console.log('Token or Business ID missing:', { token, businessId });
     }
-
 
     const fetchTestimonials = async () => {
       try {
@@ -99,9 +95,6 @@ function TestimonialsPage() {
           <i className="fa-solid fa-angle-right"></i>
           <NavLink to="/testimonials" className="testimonials-links">TESTIMONIALS</NavLink>
         </div>
-      </div>
-      <div className="testimonials-btn">
-        <button>Add Testimonial</button>
       </div>
       <TestimonialGallery testimonials={testimonials}></TestimonialGallery>
     </div>
