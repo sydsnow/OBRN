@@ -35,7 +35,7 @@ function RegisterBusiness() {
     const handleChange = async (e) => {
         let value = e.target.value;
         let errorMessage = '';
-    
+
         switch (e.target.name) {
             case 'phone':
                 value = value.replace(/\D/g, '').slice(0, 20);
@@ -47,12 +47,6 @@ function RegisterBusiness() {
                 value = value.slice(0, 30);
                 if (value.length === 30) {
                     errorMessage = 'Username is limited to 30 characters.';
-                }
-                break;
-            case 'insuranceExpiryDate':
-                // For date inputs, let the browser handle the format; no need for manual slicing or replacing.
-                if (new Date(value) < new Date()) {
-                    errorMessage = 'Insurance expiry date cannot be in the past.';
                 }
                 break;
             case 'fkReferralId':
@@ -70,11 +64,10 @@ function RegisterBusiness() {
             default:
                 break;
         }
-    
+
         setBusiness({ ...business, [e.target.name]: value });
         setErrorMessage(errorMessage);
     };
-    
 
     const handleStripeCheckout = async (userId, membershipType) => {
         let itemId;
@@ -288,7 +281,6 @@ function RegisterBusiness() {
                                     value={business.insuranceExpiryDate}
                                     onChange={handleChange}
                                 />
-                                
                                 <label className="label" htmlFor="insuranceExpiryDate"> Insurance Expiry</label>
                             </div>
                             <div className="form-group">
