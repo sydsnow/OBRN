@@ -7,6 +7,7 @@ function AddCategoryPage({ onCategoryAdded }) {
         categoryName: ''
     });
     const [error, setError] = useState('');
+    const [categoryAdded, setCategoryAdded] = useState(false);
 
     const handleChange = (e) => {
         setCategory({ ...category, [e.target.name]: e.target.value });
@@ -31,6 +32,10 @@ function AddCategoryPage({ onCategoryAdded }) {
             console.log("token:", token);
             localStorage.setItem('token', token);
             axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
+            setCategoryAdded(true);
+            
+            // Reset category input field to empty string
+            setCategory({ categoryName: '' });
 
             // Call the callback function to update the list of categories
             if (onCategoryAdded) {
@@ -44,6 +49,9 @@ function AddCategoryPage({ onCategoryAdded }) {
     return (
         <div className="add-category">
             <h2 className="add-category-title">Add Category</h2>
+            {categoryAdded && (
+                <div className="success-message">Category has been successfully added.</div>
+            )}
             <form className="add-category-form" onSubmit={handleSubmit}>
                 <div className="form-group-category">
                     <input
