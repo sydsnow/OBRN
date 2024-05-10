@@ -135,10 +135,10 @@ function AdminRoles() {
         pageNumbers.push(i);
     }
 
-    // Filter users based on the selected role name or display all users
+    //Filter users based on the selected role name or display all users
     // const filteredUsers = filter === 'All Users' 
     //     ? users 
-    //     : users.filter(user => user.role && user.role.includes(filter));
+    //     : setDisplayedUsers(users.filter(user => user.role && user.role.includes(filter)));
 
     return (
         <div className="wrapper">
