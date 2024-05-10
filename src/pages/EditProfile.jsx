@@ -62,7 +62,7 @@ function EditProfile() {
         <p className="testimonials-large">Edit Profile</p>
         <div className="testimonials-path">
           <i className="fa-solid fa-house"></i>
-          <Link to="/">HOME</Link>
+          <Link to="/customerprofile">VIEW PROFILE</Link>
           <i className="fa-solid fa-angle-right"></i>
           <p>EDIT PROFILE</p>
         </div>

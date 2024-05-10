@@ -71,7 +71,7 @@ function CustomerProfile() {
                         <tr>
                             <td>29 June, 2024</td>
                             <td>Haircut & Styling</td>
-                            <td>Joe</td>
+                            <td>Lisa</td>
                         </tr>
                     </tbody>
                 </table>
@@ -110,7 +110,7 @@ function CustomerProfile() {
                         </tr>
                         <tr>
                             <td>29 June, 2024</td>
-                            <td>Mushroom</td>
+                            <td>Nail Clipper</td>
                             <td>Joe</td>
                         </tr>
                     </tbody>
